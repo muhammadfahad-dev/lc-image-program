@@ -42,7 +42,7 @@ class Gemini:
             if r.status_code == 429:
                 text = r.text
                 if "PerDay" in text or "per day" in text.lower() or "daily" in text.lower():
-                    raise QuotaExhausted(text[:300])
+                    raise QuotaExhausted(text[:3000])
                 time.sleep(65)  # per-minute limit: wait and try again
                 continue
             if r.status_code >= 500:
@@ -58,6 +58,7 @@ class Gemini:
         r = self.http.get(f"{API}/models", params={"key": self.key, "pageSize": 1000}, timeout=60)
         r.raise_for_status()
         names = {m["name"].split("/", 1)[1] for m in r.json().get("models", [])}
+        self.available = names
         self.image_model = next((m for m in config.IMAGE_MODELS if m in names), None)
         self.check_model = next((m for m in config.CHECK_MODELS if m in names), None)
         if not self.image_model or not self.check_model:

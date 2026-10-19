@@ -23,16 +23,27 @@ OUT = Path("output")
 def test_key():
     g = Gemini()
     image_model, check_model = g.choose_models()
-    print(f"Image model: {image_model}\nCheck model: {check_model}")
+    print(f"Check model: {check_model}")
+    image_models = sorted(m for m in g.available if "image" in m)
+    print("Image models this key can see:", ", ".join(image_models) or "none")
+    ok = False
+    for model in [m for m in config.IMAGE_MODELS if m in g.available] + [m for m in image_models if m not in config.IMAGE_MODELS]:
+        g.image_model = model
+        try:
+            data = g.generate([], "A plain ivory square with soft light. No text.", "1:1")
+            print(f"OK {model}: made a test image ({len(data)} bytes).")
+            ok = True
+            break
+        except QuotaExhausted as error:
+            print(f"REFUSED {model} (limit): {error}")
+        except (GenerationFailed, RuntimeError) as error:
+            print(f"REFUSED {model}: {str(error)[:1500]}")
     try:
-        data = g.generate([], "A plain ivory square with soft light. No text.", "1:1")
-        print(f"OK: the key made a test image ({len(data)} bytes).")
-        return 0
-    except QuotaExhausted as error:
-        print(f"REFUSED (limit): {error}")
-    except (GenerationFailed, RuntimeError) as error:
-        print(f"REFUSED: {error}")
-    return 1
+        answer = g.ask_json([], 'Reply with {"ok": true}')
+        print(f"Check model {check_model}: {'OK' if answer.get('ok') else answer}")
+    except Exception as error:
+        print(f"Check model {check_model} REFUSED: {str(error)[:800]}")
+    return 0 if ok else 1
 
 
 def contact_sheet(results):
