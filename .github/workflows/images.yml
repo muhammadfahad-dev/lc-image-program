@@ -21,6 +21,9 @@ on:
         required: false
         default: "5"
 
+permissions:
+  contents: write
+
 concurrency:
   group: lc-images
   cancel-in-progress: false
@@ -38,25 +41,37 @@ jobs:
       SHOPIFY_STORE: ${{ vars.SHOPIFY_STORE || '0anyrv-ej.myshopify.com' }}
       MAX_PRODUCTS: ${{ vars.MAX_PRODUCTS || '25' }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
       - run: python tests/test_pipeline.py && python tests/test_gemini.py
       - name: Run
         run: |
+          set -o pipefail
+          mkdir -p output
           MODE="${{ github.event.inputs.mode || 'live' }}"
+          echo "$MODE" > output/mode.txt
           case "$MODE" in
-            test-key) python run.py --test-key ;;
-            pilot)    python run.py --dry-run --limit "${{ github.event.inputs.limit || '5' }}" --handles "${{ github.event.inputs.handles }}" ;;
-            live)     python run.py --limit "${{ github.event.inputs.limit || env.MAX_PRODUCTS }}" --handles "${{ github.event.inputs.handles }}" ;;
+            test-key) python run.py --test-key 2>&1 | tee output/run.log ;;
+            pilot)    python run.py --dry-run --limit "${{ github.event.inputs.limit || '5' }}" --handles "${{ github.event.inputs.handles }}" 2>&1 | tee output/run.log ;;
+            live)     python run.py --limit "${{ github.event.inputs.limit || env.MAX_PRODUCTS }}" --handles "${{ github.event.inputs.handles }}" 2>&1 | tee output/run.log ;;
           esac
-      - name: Keep the images and report
+      - name: Show the error
+        if: failure()
+        run: tail -n 12 output/run.log 2>/dev/null | sed 's/%/%25/g' | while IFS= read -r line; do echo "::error::$line"; done
+      - name: Save the report to the reports branch
         if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: lc-images-${{ github.run_number }}
-          path: output/
-          if-no-files-found: ignore
-          retention-days: 30
+        run: |
+          RUN="runs/${{ github.run_number }}"
+          mkdir -p "/tmp/report/$RUN"
+          cp output/run.log output/summary.json output/mode.txt "/tmp/report/$RUN/" 2>/dev/null || true
+          # Images are kept only for pilots (for review); live runs keep the log and summary
+          if [ "$(cat output/mode.txt 2>/dev/null)" = "pilot" ]; then cp -r output/. "/tmp/report/$RUN/"; fi
+          git config user.name "lc-images-bot"
+          git config user.email "lc-images-bot@users.noreply.github.com"
+          if git fetch --depth 1 origin reports 2>/dev/null; then git checkout -q -B reports origin/reports; else git checkout -q --orphan reports; git rm -rq --cached . 2>/dev/null || true; find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +; fi
+          mkdir -p runs && cp -r "/tmp/report/runs/." runs/
+          git add runs
+          git commit -q -m "Report for run ${{ github.run_number }}" && git push -q origin reports || echo "Nothing to save"
