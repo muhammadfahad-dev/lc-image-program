@@ -43,6 +43,12 @@ def test_key():
         print(f"Check model {check_model}: {'OK' if answer.get('ok') else answer}")
     except Exception as error:
         print(f"Check model {check_model} REFUSED: {str(error)[:800]}")
+    try:
+        shop = Shopify()
+        d = shop.gql("{ shop { name myshopifyDomain } products(first: 1) { nodes { title } } }")
+        print(f"Shopify OK: logged in to {d['shop']['name']} ({d['shop']['myshopifyDomain']}), can read products.")
+    except Exception as error:
+        print(f"Shopify REFUSED: {str(error)[:800]}")
     return 0 if ok else 1
 
 
