@@ -1,0 +1,322 @@
+"""What happens to one product: choose the photo, make the listing images, check them, upload them,
+then make and link the single-colour variant images. Progress is saved on the product after every image,
+so a run that stops (daily limit, error) carries on from the same place next time."""
+import io
+import json
+import re
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+
+import requests
+from PIL import Image
+
+from . import config
+from .gemini import GenerationFailed, QuotaExhausted
+
+HERE = Path(__file__).parent
+PROMPTS = json.loads((HERE / "prompts.json").read_text(encoding="utf-8"))
+
+MIXED = re.compile(r"(-|&|/|\band\b|\bwith\b|ombr|tie-?dye|multi)", re.I)
+PATTERNS = {"floral", "checkered", "geometric"}
+
+CLOSED_NOTES = {
+    "multi-1": "Note: this abaya does not open at the front, so show the simple front view.",
+    "multi-2": "Note: this abaya does not open at the front, so show a three-quarter view instead of worn open.",
+}
+
+FITTING_FRAMING = (
+    "For this fitting image the framing must also be: full-length front view, garment centred left to right, "
+    "neckline in the upper part of the frame (about 20% from the top), hem near the bottom (about 88% from the top), "
+    "and a sleeve visible on the left side at about 35% across and 40% down."
+)
+
+COLOUR_PROMPT = (
+    "Use the attached image as the only reference. Change only the colour of the abaya fabric to {colour}. "
+    "Keep everything else exactly the same: the cut, fabric texture, drape, sleeves, neckline, length, pose, "
+    "model or mannequin, background, lighting and framing. Keep every embroidery, stonework, cutdana, beadwork, "
+    "lace, button and trim detail in exactly the same place, shape and colour as in the reference; only the base "
+    "fabric changes colour. The fabric must clearly read as {colour}, true to life, as in a real studio photograph. "
+    "Do not add any text, logo or watermark to the image."
+)
+
+SELECT_PROMPT = """You are helping an abaya store prepare product images.
+The images above are the store's photos of ONE product: "{title}" (type: {type}; tags: {tags}).
+Colour options for this product: {colours}.
+
+Answer in JSON with exactly these keys:
+- "best_index": the index of the single best photo to use as the reference for new product images: a clear, sharp, well-lit photo showing the whole abaya from the front, head to hem, with the design visible. Use null if no photo is good enough (blurry, cropped, only a detail, only a size chart, several products, heavy text).
+- "reason": one short sentence explaining the choice or why none is usable.
+- "front_open": true if this abaya opens at the front (open front, kimono, shrug, cardigan style), false if it is a closed abaya. Use the title, tags and photos.
+- "has_design_work": true if the abaya has visible embroidery, stonework, cutdana, beadwork, lace, print or other surface decoration; false if it is plain.
+- "input_colour": the colour option (copied exactly from the list) that the photo at best_index shows, or null if it matches none or you are unsure.
+- "colour_photos": an object with every colour option as a key; the value is the index of a photo that clearly shows this same abaya, whole or nearly whole, in that colour, or null if no photo clearly does. Only give an index when you are confident.
+"""
+
+CHECK_PROMPT = """You are checking an AI-generated image for an online abaya store.
+Image 0 is the real product photo. Image 1 is the generated image. The brief for image 1: {brief}
+{scope}
+Fail image 1 if ANY of these is true:
+- the garment design differs from image 0: embroidery, stonework, cutdana, beadwork, print, lace, buttons or trims added, removed, moved, simplified or changed;
+- the fabric colour is not {colour};
+- the cut, sleeves, neckline or length differ from image 0;
+- any text, logo, label or watermark appears;
+- the garment or the person looks distorted or unrealistic;
+- the image does not follow the brief.
+{extra}
+Answer in JSON: {{"pass": true or false, "problems": ["short plain reason", ...]}}"""
+
+CLOSE_UP_SLOTS = {"multi-3b", "closer-1", "closer-2", "closer-3", "closer-4"}
+
+
+def now():
+    return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")
+
+
+def slug(text):
+    return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
+
+
+def to_jpeg(data, max_side=None, quality=92):
+    image = Image.open(io.BytesIO(data)).convert("RGB")
+    if max_side and max(image.size) > max_side:
+        image.thumbnail((max_side, max_side))
+    out = io.BytesIO()
+    image.save(out, "JPEG", quality=quality, optimize=True)
+    return out.getvalue()
+
+
+def fetch(url, width=None, http=requests):
+    if width:
+        url = f"{url}{'&' if '?' in url else '?'}width={width}"
+    r = http.get(url, timeout=120)
+    r.raise_for_status()
+    return to_jpeg(r.content, max_side=width or 2048)
+
+
+def classify_colour(option_name, value, product_type):
+    if option_name.strip().lower() not in config.COLOUR_OPTION_NAMES:
+        return "not_fabric_colour"
+    if value.strip().lower() in PATTERNS:
+        return "pattern"
+    if MIXED.search(value):
+        return "mixed"
+    if product_type in config.PRINTED_TYPES:
+        return "printed"
+    return "single"
+
+
+def listing_plan(front_open, has_design_work):
+    """The slots to make, in display order, for each image field."""
+    media = ["hero-1", "hero-2", "hero-3", "hero-4"] if front_open else ["hero-1", "hero-2", "hero-4"]
+    multi = ["multi-1", "multi-2", "multi-3b" if has_design_work else "multi-3a"]
+    return {"media": media, "fitting": ["fitting-1"], "multi": multi, "closer": ["closer-1", "closer-2", "closer-3", "closer-4"]}
+
+
+class ProductRun:
+    def __init__(self, product, gemini, shopify, out_dir=None, log=print):
+        self.p = product
+        self.g = gemini
+        self.s = shopify
+        self.out = Path(out_dir) / product["handle"] if out_dir else None
+        self.log = log
+        self.made = 0
+        self.hero_jpeg = None
+        raw = (product.get("audit") or {}).get("value")
+        self.audit = json.loads(raw) if raw else {"version": 1, "status": "new", "slots": {}, "colours": {}, "notes": []}
+        self.audit.setdefault("slots", {})
+        self.audit.setdefault("colours", {})
+        self.audit.setdefault("notes", [])
+        if self.out:
+            self.out.mkdir(parents=True, exist_ok=True)
+
+    # ---------- helpers ----------
+    def save(self, status=None):
+        if status:
+            self.audit["status"] = status
+        self.audit["updated"] = now()
+        self.s.save_audit(self.p["id"], self.audit)
+        if self.out:
+            (self.out / "report.json").write_text(json.dumps(self.audit, indent=2), encoding="utf-8")
+
+    def keep_local(self, name, jpeg):
+        if self.out:
+            (self.out / name).write_bytes(jpeg)
+
+    def images(self):
+        """The product's own photos (not images this program added)."""
+        ours = {v.get("file") for v in self.audit["slots"].values()} | {v.get("file") for v in self.audit["colours"].values()}
+        return [m for m in self.p["media"]["nodes"] if m.get("mediaContentType") == "IMAGE" and m.get("image") and m["id"] not in ours]
+
+    def check(self, original, generated, brief, colour, slot=None):
+        scope = "Image 1 is a close-up, so judge only the part that is visible." if slot in CLOSE_UP_SLOTS else ""
+        extra = FITTING_FRAMING if slot == "fitting-1" else ""
+        answer = self.g.ask_json([original, generated], CHECK_PROMPT.format(brief=brief, scope=scope, colour=colour, extra=extra))
+        return bool(answer.get("pass")), [str(x) for x in answer.get("problems") or []]
+
+    def make(self, reference, prompt, ratio, brief, colour, slot, name):
+        """Generate, check, and retry up to config.RETRIES times. Returns (jpeg or None, problems)."""
+        problems = []
+        for attempt in range(1 + config.RETRIES):
+            try:
+                raw = self.g.generate([reference], prompt, ratio)
+            except GenerationFailed as error:
+                problems = [f"Gemini gave no image ({error})"]
+                continue
+            jpeg = to_jpeg(raw)
+            self.keep_local(f"{name}-try{attempt + 1}.jpg", jpeg)
+            ok, problems = self.check(reference, to_jpeg(raw, max_side=1024), brief, colour, slot)
+            if ok:
+                self.made += 1
+                return jpeg, []
+            self.log(f"    {name}: check failed ({'; '.join(problems)[:160]}), attempt {attempt + 1}")
+        return None, problems
+
+    # ---------- main ----------
+    def run(self):
+        p, audit = self.p, self.audit
+        if audit.get("status") in ("done", "manual", "needs_photo", "skipped"):
+            return audit["status"]
+        if p["productType"] not in config.PRODUCT_TYPES:
+            audit["notes"] = [f"Not an abaya type ({p['productType'] or 'none'})"]
+            self.save("skipped")
+            return "skipped"
+
+        colour_opts = [o for o in p["options"] if o["name"].strip().lower() in config.COLOUR_OPTION_NAMES]
+        colour_names = [v for o in colour_opts for v in o["values"]]
+        photos = self.images()[: config.MAX_SELECTION_PHOTOS]
+        if not photos:
+            audit["notes"] = ["No product photos to work from"]
+            self.save("needs_photo")
+            return "needs_photo"
+
+        # 1. Choose the reference photo (once; kept in the audit)
+        if "choice" not in audit:
+            small = [fetch(m["image"]["url"], 768) for m in photos]
+            answer = self.g.ask_json(small, SELECT_PROMPT.format(title=p["title"], type=p["productType"], tags=", ".join(p["tags"]), colours=", ".join(colour_names) or "none"))
+            index = answer.get("best_index")
+            if not isinstance(index, int) or not 0 <= index < len(photos):
+                audit["notes"] = [f"No usable photo: {answer.get('reason', 'none suitable')}"]
+                self.save("needs_photo")
+                return "needs_photo"
+            colour_photos = {}
+            for name, i in (answer.get("colour_photos") or {}).items():
+                if isinstance(i, int) and 0 <= i < len(photos) and name in colour_names:
+                    colour_photos[name] = photos[i]["id"]
+            audit["choice"] = {
+                "media_id": photos[index]["id"],
+                "url": photos[index]["image"]["url"],
+                "reason": answer.get("reason", ""),
+                "front_open": bool(answer.get("front_open")),
+                "has_design_work": bool(answer.get("has_design_work")),
+                "input_colour": answer.get("input_colour") if answer.get("input_colour") in colour_names else None,
+                "colour_photos": colour_photos,
+            }
+            self.save("in_progress")
+        choice = audit["choice"]
+        reference = fetch(choice["url"], 2048)
+        self.keep_local("reference.jpg", reference)
+
+        # 2. Listing images, field by field
+        plan = listing_plan(choice["front_open"], choice["has_design_work"])
+        filled = {field: bool((p.get(field) or {}).get("value")) for field in ("fitting", "multi", "closer")}
+        already_done_by_hand = all(filled.values())
+        for field, slots in plan.items():
+            skip_field = already_done_by_hand or (field != "media" and filled[field])
+            for slot in slots:
+                state = audit["slots"].get(slot, {})
+                if state.get("status") in ("done", "manual", "existing"):
+                    continue
+                if skip_field:
+                    audit["slots"][slot] = {"status": "existing"}
+                    continue
+                prompt = PROMPTS[slot]["prompt"]
+                if not choice["front_open"] and slot in CLOSED_NOTES:
+                    prompt = prompt + "\n\n" + CLOSED_NOTES[slot]
+                brief = f"{PROMPTS[slot]['title']} ({field} image)"
+                self.log(f"  {slot}: generating")
+                jpeg, problems = self.make(reference, prompt, PROMPTS[slot]["ratio"], brief, "the same as image 0", slot, slot)
+                if jpeg is None:
+                    audit["slots"][slot] = {"status": "manual", "problems": problems[:4]}
+                else:
+                    if slot == "hero-1":
+                        self.hero_jpeg = jpeg
+                    file_id = self.s.upload_image(jpeg, f"{p['handle']}-{slot}.jpg", f"{p['title']} - {PROMPTS[slot]['title']}")
+                    audit["slots"][slot] = {"status": "done", "file": file_id}
+                self.save()
+            self.place_field(field, slots)
+
+        # 3. Single-colour variant images
+        self.colours(colour_opts, reference)
+
+        manual = [k for k, v in audit["slots"].items() if v.get("status") == "manual"] + [k for k, v in audit["colours"].items() if v.get("status") == "manual"]
+        audit["notes"] = [f"Do manually: {', '.join(manual)}"] if manual else []
+        self.save("manual" if manual else "done")
+        return audit["status"]
+
+    def place_field(self, field, slots):
+        """Put a finished field's images in place. A field is only filled when all its images passed."""
+        audit = self.audit
+        states = [audit["slots"].get(s, {}) for s in slots]
+        if any(st.get("status") != "done" for st in states) or audit.get("placed", {}).get(field):
+            return
+        files = [st["file"] for st in states]
+        pid = self.p["id"]
+        if field == "media":
+            self.s.attach_to_product(pid, files)
+            self.s.move_media_to_front(pid, files)
+        elif field == "fitting":
+            self.s.set_metafields([{"ownerId": pid, "namespace": "custom", "key": config.FIELD_KEYS["fitting"], "type": "file_reference", "value": files[0]}])
+        else:
+            self.s.set_metafields([{"ownerId": pid, "namespace": "custom", "key": config.FIELD_KEYS[field], "type": "list.file_reference", "value": json.dumps(files)}])
+        audit.setdefault("placed", {})[field] = True
+        self.save()
+
+    def front_image(self, reference):
+        """Colours are made from the new front image (1.1) so every colour has the same pose; the reference photo otherwise."""
+        hero = self.audit["slots"].get("hero-1", {})
+        if self.hero_jpeg:
+            return self.hero_jpeg
+        if hero.get("status") == "done" and not str(hero.get("file", "")).startswith("dry-run"):
+            url = self.s.file_url(hero["file"])
+            if url:
+                return fetch(url, 2048)
+        return reference
+
+    def colours(self, colour_opts, reference):
+        audit, p = self.audit, self.p
+        hero = audit["slots"].get("hero-1", {})
+        base = None  # the image the colours are made from: the new front image if there is one, else the reference photo
+        for option in colour_opts:
+            for value in option["values"]:
+                state = audit["colours"].get(value, {})
+                if state.get("status") in ("done", "existing_photo", "had_image", "main_image", "manual") or state.get("status", "").startswith("skipped"):
+                    continue
+                kind = classify_colour(option["name"], value, p["productType"])
+                variants = [v for v in p["variants"]["nodes"] if any(o["name"] == option["name"] and o["value"] == value for o in v["selectedOptions"])]
+                if kind != "single":
+                    audit["colours"][value] = {"status": f"skipped_{kind}"}
+                    continue
+                if any(v["media"]["nodes"] for v in variants):
+                    audit["colours"][value] = {"status": "had_image"}
+                    continue
+                media_id, status = None, None
+                if value in audit["choice"]["colour_photos"]:
+                    media_id, status = audit["choice"]["colour_photos"][value], "existing_photo"
+                elif value == audit["choice"]["input_colour"] and hero.get("status") == "done" and audit.get("placed", {}).get("media"):
+                    media_id, status = hero["file"], "main_image"
+                else:
+                    if base is None:
+                        base = self.front_image(reference)
+                    self.log(f"  colour {value}: generating")
+                    jpeg, problems = self.make(base, COLOUR_PROMPT.format(colour=value), "4:5", f"the same abaya recoloured to {value}, everything else unchanged", value, None, f"colour-{slug(value)}")
+                    if jpeg is None:
+                        audit["colours"][value] = {"status": "manual", "problems": problems[:4]}
+                        self.save()
+                        continue
+                    media_id = self.s.upload_image(jpeg, f"{p['handle']}-colour-{slug(value)}.jpg", f"{p['title']} - {value}")
+                    self.s.attach_to_product(p["id"], [media_id])
+                    status = "done"
+                self.s.link_variants(p["id"], [(v["id"], media_id) for v in variants])
+                audit["colours"][value] = {"status": status, "file": media_id}
+                self.save()

@@ -1,0 +1,62 @@
+name: LC images
+
+on:
+  # Daily run, shortly after Gemini's free daily limit resets (midnight US Pacific time).
+  # It only does live work once the repository variable LIVE is set to "true" (after the pilot is approved).
+  schedule:
+    - cron: "20 8 * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "test-key = check the Gemini key · pilot = make images for review, change nothing · live = update the store"
+        type: choice
+        options: [test-key, pilot, live]
+        default: pilot
+      handles:
+        description: "Product handles, comma-separated (leave empty to go through the store)"
+        required: false
+        default: ""
+      limit:
+        description: "Most products to work on in this run"
+        required: false
+        default: "5"
+
+concurrency:
+  group: lc-images
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    if: github.event_name == 'workflow_dispatch' || vars.LIVE == 'true'
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      SHOPIFY_ADMIN_TOKEN: ${{ secrets.SHOPIFY_ADMIN_TOKEN }}
+      SHOPIFY_CLIENT_ID: ${{ secrets.SHOPIFY_CLIENT_ID }}
+      SHOPIFY_CLIENT_SECRET: ${{ secrets.SHOPIFY_CLIENT_SECRET }}
+      SHOPIFY_STORE: ${{ vars.SHOPIFY_STORE || '0anyrv-ej.myshopify.com' }}
+      MAX_PRODUCTS: ${{ vars.MAX_PRODUCTS || '25' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python tests/test_pipeline.py && python tests/test_gemini.py
+      - name: Run
+        run: |
+          MODE="${{ github.event.inputs.mode || 'live' }}"
+          case "$MODE" in
+            test-key) python run.py --test-key ;;
+            pilot)    python run.py --dry-run --limit "${{ github.event.inputs.limit || '5' }}" --handles "${{ github.event.inputs.handles }}" ;;
+            live)     python run.py --limit "${{ github.event.inputs.limit || env.MAX_PRODUCTS }}" --handles "${{ github.event.inputs.handles }}" ;;
+          esac
+      - name: Keep the images and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lc-images-${{ github.run_number }}
+          path: output/
+          if-no-files-found: ignore
+          retention-days: 30

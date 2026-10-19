@@ -1,0 +1,335 @@
+{
+ "mode": "colour_name_only",
+ "colours": [
+  {
+   "name": "Navy",
+   "products": 154,
+   "images_needed": 137
+  },
+  {
+   "name": "Brown",
+   "products": 127,
+   "images_needed": 117
+  },
+  {
+   "name": "Purple",
+   "products": 103,
+   "images_needed": 91
+  },
+  {
+   "name": "Grey",
+   "products": 89,
+   "images_needed": 82
+  },
+  {
+   "name": "Pink",
+   "products": 90,
+   "images_needed": 78
+  },
+  {
+   "name": "Teal",
+   "products": 80,
+   "images_needed": 72
+  },
+  {
+   "name": "Maroon",
+   "products": 76,
+   "images_needed": 68
+  },
+  {
+   "name": "Blue",
+   "products": 79,
+   "images_needed": 68
+  },
+  {
+   "name": "Beige",
+   "products": 75,
+   "images_needed": 64
+  },
+  {
+   "name": "Emerald Green",
+   "products": 63,
+   "images_needed": 60
+  },
+  {
+   "name": "Skyblue",
+   "products": 64,
+   "images_needed": 55
+  },
+  {
+   "name": "Green",
+   "products": 60,
+   "images_needed": 53
+  },
+  {
+   "name": "Black",
+   "products": 64,
+   "images_needed": 52
+  },
+  {
+   "name": "Taupe",
+   "products": 51,
+   "images_needed": 48
+  },
+  {
+   "name": "Mauve",
+   "products": 47,
+   "images_needed": 47
+  },
+  {
+   "name": "Dark Brown",
+   "products": 47,
+   "images_needed": 47
+  },
+  {
+   "name": "Dusty Lavender",
+   "products": 49,
+   "images_needed": 44
+  },
+  {
+   "name": "Red",
+   "products": 46,
+   "images_needed": 42
+  },
+  {
+   "name": "Silver Gray",
+   "products": 40,
+   "images_needed": 36
+  },
+  {
+   "name": "Peach",
+   "products": 40,
+   "images_needed": 34
+  },
+  {
+   "name": "Light Purple",
+   "products": 34,
+   "images_needed": 34
+  },
+  {
+   "name": "Olive Green",
+   "products": 33,
+   "images_needed": 31
+  },
+  {
+   "name": "Powder Blue",
+   "products": 31,
+   "images_needed": 29
+  },
+  {
+   "name": "Mauve Purple",
+   "products": 28,
+   "images_needed": 28
+  },
+  {
+   "name": "White",
+   "products": 32,
+   "images_needed": 27
+  },
+  {
+   "name": "Charcoal",
+   "products": 31,
+   "images_needed": 25
+  },
+  {
+   "name": "Blush Pink",
+   "products": 31,
+   "images_needed": 24
+  },
+  {
+   "name": "Light Grey",
+   "products": 25,
+   "images_needed": 24
+  },
+  {
+   "name": "Ruby Red",
+   "products": 25,
+   "images_needed": 23
+  },
+  {
+   "name": "Baby Pink",
+   "products": 20,
+   "images_needed": 20
+  },
+  {
+   "name": "Light Green",
+   "products": 20,
+   "images_needed": 19
+  },
+  {
+   "name": "Light Brown",
+   "products": 19,
+   "images_needed": 19
+  },
+  {
+   "name": "Bronze",
+   "products": 19,
+   "images_needed": 19
+  },
+  {
+   "name": "Gray",
+   "products": 21,
+   "images_needed": 17
+  },
+  {
+   "name": "Magenta",
+   "products": 19,
+   "images_needed": 16
+  },
+  {
+   "name": "Camel Beige",
+   "products": 16,
+   "images_needed": 15
+  },
+  {
+   "name": "Mint Green",
+   "products": 18,
+   "images_needed": 15
+  },
+  {
+   "name": "Ice Blue",
+   "products": 15,
+   "images_needed": 15
+  },
+  {
+   "name": "Deep Plum",
+   "products": 14,
+   "images_needed": 14
+  },
+  {
+   "name": "Camel Brown",
+   "products": 21,
+   "images_needed": 13
+  },
+  {
+   "name": "Cream",
+   "products": 17,
+   "images_needed": 12
+  },
+  {
+   "name": "sage green",
+   "products": 16,
+   "images_needed": 11
+  },
+  {
+   "name": "Forest Green",
+   "products": 12,
+   "images_needed": 8
+  },
+  {
+   "name": "Mustard Gold",
+   "products": 9,
+   "images_needed": 8
+  },
+  {
+   "name": "burgundy",
+   "products": 8,
+   "images_needed": 8
+  },
+  {
+   "name": "Yellow",
+   "products": 8,
+   "images_needed": 7
+  },
+  {
+   "name": "Orange",
+   "products": 7,
+   "images_needed": 7
+  },
+  {
+   "name": "Silver",
+   "products": 10,
+   "images_needed": 7
+  },
+  {
+   "name": "Sage Khaki",
+   "products": 6,
+   "images_needed": 6
+  },
+  {
+   "name": "Dark Pink",
+   "products": 6,
+   "images_needed": 6
+  },
+  {
+   "name": "Rust",
+   "products": 6,
+   "images_needed": 6
+  },
+  {
+   "name": "Mulberry",
+   "products": 5,
+   "images_needed": 5
+  },
+  {
+   "name": "Dusty Blue",
+   "products": 6,
+   "images_needed": 4
+  },
+  {
+   "name": "Lavender",
+   "products": 5,
+   "images_needed": 4
+  },
+  {
+   "name": "Rust Gold",
+   "products": 4,
+   "images_needed": 4
+  },
+  {
+   "name": "Light Orange",
+   "products": 4,
+   "images_needed": 4
+  },
+  {
+   "name": "Violet Purple",
+   "products": 1,
+   "images_needed": 1
+  },
+  {
+   "name": "Ash Grey",
+   "products": 1,
+   "images_needed": 1
+  },
+  {
+   "name": "skin",
+   "products": 1,
+   "images_needed": 1
+  },
+  {
+   "name": "Lime Green",
+   "products": 3,
+   "images_needed": 1
+  },
+  {
+   "name": "Mustard",
+   "products": 1,
+   "images_needed": 1
+  },
+  {
+   "name": "Charcoal Grey",
+   "products": 1,
+   "images_needed": 1
+  },
+  {
+   "name": "Light Blue",
+   "products": 1,
+   "images_needed": 1
+  },
+  {
+   "name": "Gold",
+   "products": 2,
+   "images_needed": 1
+  },
+  {
+   "name": "Indigo",
+   "products": 1,
+   "images_needed": 1
+  },
+  {
+   "name": "Rose gold",
+   "products": 1,
+   "images_needed": 1
+  }
+ ]
+}
