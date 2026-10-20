@@ -41,7 +41,13 @@ class Shopify:
 
     def gql(self, query, variables=None):
         for attempt in range(6):
-            r = self.http.post(self.url, json={"query": query, "variables": variables or {}}, headers={"X-Shopify-Access-Token": self.token}, timeout=90)
+            try:
+                r = self.http.post(self.url, json={"query": query, "variables": variables or {}}, headers={"X-Shopify-Access-Token": self.token}, timeout=90)
+            except (requests.ConnectionError, requests.Timeout):
+                if attempt == 5:
+                    raise
+                time.sleep(5 + attempt * 10)  # connection dropped: wait and try again
+                continue
             if r.status_code in (429, 502, 503):
                 time.sleep(2 + attempt * 3)
                 continue
@@ -54,7 +60,7 @@ class Shopify:
             if errors:
                 raise RuntimeError(f"Shopify: {json.dumps(errors)[:500]}")
             return data["data"]
-        raise RuntimeError("Shopify kept throttling")
+        raise RuntimeError("Shopify kept throttling or refusing the connection")
 
     @staticmethod
     def _check(payload, name):
@@ -104,7 +110,14 @@ class Shopify:
             "stagedUploadsCreate",
         )["stagedTargets"][0]
         form = {p["name"]: p["value"] for p in staged["parameters"]}
-        up = requests.post(staged["url"], data=form, files={"file": (filename, jpeg, "image/jpeg")}, timeout=180)
+        for attempt in range(4):
+            try:
+                up = requests.post(staged["url"], data=form, files={"file": (filename, jpeg, "image/jpeg")}, timeout=180)
+                break
+            except (requests.ConnectionError, requests.Timeout):
+                if attempt == 3:
+                    raise
+                time.sleep(5 + attempt * 10)
         if up.status_code not in (200, 201, 204):
             raise RuntimeError(f"Upload failed {up.status_code}: {up.text[:300]}")
         created = self._check(

@@ -91,7 +91,14 @@ def to_jpeg(data, max_side=None, quality=92):
 def fetch(url, width=None, http=requests):
     if width:
         url = f"{url}{'&' if '?' in url else '?'}width={width}"
-    r = http.get(url, timeout=120)
+    for attempt in range(4):
+        try:
+            r = http.get(url, timeout=120)
+            break
+        except (requests.ConnectionError, requests.Timeout):
+            if attempt == 3:
+                raise
+            time.sleep(5 + attempt * 10)  # connection dropped: wait and try again
     r.raise_for_status()
     return to_jpeg(r.content, max_side=width or 2048)
 

@@ -184,7 +184,10 @@ def main():
     if args.dry_run:
         contact_sheet(results)
     else:
-        s.set_metafields([{"ownerId": s.shop_id(), "namespace": "custom", "key": config.SUMMARY_KEY, "type": "json", "value": json.dumps({k: v for k, v in summary.items() if k != "products"})}])
+        try:
+            s.set_metafields([{"ownerId": s.shop_id(), "namespace": "custom", "key": config.SUMMARY_KEY, "type": "json", "value": json.dumps({k: v for k, v in summary.items() if k != "products"})}])
+        except Exception as error:  # the summary is a convenience; the products' own progress is already saved
+            print(f"Could not save the run summary to Shopify ({str(error)[:150]}); it is in output/summary.json")
     print("\nSummary:", json.dumps({k: v for k, v in summary.items() if k != "products"}, indent=2))
     return 0
 
