@@ -128,14 +128,21 @@ class GeminiWeb:
 
     def close(self, keep_chrome_open=False):
         try:
-            if self._browser:
+            if self._chrome and not keep_chrome_open and self._browser:
+                # Ask Chrome to shut down normally, so it saves the profile (your sign-in) first
+                try:
+                    self._browser.new_browser_cdp_session().send("Browser.close")
+                    self._chrome.wait(20)
+                except Exception:
+                    pass
+            if self._browser and self._browser.is_connected():
                 self._browser.close()  # disconnects; Chrome itself stays open
             elif self._context:
                 self._context.close()
         finally:
             if self._pw:
                 self._pw.stop()
-            if self._chrome and not keep_chrome_open:
+            if self._chrome and not keep_chrome_open and self._chrome.poll() is None:
                 self._chrome.terminate()
                 try:
                     self._chrome.wait(15)
@@ -202,7 +209,10 @@ class GeminiWeb:
 
     # ---------- sign-in ----------
     def signed_in(self):
-        return self.find("prompt_box") is not None and self.find("signed_out") is None
+        """Signed in = no "Sign in" link, and the chat box (or your Google Account button) is there."""
+        if self.find("signed_out") is not None:
+            return False
+        return self.find("signed_in") is not None or self.find("prompt_box") is not None
 
     def open_app(self):
         self.page.goto(self.sel["app_url"], wait_until="domcontentloaded")
@@ -211,19 +221,23 @@ class GeminiWeb:
             if self.find("prompt_box"):
                 break
             time.sleep(0.5)
+        time.sleep(3)  # the "Sign in" link and account button appear a moment after the chat box
 
     def login(self, wait_minutes=10):
         """Open Gemini and wait for you to sign in yourself in the Chrome window."""
         self.open_app()
         end = time.monotonic() + wait_minutes * 60
-        told = False
+        told, steady = False, 0
         while time.monotonic() < end:
-            if self.signed_in():
+            # Must look signed in on three checks in a row, so a half-loaded page does not count
+            steady = steady + 1 if self.signed_in() else 0
+            if steady >= 3:
+                time.sleep(5)  # give Chrome a moment to store the sign-in
                 return True
-            if not told:
+            if not told and steady == 0:
                 self.log("Sign in to Gemini in the Chrome window that opened. Waiting up to %d minutes..." % wait_minutes)
                 told = True
-            time.sleep(3)
+            time.sleep(2)
         return False
 
     # ---------- one image ----------

@@ -65,5 +65,10 @@
   "signed_out": [
     "role:link|Sign in",
     "role:button|Sign in"
+  ],
+  "signed_in": [
+    "a[aria-label^='Google Account']",
+    "button[aria-label^='Google Account']",
+    "img[alt*='profile' i]"
   ]
 }
