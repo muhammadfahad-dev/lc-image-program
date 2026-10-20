@@ -18,6 +18,10 @@ class GenerationFailed(Exception):
     """Gemini answered but gave no usable image (safety block, text only, etc.)."""
 
 
+class TemporaryFailure(GenerationFailed):
+    """Gemini had a passing problem ("I encountered an error... try again"). Worth waiting and trying again."""
+
+
 class Gemini:
     def __init__(self, key=None, session=None):
         self.key = key or config.GEMINI_KEY

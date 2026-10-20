@@ -71,5 +71,14 @@
     "a[aria-label^='Google Account']",
     "button[aria-label^='Google Account']",
     "img[alt*='profile' i]"
+  ],
+  "retry_phrases": [
+    "encountered an error",
+    "something went wrong",
+    "could you try again",
+    "please try again",
+    "try again later",
+    "having trouble",
+    "network error"
   ]
 }

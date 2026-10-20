@@ -22,7 +22,7 @@ from pathlib import Path
 from PIL import Image
 
 from . import config
-from .gemini import GenerationFailed, QuotaExhausted
+from .gemini import GenerationFailed, QuotaExhausted, TemporaryFailure
 
 SELECTORS_FILE = Path(__file__).with_name("selectors.json")
 
@@ -444,7 +444,9 @@ class GeminiWeb:
                 low = said.lower()
                 if any(p in low for p in self.sel.get("limit_phrases", [])):
                     raise QuotaExhausted(f"Gemini website limit: {said[:500]}")
-                raise GenerationFailed(f"Gemini website gave no image: {said[:300] or 'empty answer'}")
+                if not said or any(p in low for p in self.sel.get("retry_phrases", [])):
+                    raise TemporaryFailure(f"Gemini website had a problem: {said[:300] or 'empty answer'}")
+                raise GenerationFailed(f"Gemini website gave no image: {said[:300]}")
         self.snapshot("timeout")
         raise GenerationFailed(f"No image after {config.WEB_TIMEOUT_SECONDS}s")
 

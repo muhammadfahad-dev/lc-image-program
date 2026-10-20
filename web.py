@@ -4,6 +4,8 @@
   python web.py inspect                     check that the program can find Gemini's buttons (prints no page text)
   python web.py test --handle HANDLE        make ONE image (Media 1.1) from a product's first photo; changes nothing in Shopify
   python web.py test --image photo.jpg      the same, from a photo on your PC (no Shopify or API key needed)
+  python web.py upload-check                attach a test photo (sends nothing) and print the names of Gemini's upload
+                                            menu and photo preview, so the program can be matched to them
 
 For a full pilot through the website:  python run.py --web --dry-run --handles HANDLE
 """
@@ -44,6 +46,74 @@ def cmd_inspect(args):
         print("\n'--' is normal on an empty chat for attachment_preview, image_tool, stop, response, response_text, result_image, download and signed_out.")
         if args.save:
             print("Debug bundle (screenshot, HTML, accessibility tree; keep it private):", web.snapshot("inspect"))
+        return 0
+    finally:
+        web.close()
+
+
+# Walks up from the chat box to the area that also holds the upload button, and lists that area's elements
+# that are controls or pictures: tag, data-test-id, aria-label, first classes. No chat or account text.
+PROBE_JS = r"""(box) => {
+  // Up to the box that holds the upload button, then at most two more levels if the photo is not inside yet
+  let area = box, extra = 0;
+  for (let i = 0; i < 12 && area.parentElement; i++) {
+    area = area.parentElement;
+    const hasButton = area.querySelector('button[aria-label*="upload" i], button[aria-label*="Add files" i]');
+    if (hasButton && (area.querySelector('img') || ++extra > 2)) break;
+  }
+  const lines = [];
+  for (const el of area.querySelectorAll('*')) {
+    const label = el.getAttribute('aria-label') || '';
+    const isPic = el.tagName === 'IMG';
+    const custom = el.tagName.includes('-');
+    if (!label && !isPic && !custom) continue;
+    const cls = typeof el.className === 'string' ? el.className.trim().split(/\s+/).slice(0, 3).join('.') : '';
+    const test = el.getAttribute('data-test-id');
+    lines.push(el.tagName.toLowerCase() + (test ? `[data-test-id=${test}]` : '') + (cls ? '.' + cls : '')
+               + (label ? `  "${label.slice(0, 60)}"` : '') + (isPic ? `  (picture ${el.naturalWidth}x${el.naturalHeight})` : ''));
+  }
+  return [...new Set(lines)].slice(0, 120).join('\n');
+}"""
+
+
+def cmd_upload_check(args):
+    """Prints only control names from the chat box area: no chats, no account details."""
+    import tempfile
+    from PIL import Image
+
+    web = GeminiWeb(out_dir=OUT).start()
+    try:
+        web.open_app()
+        menu = web.find("upload_menu")
+        print("Upload button:", (menu.get_attribute("aria-label") or menu.inner_text()) if menu else "NOT FOUND")
+        if menu:
+            menu.click()
+            time.sleep(2)
+            items = []
+            for role in ("menuitem", "option", "button"):
+                loc = web.page.get_by_role(role)
+                for i in range(min(loc.count(), 60)):
+                    item = loc.nth(i)
+                    try:
+                        if item.is_visible():
+                            label = (item.get_attribute("aria-label") or item.inner_text() or "").strip().replace("\n", " ")
+                            if label and len(label) < 60:
+                                items.append(f"{role}: {label}")
+                    except Exception:
+                        pass
+            print("Visible after clicking it:")
+            for line in dict.fromkeys(items):
+                print("   ", line)
+            web.page.keyboard.press("Escape")
+        with tempfile.TemporaryDirectory() as tmp:
+            photo = Path(tmp) / "upload-check.jpg"
+            Image.new("RGB", (400, 500), (198, 167, 123)).save(photo, "JPEG")
+            web._attach([str(photo)])
+            time.sleep(3)
+            box = web.need("prompt_box")
+            print("\nChat box area after attaching (tags and control names only):")
+            print(box.evaluate(PROBE_JS))
+        print("\nNothing was sent. The chat is left unsent; you can close the window.")
         return 0
     finally:
         web.close()
@@ -122,13 +192,14 @@ def main():
     p.add_argument("--minutes", type=int, default=10)
     p = sub.add_parser("inspect")
     p.add_argument("--save", action="store_true", help="also save a debug bundle")
+    sub.add_parser("upload-check")
     p = sub.add_parser("test")
     g = p.add_mutually_exclusive_group(required=True)
     g.add_argument("--handle")
     g.add_argument("--image")
     p.add_argument("--slot", default="hero-1")
     args = ap.parse_args()
-    return {"login": cmd_login, "inspect": cmd_inspect, "test": cmd_test}[args.cmd](args)
+    return {"login": cmd_login, "inspect": cmd_inspect, "test": cmd_test, "upload-check": cmd_upload_check}[args.cmd](args)
 
 
 if __name__ == "__main__":

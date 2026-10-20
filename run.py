@@ -3,6 +3,7 @@
   python run.py --test-key                     check that the Gemini key can make images
   python run.py --dry-run --handles a,b,c      pilot: make images into ./output, change nothing in Shopify
   python run.py --limit 25                     live run: up to 25 products, then stop
+  python run.py --retry-manual ...             also try again the images marked "do manually"
   python run.py --web ...                      make the images on the Gemini website (your PC, signed in with python web.py login)
 """
 import argparse
@@ -97,6 +98,7 @@ def main():
     ap.add_argument("--limit", type=int, default=config.MAX_PRODUCTS_PER_RUN)
     ap.add_argument("--handles", default="", help="comma-separated product handles to process")
     ap.add_argument("--test-key", action="store_true")
+    ap.add_argument("--retry-manual", action="store_true", help="try again the images marked 'do manually'")
     ap.add_argument("--web", action="store_true", help="make images on the Gemini website instead of the API (photo choice and checks too, unless CHECK_SOURCE=api)")
     args = ap.parse_args()
 
@@ -132,10 +134,13 @@ def main():
         if product["productType"] not in config.PRODUCT_TYPES:
             continue
         audit = json.loads((product.get("audit") or {}).get("value") or "{}")
-        if audit.get("status") in ("done", "manual", "needs_photo", "skipped") and not handles:
+        skip = ("done", "needs_photo", "skipped") if args.retry_manual else ("done", "manual", "needs_photo", "skipped")
+        if audit.get("status") in skip and not handles:
             continue
         print(f"\n{product['title']}")
         run = ProductRun(product, g, s, out_dir=OUT if args.dry_run else None)
+        if args.retry_manual:
+            run.reopen_manual()
         try:
             status = run.run()
         except QuotaExhausted as error:

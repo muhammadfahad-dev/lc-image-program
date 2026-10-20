@@ -8,9 +8,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from PIL import Image
 
 from lc_images import config, pipeline
-from lc_images.gemini import QuotaExhausted
+from lc_images.gemini import QuotaExhausted, TemporaryFailure
 
 config.SECONDS_BETWEEN_CALLS = 0
+config.TEMPORARY_WAIT_SECONDS = 0
 
 
 def jpeg(colour=(200, 180, 160)):
@@ -183,6 +184,32 @@ def test_pilot_resumes_from_its_own_folder():
         assert run2.run() == "done"
         assert g2.calls["image"] == 12 - 4 + 1  # the rest of the listing images and the colour image
         assert g2.calls["check"] == 12 - 4 + 1  # the photo choice is not repeated
+
+
+def test_temporary_gemini_error_waits_and_tries_again():
+    class Flaky(FakeGemini):
+        hiccups = 2
+
+        def generate(self, images, prompt, ratio):
+            if self.hiccups:
+                self.hiccups -= 1
+                raise TemporaryFailure("I encountered an error doing what you asked. Could you try again?")
+            return super().generate(images, prompt, ratio)
+
+    g = Flaky(SELECT_OPEN)
+    run = pipeline.ProductRun(product(colours=("Navy",)), g, FakeShopify(), log=lambda *a: None)
+    assert run.run() == "done"  # two hiccups on the first image do not use up its attempts
+    assert g.calls["image"] == 12
+
+
+def test_retry_manual_reopens_only_manual_images():
+    audit = {"version": 1, "status": "manual", "slots": {"hero-1": {"status": "done", "file": "f1"}, "closer-2": {"status": "manual", "problems": ["x"]}},
+             "colours": {"Navy": {"status": "manual"}, "Teal": {"status": "had_image"}}, "notes": []}
+    run = pipeline.ProductRun(product(audit=audit), FakeGemini(SELECT_OPEN), FakeShopify(), log=lambda *a: None)
+    run.reopen_manual()
+    assert run.audit["status"] == "in_progress"
+    assert "closer-2" not in run.audit["slots"] and run.audit["slots"]["hero-1"]["status"] == "done"
+    assert "Navy" not in run.audit["colours"] and "Teal" in run.audit["colours"]
 
 
 def test_done_by_hand_only_colours():

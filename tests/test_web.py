@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from PIL import Image
 
 from lc_images import config
-from lc_images.gemini import GenerationFailed, QuotaExhausted
+from lc_images.gemini import GenerationFailed, QuotaExhausted, TemporaryFailure
 from lc_images.gemini_web import GeminiWeb, find_chrome, load_selectors
 
 try:
@@ -63,7 +63,7 @@ def main():
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         web = web_for("ok", tmp).start()
         try:
-            for mode, expect in [("ok", None), ("multi", None), ("slowmenu", None), ("nomenu", None), ("nopreview", None), ("limit", QuotaExhausted), ("refuse", GenerationFailed), ("square", GenerationFailed)]:
+            for mode, expect in [("ok", None), ("multi", None), ("slowmenu", None), ("nomenu", None), ("nopreview", None), ("limit", QuotaExhausted), ("refuse", GenerationFailed), ("hiccup", TemporaryFailure), ("square", GenerationFailed)]:
                 web.sel["app_url"] = f"{BASE}?mode={mode}"
                 try:
                     data = web.generate([photo()], "Make the product photo.", "4:5")
@@ -81,7 +81,7 @@ def main():
                     with Image.open(io.BytesIO(data)) as im:
                         assert im.size == (1024, 1280), im.size
                     assert web.page.evaluate("window.lastAttached") == 1, "photo was not attached exactly once"
-                    assert "Aspect ratio: 4:5." in web.page.evaluate("window.lastPrompt"), "ratio line missing"
+                    assert "Aspect ratio: 4:5. Make only one image." in web.page.evaluate("window.lastPrompt"), "ratio line missing"
                     assert web.timings and web.usage.today() == 1
                     assert not list((Path(tmp) / "out").glob("web-rejected/*"))
                     assert not any("download button did not work" in line for line in LOG), LOG

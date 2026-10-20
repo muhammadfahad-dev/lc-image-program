@@ -57,5 +57,8 @@ WEB_DOWNLOAD_TIMEOUT = int(os.environ.get("WEB_DOWNLOAD_TIMEOUT", "90"))
 WEB_DAILY_CAP = int(os.environ.get("WEB_DAILY_CAP", "0"))  # your own limit per day; 0 = stop only when Gemini says so
 WEB_MIN_SIDE = int(os.environ.get("WEB_MIN_SIDE", "768"))  # smallest acceptable short side; the website gives about 1 megapixel (928x1152 for 4:5)
 WEB_RATIO_TOLERANCE = float(os.environ.get("WEB_RATIO_TOLERANCE", "0.05"))
-# The website has no aspect-ratio setting, so this line is added after each prompt. Set it empty to add nothing.
-WEB_RATIO_TEXT = os.environ.get("WEB_RATIO_TEXT", "\n\nAspect ratio: {ratio}.").replace("\\n", "\n")
+# The website has no aspect-ratio setting and sometimes makes several images, so this line is added after each prompt.
+# Set it empty to add nothing.
+WEB_RATIO_TEXT = os.environ.get("WEB_RATIO_TEXT", "\n\nAspect ratio: {ratio}. Make only one image.").replace("\\n", "\n")
+TEMPORARY_RETRIES = int(os.environ.get("TEMPORARY_RETRIES", "2"))  # extra tries after "Gemini had an error", not counted as failed attempts
+TEMPORARY_WAIT_SECONDS = float(os.environ.get("TEMPORARY_WAIT_SECONDS", "90"))

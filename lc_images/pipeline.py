@@ -12,7 +12,7 @@ import requests
 from PIL import Image
 
 from . import config
-from .gemini import GenerationFailed, QuotaExhausted
+from .gemini import GenerationFailed, QuotaExhausted, TemporaryFailure
 
 HERE = Path(__file__).parent
 PROMPTS = json.loads((HERE / "prompts.json").read_text(encoding="utf-8"))
@@ -171,10 +171,21 @@ class ProductRun:
         """Generate, check, and retry up to config.RETRIES times. Returns (jpeg or None, problems)."""
         problems = []
         for attempt in range(1 + config.RETRIES):
-            try:
-                raw = self.g.generate([reference], prompt, ratio)
-            except GenerationFailed as error:
-                problems = [f"Gemini gave no image ({error})"]
+            raw = None
+            for pause in range(1 + config.TEMPORARY_RETRIES):
+                try:
+                    raw = self.g.generate([reference], prompt, ratio)
+                    break
+                except TemporaryFailure as error:
+                    problems = [f"Gemini gave no image ({error})"]
+                    if pause < config.TEMPORARY_RETRIES:
+                        self.log(f"    {name}: {str(error)[:120]}; waiting {config.TEMPORARY_WAIT_SECONDS:.0f}s and trying again")
+                        time.sleep(config.TEMPORARY_WAIT_SECONDS)
+                except GenerationFailed as error:
+                    problems = [f"Gemini gave no image ({error})"]
+                    break
+            if raw is None:
+                self.log(f"    {name}: {problems[0][:160]}, attempt {attempt + 1}")
                 continue
             jpeg = to_jpeg(raw)
             self.last_local = f"{name}-try{attempt + 1}.jpg"
@@ -185,6 +196,15 @@ class ProductRun:
                 return jpeg, []
             self.log(f"    {name}: check failed ({'; '.join(problems)[:160]}), attempt {attempt + 1}")
         return None, problems
+
+    def reopen_manual(self):
+        """Give the images marked "do manually" another go (python run.py --retry-manual)."""
+        audit = self.audit
+        for group in ("slots", "colours"):
+            for key in [k for k, v in audit[group].items() if v.get("status") == "manual"]:
+                del audit[group][key]
+        if audit.get("status") == "manual":
+            audit["status"] = "in_progress"
 
     # ---------- main ----------
     def run(self):
