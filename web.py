@@ -108,12 +108,22 @@ def cmd_upload_check(args):
         with tempfile.TemporaryDirectory() as tmp:
             photo = Path(tmp) / "upload-check.jpg"
             Image.new("RGB", (400, 500), (198, 167, 123)).save(photo, "JPEG")
-            web._attach([str(photo)])
-            time.sleep(3)
-            box = web.need("prompt_box")
-            print("\nChat box area after attaching (tags and control names only):")
-            print(box.evaluate(PROBE_JS))
-        print("\nNothing was sent. The chat is left unsent; you can close the window.")
+            for method in (web._attach_with_menu, web._attach_with_field, web._attach_by_drop):
+                name = method.__name__[1:]
+                try:
+                    tried = method([str(photo)])
+                    result = "ran" if tried else "control not found"
+                except Exception as error:
+                    result = f"error: {str(error).splitlines()[0][:90]}"
+                    web.page.keyboard.press("Escape")
+                time.sleep(4)
+                print(f"\n== {name}: {result}; photos the program sees in the chat box: {web._preview_count()}")
+                box = web.need("prompt_box")
+                print(box.evaluate(PROBE_JS))
+                web.page.reload(wait_until="domcontentloaded")  # discard the unsent test photo
+                web.need("prompt_box", 30)
+                time.sleep(2)
+        print("\nNothing was sent.")
         return 0
     finally:
         web.close()

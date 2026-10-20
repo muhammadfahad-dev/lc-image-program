@@ -48,10 +48,16 @@ WEB_USE_BUNDLED_BROWSER = os.environ.get("WEB_USE_BUNDLED_BROWSER", "") == "1"  
 WEB_CHROME_ARGS = os.environ.get("WEB_CHROME_ARGS", "").split()  # extra Chrome switches, normally none
 WEB_DEBUG_PORT = int(os.environ.get("WEB_DEBUG_PORT", "9333"))  # local only, to talk to the Chrome window
 WEB_SELECTORS = os.environ.get("WEB_SELECTORS", "")  # empty = lc_images/selectors.json
-WEB_SECONDS_BETWEEN_IMAGES = float(os.environ.get("WEB_SECONDS_BETWEEN_IMAGES", "30"))
+WEB_SECONDS_BETWEEN_IMAGES = float(os.environ.get("WEB_SECONDS_BETWEEN_IMAGES", "10"))
 # Where photo choice and image checks run: "web" = the Gemini website (free, no key needed), "api" = GEMINI_API_KEY
 CHECK_SOURCE = os.environ.get("CHECK_SOURCE", "web").strip().lower()
-WEB_SECONDS_BEFORE_CHECK = float(os.environ.get("WEB_SECONDS_BEFORE_CHECK", "8"))
+WEB_SECONDS_BEFORE_CHECK = float(os.environ.get("WEB_SECONDS_BEFORE_CHECK", "3"))
+# One chat per product for its images, and one shared chat for all checks (a fresh one after this many checks,
+# because a very long chat makes the page slow). A passing Gemini error is retried in the same chat first.
+WEB_CHECK_CHAT_MAX = int(os.environ.get("WEB_CHECK_CHAT_MAX", "40"))
+WEB_SAME_CHAT_RETRIES = int(os.environ.get("WEB_SAME_CHAT_RETRIES", "2"))
+# Put before each image prompt, because several images share one chat
+WEB_IMAGE_INTRO = os.environ.get("WEB_IMAGE_INTRO", "New image. Use only the photo attached to this message as the reference; ignore the earlier images in this chat.")
 WEB_TIMEOUT_SECONDS = int(os.environ.get("WEB_TIMEOUT_SECONDS", "240"))
 WEB_DOWNLOAD_TIMEOUT = int(os.environ.get("WEB_DOWNLOAD_TIMEOUT", "90"))
 WEB_DAILY_CAP = int(os.environ.get("WEB_DAILY_CAP", "0"))  # your own limit per day; 0 = stop only when Gemini says so
@@ -61,4 +67,4 @@ WEB_RATIO_TOLERANCE = float(os.environ.get("WEB_RATIO_TOLERANCE", "0.05"))
 # Set it empty to add nothing.
 WEB_RATIO_TEXT = os.environ.get("WEB_RATIO_TEXT", "\n\nAspect ratio: {ratio}. Make only one image.").replace("\\n", "\n")
 TEMPORARY_RETRIES = int(os.environ.get("TEMPORARY_RETRIES", "2"))  # extra tries after "Gemini had an error", not counted as failed attempts
-TEMPORARY_WAIT_SECONDS = float(os.environ.get("TEMPORARY_WAIT_SECONDS", "90"))
+TEMPORARY_WAIT_SECONDS = float(os.environ.get("TEMPORARY_WAIT_SECONDS", "60"))

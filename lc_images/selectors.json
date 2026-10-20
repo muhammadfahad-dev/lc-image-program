@@ -24,7 +24,7 @@
     "uploader-file-preview",
     "[data-test-id='file-preview']",
     ".file-preview-container img",
-    "user-query-file-preview"
+    "[data-test-id='uploaded-img']"
   ],
   "image_tool": [],
   "send": [

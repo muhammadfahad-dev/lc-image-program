@@ -23,9 +23,17 @@ const showPreviews = () => { if (mode !== 'nopreview') $('#previews').innerHTML 
 $('.ql-editor').addEventListener('drop', (e) => { e.preventDefault(); attached += e.dataTransfer.files.length; showPreviews(); });
 $('#upload').onclick = () => { $('#menu').hidden = true; $('#file').click(); };
 if ($('#file')) $('#file').onchange = () => { attached += $('#file').files.length; setTimeout(showPreviews, 500); };
+// Like the real site: the sent message shows its photos in the chat, the chat box empties, and after the
+// first message the chat gets its own address. hiccuponce: the first answer in a chat is an error.
+let sent = 0;
 $('#send').onclick = () => {
   const prompt = $('.ql-editor').innerText;
-  window.lastPrompt = prompt; window.lastAttached = attached;
+  window.lastPrompt = prompt; window.lastAttached = attached; window.sentCount = ++sent;
+  const q = document.createElement('user-query');
+  q.innerHTML = '<img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=">'.repeat(attached) + '<p></p>';
+  $('#chat').append(q);
+  attached = 0; $('#previews').innerHTML = ''; $('.ql-editor').innerText = '';
+  if (sent === 1) history.pushState({}, '', location.pathname + location.search + '&chat=' + Math.floor(Math.random() * 1e6));
   const r = document.createElement('model-response');
   r.innerHTML = '<message-content></message-content>';
   $('#chat').append(r);
@@ -33,7 +41,8 @@ $('#send').onclick = () => {
   setTimeout(() => $('#composer').append(stop), 300);
   setTimeout(() => {
     stop.remove();
-    if (prompt.includes('Reply with only the JSON object')) { r.querySelector('message-content').textContent = '```json\n{"pass": true, "problems": []}\n```'; return; }
+    if (prompt.includes('Reply with only the JSON object')) { r.querySelector('message-content').textContent = '```json\n{"pass": true, "problems": [], "images_seen": ' + window.lastAttached + '}\n```'; return; }
+    if (mode === 'hiccuponce' && sent === 1) { r.querySelector('message-content').textContent = "I encountered an error doing what you asked. Could you try again?"; return; }
     if (mode === 'limit') { r.querySelector('message-content').textContent = "You've reached your limit for image generation. Try again tomorrow."; return; }
     if (mode === 'hiccup') { r.querySelector('message-content').textContent = "I encountered an error doing what you asked. Could you try again?"; return; }
     if (mode === 'refuse') { r.querySelector('message-content').textContent = "I can't help with that."; return; }

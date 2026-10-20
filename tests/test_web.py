@@ -17,7 +17,7 @@ from PIL import Image
 
 from lc_images import config
 from lc_images.gemini import GenerationFailed, QuotaExhausted, TemporaryFailure
-from lc_images.gemini_web import GeminiWeb, find_chrome, load_selectors
+from lc_images.gemini_web import ControlMissing, GeminiWeb, find_chrome, load_selectors
 
 try:
     import playwright  # noqa: F401
@@ -63,19 +63,24 @@ def main():
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         web = web_for("ok", tmp).start()
         try:
-            for mode, expect in [("ok", None), ("multi", None), ("slowmenu", None), ("nomenu", None), ("nopreview", None), ("limit", QuotaExhausted), ("refuse", GenerationFailed), ("hiccup", TemporaryFailure), ("square", GenerationFailed)]:
+            for mode, expect in [("ok", None), ("multi", None), ("slowmenu", None), ("nomenu", None), ("nopreview", ControlMissing), ("hiccuponce", None), ("limit", QuotaExhausted), ("refuse", GenerationFailed), ("hiccup", TemporaryFailure), ("square", GenerationFailed)]:
                 web.sel["app_url"] = f"{BASE}?mode={mode}"
+                web.start_product(mode)  # each mode is a new product, so a new chat
                 try:
                     data = web.generate([photo()], "Make the product photo.", "4:5")
                     outcome = None
-                except (QuotaExhausted, GenerationFailed) as error:
+                except (QuotaExhausted, GenerationFailed, ControlMissing) as error:
                     outcome, data = type(error), str(error)
                 assert outcome is expect, f"{mode}: expected {expect}, got {outcome} {str(data)[:200]}"
                 if mode == "multi":
                     with Image.open(io.BytesIO(data)) as im:
                         assert im.convert("RGB").getpixel((5, 5)) == (0x6D, 0x74, 0x64), "should take the first image"
                     assert any("only the first is used" in line for line in LOG), LOG
-                if mode in ("slowmenu", "nomenu", "nopreview"):
+                if mode == "nopreview":
+                    assert not web.page.evaluate("window.sentCount"), "must not send without a confirmed photo"
+                if mode == "hiccuponce":
+                    assert web.page.evaluate("window.sentCount") == 2, "the error should be asked again in the same chat"
+                if mode in ("slowmenu", "nomenu"):
                     assert web.page.evaluate("window.lastAttached") == 1, f"{mode}: photo was not attached exactly once"
                 if mode == "ok":
                     with Image.open(io.BytesIO(data)) as im:
@@ -90,13 +95,26 @@ def main():
                 if mode == "limit":
                     assert "reached your limit" in data
                 print(f"PASS web {mode}")
+            # Two images of one product share a chat
             web.sel["app_url"] = f"{BASE}?mode=ok"
+            web.start_product("shared")
+            web.generate([photo()], "First image.", "4:5")
+            first_chat = web.page.url
+            web.generate([photo()], "Second image.", "4:5")
+            assert web.page.url == first_chat and web.page.evaluate("window.sentCount") == 2
+            assert web.page.evaluate("window.lastAttached") == 1, "only this message's photo, once"
+            assert web.page.evaluate("window.lastPrompt").startswith("New image. Use only the photo attached to this message")
+            print("PASS web one chat per product")
             config.CHECK_SOURCE = "web"
             answer = web.ask_json([photo(), photo()], "Is image 1 the same garment?")
-            assert answer == {"pass": True, "problems": []}, answer
-            assert web.page.evaluate("window.lastAttached") == 2, "both images should be attached"
-            assert "Image 0 (file Image-0.jpg), Image 1 (file Image-1.jpg)" in web.page.evaluate("window.lastPrompt")
+            assert answer == {"pass": True, "problems": [], "images_seen": 2}, answer
+            assert web.check_page.evaluate("window.lastAttached") == 2, "both images should be attached"
+            assert "Image 0 (file Image-0.jpg), Image 1 (file Image-1.jpg)" in web.check_page.evaluate("window.lastPrompt")
             assert web.calls["check"] == 1
+            check_tab = web.check_page
+            web.ask_json([photo(), photo()], "Second question?")
+            assert web.check_page is check_tab and check_tab.evaluate("window.sentCount") == 2, "checks share one chat"
+            assert web.gen_page.url == first_chat, "checks must not move the image chat"
             print("PASS web check")
             assert web.signed_in()
             assert any(r["found"] for r in web.inspect()["prompt_box"])

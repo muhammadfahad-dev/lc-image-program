@@ -150,6 +150,18 @@ class Shopify:
         )
         self.wait_for_media(product_id, file_ids)
 
+    def detach_from_product(self, product_id, file_ids):
+        """Take files off the product's media. The files themselves stay in Shopify Files."""
+        if self.dry_run or not file_ids:
+            return
+        self._check(
+            self.gql(
+                "mutation($f: [FileUpdateInput!]!) { fileUpdate(files: $f) { files { id } userErrors { field message } } }",
+                {"f": [{"id": i, "referencesToRemove": [product_id]} for i in file_ids]},
+            )["fileUpdate"],
+            "fileUpdate",
+        )
+
     def wait_for_media(self, product_id, media_ids):
         for _ in range(40):
             d = self.gql("query($id: ID!) { product(id: $id) { media(first: 100) { nodes { id status } } } }", {"id": product_id})

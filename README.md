@@ -50,10 +50,12 @@ by itself at 08:20 UTC. It stops cleanly when Gemini's daily free limit is used 
 ## Running on your Windows PC with the Gemini website
 The Gemini API's free tier gives no images, so the images can be made on gemini.google.com instead, on your own PC,
 signed in with your own Google account. The program opens a separate Chrome window with its own profile folder
-(`chrome-profile`), so your normal Chrome is not touched. It works one image at a time, starts a new chat for each image,
-waits 30 seconds between images, and stops as soon as Gemini says a limit is reached. Progress is saved on every product,
-so the next run continues where it stopped. It does not deal with CAPTCHAs or sign-in checks: if Gemini asks for one,
-the run stops and you handle it yourself in the window. Every image still makes a chat in your Gemini history.
+(`chrome-profile`), so your normal Chrome is not touched. Each product gets **one chat** for all its images (first tab),
+and all checks go to **one shared check chat** (second tab; a fresh one every 40 checks so the page stays fast).
+A photo is only sent once Gemini shows it attached; if it cannot be attached, the run stops instead of sending a prompt
+without the photo. A passing Gemini error ("I encountered an error...") is asked again in the same chat, then in a new one.
+It waits 10 seconds between images and stops as soon as Gemini says a limit is reached; progress is saved on every product,
+so the next run continues where it stopped. It does not deal with CAPTCHAs or sign-in checks.
 
 Photo choice and the image checks also run on the website, each in its own new chat with the photos attached,
 because the free API key allows only about 20 checks a day. (Set `CHECK_SOURCE=api` in `.env` to use the key instead.)
@@ -89,6 +91,10 @@ To get program updates: `git pull`, then `pip install -r requirements.txt`.
 3. Pilot of one product, all images, nothing changed in Shopify: `python run.py --web --dry-run --handles <handle>`.
    Open `output\index.html` to see every image.
 4. Live: `python run.py --web --limit 5`, and more once the results look right.
+
+**Making images again.** `python run.py --web --redo closer --handles <handle>` makes that product's
+"A little closer" images again (also: `media`, `fitting`, `multi`, or single images like `closer-1,closer-3`).
+The old ones leave the product page but stay in Shopify Files. `--retry-manual` retries the "do manually" images.
 
 **Stopping and continuing.** You can stop at any time: press Ctrl+C, or close Chrome, or let the PC sleep.
 Everything made so far is kept (live runs on the product in Shopify, pilots in `output\<handle>\report.json`).

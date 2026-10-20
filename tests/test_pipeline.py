@@ -41,6 +41,7 @@ class FakeGemini:
 
     def ask_json(self, images, prompt):
         self.calls["check"] += 1
+        self.image_counts = getattr(self, "image_counts", []) + [len(images)]
         if prompt.startswith("You are helping"):
             return self.select
         failing = any(slot_title in prompt for slot_title in self.fail_slots)
@@ -63,6 +64,9 @@ class FakeShopify:
 
     def set_metafields(self, entries):
         self.metafields.extend(entries)
+
+    def detach_from_product(self, pid, ids):
+        self.detached = getattr(self, "detached", []) + list(ids)
 
     def link_variants(self, pid, pairs):
         self.links.extend(pairs)
@@ -210,6 +214,34 @@ def test_retry_manual_reopens_only_manual_images():
     assert run.audit["status"] == "in_progress"
     assert "closer-2" not in run.audit["slots"] and run.audit["slots"]["hero-1"]["status"] == "done"
     assert "Navy" not in run.audit["colours"] and "Teal" in run.audit["colours"]
+
+
+def test_repeat_check_sees_the_sections_other_images():
+    g = FakeGemini(SELECT_OPEN)
+    run = pipeline.ProductRun(product(colours=("Navy",)), g, FakeShopify(), log=lambda *a: None)
+    run.run()
+    # selection (3 photos), then per image: photo + new image + up to 3 earlier images of the same section
+    checks = g.image_counts[1:]
+    assert checks[:4] == [2, 3, 4, 5]  # hero-1..hero-4
+    assert checks[4] == 2  # fitting has no other images
+    assert checks[-4:] == [2, 3, 4, 5]  # closer-1..closer-4
+
+
+def test_redo_section_and_media_image():
+    g, s = FakeGemini(SELECT_OPEN), FakeShopify()
+    run = pipeline.ProductRun(product(colours=("Navy",)), g, s, log=lambda *a: None)
+    run.run()
+    old_closer = [run.audit["slots"][k]["file"] for k in ("closer-1", "closer-2", "closer-3", "closer-4")]
+    old_hero2 = run.audit["slots"]["hero-2"]["file"]
+    saved = json.loads(json.dumps(run.audit))
+    g2, s2 = FakeGemini(SELECT_OPEN), FakeShopify()
+    run2 = pipeline.ProductRun(product(colours=("Navy",), audit=saved), g2, s2, log=lambda *a: None)
+    assert sorted(run2.reopen(["closer", "hero-2"])) == ["closer-1", "closer-2", "closer-3", "closer-4", "hero-2"]
+    assert run2.run() == "done"
+    assert g2.calls["image"] == 5
+    closer = [m for m in s2.metafields if m["key"] == "closer_images"][-1]
+    assert not set(json.loads(closer["value"])) & set(old_closer)
+    assert s2.detached == [old_hero2] and len(s2.moved[-1]) == 4
 
 
 def test_done_by_hand_only_colours():

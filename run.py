@@ -4,6 +4,7 @@
   python run.py --dry-run --handles a,b,c      pilot: make images into ./output, change nothing in Shopify
   python run.py --limit 25                     live run: up to 25 products, then stop
   python run.py --retry-manual ...             also try again the images marked "do manually"
+  python run.py --redo closer-1,closer-3 --handles X   make these images of product X again
   python run.py --web ...                      make the images on the Gemini website (your PC, signed in with python web.py login)
 """
 import argparse
@@ -99,6 +100,7 @@ def main():
     ap.add_argument("--handles", default="", help="comma-separated product handles to process")
     ap.add_argument("--test-key", action="store_true")
     ap.add_argument("--retry-manual", action="store_true", help="try again the images marked 'do manually'")
+    ap.add_argument("--redo", default="", help="make these images again, e.g. closer-1,closer-3 or closer (use with --handles)")
     ap.add_argument("--web", action="store_true", help="make images on the Gemini website instead of the API (photo choice and checks too, unless CHECK_SOURCE=api)")
     args = ap.parse_args()
 
@@ -141,6 +143,9 @@ def main():
         run = ProductRun(product, g, s, out_dir=OUT if args.dry_run else None)
         if args.retry_manual:
             run.reopen_manual()
+        if args.redo:
+            redone = run.reopen([n.strip() for n in args.redo.split(",") if n.strip()])
+            print(f"  making again: {', '.join(redone) or 'nothing (no such images yet)'}")
         try:
             status = run.run()
         except QuotaExhausted as error:

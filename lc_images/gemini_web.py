@@ -1,12 +1,11 @@
 """Image generation through the Gemini website (gemini.google.com), driven by Playwright on your own PC.
 
 You sign in yourself, in a normal Chrome window the program opens with its own profile folder.
-The program then works like a person would: one image at a time, a new chat for each image,
-a fixed pause between images. It does not hide that it is automated, does not handle CAPTCHAs,
-and stops (QuotaExhausted) as soon as Gemini says a limit is reached; progress is kept and the
-next run continues where this one stopped.
-
-Photo selection and image checks still go to the Gemini API check model (free), through `api`.
+Each product gets one chat for its images (in the first tab); all image checks go to one shared chat
+(in a second tab), which is replaced by a fresh one every WEB_CHECK_CHAT_MAX checks. A passing Gemini
+error is asked again in the same chat first. A photo is only ever sent once Gemini shows it attached.
+The program does not hide that it is automated, does not handle CAPTCHAs, and stops (QuotaExhausted)
+as soon as Gemini says a limit is reached; progress is kept and the next run continues.
 """
 import base64
 import io
@@ -16,6 +15,7 @@ import socket
 import subprocess
 import tempfile
 import time
+from contextlib import contextmanager
 from datetime import date, datetime
 from pathlib import Path
 
@@ -101,6 +101,10 @@ class GeminiWeb:
         self._pw = self._browser = self._context = self.page = None
         self._chrome = None
         self._last = 0.0
+        self.gen_page = self.check_page = None
+        self.gen_url = self.check_url = None  # the current image chat and check chat (None = start a new one)
+        self.check_count = 0
+        self._attach_order = None  # the way of attaching that worked last time is tried first
 
     # ---------- browser ----------
     def start(self):
@@ -130,6 +134,7 @@ class GeminiWeb:
             self._context = self._pw.chromium.launch_persistent_context(str(self.profile), headless=False, accept_downloads=True, viewport=None)
         self.page = self._context.pages[0] if self._context.pages else self._context.new_page()
         self.page.set_default_timeout(15000)
+        self.gen_page = self.page
         return self
 
     @staticmethod
@@ -277,20 +282,46 @@ class GeminiWeb:
         self.log(f"    website image made in {seconds}s ({self.usage.today()} today)")
         return data
 
-    def _generate(self, images, prompt, ratio):
-        text = prompt + (config.WEB_RATIO_TEXT.format(ratio=ratio) if config.WEB_RATIO_TEXT else "")
-        images_before, responses_before = self._new_chat(images, "reference-{n}.jpg", text, use_image_tool=True)
-        return self._wait_for_image(images_before, responses_before)
+    # ---------- tabs and chats ----------
+    @contextmanager
+    def _on(self, page):
+        saved, self.page = self.page, page
+        try:
+            yield
+        finally:
+            self.page = saved
 
-    def _new_chat(self, images, file_name, text, use_image_tool=False):
-        """Open a new chat, attach the images, type the message and send it. Returns the page counts from before sending."""
-        self.open_app()
-        if not self.signed_in():
-            raise NotSignedIn("Gemini is not signed in. Run: python web.py login")
-        if use_image_tool and self.sel.get("image_tool"):
-            tool = self.find("image_tool")
-            if tool:
-                tool.click()
+    def _check_tab(self):
+        if self.check_page is None or self.check_page.is_closed():
+            self.check_page = self._context.new_page()
+            self.check_page.set_default_timeout(15000)
+            self.check_url, self.check_count = None, 0
+        return self.check_page
+
+    def start_product(self, key=None):
+        """Each product gets its own image chat."""
+        self.gen_url = None
+
+    def _go_to_chat(self, url):
+        """Open this chat, or a new chat when url is None. Returns True for a new chat."""
+        if url is None:
+            self.open_app()
+            if not self.signed_in():
+                raise NotSignedIn("Gemini is not signed in. Run: python web.py login")
+            return True
+        if self.page.url != url:
+            self.page.goto(url, wait_until="domcontentloaded")
+            self.need("prompt_box", 30)
+            time.sleep(2)
+        return False
+
+    def _current_chat(self):
+        """The address of the chat on screen, or None if Gemini gave it none (then the next message starts a new chat)."""
+        url = self.page.url
+        return None if url.rstrip("/") == self.sel["app_url"].rstrip("/") else url
+
+    def _send_message(self, images, file_name, text):
+        """Attach the images, type the message and send it. Returns the page counts from before sending."""
         with tempfile.TemporaryDirectory() as tmp:
             paths = []
             for i, jpeg in enumerate(images):
@@ -309,37 +340,86 @@ class GeminiWeb:
             self._send()
         return before
 
+    def _generate(self, images, prompt, ratio):
+        text = prompt + (config.WEB_RATIO_TEXT.format(ratio=ratio) if config.WEB_RATIO_TEXT else "")
+        if config.WEB_IMAGE_INTRO:
+            text = config.WEB_IMAGE_INTRO + "\n\n" + text
+        with self._on(self.gen_page):
+            for attempt in range(1 + config.WEB_SAME_CHAT_RETRIES):
+                if self._go_to_chat(self.gen_url) and self.sel.get("image_tool"):
+                    tool = self.find("image_tool")
+                    if tool:
+                        tool.click()
+                images_before, responses_before = self._send_message(images, "reference-{n}.jpg", text)
+                try:
+                    data = self._wait_for_image(images_before, responses_before)
+                    self.gen_url = self._current_chat()
+                    return data
+                except TemporaryFailure as error:
+                    self.gen_url = self._current_chat()
+                    if attempt < config.WEB_SAME_CHAT_RETRIES:
+                        self.log(f"    {str(error)[:120]}; asking again in the same chat")
+                        time.sleep(10)
+                        continue
+                    self.gen_url = None  # it kept failing here: the next try starts a new chat
+                    raise
+                except GenerationFailed:
+                    self.gen_url = None  # a refusal can colour the rest of the chat: start a new one
+                    raise
+
+    def _composer(self):
+        """The chat box area (box, upload button, attached photos), so photos already sent in the chat are not counted."""
+        box = self.find("prompt_box")
+        if box is None:
+            return None
+        low = "translate(@aria-label,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"
+        area = box.locator(f"xpath=ancestor::*[.//button[contains({low},'upload') or contains({low},'add files')]][1]")
+        try:
+            return area if area.count() else None
+        except Exception:
+            return None
+
     def _attach(self, paths):
-        """Attach the photos exactly once. Another way is tried only when the previous one could not attach anything;
-        if Gemini then shows more photos than were meant to be attached, the chat is abandoned (GenerationFailed)."""
+        """Attach the photos exactly once, and only go on once Gemini shows them attached.
+        If a way of attaching shows nothing, the unsent message is discarded (page reload) before the next way is tried."""
         if self._preview_count():
-            self.open_app()  # a fresh chat must start without leftover photos
+            self.page.reload(wait_until="domcontentloaded")  # leftover photos from a stopped run
+            self.need("prompt_box", 30)
             if self._preview_count():
                 folder = self.snapshot("leftover-photos")
-                raise ControlMissing(f"The new chat already has photos attached. Remove them in the Chrome window. Saved {folder}.")
-        for method in (self._attach_with_menu, self._attach_with_field, self._attach_by_drop, self._attach_by_paste):
+                raise ControlMissing(f"The chat box already has photos attached. Remove them in the Chrome window. Saved {folder}.")
+        methods = [self._attach_with_menu, self._attach_with_field, self._attach_by_drop, self._attach_by_paste]
+        if self._attach_order:
+            methods.sort(key=lambda m: m.__name__ != self._attach_order)
+        for method in methods:
             try:
-                if not method(paths):
-                    continue
+                tried = method(paths)
             except Exception as error:
-                self.log(f"    {method.__name__[1:]} did not work ({str(error)[:100]})")
+                self.log(f"    {method.__name__[1:]} did not work ({str(error).splitlines()[0][:100]})")
                 self.page.keyboard.press("Escape")
-                if self._preview_count():  # it attached after all: do not attach again
-                    break
+                tried = True  # it may have attached anyway: the preview decides
+            if not tried:
                 continue
-            break
-        else:
-            folder = self.snapshot("missing-upload")
-            raise ControlMissing(f"Could not attach the photo. Saved {folder}.")
-        shown = self._wait_for_preview(len(paths), 20)
-        if shown > len(paths):
-            self.snapshot("too-many-photos")
-            self.open_app()  # leave this chat without sending
-            raise GenerationFailed(f"Gemini showed {shown} photos instead of {len(paths)}; the chat was abandoned")
+            shown = self._wait_for_preview(len(paths), 15)
+            if shown == len(paths):
+                self._attach_order = method.__name__
+                return
+            if shown > len(paths):
+                self.snapshot("too-many-photos")
+            # Nothing (or the wrong number) attached: discard the unsent message and try the next way
+            self.page.reload(wait_until="domcontentloaded")
+            self.need("prompt_box", 30)
+            time.sleep(1)
+        folder = self.snapshot("missing-upload")
+        raise ControlMissing(
+            f"Gemini did not show the photo as attached, so nothing was sent. Saved {folder}. "
+            "Run 'python web.py upload-check' and send the result, so the program can be matched to Gemini's upload."
+        )
 
     def _preview_count(self):
-        """How many attached photos the chat box shows (0 if none, or if the preview cannot be recognised)."""
-        for _, loc in self._candidates("attachment_preview"):
+        """How many attached, unsent photos the chat box shows (0 if none, or if the preview cannot be recognised)."""
+        scope = self._composer()
+        for _, loc in self._candidates("attachment_preview", scope):
             try:
                 n = sum(1 for i in range(loc.count()) if loc.nth(i).is_visible())
             except Exception:
@@ -349,7 +429,7 @@ class GeminiWeb:
         return 0
 
     def _wait_for_preview(self, expected, seconds):
-        """Wait until the attached photos show; returns how many are shown (0 if the preview cannot be recognised)."""
+        """Wait until the attached photos show; returns how many are shown."""
         end = time.monotonic() + seconds
         shown = 0
         while time.monotonic() < end:
@@ -358,8 +438,6 @@ class GeminiWeb:
                 time.sleep(1)
                 return self._preview_count()
             time.sleep(0.5)
-        if not shown:
-            self.log("    could not see the photo preview; sending anyway (the photo is attached only once)")
         return shown
 
     def _attach_with_menu(self, paths):
@@ -552,7 +630,7 @@ class GeminiWeb:
 
     # ---------- photo choice and checks ----------
     def ask_json(self, images, prompt):
-        """Same contract as Gemini.ask_json. On the website (CHECK_SOURCE=web) or through the API key (CHECK_SOURCE=api)."""
+        """Same contract as Gemini.ask_json. In the shared check chat (CHECK_SOURCE=web) or through the API key (CHECK_SOURCE=api)."""
         if config.CHECK_SOURCE == "api":
             if not self.api:
                 raise RuntimeError("CHECK_SOURCE=api needs GEMINI_API_KEY")
@@ -561,18 +639,37 @@ class GeminiWeb:
         if self._last and gap < config.WEB_SECONDS_BEFORE_CHECK:
             time.sleep(config.WEB_SECONDS_BEFORE_CHECK - gap)
         names = ", ".join(f"Image {i} (file Image-{i}.jpg)" for i in range(len(images)))
-        text = f"The attached images are, in order: {names}.\n\n{prompt}\n\nReply with only the JSON object and nothing else."
+        text = (
+            f"New question, separate from the earlier ones in this chat. Look only at the images attached to this message: {names}.\n\n"
+            f"{prompt}\n\nReply with only the JSON object and nothing else. "
+            'Include in it "images_seen": the number of images attached to this message.'
+        )
+        said = ""
         try:
-            for attempt in range(2):
-                _, responses_before = self._new_chat(images, "Image-{i}.jpg", text)
-                said = self._wait_for_text(responses_before)
-                answer = parse_json(said)
-                if answer is not None:
+            with self._on(self._check_tab()):
+                for attempt in range(1 + config.WEB_SAME_CHAT_RETRIES):
+                    if self.check_count >= config.WEB_CHECK_CHAT_MAX:
+                        self.check_url = None
+                    if self._go_to_chat(self.check_url):
+                        self.check_count = 0
+                    _, responses_before = self._send_message(images, "Image-{i}.jpg", text)
+                    said = self._wait_for_text(responses_before)
+                    self.check_url = self._current_chat()
+                    self.check_count += 1
+                    answer = parse_json(said)
+                    if answer is None:
+                        if any(p in said.lower() for p in self.sel.get("limit_phrases", [])):
+                            raise QuotaExhausted(f"Gemini website limit: {said[:500]}")
+                        self.log(f"    check answer was not JSON ({said[:80]}); asking again")
+                        continue
+                    seen = answer.get("images_seen")
+                    if isinstance(seen, int) and seen < len(images):
+                        self.log(f"    Gemini says it got {seen} of {len(images)} images; asking again in a new chat")
+                        self.check_url = None
+                        continue
                     self.calls["check"] += 1
                     return answer
-                if any(p in said.lower() for p in self.sel.get("limit_phrases", [])):
-                    raise QuotaExhausted(f"Gemini website limit: {said[:500]}")
-            raise RuntimeError(f"Gemini did not answer with JSON: {said[:200]}")
+            raise ControlMissing(f"Gemini did not give a usable check answer: {said[:200]}")
         finally:
             self._last = time.monotonic()
 

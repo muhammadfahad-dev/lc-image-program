@@ -58,15 +58,21 @@ CHECK_PROMPT = """You are checking an AI-generated image for an online abaya sto
 Image 0 is the real product photo. Image 1 is the generated image. The brief for image 1: {brief}
 {scope}
 Fail image 1 ONLY for a major problem that a customer would notice and that misrepresents the product:
-- it shows a different garment: a different type or length (for example a short cape, top or mini dress instead of a full-length abaya), a clearly different cut or silhouette, or a main part missing or added (overlay, cape, sleeves, inner layer);
+- it shows a different garment: a different type or length (for example a short cape, top or mini dress instead of a full-length abaya), a clearly different cut or silhouette, or a main part missing or added (overlay, cape, sleeves, inner layer); this includes a person or mannequin wearing some other dress instead of the abaya from image 0;
+- the fabric or detail shown does not come from the abaya in image 0 (for example a close-up of a fabric, colour or stitching that image 0 does not have);
 - the design work is missing, clearly in a different place, or added where there was none;
 - the fabric colour is clearly not {colour};
 - any text, logo, label or watermark appears;
 - the person or mannequin is clearly deformed (extra or missing fingers, hands or limbs, a twisted body);
 - the image clearly ignores the brief (wrong view or wrong kind of shot).
 Do NOT fail for small things: embroidery, beadwork, stonework or trim that is slightly simplified or less detailed; small differences in drape, folds or volume; hands that are slightly imperfect; small differences in framing, pose, lighting or background; accessories such as hijab, niqab, shoes or jewellery.
-{extra}
+{extra}{others}
 Answer in JSON: {{"pass": true or false, "problems": ["short plain reason", ...]}}. List only major problems; an image without a major problem passes."""
+
+OTHERS_NOTE = (
+    "\nImages 2 to {last} are the other images already made for this same section of the product page. "
+    "Also fail image 1 if it shows the same view or the same detail as one of them (each image in a section must show something different)."
+)
 
 CLOSE_UP_SLOTS = {"multi-3b", "closer-1", "closer-2", "closer-3", "closer-4"}
 
@@ -137,6 +143,7 @@ class ProductRun:
             raw = local.read_text(encoding="utf-8")  # a pilot carries on from its own saved progress
         self.audit = json.loads(raw) if raw else {"version": 1, "status": "new", "slots": {}, "colours": {}, "notes": []}
         self.last_local = None
+        self.small = {}  # slot -> small copy of each image made, for the repeat check
         self.audit.setdefault("slots", {})
         self.audit.setdefault("colours", {})
         self.audit.setdefault("notes", [])
@@ -161,13 +168,30 @@ class ProductRun:
         ours = {v.get("file") for v in self.audit["slots"].values()} | {v.get("file") for v in self.audit["colours"].values()}
         return [m for m in self.p["media"]["nodes"] if m.get("mediaContentType") == "IMAGE" and m.get("image") and m["id"] not in ours]
 
-    def check(self, original, generated, brief, colour, slot=None):
+    def check(self, original, generated, brief, colour, slot=None, others=()):
         scope = "Image 1 is a close-up, so judge only the part that is visible." if slot in CLOSE_UP_SLOTS else ""
         extra = FITTING_FRAMING if slot == "fitting-1" else ""
-        answer = self.g.ask_json([original, generated], CHECK_PROMPT.format(brief=brief, scope=scope, colour=colour, extra=extra))
+        others = list(others)[:3]
+        note = OTHERS_NOTE.format(last=1 + len(others)) if others else ""
+        answer = self.g.ask_json([original, generated, *others], CHECK_PROMPT.format(brief=brief, scope=scope, colour=colour, extra=extra, others=note))
         return bool(answer.get("pass")), [str(x) for x in answer.get("problems") or []]
 
-    def make(self, reference, prompt, ratio, brief, colour, slot, name):
+    def small_image(self, slot):
+        """A small copy of an image already made for this product (for the repeat check), or None."""
+        if slot in self.small:
+            return self.small[slot]
+        state = self.audit["slots"].get(slot, {})
+        try:
+            if self.out and state.get("local") and (self.out / state["local"]).exists():
+                self.small[slot] = to_jpeg((self.out / state["local"]).read_bytes(), max_side=768)
+            elif state.get("file") and not str(state["file"]).startswith("dry-run"):
+                url = self.s.file_url(state["file"])
+                self.small[slot] = fetch(url, 768) if url else None
+        except Exception:
+            self.small[slot] = None
+        return self.small.get(slot)
+
+    def make(self, reference, prompt, ratio, brief, colour, slot, name, others=()):
         """Generate, check, and retry up to config.RETRIES times. Returns (jpeg or None, problems)."""
         problems = []
         for attempt in range(1 + config.RETRIES):
@@ -190,9 +214,10 @@ class ProductRun:
             jpeg = to_jpeg(raw)
             self.last_local = f"{name}-try{attempt + 1}.jpg"
             self.keep_local(self.last_local, jpeg)
-            ok, problems = self.check(reference, to_jpeg(raw, max_side=1024), brief, colour, slot)
+            ok, problems = self.check(reference, to_jpeg(raw, max_side=1024), brief, colour, slot, others)
             if ok:
                 self.made += 1
+                self.small[name] = to_jpeg(raw, max_side=768)
                 return jpeg, []
             self.log(f"    {name}: check failed ({'; '.join(problems)[:160]}), attempt {attempt + 1}")
         return None, problems
@@ -206,11 +231,39 @@ class ProductRun:
         if audit.get("status") == "manual":
             audit["status"] = "in_progress"
 
+    def reopen(self, names):
+        """Make these images again (python run.py --redo closer-1,closer-3 or --redo closer).
+        Names are image slots (hero-1 ... closer-4) or sections (media, fitting, multi, closer).
+        The old images leave the product page; they stay in Shopify Files (nothing is deleted)."""
+        audit = self.audit
+        if "choice" not in audit:
+            return []
+        plan = listing_plan(audit["choice"]["front_open"], audit["choice"]["has_design_work"])
+        wanted = set()
+        for name in names:
+            wanted.update(plan.get(name, [name]))
+        reopened = []
+        for field, slots in plan.items():
+            hit = [sl for sl in slots if sl in wanted and sl in audit["slots"]]
+            if not hit:
+                continue
+            for sl in hit:
+                old = audit["slots"].pop(sl)
+                if field == "media" and old.get("file") and audit.get("placed", {}).get("media"):
+                    audit.setdefault("detach", []).append(old["file"])
+                reopened.append(sl)
+            audit.setdefault("placed", {})[field] = False
+        if reopened:
+            audit["status"] = "in_progress"
+        return reopened
+
     # ---------- main ----------
     def run(self):
         p, audit = self.p, self.audit
         if audit.get("status") in ("done", "manual", "needs_photo", "skipped"):
             return audit["status"]
+        if hasattr(self.g, "start_product"):
+            self.g.start_product(p["handle"])  # the website gives each product its own chat
         if p["productType"] not in config.PRODUCT_TYPES:
             audit["notes"] = [f"Not an abaya type ({p['productType'] or 'none'})"]
             self.save("skipped")
@@ -269,7 +322,8 @@ class ProductRun:
                     prompt = prompt + "\n\n" + CLOSED_NOTES[slot]
                 brief = f"{PROMPTS[slot]['title']} ({field} image)"
                 self.log(f"  {slot}: generating")
-                jpeg, problems = self.make(reference, prompt, PROMPTS[slot]["ratio"], brief, "the same as image 0", slot, slot)
+                others = [img for img in (self.small_image(o) for o in slots if o != slot and audit["slots"].get(o, {}).get("status") == "done") if img]
+                jpeg, problems = self.make(reference, prompt, PROMPTS[slot]["ratio"], brief, "the same as image 0", slot, slot, others)
                 if jpeg is None:
                     audit["slots"][slot] = {"status": "manual", "problems": problems[:4]}
                 else:
@@ -299,7 +353,10 @@ class ProductRun:
         files = [st["file"] for st in states]
         pid = self.p["id"]
         if field == "media":
-            self.s.attach_to_product(pid, files)
+            if audit.get("detach"):
+                self.s.detach_from_product(pid, audit["detach"])  # images being replaced (--redo)
+                audit["detach"] = []
+            self.s.attach_to_product(pid, [f for f in files if f not in self.attached_media()])
             self.s.move_media_to_front(pid, files)
         elif field == "fitting":
             self.s.set_metafields([{"ownerId": pid, "namespace": "custom", "key": config.FIELD_KEYS["fitting"], "type": "file_reference", "value": files[0]}])
@@ -307,6 +364,9 @@ class ProductRun:
             self.s.set_metafields([{"ownerId": pid, "namespace": "custom", "key": config.FIELD_KEYS[field], "type": "list.file_reference", "value": json.dumps(files)}])
         audit.setdefault("placed", {})[field] = True
         self.save()
+
+    def attached_media(self):
+        return {m["id"] for m in self.p["media"]["nodes"]}
 
     def front_image(self, reference):
         """Colours are made from the new front image (1.1) so every colour has the same pose; the reference photo otherwise."""
