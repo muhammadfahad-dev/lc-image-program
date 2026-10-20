@@ -52,7 +52,7 @@ WEB_SECONDS_BETWEEN_IMAGES = float(os.environ.get("WEB_SECONDS_BETWEEN_IMAGES", 
 WEB_TIMEOUT_SECONDS = int(os.environ.get("WEB_TIMEOUT_SECONDS", "240"))
 WEB_DOWNLOAD_TIMEOUT = int(os.environ.get("WEB_DOWNLOAD_TIMEOUT", "90"))
 WEB_DAILY_CAP = int(os.environ.get("WEB_DAILY_CAP", "0"))  # your own limit per day; 0 = stop only when Gemini says so
-WEB_MIN_SIDE = int(os.environ.get("WEB_MIN_SIDE", "1000"))  # smallest acceptable short side in pixels
+WEB_MIN_SIDE = int(os.environ.get("WEB_MIN_SIDE", "768"))  # smallest acceptable short side; the website gives about 1 megapixel (928x1152 for 4:5)
 WEB_RATIO_TOLERANCE = float(os.environ.get("WEB_RATIO_TOLERANCE", "0.05"))
 # The website has no aspect-ratio setting, so this line is added after each prompt. Set it empty to add nothing.
 WEB_RATIO_TEXT = os.environ.get("WEB_RATIO_TEXT", "\n\nAspect ratio: {ratio}.").replace("\\n", "\n")

@@ -15,9 +15,12 @@
 const mode = new URLSearchParams(location.search).get('mode') || localStorage.getItem('mode') || 'ok';
 const $ = (s) => document.querySelector(s);
 let attached = 0;
-$('#plus').onclick = () => { $('#menu').hidden = false; };
+// slowmenu: the menu opens late; nomenu: no upload button or file field, only drag-and-drop works
+$('#plus').onclick = () => { setTimeout(() => { $('#menu').hidden = false; }, mode === 'slowmenu' ? 1500 : 0); };
+if (mode === 'nomenu') { $('#plus').remove(); $('#file').remove(); }
+$('.ql-editor').addEventListener('drop', (e) => { e.preventDefault(); attached = e.dataTransfer.files.length; $('#previews').innerHTML = '<uploader-file-preview>photo</uploader-file-preview>'; });
 $('#upload').onclick = () => { $('#menu').hidden = true; $('#file').click(); };
-$('#file').onchange = () => { attached = $('#file').files.length; setTimeout(() => { $('#previews').innerHTML = '<uploader-file-preview>photo</uploader-file-preview>'; }, 500); };
+if ($('#file')) $('#file').onchange = () => { attached = $('#file').files.length; setTimeout(() => { $('#previews').innerHTML = '<uploader-file-preview>photo</uploader-file-preview>'; }, 500); };
 $('#send').onclick = () => {
   const prompt = $('.ql-editor').innerText;
   window.lastPrompt = prompt; window.lastAttached = attached;

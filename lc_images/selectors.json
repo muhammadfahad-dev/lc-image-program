@@ -17,7 +17,8 @@
   "upload_item": [
     "role:menuitem|Upload files",
     "role:button|Upload files",
-    "text=Upload files"
+    "text=Upload files",
+    "role:menuitem|Upload"
   ],
   "attachment_preview": [
     "uploader-file-preview",

@@ -257,7 +257,11 @@ class GeminiWeb:
         self.timings.append(seconds)
         self.calls["image"] += 1
         self.usage.add()
-        self._validate(data, ratio)
+        try:
+            self._validate(data, ratio)
+        except GenerationFailed:
+            self._keep_rejected(data)
+            raise
         self.log(f"    website image made in {seconds}s ({self.usage.today()} today)")
         return data
 
@@ -293,33 +297,83 @@ class GeminiWeb:
             return self._wait_for_image(before, responses_before)
 
     def _attach(self, paths):
-        attached = False
-        menu = self.find("upload_menu")
-        if menu:
+        """Attach the photo: through Gemini's upload menu, else its file field, else by dropping it on the chat box."""
+        for method in (self._attach_with_menu, self._attach_with_field, self._attach_by_drop, self._attach_by_paste):
             try:
-                with self.page.expect_file_chooser(timeout=8000) as chooser:
-                    menu.click()
-                    item = self.find("upload_item")
-                    if item:
-                        item.click()
-                chooser.value.set_files(paths)
-                attached = True
-            except Exception:
+                if not method(paths):
+                    continue
+            except Exception as error:
+                self.log(f"    {method.__name__[1:]} did not work ({str(error)[:100]})")
                 self.page.keyboard.press("Escape")
-        if not attached:
-            field = self.find("file_input", visible=False)
-            if not field:
-                folder = self.snapshot("missing-upload")
-                raise ControlMissing(f"Could not find how to attach the photo. Saved {folder}.")
-            field.set_input_files(paths)
-        # Wait for the photo to finish uploading (its preview appears and Send becomes usable)
-        end = time.monotonic() + 60
-        while time.monotonic() < end:
-            if not self.sel.get("attachment_preview") or self.find("attachment_preview"):
+                continue
+            if self._wait_for_preview(15):
                 return
+        folder = self.snapshot("missing-upload")
+        raise ControlMissing(f"Could not attach the photo. Saved {folder}.")
+
+    def _wait_for_preview(self, seconds):
+        if not self.sel.get("attachment_preview"):
+            time.sleep(3)
+            return True
+        end = time.monotonic() + seconds
+        while time.monotonic() < end:
+            if self.find("attachment_preview"):
+                return True
             time.sleep(0.5)
-        folder = self.snapshot("upload-not-confirmed")
-        raise ControlMissing(f"The photo did not appear as attached. Saved {folder}.")
+        return False
+
+    def _attach_with_menu(self, paths):
+        menu = self.find("upload_menu")
+        if not menu:
+            return False
+        with self.page.expect_file_chooser(timeout=10000) as chooser:
+            menu.click()
+            end = time.monotonic() + 5  # the menu takes a moment to open
+            while time.monotonic() < end:
+                item = self.find("upload_item")
+                if item:
+                    item.click()
+                    break
+                time.sleep(0.3)
+        chooser.value.set_files(paths)
+        return True
+
+    def _attach_with_field(self, paths):
+        field = self.find("file_input", visible=False)
+        if not field:
+            return False
+        field.set_input_files(paths)
+        return True
+
+    def _drop_or_paste(self, paths, how):
+        box = self.find("prompt_box")
+        if not box:
+            return False
+        files = [{"name": Path(p).name, "data": base64.b64encode(Path(p).read_bytes()).decode()} for p in paths]
+        box.evaluate(
+            """(target, [files, how]) => {
+                 const dt = new DataTransfer();
+                 for (const f of files) {
+                   const bytes = Uint8Array.from(atob(f.data), c => c.charCodeAt(0));
+                   dt.items.add(new File([bytes], f.name, {type: 'image/jpeg'}));
+                 }
+                 if (how === 'paste') {
+                   target.focus();
+                   target.dispatchEvent(new ClipboardEvent('paste', {bubbles: true, cancelable: true, clipboardData: dt}));
+                 } else {
+                   for (const type of ['dragenter', 'dragover', 'drop'])
+                     target.dispatchEvent(new DragEvent(type, {bubbles: true, cancelable: true, dataTransfer: dt}));
+                 }
+               }""",
+            [files, how],
+        )
+        return True
+
+    def _attach_by_drop(self, paths):
+        return self._drop_or_paste(paths, "drop")
+
+    def _attach_by_paste(self, paths):
+        return self._drop_or_paste(paths, "paste")
 
     def _send(self):
         end = time.monotonic() + 60
@@ -401,6 +455,19 @@ class GeminiWeb:
             image.element_handle(),
         )
         return base64.b64decode(data)
+
+    def _keep_rejected(self, data):
+        """An image that failed the size/shape check is still saved, so a used generation is never lost."""
+        folder = self.out / "web-rejected"
+        folder.mkdir(parents=True, exist_ok=True)
+        path = folder / f"{datetime.now():%Y%m%d-%H%M%S}.img"
+        try:
+            with Image.open(io.BytesIO(data)) as im:
+                path = path.with_suffix("." + (im.format or "png").lower().replace("jpeg", "jpg"))
+        except Exception:
+            pass
+        path.write_bytes(data)
+        self.log(f"    kept the rejected image: {path}")
 
     @staticmethod
     def _validate(data, ratio):
