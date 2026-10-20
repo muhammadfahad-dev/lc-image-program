@@ -164,6 +164,27 @@ def test_quota_stop_and_resume():
     assert g2.calls["check"] == 7
 
 
+def test_pilot_resumes_from_its_own_folder():
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as tmp:
+        sel = dict(SELECT_OPEN, colour_photos={}, input_colour=None)
+        g, s = FakeGemini(sel, quota_after=4), FakeShopify()
+        run = pipeline.ProductRun(product(colours=("Emerald Green",)), g, s, out_dir=tmp, log=lambda *a: None)
+        try:
+            run.run()
+            raise AssertionError("expected the daily limit to stop the run")
+        except QuotaExhausted:
+            pass
+        saved = json.loads((Path(tmp) / "front-open-stonework" / "report.json").read_text())
+        assert saved["slots"]["hero-1"]["local"] == "hero-1-try1.jpg"
+        g2 = FakeGemini(sel)
+        run2 = pipeline.ProductRun(product(colours=("Emerald Green",)), g2, FakeShopify(), out_dir=tmp, log=lambda *a: None)
+        assert run2.run() == "done"
+        assert g2.calls["image"] == 12 - 4 + 1  # the rest of the listing images and the colour image
+        assert g2.calls["check"] == 12 - 4 + 1  # the photo choice is not repeated
+
+
 def test_done_by_hand_only_colours():
     sel = dict(SELECT_OPEN, input_colour=None, colour_photos={})
     g, s = FakeGemini(sel), FakeShopify()

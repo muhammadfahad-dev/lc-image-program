@@ -90,6 +90,10 @@ To get program updates: `git pull`, then `pip install -r requirements.txt`.
    Open `output\index.html` to see every image.
 4. Live: `python run.py --web --limit 5`, and more once the results look right.
 
+**Stopping and continuing.** You can stop at any time: press Ctrl+C, or close Chrome, or let the PC sleep.
+Everything made so far is kept (live runs on the product in Shopify, pilots in `output\<handle>\report.json`).
+Run the same command again and it continues from the next image. To redo a pilot from scratch, rename its folder in `output`.
+
 If something fails, the message says what. When a control could not be found, a folder in `output\debug` holds a screenshot;
 `lc_images\selectors.json` says where each control is and can be adjusted without changing the program.
 `output\debug` can show your account name: do not share it publicly.

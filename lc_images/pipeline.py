@@ -125,7 +125,11 @@ class ProductRun:
         self.made = 0
         self.hero_jpeg = None
         raw = (product.get("audit") or {}).get("value")
+        local = self.out / "report.json" if self.out else None
+        if local and local.exists():
+            raw = local.read_text(encoding="utf-8")  # a pilot carries on from its own saved progress
         self.audit = json.loads(raw) if raw else {"version": 1, "status": "new", "slots": {}, "colours": {}, "notes": []}
+        self.last_local = None
         self.audit.setdefault("slots", {})
         self.audit.setdefault("colours", {})
         self.audit.setdefault("notes", [])
@@ -166,7 +170,8 @@ class ProductRun:
                 problems = [f"Gemini gave no image ({error})"]
                 continue
             jpeg = to_jpeg(raw)
-            self.keep_local(f"{name}-try{attempt + 1}.jpg", jpeg)
+            self.last_local = f"{name}-try{attempt + 1}.jpg"
+            self.keep_local(self.last_local, jpeg)
             ok, problems = self.check(reference, to_jpeg(raw, max_side=1024), brief, colour, slot)
             if ok:
                 self.made += 1
@@ -245,6 +250,8 @@ class ProductRun:
                         self.hero_jpeg = jpeg
                     file_id = self.s.upload_image(jpeg, f"{p['handle']}-{slot}.jpg", f"{p['title']} - {PROMPTS[slot]['title']}")
                     audit["slots"][slot] = {"status": "done", "file": file_id}
+                    if self.out:
+                        audit["slots"][slot]["local"] = self.last_local
                 self.save()
             self.place_field(field, slots)
 
@@ -279,6 +286,8 @@ class ProductRun:
         hero = self.audit["slots"].get("hero-1", {})
         if self.hero_jpeg:
             return self.hero_jpeg
+        if self.out and hero.get("local") and (self.out / hero["local"]).exists():
+            return (self.out / hero["local"]).read_bytes()
         if hero.get("status") == "done" and not str(hero.get("file", "")).startswith("dry-run"):
             url = self.s.file_url(hero["file"])
             if url:

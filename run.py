@@ -19,9 +19,13 @@ from lc_images.pipeline import ProductRun, now
 from lc_images.shopify import Shopify
 
 try:
+    from playwright.sync_api import Error as BrowserError
+
     from lc_images.gemini_web import ControlMissing, NotSignedIn
 
-    WEB_STOPS = (ControlMissing, NotSignedIn)
+    # Website problems stop the run (every product would fail the same way): sign-out, a missing control,
+    # or the browser itself going away (Chrome closed, PC asleep, internet down)
+    WEB_STOPS = (ControlMissing, NotSignedIn, BrowserError)
 except ImportError:
     WEB_STOPS = ()
 
@@ -135,10 +139,13 @@ def main():
         try:
             status = run.run()
         except QuotaExhausted as error:
-            print(f"  Daily limit reached: {str(error)[:200]}")
+            print(f"  Daily limit reached: {str(error)[:300]}\n  Everything made so far is kept; run the same command again after the limit resets.")
             status, quota_hit = "paused (daily limit)", True
+        except KeyboardInterrupt:
+            print("  Stopped by you (Ctrl+C). Everything made so far is kept; run the same command again to continue.")
+            status, quota_hit = "paused (stopped by you)", True
         except WEB_STOPS as error:  # website problem: stop, every product would fail the same way
-            print(f"  Stopped: {error}")
+            print(f"  Stopped: {str(error)[:300]}\n  Everything made so far is kept; run the same command again to continue.")
             status, quota_hit = "paused (website problem)", True
         except Exception as error:  # one bad product must not stop the run
             traceback.print_exc()
@@ -156,7 +163,10 @@ def main():
             break
 
     if args.web:
-        g.close()
+        try:
+            g.close()
+        except Exception:
+            pass
     summary = {
         "date": started.strftime("%Y-%m-%d %H:%M UTC"),
         "mode": "pilot (dry run)" if args.dry_run else "live",
