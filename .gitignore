@@ -1,3 +1,6 @@
 output/
 __pycache__/
 *.pyc
+.env
+chrome-profile/
+.venv/

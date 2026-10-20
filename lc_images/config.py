@@ -1,6 +1,13 @@
 """Settings for the LC image program. Secrets come from environment variables, never from this file."""
 import os
 
+try:  # on your PC, settings and keys are read from the .env file next to run.py
+    from dotenv import load_dotenv
+
+    load_dotenv()
+except ImportError:
+    pass
+
 SHOP_DOMAIN = os.environ.get("SHOPIFY_STORE", "0anyrv-ej.myshopify.com")
 SHOPIFY_TOKEN = os.environ.get("SHOPIFY_ADMIN_TOKEN", "")
 # Apps made in the Shopify Dev Dashboard give a client ID and a client secret (shpss_...) instead of a fixed token;
@@ -33,3 +40,19 @@ MAX_SELECTION_PHOTOS = 8
 AUDIT_KEY = "image_audit"
 SUMMARY_KEY = "image_run_summary"
 FIELD_KEYS = {"fitting": "fitting_image", "multi": "multi_display_images", "closer": "closer_images"}
+
+# Gemini website (python run.py --web). Used on your own PC only.
+WEB_PROFILE_DIR = os.environ.get("WEB_PROFILE_DIR", "chrome-profile")  # the program's own Chrome profile (your Gemini sign-in lives here)
+CHROME_PATH = os.environ.get("CHROME_PATH", "")  # empty = find Chrome in the usual places
+WEB_USE_BUNDLED_BROWSER = os.environ.get("WEB_USE_BUNDLED_BROWSER", "") == "1"  # 1 = Playwright's own Chromium instead of Chrome
+WEB_CHROME_ARGS = os.environ.get("WEB_CHROME_ARGS", "").split()  # extra Chrome switches, normally none
+WEB_DEBUG_PORT = int(os.environ.get("WEB_DEBUG_PORT", "9333"))  # local only, to talk to the Chrome window
+WEB_SELECTORS = os.environ.get("WEB_SELECTORS", "")  # empty = lc_images/selectors.json
+WEB_SECONDS_BETWEEN_IMAGES = float(os.environ.get("WEB_SECONDS_BETWEEN_IMAGES", "30"))
+WEB_TIMEOUT_SECONDS = int(os.environ.get("WEB_TIMEOUT_SECONDS", "240"))
+WEB_DOWNLOAD_TIMEOUT = int(os.environ.get("WEB_DOWNLOAD_TIMEOUT", "90"))
+WEB_DAILY_CAP = int(os.environ.get("WEB_DAILY_CAP", "0"))  # your own limit per day; 0 = stop only when Gemini says so
+WEB_MIN_SIDE = int(os.environ.get("WEB_MIN_SIDE", "1000"))  # smallest acceptable short side in pixels
+WEB_RATIO_TOLERANCE = float(os.environ.get("WEB_RATIO_TOLERANCE", "0.05"))
+# The website has no aspect-ratio setting, so this line is added after each prompt. Set it empty to add nothing.
+WEB_RATIO_TEXT = os.environ.get("WEB_RATIO_TEXT", "\n\nAspect ratio: {ratio}.").replace("\\n", "\n")

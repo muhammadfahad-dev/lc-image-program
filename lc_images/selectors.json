@@ -1,0 +1,69 @@
+{
+  "_note": "Where the program finds things on gemini.google.com. Each entry is a list of candidates, tried in order. 'role:button|Send message' means an element with that accessible role and name; anything else is a CSS selector. If Gemini changes its page, run 'python web.py inspect' and edit this file; no code change is needed.",
+  "app_url": "https://gemini.google.com/app",
+  "prompt_box": [
+    "role:textbox|Enter a prompt",
+    "rich-textarea .ql-editor",
+    "div[contenteditable='true']"
+  ],
+  "file_input": [
+    "input[type='file']"
+  ],
+  "upload_menu": [
+    "role:button|Open upload file menu",
+    "role:button|Add files",
+    "button[aria-label*='upload' i]"
+  ],
+  "upload_item": [
+    "role:menuitem|Upload files",
+    "role:button|Upload files",
+    "text=Upload files"
+  ],
+  "attachment_preview": [
+    "uploader-file-preview",
+    "[data-test-id='file-preview']",
+    ".file-preview-container img",
+    "user-query-file-preview"
+  ],
+  "image_tool": [],
+  "send": [
+    "role:button|Send message",
+    "button[aria-label*='Send' i]"
+  ],
+  "stop": [
+    "role:button|Stop response",
+    "button[aria-label*='Stop' i]"
+  ],
+  "response": [
+    "model-response",
+    "[data-test-id='model-response']"
+  ],
+  "response_text": [
+    "model-response message-content",
+    "model-response .markdown"
+  ],
+  "result_image": [
+    "model-response generated-image img",
+    "model-response single-image img",
+    "model-response img.image"
+  ],
+  "download": [
+    "role:button|Download full size image",
+    "button[aria-label*='Download' i]"
+  ],
+  "limit_phrases": [
+    "reached your limit",
+    "reached the limit",
+    "limit for image",
+    "image generation limit",
+    "try again tomorrow",
+    "come back tomorrow",
+    "more images tomorrow",
+    "usage limit",
+    "upgrade to"
+  ],
+  "signed_out": [
+    "role:link|Sign in",
+    "role:button|Sign in"
+  ]
+}

@@ -53,15 +53,15 @@ class Gemini:
             return r.json()
         raise QuotaExhausted("Gemini kept refusing with rate limits")
 
-    def choose_models(self):
-        """Pick the first configured models this key can actually use."""
+    def choose_models(self, require_image=True):
+        """Pick the first configured models this key can actually use. Website runs need only the check model."""
         r = self.http.get(f"{API}/models", params={"key": self.key, "pageSize": 1000}, timeout=60)
         r.raise_for_status()
         names = {m["name"].split("/", 1)[1] for m in r.json().get("models", [])}
         self.available = names
         self.image_model = next((m for m in config.IMAGE_MODELS if m in names), None)
         self.check_model = next((m for m in config.CHECK_MODELS if m in names), None)
-        if not self.image_model or not self.check_model:
+        if (require_image and not self.image_model) or not self.check_model:
             raise RuntimeError(f"No usable Gemini model. Image: {self.image_model}, check: {self.check_model}. Available: {sorted(names)[:40]}")
         return self.image_model, self.check_model
 

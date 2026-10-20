@@ -47,9 +47,54 @@ Open the **Actions** tab → **LC images** → **Run workflow**, and pick a mode
 When the pilot looks right, add the repository variable `LIVE` = `true`. From then on the program runs every day
 by itself at 08:20 UTC. It stops cleanly when Gemini's daily free limit is used up and continues the next day.
 
+## Running on your Windows PC with the Gemini website
+The Gemini API's free tier gives no images, so the images can be made on gemini.google.com instead, on your own PC,
+signed in with your own Google account. The program opens a separate Chrome window with its own profile folder
+(`chrome-profile`), so your normal Chrome is not touched. It works one image at a time, starts a new chat for each image,
+waits 30 seconds between images, and stops as soon as Gemini says a limit is reached. Progress is saved on every product,
+so the next run continues where it stopped. It does not deal with CAPTCHAs or sign-in checks: if Gemini asks for one,
+the run stops and you handle it yourself in the window. Every image still makes a chat in your Gemini history.
+
+Photo choice and the image checks still use the free Gemini API key (check model only).
+
+### One-time setup
+1. Install **Python 3.12** from python.org (tick "Add python.exe to PATH") and **Git** from git-scm.com. Google Chrome must be installed.
+2. Open **Command Prompt** and run:
+   ```
+   cd %USERPROFILE%\Documents
+   git clone https://github.com/muhammadfahad-dev/lc-image-program.git
+   cd lc-image-program
+   py -3.12 -m venv .venv
+   .venv\Scripts\activate
+   pip install -r requirements.txt
+   copy .env.example .env
+   notepad .env
+   ```
+   In Notepad, fill in `SHOPIFY_CLIENT_ID`, `SHOPIFY_CLIENT_SECRET` and `GEMINI_API_KEY`, then save. These stay on your PC.
+3. Sign in to Gemini (once): `python web.py login`. A Chrome window opens on Gemini: sign in yourself.
+   Expected: `OK: signed in to Gemini.` The window closes; the sign-in is remembered in `chrome-profile`.
+
+Every time you open a new Command Prompt, first run `cd %USERPROFILE%\Documents\lc-image-program` and `.venv\Scripts\activate`.
+To get program updates: `git pull`, then `pip install -r requirements.txt`.
+
+### Step by step
+1. `python web.py inspect`: shows `OK` or `--` for every control the program looks for. Expected `OK` for at least
+   `prompt_box`, `upload_menu` (or `file_input`) and `send`. Add `--save` to keep a screenshot in `output\debug`.
+2. `python web.py test --handle <product-handle>`: makes **one** image (Media 1.1) from the product's first photo and
+   **changes nothing in Shopify**. Expected, for example: `OK: image made in 48.2s, 896x1152 PNG ...` and a file in `output\web-test\<handle>`.
+   Without Shopify: `python web.py test --image C:\path\photo.jpg`.
+3. Pilot of one product, all images, nothing changed in Shopify: `python run.py --web --dry-run --handles <handle>`.
+   Open `output\index.html` to see every image.
+4. Live: `python run.py --web --limit 5`, and more once the results look right.
+
+If something fails, the message says what. When a control could not be found, a folder in `output\debug` holds a screenshot;
+`lc_images\selectors.json` says where each control is and can be adjusted without changing the program.
+`output\debug` can show your account name: do not share it publicly.
+
 ## Reports
 - The **Image tracker** page shows every product's status, what still needs doing by hand, and the last run's summary.
 - GitHub emails you if a daily run fails completely.
 
 ## Tests
 `python tests/test_pipeline.py` and `python tests/test_gemini.py` run without any keys (fake Gemini and Shopify).
+`python tests/test_web.py` runs the website steps against a stand-in page in `tests/mock_gemini` (needs Chrome; not the real Gemini site).

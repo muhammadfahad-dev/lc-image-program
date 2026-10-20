@@ -1,0 +1,43 @@
+<!doctype html>
+<!-- A stand-in for gemini.google.com used by tests/test_web.py. It copies only the controls the program uses. -->
+<meta charset="utf-8"><title>Mock Gemini</title>
+<body>
+<main id="chat"></main>
+<div id="composer">
+  <div id="previews"></div>
+  <button aria-label="Open upload file menu" id="plus">+</button>
+  <div role="menu" id="menu" hidden><button role="menuitem" id="upload">Upload files</button></div>
+  <input type="file" id="file" hidden multiple>
+  <rich-textarea><div class="ql-editor" contenteditable="true" role="textbox" aria-label="Enter a prompt"></div></rich-textarea>
+  <button aria-label="Send message" id="send">Send</button>
+</div>
+<script>
+const mode = new URLSearchParams(location.search).get('mode') || localStorage.getItem('mode') || 'ok';
+const $ = (s) => document.querySelector(s);
+let attached = 0;
+$('#plus').onclick = () => { $('#menu').hidden = false; };
+$('#upload').onclick = () => { $('#menu').hidden = true; $('#file').click(); };
+$('#file').onchange = () => { attached = $('#file').files.length; setTimeout(() => { $('#previews').innerHTML = '<uploader-file-preview>photo</uploader-file-preview>'; }, 500); };
+$('#send').onclick = () => {
+  const prompt = $('.ql-editor').innerText;
+  window.lastPrompt = prompt; window.lastAttached = attached;
+  const r = document.createElement('model-response');
+  r.innerHTML = '<message-content></message-content>';
+  $('#chat').append(r);
+  const stop = document.createElement('button'); stop.setAttribute('aria-label', 'Stop response'); stop.textContent = 'Stop';
+  setTimeout(() => $('#composer').append(stop), 300);
+  setTimeout(() => {
+    stop.remove();
+    if (mode === 'limit') { r.querySelector('message-content').textContent = "You've reached your limit for image generation. Try again tomorrow."; return; }
+    if (mode === 'refuse') { r.querySelector('message-content').textContent = "I can't help with that."; return; }
+    const w = mode === 'square' ? 1024 : 1024, h = mode === 'square' ? 1024 : 1280;
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    const x = c.getContext('2d'); x.fillStyle = '#6D7464'; x.fillRect(0, 0, w, h);
+    c.toBlob((blob) => {
+      const url = URL.createObjectURL(blob);
+      r.innerHTML = `<generated-image><img src="${url}"><button aria-label="Download full size image">Download</button></generated-image>`;
+      r.querySelector('button').onclick = () => { const a = document.createElement('a'); a.href = url; a.download = 'Gemini_Generated_Image.png'; a.click(); };
+    }, 'image/png');
+  }, 3000);
+};
+</script>
