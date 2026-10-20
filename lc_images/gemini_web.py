@@ -310,7 +310,13 @@ class GeminiWeb:
         return before
 
     def _attach(self, paths):
-        """Attach the photo: through Gemini's upload menu, else its file field, else by dropping it on the chat box."""
+        """Attach the photos exactly once. Another way is tried only when the previous one could not attach anything;
+        if Gemini then shows more photos than were meant to be attached, the chat is abandoned (GenerationFailed)."""
+        if self._preview_count():
+            self.open_app()  # a fresh chat must start without leftover photos
+            if self._preview_count():
+                folder = self.snapshot("leftover-photos")
+                raise ControlMissing(f"The new chat already has photos attached. Remove them in the Chrome window. Saved {folder}.")
         for method in (self._attach_with_menu, self._attach_with_field, self._attach_by_drop, self._attach_by_paste):
             try:
                 if not method(paths):
@@ -318,22 +324,43 @@ class GeminiWeb:
             except Exception as error:
                 self.log(f"    {method.__name__[1:]} did not work ({str(error)[:100]})")
                 self.page.keyboard.press("Escape")
+                if self._preview_count():  # it attached after all: do not attach again
+                    break
                 continue
-            if self._wait_for_preview(15):
-                return
-        folder = self.snapshot("missing-upload")
-        raise ControlMissing(f"Could not attach the photo. Saved {folder}.")
+            break
+        else:
+            folder = self.snapshot("missing-upload")
+            raise ControlMissing(f"Could not attach the photo. Saved {folder}.")
+        shown = self._wait_for_preview(len(paths), 20)
+        if shown > len(paths):
+            self.snapshot("too-many-photos")
+            self.open_app()  # leave this chat without sending
+            raise GenerationFailed(f"Gemini showed {shown} photos instead of {len(paths)}; the chat was abandoned")
 
-    def _wait_for_preview(self, seconds):
-        if not self.sel.get("attachment_preview"):
-            time.sleep(3)
-            return True
+    def _preview_count(self):
+        """How many attached photos the chat box shows (0 if none, or if the preview cannot be recognised)."""
+        for _, loc in self._candidates("attachment_preview"):
+            try:
+                n = sum(1 for i in range(loc.count()) if loc.nth(i).is_visible())
+            except Exception:
+                continue
+            if n:
+                return n
+        return 0
+
+    def _wait_for_preview(self, expected, seconds):
+        """Wait until the attached photos show; returns how many are shown (0 if the preview cannot be recognised)."""
         end = time.monotonic() + seconds
+        shown = 0
         while time.monotonic() < end:
-            if self.find("attachment_preview"):
-                return True
+            shown = self._preview_count()
+            if shown >= expected:
+                time.sleep(1)
+                return self._preview_count()
             time.sleep(0.5)
-        return False
+        if not shown:
+            self.log("    could not see the photo preview; sending anyway (the photo is attached only once)")
+        return shown
 
     def _attach_with_menu(self, paths):
         menu = self.find("upload_menu")
@@ -408,7 +435,7 @@ class GeminiWeb:
             busy = self.find("stop") is not None
             if self.count("result_image") > images_before and not busy:
                 time.sleep(2)  # let the full image finish loading
-                return self._download()
+                return self._download(images_before)
             replied = self.count("response") > responses_before
             idle = idle + 1 if replied and not busy else 0
             # Finished without a new image (idle for three checks in a row, and not straight after sending): read why
@@ -452,19 +479,28 @@ class GeminiWeb:
                 pass
         return ""
 
-    def _download(self):
-        """Full-size image through Gemini's own download button; falls back to the image shown on the page."""
-        image = None
+    def _download(self, images_before):
+        """The FIRST new image of the answer (Gemini sometimes makes several), full size through its own download
+        button; falls back to the image shown on the page."""
+        image, made = None, 0
         for _, loc in self._candidates("result_image"):
-            if loc.count():
-                image = loc.last
+            n = loc.count()
+            if n > images_before:
+                image, made = loc.nth(images_before), n - images_before
                 break
         if image is None:
             raise GenerationFailed("Image disappeared before download")
+        if made > 1:
+            self.log(f"    Gemini made {made} images in one answer; only the first is used")
         try:
+            image.scroll_into_view_if_needed()
             image.hover()
-            response = self.page.locator(self.sel["response"][0]).last if self.sel.get("response") else None
-            button = self.find("download", scope=response) or self.find("download")
+            # This image's own download button: look in the image's frame first, then in the answer
+            frame = image.locator("xpath=ancestor::*[self::generated-image or self::single-image][1]")
+            button = self.find("download", scope=frame) if frame.count() else None
+            if button is None:
+                response = self.page.locator(self.sel["response"][0]).last if self.sel.get("response") else None
+                button = self.find("download", scope=response)
             if button:
                 with self.page.expect_download(timeout=config.WEB_DOWNLOAD_TIMEOUT * 1000) as info:
                     button.click()

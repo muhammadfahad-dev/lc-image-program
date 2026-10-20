@@ -63,7 +63,7 @@ def main():
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         web = web_for("ok", tmp).start()
         try:
-            for mode, expect in [("ok", None), ("slowmenu", None), ("nomenu", None), ("limit", QuotaExhausted), ("refuse", GenerationFailed), ("square", GenerationFailed)]:
+            for mode, expect in [("ok", None), ("multi", None), ("slowmenu", None), ("nomenu", None), ("nopreview", None), ("limit", QuotaExhausted), ("refuse", GenerationFailed), ("square", GenerationFailed)]:
                 web.sel["app_url"] = f"{BASE}?mode={mode}"
                 try:
                     data = web.generate([photo()], "Make the product photo.", "4:5")
@@ -71,12 +71,16 @@ def main():
                 except (QuotaExhausted, GenerationFailed) as error:
                     outcome, data = type(error), str(error)
                 assert outcome is expect, f"{mode}: expected {expect}, got {outcome} {str(data)[:200]}"
-                if mode in ("slowmenu", "nomenu"):
-                    assert web.page.evaluate("window.lastAttached") == 1, f"{mode}: photo was not attached"
+                if mode == "multi":
+                    with Image.open(io.BytesIO(data)) as im:
+                        assert im.convert("RGB").getpixel((5, 5)) == (0x6D, 0x74, 0x64), "should take the first image"
+                    assert any("only the first is used" in line for line in LOG), LOG
+                if mode in ("slowmenu", "nomenu", "nopreview"):
+                    assert web.page.evaluate("window.lastAttached") == 1, f"{mode}: photo was not attached exactly once"
                 if mode == "ok":
                     with Image.open(io.BytesIO(data)) as im:
                         assert im.size == (1024, 1280), im.size
-                    assert web.page.evaluate("window.lastAttached") == 1, "photo was not attached"
+                    assert web.page.evaluate("window.lastAttached") == 1, "photo was not attached exactly once"
                     assert "Aspect ratio: 4:5." in web.page.evaluate("window.lastPrompt"), "ratio line missing"
                     assert web.timings and web.usage.today() == 1
                     assert not list((Path(tmp) / "out").glob("web-rejected/*"))

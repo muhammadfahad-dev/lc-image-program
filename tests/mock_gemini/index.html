@@ -18,9 +18,11 @@ let attached = 0;
 // slowmenu: the menu opens late; nomenu: no upload button or file field, only drag-and-drop works
 $('#plus').onclick = () => { setTimeout(() => { $('#menu').hidden = false; }, mode === 'slowmenu' ? 1500 : 0); };
 if (mode === 'nomenu') { $('#plus').remove(); $('#file').remove(); }
-$('.ql-editor').addEventListener('drop', (e) => { e.preventDefault(); attached = e.dataTransfer.files.length; $('#previews').innerHTML = '<uploader-file-preview>photo</uploader-file-preview>'; });
+// Attachments add up like on the real site; nopreview: the photo attaches but shows no recognisable preview
+const showPreviews = () => { if (mode !== 'nopreview') $('#previews').innerHTML = '<uploader-file-preview>photo</uploader-file-preview>'.repeat(attached); };
+$('.ql-editor').addEventListener('drop', (e) => { e.preventDefault(); attached += e.dataTransfer.files.length; showPreviews(); });
 $('#upload').onclick = () => { $('#menu').hidden = true; $('#file').click(); };
-if ($('#file')) $('#file').onchange = () => { attached = $('#file').files.length; setTimeout(() => { $('#previews').innerHTML = '<uploader-file-preview>photo</uploader-file-preview>'; }, 500); };
+if ($('#file')) $('#file').onchange = () => { attached += $('#file').files.length; setTimeout(showPreviews, 500); };
 $('#send').onclick = () => {
   const prompt = $('.ql-editor').innerText;
   window.lastPrompt = prompt; window.lastAttached = attached;
@@ -39,8 +41,11 @@ $('#send').onclick = () => {
     const x = c.getContext('2d'); x.fillStyle = '#6D7464'; x.fillRect(0, 0, w, h);
     c.toBlob((blob) => {
       const url = URL.createObjectURL(blob);
-      r.innerHTML = `<generated-image><img src="${url}"><button aria-label="Download full size image">Download</button></generated-image>`;
-      r.querySelector('button').onclick = () => { const a = document.createElement('a'); a.href = url; a.download = 'Gemini_Generated_Image.png'; a.click(); };
+      // multi: Gemini answers with two images; the second one is charcoal so a wrong pick is visible
+      const second = mode === 'multi' ? (() => { x.fillStyle = '#25231F'; x.fillRect(0, 0, w, h); return c.toDataURL('image/png'); })() : null;
+      r.innerHTML = `<generated-image><img src="${url}"><button aria-label="Download full size image">Download</button></generated-image>`
+        + (second ? `<generated-image><img src="${second}"><button aria-label="Download full size image">Download</button></generated-image>` : '');
+      r.querySelectorAll('button').forEach((b, i) => { b.onclick = () => { const a = document.createElement('a'); a.href = i ? second : url; a.download = 'Gemini_Generated_Image.png'; a.click(); }; });
     }, 'image/png');
   }, 3000);
 };
