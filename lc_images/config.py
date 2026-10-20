@@ -49,6 +49,9 @@ WEB_CHROME_ARGS = os.environ.get("WEB_CHROME_ARGS", "").split()  # extra Chrome 
 WEB_DEBUG_PORT = int(os.environ.get("WEB_DEBUG_PORT", "9333"))  # local only, to talk to the Chrome window
 WEB_SELECTORS = os.environ.get("WEB_SELECTORS", "")  # empty = lc_images/selectors.json
 WEB_SECONDS_BETWEEN_IMAGES = float(os.environ.get("WEB_SECONDS_BETWEEN_IMAGES", "30"))
+# Where photo choice and image checks run: "web" = the Gemini website (free, no key needed), "api" = GEMINI_API_KEY
+CHECK_SOURCE = os.environ.get("CHECK_SOURCE", "web").strip().lower()
+WEB_SECONDS_BEFORE_CHECK = float(os.environ.get("WEB_SECONDS_BEFORE_CHECK", "8"))
 WEB_TIMEOUT_SECONDS = int(os.environ.get("WEB_TIMEOUT_SECONDS", "240"))
 WEB_DOWNLOAD_TIMEOUT = int(os.environ.get("WEB_DOWNLOAD_TIMEOUT", "90"))
 WEB_DAILY_CAP = int(os.environ.get("WEB_DAILY_CAP", "0"))  # your own limit per day; 0 = stop only when Gemini says so

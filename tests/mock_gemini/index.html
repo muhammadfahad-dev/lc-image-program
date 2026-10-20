@@ -31,6 +31,7 @@ $('#send').onclick = () => {
   setTimeout(() => $('#composer').append(stop), 300);
   setTimeout(() => {
     stop.remove();
+    if (prompt.includes('Reply with only the JSON object')) { r.querySelector('message-content').textContent = '```json\n{"pass": true, "problems": []}\n```'; return; }
     if (mode === 'limit') { r.querySelector('message-content').textContent = "You've reached your limit for image generation. Try again tomorrow."; return; }
     if (mode === 'refuse') { r.querySelector('message-content').textContent = "I can't help with that."; return; }
     const w = mode === 'square' ? 1024 : 1024, h = mode === 'square' ? 1024 : 1280;

@@ -54,6 +54,18 @@ def find_chrome():
     return shutil.which("google-chrome") or shutil.which("chrome") or shutil.which("chromium")
 
 
+def parse_json(text):
+    """The JSON object in a website answer (which may be wrapped in ``` fences or have words around it), or None."""
+    start, end = text.find("{"), text.rfind("}")
+    if start < 0 or end < start:
+        return None
+    try:
+        value = json.loads(text[start : end + 1])
+    except json.JSONDecodeError:
+        return None
+    return value if isinstance(value, dict) else None
+
+
 def ratio_of(text):
     w, h = (float(x) for x in text.split(":"))
     return w / h
@@ -266,35 +278,36 @@ class GeminiWeb:
         return data
 
     def _generate(self, images, prompt, ratio):
+        text = prompt + (config.WEB_RATIO_TEXT.format(ratio=ratio) if config.WEB_RATIO_TEXT else "")
+        images_before, responses_before = self._new_chat(images, "reference-{n}.jpg", text, use_image_tool=True)
+        return self._wait_for_image(images_before, responses_before)
+
+    def _new_chat(self, images, file_name, text, use_image_tool=False):
+        """Open a new chat, attach the images, type the message and send it. Returns the page counts from before sending."""
         self.open_app()
         if not self.signed_in():
             raise NotSignedIn("Gemini is not signed in. Run: python web.py login")
-        if self.sel.get("image_tool"):
+        if use_image_tool and self.sel.get("image_tool"):
             tool = self.find("image_tool")
             if tool:
                 tool.click()
-
         with tempfile.TemporaryDirectory() as tmp:
             paths = []
             for i, jpeg in enumerate(images):
-                path = Path(tmp) / f"reference-{i + 1}.jpg"
+                path = Path(tmp) / file_name.format(n=i + 1, i=i)
                 path.write_bytes(jpeg)
                 paths.append(str(path))
             if paths:
                 self._attach(paths)
-
-            text = prompt + (config.WEB_RATIO_TEXT.format(ratio=ratio) if config.WEB_RATIO_TEXT else "")
             box = self.need("prompt_box")
             box.click()
             try:
                 box.fill(text)
             except Exception:
                 self.page.keyboard.insert_text(text)
-
-            before = self.count("result_image")
-            responses_before = self.count("response")
+            before = (self.count("result_image"), self.count("response"))
             self._send()
-            return self._wait_for_image(before, responses_before)
+        return before
 
     def _attach(self, paths):
         """Attach the photo: through Gemini's upload menu, else its file field, else by dropping it on the chat box."""
@@ -408,6 +421,22 @@ class GeminiWeb:
         self.snapshot("timeout")
         raise GenerationFailed(f"No image after {config.WEB_TIMEOUT_SECONDS}s")
 
+    def _wait_for_text(self, responses_before):
+        start = time.monotonic()
+        end = start + config.WEB_TIMEOUT_SECONDS
+        idle = 0
+        while time.monotonic() < end:
+            time.sleep(2)
+            busy = self.find("stop") is not None
+            replied = self.count("response") > responses_before
+            idle = idle + 1 if replied and not busy else 0
+            if idle >= 2 and time.monotonic() - start > 6:
+                said = self._last_response_text()
+                if said:
+                    return said
+        self.snapshot("timeout")
+        raise RuntimeError(f"No answer from Gemini after {config.WEB_TIMEOUT_SECONDS}s")
+
     def _last_response_text(self):
         for _, loc in self._candidates("response_text"):
             try:
@@ -483,11 +512,31 @@ class GeminiWeb:
         if ratio and abs(width / height - ratio_of(ratio)) / ratio_of(ratio) > config.WEB_RATIO_TOLERANCE:
             raise GenerationFailed(f"Wrong shape: {width}x{height}, asked for {ratio}")
 
-    # ---------- checks go to the API ----------
+    # ---------- photo choice and checks ----------
     def ask_json(self, images, prompt):
-        if not self.api:
-            raise RuntimeError("Image checks need GEMINI_API_KEY (the free check model)")
-        return self.api.ask_json(images, prompt)
+        """Same contract as Gemini.ask_json. On the website (CHECK_SOURCE=web) or through the API key (CHECK_SOURCE=api)."""
+        if config.CHECK_SOURCE == "api":
+            if not self.api:
+                raise RuntimeError("CHECK_SOURCE=api needs GEMINI_API_KEY")
+            return self.api.ask_json(images, prompt)
+        gap = time.monotonic() - self._last
+        if self._last and gap < config.WEB_SECONDS_BEFORE_CHECK:
+            time.sleep(config.WEB_SECONDS_BEFORE_CHECK - gap)
+        names = ", ".join(f"Image {i} (file Image-{i}.jpg)" for i in range(len(images)))
+        text = f"The attached images are, in order: {names}.\n\n{prompt}\n\nReply with only the JSON object and nothing else."
+        try:
+            for attempt in range(2):
+                _, responses_before = self._new_chat(images, "Image-{i}.jpg", text)
+                said = self._wait_for_text(responses_before)
+                answer = parse_json(said)
+                if answer is not None:
+                    self.calls["check"] += 1
+                    return answer
+                if any(p in said.lower() for p in self.sel.get("limit_phrases", [])):
+                    raise QuotaExhausted(f"Gemini website limit: {said[:500]}")
+            raise RuntimeError(f"Gemini did not answer with JSON: {said[:200]}")
+        finally:
+            self._last = time.monotonic()
 
     # ---------- calibration ----------
     def inspect(self):

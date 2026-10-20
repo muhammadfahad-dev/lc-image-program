@@ -55,7 +55,10 @@ waits 30 seconds between images, and stops as soon as Gemini says a limit is rea
 so the next run continues where it stopped. It does not deal with CAPTCHAs or sign-in checks: if Gemini asks for one,
 the run stops and you handle it yourself in the window. Every image still makes a chat in your Gemini history.
 
-Photo choice and the image checks still use the free Gemini API key (check model only).
+Photo choice and the image checks also run on the website, each in its own new chat with the photos attached,
+because the free API key allows only about 20 checks a day. (Set `CHECK_SOURCE=api` in `.env` to use the key instead.)
+A check fails an image only for a major problem: a different garment, length or cut, design work missing or added,
+the wrong colour, text or a watermark, or a clearly deformed person. Small simplifications do not fail it.
 
 ### One-time setup
 1. Install **Python 3.12** from python.org (tick "Add python.exe to PATH") and **Git** from git-scm.com. Google Chrome must be installed.

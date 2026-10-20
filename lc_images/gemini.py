@@ -42,7 +42,7 @@ class Gemini:
             if r.status_code == 429:
                 text = r.text
                 if "PerDay" in text or "per day" in text.lower() or "daily" in text.lower():
-                    raise QuotaExhausted(text[:3000])
+                    raise QuotaExhausted(f"Gemini API key ({model}) daily limit: {text[:3000]}")
                 time.sleep(65)  # per-minute limit: wait and try again
                 continue
             if r.status_code >= 500:

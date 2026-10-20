@@ -75,44 +75,43 @@ def cmd_test(args):
     (folder / "reference.jpg").write_bytes(reference)
 
     api = None
-    if config.GEMINI_KEY:
+    if config.CHECK_SOURCE == "api":
         from lc_images.gemini import Gemini
 
         api = Gemini()
         api.choose_models(require_image=False)
+    from PIL import Image
+    import io
+    from lc_images.pipeline import CHECK_PROMPT, to_jpeg
+
     web = GeminiWeb(api=api, out_dir=OUT).start()
     try:
         started = time.monotonic()
         data = web.generate([reference], prompts[args.slot]["prompt"], prompts[args.slot]["ratio"])
         seconds = round(time.monotonic() - started, 1)
+        with Image.open(io.BytesIO(data)) as im:
+            size, fmt = im.size, im.format
+        out = folder / f"{args.slot}.{(fmt or 'png').lower().replace('jpeg', 'jpg')}"
+        out.write_bytes(data)
+        print(f"OK: image made in {seconds}s, {size[0]}x{size[1]} {fmt}, {len(data) // 1024} KB")
+        print(f"Saved: {out}  (reference photo: {folder / 'reference.jpg'})")
+        print(f"Website images made today: {web.usage.today()}")
+        answer = web.ask_json(
+            [reference, to_jpeg(data, max_side=1024)],
+            CHECK_PROMPT.format(brief=f"{prompts[args.slot]['title']} (media image)", scope="", colour="the same as image 0", extra=""),
+        )
+        print(f"Check ({'API' if api else 'website'}):", "PASS" if answer.get("pass") else "FAIL", json.dumps(answer.get("problems") or []))
     except NotSignedIn as error:
         print("NOT SIGNED IN:", error)
         return 1
     except QuotaExhausted as error:
         print("LIMIT REACHED:", error)
         return 1
-    except (GenerationFailed, ControlMissing) as error:
+    except (GenerationFailed, ControlMissing, RuntimeError) as error:
         print("FAILED:", error)
         return 1
     finally:
         web.close()
-
-    from PIL import Image
-    import io
-
-    with Image.open(io.BytesIO(data)) as im:
-        size, fmt = im.size, im.format
-    out = folder / f"{args.slot}.{(fmt or 'png').lower().replace('jpeg', 'jpg')}"
-    out.write_bytes(data)
-    print(f"OK: image made in {seconds}s, {size[0]}x{size[1]} {fmt}, {len(data) // 1024} KB")
-    print(f"Saved: {out}  (reference photo: {folder / 'reference.jpg'})")
-    print(f"Website images made today: {web.usage.today()}")
-    if api:
-        from lc_images.pipeline import to_jpeg
-
-        answer = api.ask_json([reference, to_jpeg(data, max_side=1024)], "Image 0 is a product photo of an abaya. Image 1 was generated from it. "
-                              'Answer JSON {"same_garment": true/false, "problems": [short strings]}: is Image 1 the same garment (colour, cut, details)?')
-        print("Check model says:", json.dumps(answer))
     return 0
 
 

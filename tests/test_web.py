@@ -86,6 +86,14 @@ def main():
                 if mode == "limit":
                     assert "reached your limit" in data
                 print(f"PASS web {mode}")
+            web.sel["app_url"] = f"{BASE}?mode=ok"
+            config.CHECK_SOURCE = "web"
+            answer = web.ask_json([photo(), photo()], "Is image 1 the same garment?")
+            assert answer == {"pass": True, "problems": []}, answer
+            assert web.page.evaluate("window.lastAttached") == 2, "both images should be attached"
+            assert "Image 0 (file Image-0.jpg), Image 1 (file Image-1.jpg)" in web.page.evaluate("window.lastPrompt")
+            assert web.calls["check"] == 1
+            print("PASS web check")
             assert web.signed_in()
             assert any(r["found"] for r in web.inspect()["prompt_box"])
             print("PASS web inspect")

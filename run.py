@@ -93,25 +93,29 @@ def main():
     ap.add_argument("--limit", type=int, default=config.MAX_PRODUCTS_PER_RUN)
     ap.add_argument("--handles", default="", help="comma-separated product handles to process")
     ap.add_argument("--test-key", action="store_true")
-    ap.add_argument("--web", action="store_true", help="make images on the Gemini website instead of the API (checks still use the free API model)")
+    ap.add_argument("--web", action="store_true", help="make images on the Gemini website instead of the API (photo choice and checks too, unless CHECK_SOURCE=api)")
     args = ap.parse_args()
 
     if args.test_key:
         return test_key()
 
     OUT.mkdir(exist_ok=True)
-    api = Gemini()
+    api = Gemini() if config.GEMINI_KEY else None
     if args.web:
         from lc_images.gemini_web import GeminiWeb
 
-        print("Check model:", api.choose_models(require_image=False)[1], "| images: Gemini website")
+        if config.CHECK_SOURCE == "api":
+            print("Check model:", api.choose_models(require_image=False)[1], "| images: Gemini website")
+        else:
+            print("Images, photo choice and checks: Gemini website")
+            api = None
         g = GeminiWeb(api=api, out_dir=OUT).start()
         if not g.signed_in() and (g.open_app() or not g.signed_in()):
             g.close()
             print("Gemini is not signed in. Run: python web.py login")
             return 1
     else:
-        g = api
+        g = api or Gemini()
         print("Models:", *g.choose_models())
     s = Shopify(dry_run=args.dry_run)
     handles = [h.strip() for h in args.handles.split(",") if h.strip()]

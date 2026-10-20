@@ -26,9 +26,10 @@ CLOSED_NOTES = {
 }
 
 FITTING_FRAMING = (
-    "For this fitting image the framing must also be: full-length front view, garment centred left to right, "
-    "neckline in the upper part of the frame (about 20% from the top), hem near the bottom (about 88% from the top), "
-    "and a sleeve visible on the left side at about 35% across and 40% down."
+    "For this fitting image also check the framing, roughly (within about a tenth of the frame): full-length front view, "
+    "garment centred left to right, neckline in the upper part of the frame (about 20% from the top), hem near the bottom "
+    "(about 88% from the top), and a sleeve visible on the left side. Fail only if the framing is clearly different, "
+    "for example the head or hem is cut off, or it is not a front view."
 )
 
 COLOUR_PROMPT = (
@@ -56,15 +57,16 @@ Answer in JSON with exactly these keys:
 CHECK_PROMPT = """You are checking an AI-generated image for an online abaya store.
 Image 0 is the real product photo. Image 1 is the generated image. The brief for image 1: {brief}
 {scope}
-Fail image 1 if ANY of these is true:
-- the garment design differs from image 0: embroidery, stonework, cutdana, beadwork, print, lace, buttons or trims added, removed, moved, simplified or changed;
-- the fabric colour is not {colour};
-- the cut, sleeves, neckline or length differ from image 0;
+Fail image 1 ONLY for a major problem that a customer would notice and that misrepresents the product:
+- it shows a different garment: a different type or length (for example a short cape, top or mini dress instead of a full-length abaya), a clearly different cut or silhouette, or a main part missing or added (overlay, cape, sleeves, inner layer);
+- the design work is missing, clearly in a different place, or added where there was none;
+- the fabric colour is clearly not {colour};
 - any text, logo, label or watermark appears;
-- the garment or the person looks distorted or unrealistic;
-- the image does not follow the brief.
+- the person or mannequin is clearly deformed (extra or missing fingers, hands or limbs, a twisted body);
+- the image clearly ignores the brief (wrong view or wrong kind of shot).
+Do NOT fail for small things: embroidery, beadwork, stonework or trim that is slightly simplified or less detailed; small differences in drape, folds or volume; hands that are slightly imperfect; small differences in framing, pose, lighting or background; accessories such as hijab, niqab, shoes or jewellery.
 {extra}
-Answer in JSON: {{"pass": true or false, "problems": ["short plain reason", ...]}}"""
+Answer in JSON: {{"pass": true or false, "problems": ["short plain reason", ...]}}. List only major problems; an image without a major problem passes."""
 
 CLOSE_UP_SLOTS = {"multi-3b", "closer-1", "closer-2", "closer-3", "closer-4"}
 
