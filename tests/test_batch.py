@@ -259,7 +259,11 @@ def test_an_image_that_can_never_be_finished_ends_as_manual():
         a = audit_of(s, p)
         assert all(v["status"] == "manual" for v in a["slots"].values()), {k: v["status"] for k, v in a["slots"].items()}
         assert a["slots"]["closer-2"].get("placeholder") == "placeholder-closer-2"
-        assert s.shop["image_batches"]["jobs"] == []
+        jobs = s.shop["image_batches"]["jobs"]
+        # only the colour images are still sent: with 1.1 failed, Navy cannot reuse the front image, so both colours
+        # are made from the product photo
+        assert len(jobs) == 1 and jobs[0]["count"] == 2
+        assert a["colours"]["Emerald Green"]["status"] == "queued" and a["colours"]["Navy"]["status"] == "queued"
 
 
 def test_a_job_another_machine_just_started_is_not_taken_for_lost():
