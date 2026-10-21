@@ -91,6 +91,11 @@ class Shopify:
                 return
             after = page["pageInfo"]["endCursor"]
 
+    def product_by_id(self, product_id):
+        d = self.gql(f"query($id: ID!) {{ node(id: $id) {{ ... on Product {{ {PRODUCT_FIELDS} }} }} }}", {"id": product_id})
+        node = d.get("node") or {}
+        return node if node.get("id") else None
+
     def file_url(self, file_id):
         d = self.gql("query($id: ID!) { node(id: $id) { ... on MediaImage { image { url } } } }", {"id": file_id})
         return ((d.get("node") or {}).get("image") or {}).get("url")

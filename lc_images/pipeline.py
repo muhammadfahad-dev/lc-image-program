@@ -502,6 +502,8 @@ class ProductRun:
         audit = self.audit
         states = list(audit["slots"].values()) + list(audit["colours"].values())
         waiting = any(st.get("status") in ("queued", "pending") for st in states) or (self.plan and not self.media_ready())
+        if not waiting and self.plan:
+            waiting = bool(self.pending())  # e.g. colour images, which can only start once Media is finished
         manual = [k for k, v in audit["slots"].items() if v.get("status") == "manual"] + [k for k, v in audit["colours"].items() if v.get("status") == "manual"]
         audit["notes"] = [f"Do manually: {', '.join(manual)}"] if manual else []
         self.save("in_progress" if waiting else ("manual" if manual else "done"))
@@ -568,6 +570,27 @@ class ProductRun:
         return jobs
 
     # ---------- Batch ----------
+    def job_for(self, ref):
+        """Rebuild the job for an image that is out in a Batch job (ref from the job's map), or None if it is
+        no longer queued (redone or changed by hand since)."""
+        if self.plan is None:
+            return None
+        if ref["kind"] == "slot":
+            state = self.audit["slots"].get(ref["name"], {})
+            field = next((f for f, slots in self.plan.items() if ref["name"] in slots), None)
+            if state.get("status") != "queued" or field is None:
+                return None
+            job = self.slot_job(field, ref["name"])
+        else:
+            value = ref["value"]
+            state = self.audit["colours"].get(value, {})
+            if state.get("status") != "queued":
+                return None
+            job = Job("colour", ref["name"], COLOUR_PROMPT.format(colour=value), "4:5",
+                      f"the same abaya recoloured to {value}, everything else unchanged", value, self.colour_base(), value=value)
+        job.tries = state.get("tries", 0)
+        return job
+
     def mark_queued(self, job, batch_name):
         group = "slots" if job.kind == "slot" else "colours"
         self.audit[group][job.value if job.kind == "colour" else job.name] = {"status": "queued", "batch": batch_name, "tries": job.tries}

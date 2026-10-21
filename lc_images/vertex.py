@@ -27,29 +27,51 @@ from .gemini import GenerationFailed, QuotaExhausted
 
 
 class Spend:
-    """Estimated spend so far, kept in a file so the cap holds across runs."""
+    """Estimated spend so far. Kept in output/vertex_spend.json and, when a Shopify connection is given, in the shop
+    field "vertex_spend" too, so the cap holds across runs and across your PC and GitHub (the higher figure wins)."""
 
-    def __init__(self, path):
+    def __init__(self, path, shopify=None):
         self.path = Path(path)
-        self.data = json.loads(self.path.read_text()) if self.path.exists() else {"usd": 0.0, "images": 0, "checks": 0}
+        self.shopify = shopify
+        local = json.loads(self.path.read_text()) if self.path.exists() else {}
+        shared = {}
+        if shopify is not None:
+            try:
+                shared = shopify.get_shop_json("vertex_spend", {}) or {}
+            except Exception:
+                shared = {}
+        self.data = max((local, shared), key=lambda d: d.get("usd", 0)) or {}
+        self.data.setdefault("usd", 0.0)
+        self._unsaved = 0
 
-    def add(self, usd, kind):
+    def add(self, usd, kind, count=1):
         self.data["usd"] = round(self.data["usd"] + usd, 4)
-        self.data[kind] = self.data.get(kind, 0) + 1
+        self.data[kind] = self.data.get(kind, 0) + count
         self.data["updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.path.write_text(json.dumps(self.data, indent=2))
+        self._unsaved += 1
+        if self.shopify is not None and (self._unsaved >= 5 or count > 1):
+            self.flush()
+
+    def flush(self):
+        if self.shopify is not None and self._unsaved:
+            try:
+                self.shopify.set_shop_json("vertex_spend", self.data)
+                self._unsaved = 0
+            except Exception:
+                pass  # the local file still has it; tried again next time
 
 
 class GeminiVertex:
-    def __init__(self, project=None, location=None, out_dir="output", client=None, log=print):
+    def __init__(self, project=None, location=None, out_dir="output", client=None, log=print, shopify=None):
         self.project = project or config.VERTEX_PROJECT
         self.location = location or config.VERTEX_LOCATION
         self.log = log
         self.calls = {"image": 0, "check": 0}
         self.image_model = config.VERTEX_IMAGE_MODEL
         self.check_model = config.VERTEX_CHECK_MODEL
-        self.spend = Spend(Path(out_dir) / "vertex_spend.json")
+        self.spend = Spend(Path(out_dir) / "vertex_spend.json", shopify)
         self._last = 0.0
         if client is None:
             if not self.project:
@@ -73,6 +95,19 @@ class GeminiVertex:
             name = (model.name or "").split("/")[-1]
             found.append((name, getattr(model, "display_name", "") or ""))
         return found
+
+    # ---------- Batch ----------
+    def create_batch(self, src, dest, display_name):
+        """Start a Batch job reading requests from src (gs://.../input.jsonl), writing answers under dest. Returns its name."""
+        from google.genai import types
+
+        job = self.client.batches.create(model=self.image_model, src=src, config=types.CreateBatchJobConfig(dest=dest, display_name=display_name))
+        return job.name
+
+    def batch_state(self, name):
+        job = self.client.batches.get(name=name)
+        state = job.state
+        return getattr(state, "name", None) or str(state)
 
     def choose_models(self, require_image=True):
         return self.image_model, self.check_model

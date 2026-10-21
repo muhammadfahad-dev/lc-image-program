@@ -83,3 +83,13 @@ VERTEX_SECONDS_BETWEEN_CALLS = float(os.environ.get("VERTEX_SECONDS_BETWEEN_CALL
 VERTEX_TIMEOUT_SECONDS = int(os.environ.get("VERTEX_TIMEOUT_SECONDS", "150"))
 # Waits after "too many requests" before trying again; after the last one the run stops (and continues next time)
 VERTEX_RATE_LIMIT_WAITS = [int(x) for x in os.environ.get("VERTEX_RATE_LIMIT_WAITS", "15,30,60,60,90,120").split(",")]
+
+# Report (python run.py --report, and after every live run when REPORT_SHEET_ID is set)
+STORE_URL = os.environ.get("STORE_URL", "wearlcm.com")
+REPORT_SHEET_ID = os.environ.get("REPORT_SHEET_ID", "")  # the long part of the Sheet's address, between /d/ and /edit
+REPORT_SHEET_TAB = os.environ.get("REPORT_SHEET_TAB", "Image report")
+
+# Batch mode (python run.py --vertex --batch submit|collect|auto)
+VERTEX_BUCKET = os.environ.get("VERTEX_BUCKET", "")  # Cloud Storage bucket for the request lists and answers
+VERTEX_BATCH_SIZE = int(os.environ.get("VERTEX_BATCH_SIZE", "50"))  # most images in one Batch job; start small
+VERTEX_BATCH_PRICE_PER_IMAGE = float(os.environ.get("VERTEX_BATCH_PRICE_PER_IMAGE", str(round(VERTEX_PRICE_PER_IMAGE / 2, 4))))

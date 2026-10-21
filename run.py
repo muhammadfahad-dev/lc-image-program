@@ -8,6 +8,9 @@
   python run.py --redo closer-1,closer-3 --handles X   make these images of product X again
   python run.py --vertex --test-key            Vertex AI (Google Cloud credit): make ONE test image
   python run.py --vertex --list-models         the model IDs your project can use
+  python run.py --vertex --batch auto          Batch round: collect finished results, then submit the next images
+  python run.py --vertex --batch status        show the Batch jobs that are out
+  python run.py --report                       write the progress report (output/report.csv and the Google Sheet)
   python run.py --vertex ...                   make the images through Vertex AI in your Google Cloud project
   python run.py --web ...                      make the images on the Gemini website (your PC, signed in with python web.py login)
 """
@@ -130,6 +133,106 @@ def contact_sheet(results):
     (OUT / "index.html").write_text(page, encoding="utf-8")
 
 
+def make_generator(args, s):
+    """The image maker for this run: Gemini website, Vertex AI, or the Gemini API key."""
+    if args.web:
+        from lc_images.gemini_web import GeminiWeb
+
+        api = None
+        if config.CHECK_SOURCE == "api":
+            api = Gemini()
+            print("Check model:", api.choose_models(require_image=False)[1], "| images: Gemini website")
+        else:
+            print("Images, photo choice and checks: Gemini website")
+        g = GeminiWeb(api=api, out_dir=OUT).start()
+        if not g.signed_in() and (g.open_app() or not g.signed_in()):
+            g.close()
+            raise SystemExit("Gemini is not signed in. Run: python web.py login")
+        return g
+    if args.vertex:
+        from lc_images.vertex import GeminiVertex
+
+        g = GeminiVertex(out_dir=OUT, shopify=s)
+        print(f"Vertex AI, project {g.project}: images {g.image_model}, checks {g.check_model}; spend so far about ${g.spend.data['usd']:.2f} of ${config.VERTEX_BUDGET_USD:.0f}")
+        return g
+    g = Gemini()
+    print("Models:", *g.choose_models())
+    return g
+
+
+def run_products(args, g, s, handles):
+    """One-by-one: work through the products. Returns (results, counts, stopped, images passed)."""
+    results, counts, stopped, images_made = [], {}, False, 0
+    for product in s.iter_products(handles or None):
+        if len(results) >= args.limit:
+            break
+        if product["productType"] not in config.PRODUCT_TYPES:
+            continue
+        audit = json.loads((product.get("audit") or {}).get("value") or "{}")
+        skip = ("done", "needs_photo", "skipped") if args.retry_manual else ("done", "manual", "needs_photo", "skipped")
+        if audit.get("status") in skip and not handles:
+            continue
+        print(f"\n{product['title']}")
+        run = ProductRun(product, g, s, out_dir=OUT if args.dry_run else None)
+        if args.retry_manual:
+            run.reopen_manual()
+        if args.redo:
+            redone = run.reopen([n.strip() for n in args.redo.split(",") if n.strip()])
+            print(f"  making again: {', '.join(redone) or 'nothing (no such images yet)'}")
+        try:
+            status = run.run()
+        except QuotaExhausted as error:
+            print(f"  Limit reached: {str(error)[:300]}\n  Everything made so far is kept; run the same command again later.")
+            status, stopped = "paused (limit)", True
+        except KeyboardInterrupt:
+            print("  Stopped by you (Ctrl+C). Everything made so far is kept; run the same command again to continue.")
+            status, stopped = "paused (stopped by you)", True
+        except WEB_STOPS as error:  # website problem: stop, every product would fail the same way
+            print(f"  Stopped: {str(error)[:300]}\n  Everything made so far is kept; run the same command again to continue.")
+            status, stopped = "paused (website problem)", True
+        except Exception as error:  # one bad product must not stop the run
+            traceback.print_exc()
+            status = "error"
+            run.audit.setdefault("notes", []).append(f"Error {now()}: {str(error)[:300]}")
+            try:
+                run.save()
+            except Exception:
+                pass
+        images_made += run.made
+        results.append((product["handle"], status))
+        counts[status] = counts.get(status, 0) + 1
+        print(f"  -> {status} ({run.made} images passed)")
+        if stopped:
+            break
+    return results, counts, stopped, images_made
+
+
+def run_batch(args, g, s, handles):
+    """Batch mode: submit, collect or auto (collect, then submit the next round)."""
+    from lc_images.batch import BatchRunner
+
+    runner = BatchRunner(g, s, out_dir=OUT, dry_run=args.dry_run)
+    stopped = False
+    try:
+        if args.batch == "submit":
+            runner.submit(args.limit, handles)
+        elif args.batch == "collect":
+            runner.collect()
+        elif args.batch == "status":
+            for job in runner.state["jobs"]:
+                print(f"  {job['name']}: {g.batch_state(job['name'])}, {job['count']} image(s), started {job['created']} UTC")
+            if not runner.state["jobs"]:
+                print("  No Batch jobs out.")
+        else:
+            runner.auto(args.limit, handles)
+    except QuotaExhausted as error:
+        print(f"Stopped: {str(error)[:300]}")
+        stopped = True
+    c = runner.counts
+    print(f"Batch: {c['submitted']} submitted, {c['passed']} passed, {c['retry']} to try again, {c['manual']} do manually, {c['again']} back in the queue")
+    return [], {"batch": 1}, stopped, c["passed"]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true", help="make images into ./output only; change nothing in Shopify")
@@ -138,9 +241,11 @@ def main():
     ap.add_argument("--test-key", action="store_true")
     ap.add_argument("--list-models", action="store_true", help="with --vertex: list the image and Gemini models your project can use")
     ap.add_argument("--sheet", action="store_true", help="rebuild output/index.html from the pilot folders already in output")
+    ap.add_argument("--report", action="store_true", help="write the progress report (output/report.csv and the Google Sheet)")
     ap.add_argument("--retry-manual", action="store_true", help="try again the images marked 'do manually'")
     ap.add_argument("--redo", default="", help="make these images again, e.g. closer-1,closer-3 or closer (use with --handles)")
     ap.add_argument("--vertex", action="store_true", help="use Vertex AI in your Google Cloud project (signed in with gcloud, no API key)")
+    ap.add_argument("--batch", choices=["submit", "collect", "auto", "status"], help="with --vertex: Batch mode (half price, results within 24h)")
     ap.add_argument("--web", action="store_true", help="make images on the Gemini website instead of the API (photo choice and checks too, unless CHECK_SOURCE=api)")
     args = ap.parse_args()
 
@@ -166,87 +271,37 @@ def main():
         contact_sheet(folders)
         print(f"Rebuilt {OUT / 'index.html'} for {len(folders)} product(s).")
         return 0
+    if args.report:
+        from lc_images.report import make_report
+
+        for where in make_report(Shopify(dry_run=True), OUT):
+            print("Report written:", where)
+        return 0
     if args.test_key:
         return test_vertex() if args.vertex else test_key()
+    if args.batch and not args.vertex:
+        raise SystemExit("Batch mode needs --vertex")
 
     OUT.mkdir(exist_ok=True)
-    api = Gemini() if config.GEMINI_KEY and not args.vertex else None
-    if args.web:
-        from lc_images.gemini_web import GeminiWeb
-
-        if config.CHECK_SOURCE == "api":
-            print("Check model:", api.choose_models(require_image=False)[1], "| images: Gemini website")
-        else:
-            print("Images, photo choice and checks: Gemini website")
-            api = None
-        g = GeminiWeb(api=api, out_dir=OUT).start()
-        if not g.signed_in() and (g.open_app() or not g.signed_in()):
-            g.close()
-            print("Gemini is not signed in. Run: python web.py login")
-            return 1
-    elif args.vertex:
-        from lc_images.vertex import GeminiVertex
-
-        g = GeminiVertex(out_dir=OUT)
-        print(f"Vertex AI, project {g.project}: images {g.image_model}, checks {g.check_model}; spend so far about ${g.spend.data['usd']:.2f} of ${config.VERTEX_BUDGET_USD:.0f}")
-    else:
-        g = api or Gemini()
-        print("Models:", *g.choose_models())
     s = Shopify(dry_run=args.dry_run)
+    g = make_generator(args, s)
     handles = [h.strip() for h in args.handles.split(",") if h.strip()]
 
     started = datetime.now(timezone.utc)
-    results, counts, quota_hit, images_made = [], {}, False, 0
-    for product in s.iter_products(handles or None):
-        if len(results) >= args.limit:
-            break
-        if product["productType"] not in config.PRODUCT_TYPES:
-            continue
-        audit = json.loads((product.get("audit") or {}).get("value") or "{}")
-        skip = ("done", "needs_photo", "skipped") if args.retry_manual else ("done", "manual", "needs_photo", "skipped")
-        if audit.get("status") in skip and not handles:
-            continue
-        print(f"\n{product['title']}")
-        run = ProductRun(product, g, s, out_dir=OUT if args.dry_run else None)
-        if args.retry_manual:
-            run.reopen_manual()
-        if args.redo:
-            redone = run.reopen([n.strip() for n in args.redo.split(",") if n.strip()])
-            print(f"  making again: {', '.join(redone) or 'nothing (no such images yet)'}")
-        try:
-            status = run.run()
-        except QuotaExhausted as error:
-            print(f"  Daily limit reached: {str(error)[:300]}\n  Everything made so far is kept; run the same command again after the limit resets.")
-            status, quota_hit = "paused (daily limit)", True
-        except KeyboardInterrupt:
-            print("  Stopped by you (Ctrl+C). Everything made so far is kept; run the same command again to continue.")
-            status, quota_hit = "paused (stopped by you)", True
-        except WEB_STOPS as error:  # website problem: stop, every product would fail the same way
-            print(f"  Stopped: {str(error)[:300]}\n  Everything made so far is kept; run the same command again to continue.")
-            status, quota_hit = "paused (website problem)", True
-        except Exception as error:  # one bad product must not stop the run
-            traceback.print_exc()
-            status = "error"
-            run.audit.setdefault("notes", []).append(f"Error {now()}: {str(error)[:300]}")
-            try:
-                run.save()
-            except Exception:
-                pass
-        images_made += run.made
-        results.append((product["handle"], status))
-        counts[status] = counts.get(status, 0) + 1
-        print(f"  -> {status} ({run.made} images passed)")
-        if quota_hit:
-            break
-
+    if args.batch:
+        results, counts, stopped, images_made = run_batch(args, g, s, handles)
+    else:
+        results, counts, stopped, images_made = run_products(args, g, s, handles)
     if args.web:
         try:
             g.close()
         except Exception:
             pass
+    if args.vertex:
+        g.spend.flush()
     summary = {
         "date": started.strftime("%Y-%m-%d %H:%M UTC"),
-        "mode": "pilot (dry run)" if args.dry_run else "live",
+        "mode": ("pilot (dry run)" if args.dry_run else "live") + (f", batch {args.batch}" if args.batch else ""),
         "products_worked_on": len(results),
         "statuses": counts,
         "images_passed": images_made,
@@ -255,17 +310,26 @@ def main():
         "image_source": "website" if args.web else ("vertex" if args.vertex else "api"),
         "estimated_vertex_spend_usd": g.spend.data["usd"] if args.vertex else None,
         "seconds_per_website_image": round(sum(g.timings) / len(g.timings), 1) if args.web and g.timings else None,
-        "daily_limit_reached": quota_hit,
+        "limit_reached": stopped,
         "products": [{"handle": h, "status": st} for h, st in results],
     }
     (OUT / "summary.json").write_text(json.dumps(summary, indent=2))
     if args.dry_run:
-        contact_sheet(results)
+        if results:
+            contact_sheet(results)
     else:
         try:
             s.set_metafields([{"ownerId": s.shop_id(), "namespace": "custom", "key": config.SUMMARY_KEY, "type": "json", "value": json.dumps({k: v for k, v in summary.items() if k != "products"})}])
         except Exception as error:  # the summary is a convenience; the products' own progress is already saved
             print(f"Could not save the run summary to Shopify ({str(error)[:150]}); it is in output/summary.json")
+        if config.REPORT_SHEET_ID:
+            from lc_images.report import make_report
+
+            try:
+                for where in make_report(s, OUT):
+                    print("Report updated:", where)
+            except Exception as error:
+                print(f"Could not update the report ({str(error)[:200]}); run python run.py --report later")
     print("\nSummary:", json.dumps({k: v for k, v in summary.items() if k != "products"}, indent=2))
     return 0
 
