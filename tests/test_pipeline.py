@@ -53,9 +53,12 @@ class FakeShopify:
     def __init__(self):
         self.uploads, self.attached, self.moved, self.metafields, self.links, self.audits = [], [], [], [], [], []
 
+    counter = 0  # shared, so two runs never get the same file id (like real Shopify)
+
     def upload_image(self, data, filename, alt):
         self.uploads.append(filename)
-        return f"gid://shopify/MediaImage/{len(self.uploads)}"
+        FakeShopify.counter += 1
+        return f"gid://shopify/MediaImage/{FakeShopify.counter}"
 
     def attach_to_product(self, pid, ids):
         self.attached.extend(ids)
@@ -65,6 +68,9 @@ class FakeShopify:
 
     def set_metafields(self, entries):
         self.metafields.extend(entries)
+
+    def placeholder(self, ratio):
+        return f"placeholder-{ratio}"
 
     def detach_from_product(self, pid, ids):
         self.detached = getattr(self, "detached", []) + list(ids)
@@ -150,7 +156,9 @@ def test_failed_check_retries_then_manual():
     slot = run.audit["slots"]["closer-2"]
     assert slot["status"] == "manual" and "embroidery changed at the cuff" in slot["problems"][0]
     assert g.calls["image"] == 12 - 1 + 3  # closer-2 tried three times
-    assert "closer_images" not in {m["key"] for m in s.metafields}  # an incomplete field is not filled
+    closer = json.loads([m for m in s.metafields if m["key"] == "closer_images"][-1]["value"])
+    assert closer[1] == "placeholder-1:1" and len(closer) == 4, closer  # a black placeholder keeps the order
+    assert run.audit["slots"]["closer-2"]["placeholder"] == "placeholder-1:1"
     assert "closer-2" in run.audit["notes"][0]
 
 
@@ -246,6 +254,51 @@ def test_redo_section_and_media_image():
     closer = [m for m in s2.metafields if m["key"] == "closer_images"][-1]
     assert not set(json.loads(closer["value"])) & set(old_closer)
     assert s2.detached == [old_hero2] and len(s2.moved[-1]) == 4
+
+
+def test_retry_replaces_the_placeholder_in_place():
+    g, s = FakeGemini(SELECT_OPEN, fail_slots=["Seam and stitching"]), FakeShopify()
+    run = pipeline.ProductRun(product(colours=("Navy",)), g, s, log=lambda *a: None)
+    assert run.run() == "manual"
+    saved = json.loads(json.dumps(run.audit))
+    s2 = FakeShopify()
+    run2 = pipeline.ProductRun(product(colours=("Navy",), audit=saved, filled=True), FakeGemini(SELECT_OPEN), s2, log=lambda *a: None)
+    run2.reopen_manual()
+    assert run2.run() == "done"
+    closer = json.loads([m for m in s2.metafields if m["key"] == "closer_images"][-1]["value"])
+    assert "placeholder-1:1" not in closer and closer[1] == run2.audit["slots"]["closer-2"]["file"]
+    assert [m["key"] for m in s2.metafields if m["key"] in ("fitting_image", "multi_display_images")] == []  # unchanged sections not rewritten
+
+
+def test_media_with_a_failed_image_places_the_rest_without_placeholders():
+    g, s = FakeGemini(SELECT_OPEN, fail_slots=["Back, full length"]), FakeShopify()
+    run = pipeline.ProductRun(product(colours=("Navy",)), g, s, log=lambda *a: None)
+    assert run.run() == "manual"
+    a = run.audit
+    assert "placeholder" not in a["slots"]["hero-2"]
+    assert s.moved[-1] == [a["slots"][k]["file"] for k in ("hero-1", "hero-3", "hero-4")]
+    saved = json.loads(json.dumps(a))
+    s2 = FakeShopify()
+    run2 = pipeline.ProductRun(product(colours=("Navy",), audit=saved, filled=True), FakeGemini(SELECT_OPEN), s2, log=lambda *a: None)
+    run2.reopen_manual()
+    run2.run()
+    b = run2.audit
+    assert s2.moved[-1] == [b["slots"][k]["file"] for k in ("hero-1", "hero-2", "hero-3", "hero-4")]  # back in order
+    assert s2.attached == [b["slots"]["hero-2"]["file"]]  # only the new image attached
+
+
+def test_batch_result_counts_tries():
+    g, s = FakeGemini(SELECT_OPEN, fail_slots=["Seam and stitching"]), FakeShopify()
+    run = pipeline.ProductRun(product(colours=("Navy",)), g, s, log=lambda *a: None)
+    assert run.prepare() is None
+    job = [j for j in run.pending() if j.name == "closer-2"][0]
+    assert run.batch_result(job, None, "busy", temporary=True) == "again" and run.audit["slots"]["closer-2"]["tries"] == 0
+    for expected in ("retry", "retry", "manual"):
+        job = [j for j in run.pending() if j.name == "closer-2"][0]
+        assert run.batch_result(job, jpeg()) == expected
+    assert run.audit["slots"]["closer-2"]["status"] == "manual"
+    job = [j for j in run.pending() if j.name == "closer-1"][0]
+    assert run.batch_result(job, jpeg()) == "passed" and run.audit["slots"]["closer-1"]["status"] == "done"
 
 
 def test_done_by_hand_only_colours():

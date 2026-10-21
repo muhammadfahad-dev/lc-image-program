@@ -135,7 +135,27 @@ def listing_plan(front_open, has_design_work):
     return {"media": media, "fitting": ["fitting-1"], "multi": multi, "closer": ["closer-1", "closer-2", "closer-3", "closer-4"]}
 
 
+RESOLVED = ("done", "manual", "existing")  # a listing image needs no more work
+COLOUR_FINAL = ("done", "existing_photo", "had_image", "main_image", "manual")
+PLACEHOLDER_ALT = "PLACEHOLDER"
+
+
+class Job:
+    """One image still to be made: a listing image (kind "slot") or a colour image (kind "colour")."""
+
+    def __init__(self, kind, name, prompt, ratio, brief, colour, base, field=None, value=None, tries=0):
+        self.kind, self.name, self.prompt, self.ratio = kind, name, prompt, ratio
+        self.brief, self.colour, self.base = brief, colour, base
+        self.field, self.value, self.tries = field, value, tries
+
+    def __repr__(self):
+        return f"Job({self.kind} {self.name}, try {self.tries + 1})"
+
+
 class ProductRun:
+    """Everything about one product. One-by-one runs call run(); Batch runs call prepare(), pending(),
+    batch_result() and finish() (see batch.py). Both follow exactly the same rules."""
+
     def __init__(self, product, gemini, shopify, out_dir=None, log=print):
         self.p = product
         self.g = gemini
@@ -144,6 +164,9 @@ class ProductRun:
         self.log = log
         self.made = 0
         self.hero_jpeg = None
+        self.reference = None
+        self.plan = None
+        self.colour_opts = []
         raw = (product.get("audit") or {}).get("value")
         local = self.out / "report.json" if self.out else None
         if local and local.exists():
@@ -154,6 +177,11 @@ class ProductRun:
         self.audit.setdefault("slots", {})
         self.audit.setdefault("colours", {})
         self.audit.setdefault("notes", [])
+        self.audit.setdefault("ours", [])  # every file this program uploaded for the product
+        self.attached = {m["id"] for m in product["media"]["nodes"]}
+        placed_media = self.audit.get("placed", {}).get("media")
+        if isinstance(placed_media, list):
+            self.attached.update(placed_media)  # what this program already put on the product
         if self.out:
             self.out.mkdir(parents=True, exist_ok=True)
 
@@ -171,9 +199,15 @@ class ProductRun:
             (self.out / name).write_bytes(jpeg)
 
     def images(self):
-        """The product's own photos (not images this program added)."""
-        ours = {v.get("file") for v in self.audit["slots"].values()} | {v.get("file") for v in self.audit["colours"].values()}
-        return [m for m in self.p["media"]["nodes"] if m.get("mediaContentType") == "IMAGE" and m.get("image") and m["id"] not in ours]
+        """The product's own photos (not images or placeholders this program added)."""
+        ours = set(self.audit["ours"])
+        for group in ("slots", "colours"):
+            for v in self.audit[group].values():
+                ours.update(x for x in (v.get("file"), v.get("placeholder")) if x)
+        return [
+            m for m in self.p["media"]["nodes"]
+            if m.get("mediaContentType") == "IMAGE" and m.get("image") and m["id"] not in ours and PLACEHOLDER_ALT not in (m.get("alt") or "")
+        ]
 
     def check(self, original, generated, brief, colour, slot=None, others=()):
         scope = CLOSE_UP_SCOPE if slot in CLOSE_UP_SLOTS else ""
@@ -198,39 +232,23 @@ class ProductRun:
             self.small[slot] = None
         return self.small.get(slot)
 
-    def make(self, reference, prompt, ratio, brief, colour, slot, name, others=()):
-        """Generate, check, and retry up to config.RETRIES times. Returns (jpeg or None, problems)."""
-        problems = []
-        for attempt in range(1 + config.RETRIES):
-            raw = None
-            for pause in range(1 + config.TEMPORARY_RETRIES):
-                try:
-                    raw = self.g.generate([reference], prompt, ratio)
-                    break
-                except TemporaryFailure as error:
-                    problems = [f"Gemini gave no image ({error})"]
-                    if pause < config.TEMPORARY_RETRIES:
-                        self.log(f"    {name}: {str(error)[:120]}; waiting {config.TEMPORARY_WAIT_SECONDS:.0f}s and trying again")
-                        time.sleep(config.TEMPORARY_WAIT_SECONDS)
-                except GenerationFailed as error:
-                    problems = [f"Gemini gave no image ({error})"]
-                    break
-            if raw is None:
-                self.log(f"    {name}: {problems[0][:160]}, attempt {attempt + 1}")
-                continue
-            jpeg = to_jpeg(raw)
-            self.last_local = f"{name}-try{attempt + 1}.jpg"
-            self.keep_local(self.last_local, jpeg)
-            ok, problems = self.check(reference, to_jpeg(raw, max_side=1024), brief, colour, slot, others)
-            if ok:
-                self.made += 1
-                self.small[name] = to_jpeg(raw, max_side=768)
-                return jpeg, []
-            self.log(f"    {name}: check failed ({'; '.join(problems)[:160]}), attempt {attempt + 1}")
-        return None, problems
+    def others_for(self, job):
+        """The images already made for the job's own section, for the repeat check."""
+        if job.kind != "slot":
+            return []
+        slots = self.plan[job.field]
+        done = [o for o in slots if o != job.name and self.audit["slots"].get(o, {}).get("status") == "done"]
+        return [img for img in (self.small_image(o) for o in done) if img]
 
+    def upload(self, jpeg, filename, alt):
+        file_id = self.s.upload_image(jpeg, filename, alt)
+        self.audit["ours"].append(file_id)
+        return file_id
+
+    # ---------- reopening ----------
     def reopen_manual(self):
-        """Give the images marked "do manually" another go (python run.py --retry-manual)."""
+        """Give the images marked "do manually" another go (python run.py --retry-manual).
+        Their placeholders stay on the product page until the new image passes."""
         audit = self.audit
         for group in ("slots", "colours"):
             for key in [k for k, v in audit[group].items() if v.get("status") == "manual"]:
@@ -241,7 +259,8 @@ class ProductRun:
     def reopen(self, names):
         """Make these images again (python run.py --redo closer-1,closer-3 or --redo closer).
         Names are image slots (hero-1 ... closer-4) or sections (media, fitting, multi, closer).
-        The old images leave the product page; they stay in Shopify Files (nothing is deleted)."""
+        The old images stay on the page until the new ones are in place; replaced Media images then leave
+        the product page but stay in Shopify Files (nothing is deleted)."""
         audit = self.audit
         if "choice" not in audit:
             return []
@@ -264,8 +283,9 @@ class ProductRun:
             audit["status"] = "in_progress"
         return reopened
 
-    # ---------- main ----------
-    def run(self):
+    # ---------- steps ----------
+    def prepare(self):
+        """Checks, photo choice and the reference photo. Returns a final status (nothing to do), or None to go on."""
         p, audit = self.p, self.audit
         if audit.get("status") in ("done", "manual", "needs_photo", "skipped"):
             return audit["status"]
@@ -276,15 +296,15 @@ class ProductRun:
             self.save("skipped")
             return "skipped"
 
-        colour_opts = [o for o in p["options"] if o["name"].strip().lower() in config.COLOUR_OPTION_NAMES]
-        colour_names = [v for o in colour_opts for v in o["values"]]
+        self.colour_opts = [o for o in p["options"] if o["name"].strip().lower() in config.COLOUR_OPTION_NAMES]
+        colour_names = [v for o in self.colour_opts for v in o["values"]]
         photos = self.images()[: config.MAX_SELECTION_PHOTOS]
-        if not photos:
+        if not photos and "choice" not in audit:
             audit["notes"] = ["No product photos to work from"]
             self.save("needs_photo")
             return "needs_photo"
 
-        # 1. Choose the reference photo (once; kept in the audit)
+        # Choose the reference photo (once; kept in the record)
         if "choice" not in audit:
             small = [fetch(m["image"]["url"], 768) for m in photos]
             answer = self.g.ask_json(small, SELECT_PROMPT.format(title=p["title"], type=p["productType"], tags=", ".join(p["tags"]), colours=", ".join(colour_names) or "none"))
@@ -308,128 +328,269 @@ class ProductRun:
             }
             self.save("in_progress")
         choice = audit["choice"]
-        reference = fetch(choice["url"], 2048)
-        self.keep_local("reference.jpg", reference)
+        self.reference = fetch(choice["url"], 2048)
+        self.keep_local("reference.jpg", self.reference)
 
-        # 2. Listing images, field by field
-        plan = listing_plan(choice["front_open"], choice["has_design_work"])
-        # A field counts as filled by hand only if this program never filled it (fields it filled can be redone)
+        # Sections already filled by hand (never by this program) are left alone; if all three are, only colours run
+        self.plan = listing_plan(choice["front_open"], choice["has_design_work"])
         ours = audit.get("placed", {})
-        filled = {field: bool((p.get(field) or {}).get("value")) and field not in ours for field in ("fitting", "multi", "closer")}
-        already_done_by_hand = all(filled.values())
-        for field, slots in plan.items():
-            skip_field = already_done_by_hand or (field != "media" and filled[field])
+        filled = {f: bool((p.get(f) or {}).get("value")) and f not in ours for f in ("fitting", "multi", "closer")}
+        by_hand = all(filled.values())
+        for field, slots in self.plan.items():
+            if by_hand or (field != "media" and filled[field]):
+                for slot in slots:
+                    if audit["slots"].get(slot, {}).get("status") not in RESOLVED:
+                        audit["slots"][slot] = {"status": "existing"}
+        return None
+
+    def slot_job(self, field, slot):
+        choice = self.audit["choice"]
+        prompt = PROMPTS[slot]["prompt"]
+        brief = f"{PROMPTS[slot]['title']} ({field} image)"
+        if not choice["front_open"] and slot in CLOSED_NOTES:
+            prompt = prompt + "\n\n" + CLOSED_NOTES[slot]
+            # the checker must judge against what Gemini was really asked for
+            brief += f". {CLOSED_NOTES[slot]} The brief's 'worn open' does not apply to this abaya."
+        tries = self.audit["slots"].get(slot, {}).get("tries", 0)
+        return Job("slot", slot, prompt, PROMPTS[slot]["ratio"], brief, "the same as image 0", self.reference, field=field, tries=tries)
+
+    def media_ready(self):
+        return all(self.audit["slots"].get(s, {}).get("status") in RESOLVED for s in self.plan["media"])
+
+    def pending(self):
+        """The images still to be made now. Colour images come once the Media section is finished,
+        because they are made from the new front image (1.1)."""
+        jobs = []
+        for field, slots in self.plan.items():
             for slot in slots:
-                state = audit["slots"].get(slot, {})
-                if state.get("status") in ("done", "manual", "existing"):
-                    continue
-                if skip_field:
-                    audit["slots"][slot] = {"status": "existing"}
-                    continue
-                prompt = PROMPTS[slot]["prompt"]
-                if not choice["front_open"] and slot in CLOSED_NOTES:
-                    prompt = prompt + "\n\n" + CLOSED_NOTES[slot]
-                brief = f"{PROMPTS[slot]['title']} ({field} image)"
-                if not choice["front_open"] and slot in CLOSED_NOTES:
-                    # the checker must judge against what Gemini was really asked for
-                    brief += f". {CLOSED_NOTES[slot]} The brief's 'worn open' does not apply to this abaya."
-                self.log(f"  {slot}: generating")
-                others = [img for img in (self.small_image(o) for o in slots if o != slot and audit["slots"].get(o, {}).get("status") == "done") if img]
-                jpeg, problems = self.make(reference, prompt, PROMPTS[slot]["ratio"], brief, "the same as image 0", slot, slot, others)
-                if jpeg is None:
-                    audit["slots"][slot] = {"status": "manual", "problems": problems[:4]}
-                else:
-                    if slot == "hero-1":
-                        self.hero_jpeg = jpeg
-                    file_id = self.s.upload_image(jpeg, f"{p['handle']}-{slot}.jpg", f"{p['title']} - {PROMPTS[slot]['title']}")
-                    audit["slots"][slot] = {"status": "done", "file": file_id}
-                    if self.out:
-                        audit["slots"][slot]["local"] = self.last_local
-                self.save()
-            self.place_field(field, slots)
+                status = self.audit["slots"].get(slot, {}).get("status")
+                if status not in RESOLVED and status != "queued":
+                    jobs.append(self.slot_job(field, slot))
+        if self.media_ready():
+            self.place_fields()
+            jobs.extend(self.colour_jobs())
+        return jobs
 
-        # 3. Single-colour variant images
-        self.colours(colour_opts, reference)
+    # ---------- one-by-one ----------
+    def judge(self, job, raw):
+        """Check one generated image. Returns (passed, problems, full-size jpeg)."""
+        jpeg = to_jpeg(raw)
+        self.last_local = f"{job.name}-try{job.tries + 1}.jpg"
+        self.keep_local(self.last_local, jpeg)
+        ok, problems = self.check(job.base, to_jpeg(raw, max_side=1024), job.brief, job.colour, job.name if job.kind == "slot" else None, self.others_for(job))
+        if ok:
+            self.made += 1
+            self.small[job.name] = to_jpeg(raw, max_side=768)
+        return ok, problems, jpeg
 
-        manual = [k for k, v in audit["slots"].items() if v.get("status") == "manual"] + [k for k, v in audit["colours"].items() if v.get("status") == "manual"]
-        audit["notes"] = [f"Do manually: {', '.join(manual)}"] if manual else []
-        self.save("manual" if manual else "done")
-        return audit["status"]
+    def make(self, job):
+        """Generate and check, up to 1 + config.RETRIES tries in a row. Returns (jpeg or None, problems)."""
+        problems = []
+        for attempt in range(job.tries, 1 + config.RETRIES):
+            job.tries = attempt
+            raw = None
+            for pause in range(1 + config.TEMPORARY_RETRIES):
+                try:
+                    raw = self.g.generate([job.base], job.prompt, job.ratio)
+                    break
+                except TemporaryFailure as error:
+                    problems = [f"Gemini gave no image ({error})"]
+                    if pause < config.TEMPORARY_RETRIES:
+                        self.log(f"    {job.name}: {str(error)[:120]}; waiting {config.TEMPORARY_WAIT_SECONDS:.0f}s and trying again")
+                        time.sleep(config.TEMPORARY_WAIT_SECONDS)
+                except GenerationFailed as error:
+                    problems = [f"Gemini gave no image ({error})"]
+                    break
+            if raw is None:
+                self.log(f"    {job.name}: {problems[0][:160]}, attempt {attempt + 1}")
+                continue
+            ok, problems, jpeg = self.judge(job, raw)
+            if ok:
+                return jpeg, []
+            self.log(f"    {job.name}: check failed ({'; '.join(problems)[:160]}), attempt {attempt + 1}")
+        return None, problems
 
-    def place_field(self, field, slots):
-        """Put a finished field's images in place. A field is only filled when all its images passed."""
-        audit = self.audit
-        states = [audit["slots"].get(s, {}) for s in slots]
-        if any(st.get("status") != "done" for st in states) or audit.get("placed", {}).get(field):
-            return
-        files = [st["file"] for st in states]
-        pid = self.p["id"]
-        if field == "media":
-            if audit.get("detach"):
-                self.s.detach_from_product(pid, audit["detach"])  # images being replaced (--redo)
-                audit["detach"] = []
-            self.s.attach_to_product(pid, [f for f in files if f not in self.attached_media()])
-            self.s.move_media_to_front(pid, files)
-        elif field == "fitting":
-            self.s.set_metafields([{"ownerId": pid, "namespace": "custom", "key": config.FIELD_KEYS["fitting"], "type": "file_reference", "value": files[0]}])
+    def run(self):
+        """One-by-one: make everything that is still to do, then finish."""
+        status = self.prepare()
+        if status:
+            return status
+        while True:
+            jobs = self.pending()
+            if not jobs:
+                break
+            for job in jobs:
+                self.log(f"  {job.name}: generating")
+                jpeg, problems = self.make(job)
+                self.record(job, jpeg, problems)
+                self.place_fields()
+        return self.finish()
+
+    # ---------- results ----------
+    def record(self, job, jpeg, problems):
+        """Save the outcome of one image: uploaded (passed) or "do manually" (failed every try)."""
+        p, audit = self.p, self.audit
+        if job.kind == "slot":
+            if jpeg is not None:
+                if job.name == "hero-1":
+                    self.hero_jpeg = jpeg
+                file_id = self.upload(jpeg, f"{p['handle']}-{job.name}.jpg", f"{p['title']} - {PROMPTS[job.name]['title']}")
+                audit["slots"][job.name] = {"status": "done", "file": file_id}
+                if self.out:
+                    audit["slots"][job.name]["local"] = self.last_local
+            else:
+                state = {"status": "manual", "problems": problems[:4]}
+                if job.field != "media":  # keeps the section's order on the page; replaced once the image is made
+                    state["placeholder"] = self.s.placeholder(job.ratio)
+                audit["slots"][job.name] = state
         else:
-            self.s.set_metafields([{"ownerId": pid, "namespace": "custom", "key": config.FIELD_KEYS[field], "type": "list.file_reference", "value": json.dumps(files)}])
-        audit.setdefault("placed", {})[field] = True
+            value = job.value
+            if jpeg is None:
+                audit["colours"][value] = {"status": "manual", "problems": problems[:4]}
+            else:
+                media_id = self.upload(jpeg, f"{p['handle']}-colour-{slug(value)}.jpg", f"{p['title']} - {value}")
+                self.s.attach_to_product(p["id"], [media_id])
+                self.attached.add(media_id)
+                self.s.link_variants(p["id"], [(v["id"], media_id) for v in self.variants_of(value)])
+                audit["colours"][value] = {"status": "done", "file": media_id}
+                if self.out:
+                    audit["colours"][value]["local"] = self.last_local
         self.save()
 
-    def attached_media(self):
-        return {m["id"] for m in self.p["media"]["nodes"]}
+    def place_fields(self):
+        """Put each finished section in place. A section is finished when every image in it passed or is marked
+        "do manually". Media: the passed images go first, in order (no placeholders on the main gallery).
+        Fitting, Multi display and A little closer: every position is filled, a black placeholder where an
+        image still has to be made, so the order never shifts. Run again after a retry: only changes are written."""
+        audit, pid = self.audit, self.p["id"]
+        placed = audit.setdefault("placed", {})
+        changed = False
+        for field, slots in self.plan.items():
+            states = [audit["slots"].get(s, {}) for s in slots]
+            if any(st.get("status") not in RESOLVED for st in states) or all(st.get("status") == "existing" for st in states):
+                continue
+            if placed.get(field) is True:  # filled completely by an earlier version of the program
+                continue
+            if field == "media":
+                files = [st["file"] for st in states if st.get("status") == "done"]
+                if placed.get(field) == files and not audit.get("detach"):
+                    continue
+                if audit.get("detach"):
+                    self.s.detach_from_product(pid, audit["detach"])  # images being replaced (--redo)
+                    self.attached.difference_update(audit["detach"])
+                    audit["detach"] = []
+                new = [f for f in files if f not in self.attached]
+                self.s.attach_to_product(pid, new)
+                self.attached.update(new)
+                self.s.move_media_to_front(pid, files)
+            else:
+                files = [st["file"] if st.get("status") == "done" else st.get("placeholder") for st in states]
+                files = [f for f in files if f]
+                if placed.get(field) == files:
+                    continue
+                key, kind = config.FIELD_KEYS[field], "file_reference" if field == "fitting" else "list.file_reference"
+                value = files[0] if kind == "file_reference" else json.dumps(files)
+                self.s.set_metafields([{"ownerId": pid, "namespace": "custom", "key": key, "type": kind, "value": value}])
+            placed[field] = files
+            changed = True
+        if changed:
+            self.save()
 
-    def front_image(self, reference):
+    def finish(self):
+        """Final status: done, manual (something to do by hand) or in_progress (Batch work still out)."""
+        self.place_fields()
+        audit = self.audit
+        states = list(audit["slots"].values()) + list(audit["colours"].values())
+        waiting = any(st.get("status") in ("queued", "pending") for st in states) or (self.plan and not self.media_ready())
+        manual = [k for k, v in audit["slots"].items() if v.get("status") == "manual"] + [k for k, v in audit["colours"].items() if v.get("status") == "manual"]
+        audit["notes"] = [f"Do manually: {', '.join(manual)}"] if manual else []
+        self.save("in_progress" if waiting else ("manual" if manual else "done"))
+        return audit["status"]
+
+    # ---------- colours ----------
+    def variants_of(self, value):
+        return [v for v in self.p["variants"]["nodes"] if any(o["name"].strip().lower() in config.COLOUR_OPTION_NAMES and o["value"] == value for o in v["selectedOptions"])]
+
+    def colour_base(self):
         """Colours are made from the new front image (1.1) so every colour has the same pose; the reference photo otherwise."""
         hero = self.audit["slots"].get("hero-1", {})
         if self.hero_jpeg:
             return self.hero_jpeg
         if self.out and hero.get("local") and (self.out / hero["local"]).exists():
-            return (self.out / hero["local"]).read_bytes()
+            self.hero_jpeg = (self.out / hero["local"]).read_bytes()
+            return self.hero_jpeg
         if hero.get("status") == "done" and not str(hero.get("file", "")).startswith("dry-run"):
             url = self.s.file_url(hero["file"])
             if url:
-                return fetch(url, 2048)
-        return reference
+                self.hero_jpeg = fetch(url, 2048)
+                return self.hero_jpeg
+        return self.reference
 
-    def colours(self, colour_opts, reference):
+    def colour_jobs(self):
+        """Settle every colour that needs no new image (skipped, already has one, own photo, same as the front
+        image) and return jobs for the ones that need a recoloured image."""
         audit, p = self.audit, self.p
         hero = audit["slots"].get("hero-1", {})
-        base = None  # the image the colours are made from: the new front image if there is one, else the reference photo
-        for option in colour_opts:
+        jobs, changed = [], False
+        for option in self.colour_opts:
             for value in option["values"]:
                 state = audit["colours"].get(value, {})
-                if state.get("status") in ("done", "existing_photo", "had_image", "main_image", "manual") or state.get("status", "").startswith("skipped"):
+                status = state.get("status", "")
+                if status in COLOUR_FINAL or status.startswith("skipped") or status == "queued":
                     continue
                 kind = classify_colour(option["name"], value, p["productType"])
-                variants = [v for v in p["variants"]["nodes"] if any(o["name"] == option["name"] and o["value"] == value for o in v["selectedOptions"])]
+                variants = self.variants_of(value)
                 if kind != "single":
-                    audit["colours"][value] = {"status": f"skipped_{kind}"}
+                    audit["colours"][value], changed = {"status": f"skipped_{kind}"}, True
                     continue
                 if any(v["media"]["nodes"] for v in variants):
-                    audit["colours"][value] = {"status": "had_image"}
+                    audit["colours"][value], changed = {"status": "had_image"}, True
                     continue
-                media_id, status = None, None
                 if value in audit["choice"]["colour_photos"]:
-                    media_id, status = audit["choice"]["colour_photos"][value], "existing_photo"
-                elif value == audit["choice"]["input_colour"] and hero.get("status") == "done" and audit.get("placed", {}).get("media"):
-                    media_id, status = hero["file"], "main_image"
-                else:
-                    if base is None:
-                        base = self.front_image(reference)
-                    self.log(f"  colour {value}: generating")
-                    jpeg, problems = self.make(base, COLOUR_PROMPT.format(colour=value), "4:5", f"the same abaya recoloured to {value}, everything else unchanged", value, None, f"colour-{slug(value)}")
-                    if jpeg is None:
-                        audit["colours"][value] = {"status": "manual", "problems": problems[:4]}
-                        self.save()
-                        continue
-                    colour_local = self.last_local
-                    media_id = self.s.upload_image(jpeg, f"{p['handle']}-colour-{slug(value)}.jpg", f"{p['title']} - {value}")
-                    self.s.attach_to_product(p["id"], [media_id])
-                    status = "done"
-                self.s.link_variants(p["id"], [(v["id"], media_id) for v in variants])
-                audit["colours"][value] = {"status": status, "file": media_id}
-                if self.out and status == "done":
-                    audit["colours"][value]["local"] = colour_local
-                self.save()
+                    media_id = audit["choice"]["colour_photos"][value]
+                    self.s.link_variants(p["id"], [(v["id"], media_id) for v in variants])
+                    audit["colours"][value], changed = {"status": "existing_photo", "file": media_id}, True
+                    continue
+                if value == audit["choice"]["input_colour"] and hero.get("status") == "done" and audit.get("placed", {}).get("media"):
+                    self.s.link_variants(p["id"], [(v["id"], hero["file"]) for v in variants])
+                    audit["colours"][value], changed = {"status": "main_image", "file": hero["file"]}, True
+                    continue
+                jobs.append(Job(
+                    "colour", f"colour-{slug(value)}", COLOUR_PROMPT.format(colour=value), "4:5",
+                    f"the same abaya recoloured to {value}, everything else unchanged", value, None, value=value, tries=state.get("tries", 0),
+                ))
+        if jobs:
+            base = self.colour_base()
+            for job in jobs:
+                job.base = base
+        if changed:
+            self.save()
+        return jobs
+
+    # ---------- Batch ----------
+    def mark_queued(self, job, batch_name):
+        group = "slots" if job.kind == "slot" else "colours"
+        self.audit[group][job.value if job.kind == "colour" else job.name] = {"status": "queued", "batch": batch_name, "tries": job.tries}
+
+    def batch_result(self, job, raw, problem=None, temporary=False):
+        """One answer from a Batch job: check it, then upload it, or count a failed try, or mark it "do manually"
+        after the last try. A passing Google error (temporary) does not count as a try."""
+        group = "slots" if job.kind == "slot" else "colours"
+        key = job.value if job.kind == "colour" else job.name
+        if raw is not None:
+            ok, problems, jpeg = self.judge(job, raw)
+            if ok:
+                self.record(job, jpeg, [])
+                return "passed"
+        else:
+            problems = [problem or "Gemini gave no image"]
+        if temporary:
+            self.audit[group][key] = {"status": "pending", "tries": job.tries, "problems": problems[:4]}
+            self.save()
+            return "again"
+        if job.tries + 1 >= 1 + config.RETRIES:
+            self.record(job, None, problems)
+            return "manual"
+        self.audit[group][key] = {"status": "pending", "tries": job.tries + 1, "problems": problems[:4]}
+        self.save()
+        return "retry"

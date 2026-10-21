@@ -1,4 +1,5 @@
 """Shopify Admin API calls used by the program."""
+import io
 import json
 import time
 
@@ -211,6 +212,37 @@ class Shopify:
             )["productVariantsBulkUpdate"],
             "productVariantsBulkUpdate",
         )
+
+    # ---------- shop-wide settings (json metafields on the shop) ----------
+    def get_shop_json(self, key, default=None):
+        d = self.gql(f'{{ shop {{ id m: metafield(namespace: "custom", key: "{key}") {{ value }} }} }}')
+        self._shop_id = d["shop"]["id"]
+        raw = (d["shop"].get("m") or {}).get("value")
+        return json.loads(raw) if raw else default
+
+    def set_shop_json(self, key, value):
+        if self.dry_run:
+            return
+        shop_id = getattr(self, "_shop_id", None) or self.shop_id()
+        self.set_metafields([{"ownerId": shop_id, "namespace": "custom", "key": key, "type": "json", "value": json.dumps(value)}])
+
+    def placeholder(self, ratio):
+        """A plain black image in this shape, uploaded once and reused for every "do manually" position.
+        Its Files name and alt text say PLACEHOLDER, so whoever replaces it can find it."""
+        if self.dry_run:
+            return f"dry-run://placeholder-{ratio}"
+        if not hasattr(self, "_placeholders"):
+            self._placeholders = self.get_shop_json("image_placeholders", {}) or {}
+        if ratio not in self._placeholders:
+            from PIL import Image
+
+            w, h = (int(x) for x in ratio.split(":"))
+            size = (1024, round(1024 * h / w)) if h >= w else (round(1024 * w / h), 1024)
+            buf = io.BytesIO()
+            Image.new("RGB", size, (0, 0, 0)).save(buf, "JPEG", quality=90)
+            self._placeholders[ratio] = self.upload_image(buf.getvalue(), f"lc-PLACEHOLDER-{w}x{h}.jpg", "PLACEHOLDER - image to be made by hand")
+            self.set_shop_json("image_placeholders", self._placeholders)
+        return self._placeholders[ratio]
 
     def save_audit(self, product_id, audit):
         self.set_metafields([{"ownerId": product_id, "namespace": "custom", "key": config.AUDIT_KEY, "type": "json", "value": json.dumps(audit)}])
