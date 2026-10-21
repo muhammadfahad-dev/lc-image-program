@@ -51,7 +51,7 @@ Answer in JSON with exactly these keys:
 - "front_open": true if this abaya opens at the front (open front, kimono, shrug, cardigan style), false if it is a closed abaya. Use the title, tags and photos.
 - "has_design_work": true if the abaya has visible embroidery, stonework, cutdana, beadwork, lace, print or other surface decoration; false if it is plain.
 - "input_colour": the colour option (copied exactly from the list) that the photo at best_index shows, or null if it matches none or you are unsure.
-- "colour_photos": an object with every colour option as a key; the value is the index of a photo that clearly shows this same abaya, whole or nearly whole, in that colour, or null if no photo clearly does. Only give an index when you are confident.
+- "colour_photos": an object with every colour option as a key; the value is the index of a photo that shows this same abaya alone, whole or nearly whole, in that colour, so it can be the picture for that colour on its own. Use null if no photo does, and always null for a photo that shows several abayas or colours together (a rack, a group, a collage), a close-up or a size chart. Only give an index when you are confident.
 """
 
 CHECK_PROMPT = """You are checking an AI-generated image for an online abaya store.
