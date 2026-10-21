@@ -34,6 +34,11 @@ except ImportError:
     WEB_STOPS = ()
 
 OUT = Path("output")
+# A specific, original scene: very plain prompts can be refused as too close to existing images (IMAGE_RECITATION)
+TEST_PROMPT = (
+    "A watercolour illustration of a small hand-thrown ivory ceramic cup with a thin gold rim, standing on a "
+    "folded sand-coloured linen cloth beside a single olive sprig, soft morning window light. No text."
+)
 
 
 def test_key():
@@ -46,7 +51,7 @@ def test_key():
     for model in [m for m in config.IMAGE_MODELS if m in g.available] + [m for m in image_models if m not in config.IMAGE_MODELS]:
         g.image_model = model
         try:
-            data = g.generate([], "A plain ivory square with soft light. No text.", "1:1")
+            data = g.generate([], TEST_PROMPT, "1:1")
             print(f"OK {model}: made a test image ({len(data)} bytes).")
             ok = True
             break
@@ -74,7 +79,7 @@ def test_vertex():
     g = GeminiVertex(out_dir=OUT)
     print(f"Project: {g.project} | location: {g.location} | image model: {g.image_model} | check model: {g.check_model}")
     try:
-        data = g.generate([], "A plain ivory square with soft light. No text.", "1:1")
+        data = g.generate([], TEST_PROMPT, "1:1")
     except (QuotaExhausted, GenerationFailed, RuntimeError) as error:
         print(f"REFUSED: {error}")
         return 1
