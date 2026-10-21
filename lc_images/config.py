@@ -68,3 +68,15 @@ WEB_RATIO_TOLERANCE = float(os.environ.get("WEB_RATIO_TOLERANCE", "0.05"))
 WEB_RATIO_TEXT = os.environ.get("WEB_RATIO_TEXT", "\n\nAspect ratio: {ratio}. Make only one image.").replace("\\n", "\n")
 TEMPORARY_RETRIES = int(os.environ.get("TEMPORARY_RETRIES", "2"))  # extra tries after "Gemini had an error", not counted as failed attempts
 TEMPORARY_WAIT_SECONDS = float(os.environ.get("TEMPORARY_WAIT_SECONDS", "60"))
+
+# Vertex AI (python run.py --vertex): billed to your Google Cloud project, signed in with
+# "gcloud auth application-default login" (no API key). See lc_images/vertex.py for the setup steps.
+VERTEX_PROJECT = os.environ.get("GOOGLE_CLOUD_PROJECT", "")
+VERTEX_LOCATION = os.environ.get("VERTEX_LOCATION", "global")
+VERTEX_IMAGE_MODEL = os.environ.get("VERTEX_IMAGE_MODEL", "gemini-2.5-flash-image")  # Google's own model; takes the product photo
+VERTEX_CHECK_MODEL = os.environ.get("VERTEX_CHECK_MODEL", "gemini-2.5-flash")
+VERTEX_BUDGET_USD = float(os.environ.get("VERTEX_BUDGET_USD", "280"))  # the program stops before its estimate passes this
+# Estimates used for the cap; check them against Google's Vertex AI price list and Billing reports
+VERTEX_PRICE_PER_IMAGE = float(os.environ.get("VERTEX_PRICE_PER_IMAGE", "0.04"))
+VERTEX_PRICE_PER_CHECK = float(os.environ.get("VERTEX_PRICE_PER_CHECK", "0.003"))
+VERTEX_SECONDS_BETWEEN_CALLS = float(os.environ.get("VERTEX_SECONDS_BETWEEN_CALLS", "4"))

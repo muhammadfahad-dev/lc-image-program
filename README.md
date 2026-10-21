@@ -104,6 +104,28 @@ If something fails, the message says what. When a control could not be found, a 
 `lc_images\selectors.json` says where each control is and can be adjusted without changing the program.
 `output\debug` can show your account name: do not share it publicly.
 
+## Vertex AI (Google Cloud free-trial credit)
+Images and checks through Vertex AI in your own Google Cloud project, signed in with your Google account
+(no API key). It uses Google's own Gemini image model, which takes the product photo as its reference.
+Which money pays (free credit, prepaid balance, card) is decided by Google Billing, not by the program;
+Google uses the credit first for the services it covers. The program stops by itself before its own
+estimate passes `VERTEX_BUDGET_USD` ($280 by default) and keeps the running total in `output\vertex_spend.json`.
+
+One-time setup:
+1. Install the Google Cloud CLI: https://cloud.google.com/sdk/docs/install (Windows installer), then open a new Command Prompt.
+2. Run, one at a time (use your project ID):
+   ```
+   gcloud auth login
+   gcloud config set project YOUR_PROJECT_ID
+   gcloud auth application-default login
+   gcloud auth application-default set-quota-project YOUR_PROJECT_ID
+   gcloud services enable aiplatform.googleapis.com
+   ```
+3. In `.env` add `GOOGLE_CLOUD_PROJECT=YOUR_PROJECT_ID`, then `pip install -r requirements.txt`.
+4. `python run.py --vertex --test-key` makes ONE test image (about $0.04). The next day, check in Google Cloud
+   (Billing → Reports, "Credits" column) that it was paid by the free-trial credit before running more.
+5. Then `python run.py --vertex --dry-run --handles <handle>` (nothing changes in Shopify), and live runs with `--vertex`.
+
 ## Reports
 - The **Image tracker** page shows every product's status, what still needs doing by hand, and the last run's summary.
 - GitHub emails you if a daily run fails completely.

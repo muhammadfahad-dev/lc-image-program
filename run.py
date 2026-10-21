@@ -5,6 +5,8 @@
   python run.py --limit 25                     live run: up to 25 products, then stop
   python run.py --retry-manual ...             also try again the images marked "do manually"
   python run.py --redo closer-1,closer-3 --handles X   make these images of product X again
+  python run.py --vertex --test-key            Vertex AI (Google Cloud credit): make ONE test image
+  python run.py --vertex ...                   make the images through Vertex AI in your Google Cloud project
   python run.py --web ...                      make the images on the Gemini website (your PC, signed in with python web.py login)
 """
 import argparse
@@ -66,6 +68,23 @@ def test_key():
     return 0 if ok else 1
 
 
+def test_vertex():
+    from lc_images.vertex import GeminiVertex
+
+    g = GeminiVertex(out_dir=OUT)
+    print(f"Project: {g.project} | location: {g.location} | image model: {g.image_model} | check model: {g.check_model}")
+    try:
+        data = g.generate([], "A plain ivory square with soft light. No text.", "1:1")
+    except (QuotaExhausted, GenerationFailed, RuntimeError) as error:
+        print(f"REFUSED: {error}")
+        return 1
+    OUT.mkdir(exist_ok=True)
+    (OUT / "vertex-test.png").write_bytes(data)
+    print(f"OK: Vertex AI made a test image ({len(data)} bytes), saved as output/vertex-test.png.")
+    print(f"Estimated spend so far: ${g.spend.data['usd']:.2f}. Tomorrow, check in Google Cloud: Billing > Reports, that it was paid by the credit.")
+    return 0
+
+
 def contact_sheet(results):
     """A simple page showing every image made in a dry run, for review."""
     rows = []
@@ -101,14 +120,15 @@ def main():
     ap.add_argument("--test-key", action="store_true")
     ap.add_argument("--retry-manual", action="store_true", help="try again the images marked 'do manually'")
     ap.add_argument("--redo", default="", help="make these images again, e.g. closer-1,closer-3 or closer (use with --handles)")
+    ap.add_argument("--vertex", action="store_true", help="use Vertex AI in your Google Cloud project (signed in with gcloud, no API key)")
     ap.add_argument("--web", action="store_true", help="make images on the Gemini website instead of the API (photo choice and checks too, unless CHECK_SOURCE=api)")
     args = ap.parse_args()
 
     if args.test_key:
-        return test_key()
+        return test_vertex() if args.vertex else test_key()
 
     OUT.mkdir(exist_ok=True)
-    api = Gemini() if config.GEMINI_KEY else None
+    api = Gemini() if config.GEMINI_KEY and not args.vertex else None
     if args.web:
         from lc_images.gemini_web import GeminiWeb
 
@@ -122,6 +142,11 @@ def main():
             g.close()
             print("Gemini is not signed in. Run: python web.py login")
             return 1
+    elif args.vertex:
+        from lc_images.vertex import GeminiVertex
+
+        g = GeminiVertex(out_dir=OUT)
+        print(f"Vertex AI, project {g.project}: images {g.image_model}, checks {g.check_model}; spend so far about ${g.spend.data['usd']:.2f} of ${config.VERTEX_BUDGET_USD:.0f}")
     else:
         g = api or Gemini()
         print("Models:", *g.choose_models())
@@ -185,7 +210,8 @@ def main():
         "images_passed": images_made,
         "gemini_image_calls": g.calls["image"],
         "gemini_check_calls": g.calls["check"],
-        "image_source": "website" if args.web else "api",
+        "image_source": "website" if args.web else ("vertex" if args.vertex else "api"),
+        "estimated_vertex_spend_usd": g.spend.data["usd"] if args.vertex else None,
         "seconds_per_website_image": round(sum(g.timings) / len(g.timings), 1) if args.web and g.timings else None,
         "daily_limit_reached": quota_hit,
         "products": [{"handle": h, "status": st} for h, st in results],
