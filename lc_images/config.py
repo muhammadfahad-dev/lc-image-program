@@ -80,3 +80,6 @@ VERTEX_BUDGET_USD = float(os.environ.get("VERTEX_BUDGET_USD", "280"))  # the pro
 VERTEX_PRICE_PER_IMAGE = float(os.environ.get("VERTEX_PRICE_PER_IMAGE", "0.04"))
 VERTEX_PRICE_PER_CHECK = float(os.environ.get("VERTEX_PRICE_PER_CHECK", "0.003"))
 VERTEX_SECONDS_BETWEEN_CALLS = float(os.environ.get("VERTEX_SECONDS_BETWEEN_CALLS", "4"))
+VERTEX_TIMEOUT_SECONDS = int(os.environ.get("VERTEX_TIMEOUT_SECONDS", "150"))
+# Waits after "too many requests" before trying again; after the last one the run stops (and continues next time)
+VERTEX_RATE_LIMIT_WAITS = [int(x) for x in os.environ.get("VERTEX_RATE_LIMIT_WAITS", "15,30,60,60,90,120").split(",")]

@@ -55,6 +55,24 @@ def test_rate_limit_waits_then_works():
         assert g.generate([], "p", "1:1") == b"PNG" and len(m.calls) == 2
 
 
+def test_stuck_request_times_out_and_is_retried():
+    import httpx
+
+    with tempfile.TemporaryDirectory() as tmp:
+        g, m = make([httpx.ReadTimeout("timed out"), image_reply()], tmp)
+        assert g.generate([], "p", "1:1") == b"PNG" and len(m.calls) == 2
+
+
+def test_rate_limit_that_never_ends_stops_the_run():
+    with tempfile.TemporaryDirectory() as tmp:
+        g, _ = make([errors.ClientError(429, {"error": {"message": "Resource exhausted"}})] * 10, tmp)
+        try:
+            g.generate([], "p", "1:1")
+            raise AssertionError("expected the run to stop")
+        except QuotaExhausted as error:
+            assert "too many requests" in str(error)
+
+
 def test_no_image_is_generation_failed():
     with tempfile.TemporaryDirectory() as tmp:
         g, _ = make([NS(candidates=[NS(content=None, finish_reason="IMAGE_SAFETY")], prompt_feedback=None)], tmp)

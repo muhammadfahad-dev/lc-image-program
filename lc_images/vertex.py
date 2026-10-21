@@ -56,8 +56,14 @@ class GeminiVertex:
                 raise RuntimeError("Set GOOGLE_CLOUD_PROJECT in .env to your Google Cloud project ID")
             from google import genai
 
-            # vertexai=True: Vertex AI in your project, signed in with Application Default Credentials (no API key)
-            client = genai.Client(vertexai=True, project=self.project, location=self.location)
+            from google.genai import types
+
+            # vertexai=True: Vertex AI in your project, signed in with Application Default Credentials (no API key).
+            # A time limit per request, so a stuck connection cannot hang the run.
+            client = genai.Client(
+                vertexai=True, project=self.project, location=self.location,
+                http_options=types.HttpOptions(timeout=config.VERTEX_TIMEOUT_SECONDS * 1000),
+            )
         self.client = client
 
     def choose_models(self, require_image=True):
@@ -71,27 +77,36 @@ class GeminiVertex:
                 "(VERTEX_BUDGET_USD). Check the real figure in Google Cloud Billing before raising it."
             )
 
-    def _call(self, model, contents, cfg):
+    def _call(self, model, contents, cfg, kind):
         from google.genai import errors
 
-        for attempt in range(6):
+        waits = config.VERTEX_RATE_LIMIT_WAITS
+        for attempt in range(len(waits) + 1):
             gap = time.monotonic() - self._last
             if gap < config.VERTEX_SECONDS_BETWEEN_CALLS:
                 time.sleep(config.VERTEX_SECONDS_BETWEEN_CALLS - gap)
-            self._last = time.monotonic()
+            self._last = started = time.monotonic()
             try:
-                return self.client.models.generate_content(model=model, contents=contents, config=cfg)
+                response = self.client.models.generate_content(model=model, contents=contents, config=cfg)
+                self.log(f"    {kind} answered in {time.monotonic() - started:.0f}s")
+                return response
             except errors.ClientError as error:
-                if error.code == 429:  # too many requests per minute for this project: wait and try again
-                    self.log(f"    Vertex AI rate limit, waiting {30 * (attempt + 1)}s")
-                    time.sleep(30 * (attempt + 1))
-                    continue
                 if error.code in (401, 403):
                     raise RuntimeError(f"Vertex AI refused access ({error.code}): {str(error)[:300]}. Check the setup steps in lc_images/vertex.py.")
-                raise RuntimeError(f"Vertex AI {error.code}: {str(error)[:400]}")
-            except errors.ServerError:
-                time.sleep(20 * (attempt + 1))
-        raise QuotaExhausted("Vertex AI kept refusing with rate limits; stopping for now")
+                if error.code != 429:
+                    raise RuntimeError(f"Vertex AI {error.code}: {str(error)[:400]}")
+                reason = f"Google says too many requests ({str(error)[:120]})"
+            except errors.ServerError as error:
+                reason = f"Google server error {error.code}"
+            except Exception as error:  # timeout or dropped connection
+                if "timeout" not in type(error).__name__.lower() and "connect" not in type(error).__name__.lower() and "timed out" not in str(error).lower():
+                    raise
+                reason = f"no answer within {config.VERTEX_TIMEOUT_SECONDS}s"
+            if attempt == len(waits):
+                break
+            self.log(f"    {kind}: {reason}; waiting {waits[attempt]}s ({attempt + 1}/{len(waits)})")
+            time.sleep(waits[attempt])
+        raise QuotaExhausted(f"Vertex AI kept refusing ({reason}); stopping for now. Run the same command again later to continue.")
 
     @staticmethod
     def _parts(images, labels=False):
@@ -110,7 +125,7 @@ class GeminiVertex:
 
         self._budget_check(config.VERTEX_PRICE_PER_IMAGE)
         cfg = types.GenerateContentConfig(response_modalities=["IMAGE"], image_config=types.ImageConfig(aspect_ratio=ratio))
-        response = self._call(self.image_model, [*self._parts(images), prompt], cfg)
+        response = self._call(self.image_model, [*self._parts(images), prompt], cfg, "image")
         self.spend.add(config.VERTEX_PRICE_PER_IMAGE, "images")  # charged whether or not an image comes back
         self.calls["image"] += 1
         for candidate in response.candidates or []:
@@ -127,7 +142,7 @@ class GeminiVertex:
 
         self._budget_check(config.VERTEX_PRICE_PER_CHECK)
         cfg = types.GenerateContentConfig(response_mime_type="application/json", temperature=0)
-        response = self._call(self.check_model, [*self._parts(images, labels=True), prompt], cfg)
+        response = self._call(self.check_model, [*self._parts(images, labels=True), prompt], cfg, "check")
         self.spend.add(config.VERTEX_PRICE_PER_CHECK, "checks")
         self.calls["check"] += 1
         text = response.text or ""
