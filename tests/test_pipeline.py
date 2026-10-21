@@ -235,7 +235,8 @@ def test_redo_section_and_media_image():
     old_hero2 = run.audit["slots"]["hero-2"]["file"]
     saved = json.loads(json.dumps(run.audit))
     g2, s2 = FakeGemini(SELECT_OPEN), FakeShopify()
-    run2 = pipeline.ProductRun(product(colours=("Navy",), audit=saved), g2, s2, log=lambda *a: None)
+    # the product's fields are now filled (by this program), as they are in Shopify after the first run
+    run2 = pipeline.ProductRun(product(colours=("Navy",), audit=saved, filled=True), g2, s2, log=lambda *a: None)
     assert sorted(run2.reopen(["closer", "hero-2"])) == ["closer-1", "closer-2", "closer-3", "closer-4", "hero-2"]
     assert run2.run() == "done"
     assert g2.calls["image"] == 5

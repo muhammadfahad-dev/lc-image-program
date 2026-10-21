@@ -306,7 +306,9 @@ class ProductRun:
 
         # 2. Listing images, field by field
         plan = listing_plan(choice["front_open"], choice["has_design_work"])
-        filled = {field: bool((p.get(field) or {}).get("value")) for field in ("fitting", "multi", "closer")}
+        # A field counts as filled by hand only if this program never filled it (fields it filled can be redone)
+        ours = audit.get("placed", {})
+        filled = {field: bool((p.get(field) or {}).get("value")) and field not in ours for field in ("fitting", "multi", "closer")}
         already_done_by_hand = all(filled.values())
         for field, slots in plan.items():
             skip_field = already_done_by_hand or (field != "media" and filled[field])
