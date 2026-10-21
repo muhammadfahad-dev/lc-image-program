@@ -101,6 +101,34 @@ def test_list_models():
         assert g.list_models() == [("gemini-x-image", "X Image")]
 
 
+def test_shared_spend_is_never_wiped_when_it_cannot_be_read():
+    import json as _json
+
+    class Shop:
+        def __init__(self):
+            self.v, self.fail = {"vertex_spend": {"usd": 200.0}}, False
+
+        def get_shop_json(self, key, default=None):
+            if self.fail:
+                raise RuntimeError("Shopify down")
+            return _json.loads(_json.dumps(self.v.get(key, default)))
+
+        def set_shop_json(self, key, value):
+            self.v[key] = value
+
+    shop = Shop()
+    with tempfile.TemporaryDirectory() as tmp:
+        sp = vertex.Spend(Path(tmp) / "s.json", shop)
+        assert sp.data["usd"] == 200.0
+        shop.fail = True
+        sp.add(0.05, "checks")
+        sp.flush()
+        assert shop.v["vertex_spend"]["usd"] == 200.0  # not overwritten with 0.05
+        shop.fail = False
+        sp.flush()
+        assert shop.v["vertex_spend"]["usd"] == 200.05
+
+
 def test_json_check():
     with tempfile.TemporaryDirectory() as tmp:
         g, m = make([NS(text='{"pass": true, "problems": []}')], tmp)

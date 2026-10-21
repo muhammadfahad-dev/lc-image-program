@@ -348,6 +348,38 @@ def test_redo_hero1_relinks_the_input_colour():
     assert ("v-Navy-S", new_hero) in s2.links
 
 
+def test_redo_part_of_a_hand_filled_section_remakes_and_writes_it_all():
+    p1 = product(colours=("Navy",))
+    p1["closer"] = {"value": json.dumps(["h1", "h2", "h3", "h4"])}  # closer filled by hand
+    g, s = FakeGemini(SELECT_OPEN), FakeShopify()
+    run = pipeline.ProductRun(p1, g, s, log=lambda *a: None)
+    run.run()
+    assert "closer_images" not in {m["key"] for m in s.metafields}
+    a = json.loads(json.dumps(run.audit))
+    p2 = product(colours=("Navy",), audit=a)
+    p2["closer"] = p1["closer"]
+    s2 = FakeShopify()
+    run2 = pipeline.ProductRun(p2, FakeGemini(SELECT_OPEN), s2, log=lambda *a: None)
+    assert sorted(run2.reopen(["closer-1"])) == ["closer-1", "closer-2", "closer-3", "closer-4"]
+    run2.run()
+    closer = json.loads([m for m in s2.metafields if m["key"] == "closer_images"][-1]["value"])
+    assert closer == [run2.audit["slots"][k]["file"] for k in ("closer-1", "closer-2", "closer-3", "closer-4")]
+
+
+def test_partial_media_then_all_sections_by_hand_still_places_media():
+    g, s = FakeGemini(SELECT_OPEN, quota_after=2), FakeShopify()
+    run = pipeline.ProductRun(product(colours=("Navy",)), g, s, log=lambda *a: None)
+    try:
+        run.run()
+    except QuotaExhausted:
+        pass
+    a = json.loads(json.dumps(run.audit))
+    s2 = FakeShopify()
+    run2 = pipeline.ProductRun(product(colours=("Navy",), audit=a, filled=True), FakeGemini(SELECT_OPEN), s2, log=lambda *a: None)
+    run2.run()
+    assert s2.moved and s2.moved[-1] == [a["slots"]["hero-1"]["file"], a["slots"]["hero-2"]["file"]]
+
+
 def test_check_answer_false_as_text_is_a_fail():
     run = pipeline.ProductRun(product(), FakeGemini(SELECT_OPEN), FakeShopify(), log=lambda *a: None)
     run.g.ask_json = lambda images, prompt: {"pass": "false", "problems": "wrong colour"}

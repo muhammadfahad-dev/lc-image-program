@@ -28,6 +28,10 @@ FAILED_STATES = {"JOB_STATE_FAILED", "JOB_STATE_CANCELLED", "JOB_STATE_EXPIRED"}
 TEMPORARY = re.compile(r"resource_exhausted|unavailable|internal error|deadline_exceeded|\b(429|500|503)\b", re.I)
 
 
+class NotFound(RuntimeError):
+    """The file is not in the bucket."""
+
+
 class Storage:
     """The few Cloud Storage calls Batch needs, signed in the same way as Vertex AI."""
 
@@ -43,6 +47,8 @@ class Storage:
 
     @staticmethod
     def _ok(r):
+        if r.status_code == 404:
+            raise NotFound(f"Cloud Storage 404: {r.text[:200]}")
         if r.status_code >= 300:
             raise RuntimeError(f"Cloud Storage {r.status_code}: {r.text[:300]}")
         return r
@@ -90,6 +96,7 @@ class BatchRunner:
         self.log = log
         self.local_state = self.out / "batches.json"
         self.removed = set()  # jobs read and cleared in this run
+        self.created = set()  # jobs started in this run
         self.state = self._load_state()
         self.counts = {"submitted": 0, "passed": 0, "retry": 0, "manual": 0, "again": 0}
 
@@ -107,7 +114,10 @@ class BatchRunner:
         if not self.dry_run:
             fresh = self.s.get_shop_json(STATE_KEY) or {"jobs": []}
             jobs = {j["name"]: j for j in fresh.get("jobs", [])}
-            jobs.update({j["name"]: j for j in self.state["jobs"]})
+            for j in self.state["jobs"]:
+                # update the jobs still listed; add back only jobs this run created (not ones another machine cleared)
+                if j["name"] in jobs or j["name"] in self.created:
+                    jobs[j["name"]] = j
             self.state = {"jobs": [j for name, j in jobs.items() if name not in self.removed]}
         self.out.mkdir(parents=True, exist_ok=True)
         self.local_state.write_text(json.dumps(self.state, indent=2))
@@ -126,7 +136,6 @@ class BatchRunner:
         retry_manual: also try again the images marked "do manually". redo: image or section names to make again
         (only with handles)."""
         self.state = self._load_state()
-        known = {j["name"] for j in self.state["jobs"]}
         size = config.VERTEX_BATCH_SIZE
         price = config.VERTEX_BATCH_PRICE_PER_IMAGE
         each = price + config.VERTEX_PRICE_PER_CHECK  # the check at collect time is paid too: keep room for it
@@ -155,7 +164,10 @@ class BatchRunner:
             try:
                 if run.prepare():
                     continue
-                run.release_orphans(known)
+                # read the job list again right now, so a job another machine has just started is not mistaken for a lost one
+                if any(st.get("status") == "queued" for g in ("slots", "colours") for st in run.audit[g].values()):
+                    live = ({j["name"] for j in self._load_state()["jobs"]} | self.created) - self.removed
+                    run.release_orphans(live)
                 jobs = run.pending()[: size - len(lines)]
             except Exception as error:  # one product must not stop the round
                 self.log(f"  {product['title']}: skipped this round ({str(error)[:150]})")
@@ -186,6 +198,7 @@ class BatchRunner:
         job = self.g.create_batch(src, f"gs://{config.VERTEX_BUCKET}/{prefix}/output", f"lc-images-{stamp}")
         # Record the job straight away (it is running and paid for); then mark its images
         self.g.spend.add(price * len(lines), "images", count=len(lines))
+        self.created.add(job)
         self.state["jobs"].append({"name": job, "prefix": prefix, "created": stamp, "count": len(lines), "state": "JOB_STATE_PENDING"})
         self._save_state()
         for run, jobs in runs:
@@ -208,15 +221,19 @@ class BatchRunner:
                 continue
             try:
                 mapping = json.loads(self.storage.download(f"{entry['prefix']}/map.json"))
-            except RuntimeError:
+            except NotFound:
                 mapping = None  # already read and cleared (an earlier run stopped while cleaning up)
             if mapping is not None:
                 answers = self._read_answers(entry) if state in DONE_STATES else {}
                 if state in FAILED_STATES:
                     self.log(f"  {entry['name']}: {state}; its images go into the next round (no try counted)")
                 if not self._apply(mapping, answers, entry["name"]):
-                    self.log(f"  {entry['name']}: kept, to be read again next time (some products could not be finished)")
-                    continue
+                    entry["reads"] = entry.get("reads", 0) + 1
+                    if entry["reads"] < config.VERTEX_BATCH_MAX_READS:
+                        self.log(f"  {entry['name']}: kept, to be read again next time (some products could not be finished)")
+                        self._save_state()
+                        continue
+                    self.log(f"  {entry['name']}: read {entry['reads']} times; dropped. Its unfinished images go back into the queue")
             for name in self.storage.list(entry["prefix"] + "/"):
                 self.storage.delete(name)
             self.removed.add(entry["name"])

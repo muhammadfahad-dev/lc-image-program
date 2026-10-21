@@ -279,6 +279,9 @@ class ProductRun:
             hit = [sl for sl in slots if sl in wanted and sl in audit["slots"]]
             if not hit:
                 continue
+            if field != "media" and any(audit["slots"].get(sl, {}).get("status") == "existing" for sl in slots):
+                # the section was filled by hand: it can only be replaced as a whole, so all of it is made again
+                hit = [sl for sl in slots if sl in audit["slots"]]
             for sl in hit:
                 old = audit["slots"].pop(sl)
                 if field == "media" and old.get("file") and old["file"] in self.attached:
@@ -484,8 +487,12 @@ class ProductRun:
         changed = False
         for field, slots in self.plan.items():
             states = [audit["slots"].get(s, {}) for s in slots]
-            if any(st.get("status") not in RESOLVED for st in states) or any(st.get("status") == "existing" for st in states):
-                continue  # not finished, or (partly) filled by hand: never written by the program
+            if any(st.get("status") not in RESOLVED for st in states):
+                continue  # not finished yet
+            if all(st.get("status") == "existing" for st in states):
+                continue  # filled by hand
+            if field != "media" and any(st.get("status") == "existing" for st in states):
+                continue  # a section filled by hand is never written by the program
             if placed.get(field) is True:  # filled completely by an earlier version of the program
                 continue
             if field == "media":

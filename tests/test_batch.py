@@ -229,6 +229,42 @@ def test_two_machines_do_not_wipe_each_others_jobs():
         assert other["name"] in names and len(names) == 2
 
 
+def test_a_product_that_always_fails_does_not_block_batch_forever():
+    with tempfile.TemporaryDirectory() as tmp:
+        storage, s, g, p, runner = setup(tmp)
+        runner.submit(5)
+        real = s.upload_image
+        s.upload_image = lambda *a: (_ for _ in ()).throw(RuntimeError("userError: always"))
+        for _ in range(config.VERTEX_BATCH_MAX_READS):
+            runner.collect()
+        assert s.shop["image_batches"]["jobs"] == [], "the job is dropped after the last read"
+        s.upload_image = real
+        assert runner.submit(5) is not None  # its unfinished images are sent again
+
+
+def test_a_job_another_machine_just_started_is_not_taken_for_lost():
+    with tempfile.TemporaryDirectory() as tmp:
+        storage, s, g, p, runner = setup(tmp)
+        other = batch.BatchRunner(g, s, storage, out_dir=tmp + "/other", log=lambda *a: None)
+        runner.state = runner._load_state()  # the PC loaded the (empty) list ...
+        other.submit(5)  # ... then GitHub started a job and marked the images
+        runner.submit(5)  # the PC must not send them again
+        a = audit_of(s, p)
+        assert len(s.shop["image_batches"]["jobs"]) == 1 and all(v["status"] == "queued" for v in a["slots"].values())
+
+
+def test_storage_error_is_not_taken_for_already_read():
+    with tempfile.TemporaryDirectory() as tmp:
+        storage, s, g, p, runner = setup(tmp)
+        runner.submit(5)
+        storage.download = lambda name: (_ for _ in ()).throw(RuntimeError("Cloud Storage 500"))
+        try:
+            runner.collect()
+        except RuntimeError:
+            pass
+        assert len(s.shop["image_batches"]["jobs"]) == 1  # kept, to be read when storage works
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

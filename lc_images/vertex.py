@@ -35,18 +35,19 @@ class Spend:
         self.path = Path(path)
         self.shopify = shopify
         local = json.loads(self.path.read_text()) if self.path.exists() else {}
-        shared = self._read_shared()
+        shared = self._read_shared() or {}
         self.data = dict(max((local, shared), key=lambda d: d.get("usd", 0)) or {})
         self.data.setdefault("usd", 0.0)
         self._delta = {"usd": 0.0}  # spent in this run and not yet added to the shared figure
 
     def _read_shared(self):
+        """The shared figure ({} if none yet), or None if it could not be read (then nothing is written over it)."""
         if self.shopify is None:
             return {}
         try:
             return self.shopify.get_shop_json("vertex_spend", {}) or {}
         except Exception:
-            return {}
+            return None
 
     def add(self, usd, kind, count=1):
         self.data["usd"] = round(self.data["usd"] + usd, 4)
@@ -64,6 +65,8 @@ class Spend:
             return
         try:
             shared = self._read_shared()
+            if shared is None:
+                return  # could not read it: never overwrite the shared total with only this run's spending
             for key, value in self._delta.items():
                 shared[key] = round(shared.get(key, 0) + value, 4)
             shared["updated"] = self.data.get("updated")

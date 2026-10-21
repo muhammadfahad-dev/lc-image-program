@@ -129,7 +129,7 @@ For each abaya:
 ### `run.py` (the commands)
 | Function | What it does |
 |---|---|
-| `main()` | Reads the command line and runs the right part. Refuses unsafe combinations: Batch with `--dry-run` (Batch jobs are real and paid), and `--redo` without `--handles`. Writes `output\summary.json`, the shop summary and the report. Exit code 1 when the run stopped early or a product had an error (GitHub then shows it as failed). |
+| `main()` | Reads the command line and runs the right part. Refuses unsafe combinations: Batch with `--dry-run` (Batch jobs are real and paid), and `--redo` without `--handles`. Writes `output\summary.json`, the shop summary and the report. Exit code 1 when a product had an error or the website stopped the run (GitHub then shows it as failed). Reaching a limit or the spending cap is expected and is not a failure. |
 | `make_generator()` | Sets up the image maker: Vertex AI, the Gemini website, or the Gemini API key. |
 | `run_products()` | One-by-one. Goes through products (oldest first, active, abaya types). Skips finished ones (unless you named them or used `--retry-manual`). Applies `--redo` / `--retry-manual` and runs each product. Stops cleanly on a limit, Ctrl+C or a website problem. One product's error does not stop the others. |
 | `run_batch()` | Batch mode: submit, collect, auto or status, and prints what happened. |
@@ -154,7 +154,7 @@ For each abaya:
 | `ProductRun.finish()` | Final status. A product is only `done` when nothing is left, colour images included. |
 | `ProductRun.run()` | One-by-one: prepare, then make and record everything pending, then finish. |
 | `ProductRun.reopen_manual()` | `--retry-manual`: the "do manually" images become to-do again. Placeholders stay until the new image passes. |
-| `ProductRun.reopen()` | `--redo`: those images become to-do again. Replaced Media images leave the product page (they stay in Files). Redoing 1.1 also relinks the colour that used it. |
+| `ProductRun.reopen()` | `--redo`: those images become to-do again. Replaced Media images leave the product page (they stay in Files). Redoing 1.1 also relinks the colour that used it. Redoing part of a section that was filled by hand remakes that whole section (it can only be replaced as a whole). Colour images made earlier from the old 1.1 are kept. |
 | `ProductRun.images()` | The product's own photos, never the program's images or placeholders. |
 | `ProductRun.mark_queued()` / `batch_result()` / `job_for()` / `release_orphans()` | Batch support: mark images as sent; act on one answer (pass, try again, or "do manually" after the 3rd failed try); rebuild an image's job only for the Batch job it is really in; put images of a lost job back in the queue. |
 
@@ -162,9 +162,9 @@ For each abaya:
 | Function | What it does |
 |---|---|
 | `BatchRunner.submit()` | Collects the images still needed (up to `VERTEX_BATCH_SIZE`, default 50, and never past the spending cap, checks included). Uploads each product's photo and the request list to your bucket. Starts one Vertex AI Batch job and records it straight away. |
-| `BatchRunner.collect()` | For each finished job: reads the answers, then checks, uploads and places each image. A job is cleared only when every product in it was handled; otherwise it is read again next time. A failed job puts its images back (no try counted). |
+| `BatchRunner.collect()` | For each finished job: reads the answers, then checks, uploads and places each image. A job is cleared only when every product in it was handled; otherwise it is read again next time (up to 3 times; then it is dropped and its unfinished images go back into the queue, so one bad product can never block Batch). A failed job puts its images back (no try counted). |
 | `BatchRunner.auto()` | collect, then submit the next round when no job is still out. |
-| `_save_state()` | The list of jobs out, kept in Shopify (`image_batches`) and `output\batches.json`. Merged before every write, so a PC and GitHub do not wipe each other's jobs. |
+| `_save_state()` | The list of jobs out, kept in Shopify (`image_batches`) and `output\batches.json`. Merged before every write, so a PC and GitHub do not wipe each other's jobs (and a job one machine cleared is never written back by the other). Images are only treated as lost after the list is read again, so a job another machine has just started is never sent twice. |
 | `Storage` | Upload, list, download and delete files in your bucket (only the program's own `lc-batches/` folder). |
 
 ### `lc_images/vertex.py` (Vertex AI)

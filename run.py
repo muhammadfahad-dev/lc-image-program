@@ -338,8 +338,9 @@ def main():
             except Exception as error:
                 print(f"Could not update the report ({str(error)[:200]}); run python run.py --report later")
     print("\nSummary:", json.dumps({k: v for k, v in summary.items() if k != "products"}, indent=2))
-    # Exit code for GitHub: 1 when the run stopped early (limit, cap, website problem) or a product had an error
-    return 1 if stopped or counts.get("error") else 0
+    # Exit code for GitHub: 1 when a product had an error or the website stopped the run. Reaching a limit or the
+    # spending cap is expected and not a failure (the summary says limit_reached).
+    return 1 if counts.get("error") or counts.get("paused (website problem)") else 0
 
 
 if __name__ == "__main__":

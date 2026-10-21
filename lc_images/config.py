@@ -99,3 +99,4 @@ REPORT_SHEET_TAB = env("REPORT_SHEET_TAB", "Image report")
 VERTEX_BUCKET = env("VERTEX_BUCKET", "")  # Cloud Storage bucket for the request lists and answers
 VERTEX_BATCH_SIZE = int(env("VERTEX_BATCH_SIZE", "50"))  # most images in one Batch job; start small
 VERTEX_BATCH_PRICE_PER_IMAGE = float(env("VERTEX_BATCH_PRICE_PER_IMAGE", str(round(VERTEX_PRICE_PER_IMAGE / 2, 4))))
+VERTEX_BATCH_MAX_READS = int(env("VERTEX_BATCH_MAX_READS", "3"))  # a job that cannot be finished is dropped after this many reads
