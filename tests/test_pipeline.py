@@ -42,6 +42,7 @@ class FakeGemini:
     def ask_json(self, images, prompt):
         self.calls["check"] += 1
         self.image_counts = getattr(self, "image_counts", []) + [len(images)]
+        self.check_prompts = getattr(self, "check_prompts", []) + [prompt]
         if prompt.startswith("You are helping"):
             return self.select
         failing = any(slot_title in prompt for slot_title in self.fail_slots)
@@ -137,6 +138,8 @@ def test_closed_abaya_plan_and_notes():
     assert "hero-3" not in done and "multi-3a" in done and "multi-3b" not in done
     assert s.moved == [[run.audit["slots"][k]["file"] for k in ("hero-1", "hero-2", "hero-4")]]
     assert any("three-quarter view instead of worn open" in p for p in g.prompts)
+    checks = [p for p in g.check_prompts if "Left: worn open" in p]
+    assert checks and all("does not apply to this abaya" in p for p in checks), "the check must know the abaya is closed"
     assert g.calls["image"] == 11
 
 

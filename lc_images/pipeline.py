@@ -330,6 +330,9 @@ class ProductRun:
                 if not choice["front_open"] and slot in CLOSED_NOTES:
                     prompt = prompt + "\n\n" + CLOSED_NOTES[slot]
                 brief = f"{PROMPTS[slot]['title']} ({field} image)"
+                if not choice["front_open"] and slot in CLOSED_NOTES:
+                    # the checker must judge against what Gemini was really asked for
+                    brief += f". {CLOSED_NOTES[slot]} The brief's 'worn open' does not apply to this abaya."
                 self.log(f"  {slot}: generating")
                 others = [img for img in (self.small_image(o) for o in slots if o != slot and audit["slots"].get(o, {}).get("status") == "done") if img]
                 jpeg, problems = self.make(reference, prompt, PROMPTS[slot]["ratio"], brief, "the same as image 0", slot, slot, others)
