@@ -129,9 +129,9 @@ def test_failed_checks_retry_then_placeholder():
         for _ in range(4):
             runner.auto(5)
         a = audit_of(s, p)
-        assert a["slots"]["closer-2"]["status"] == "manual" and a["slots"]["closer-2"]["placeholder"] == "placeholder-1:1"
+        assert a["slots"]["closer-2"]["status"] == "manual" and a["slots"]["closer-2"]["placeholder"] == "placeholder-closer-2"
         closer = json.loads([m for m in s.metafields if m["key"] == "closer_images"][-1]["value"])
-        assert closer[1] == "placeholder-1:1"
+        assert closer[1] == "placeholder-closer-2"
 
 
 def test_missing_answers_and_errors_do_not_count_as_tries():
@@ -163,9 +163,70 @@ def test_failed_job_puts_images_back():
 def test_spending_cap_limits_the_round():
     with tempfile.TemporaryDirectory() as tmp:
         storage, s, g, p, runner = setup(tmp)
-        g.spend.data["usd"] = config.VERTEX_BUDGET_USD - 3 * config.VERTEX_BATCH_PRICE_PER_IMAGE + 0.0001  # room for 2.99 images
+        each = config.VERTEX_BATCH_PRICE_PER_IMAGE + config.VERTEX_PRICE_PER_CHECK  # an image and its check
+        g.spend.data["usd"] = config.VERTEX_BUDGET_USD - 3 * each + 0.0001  # room for 2.99 images
         runner.submit(5)
         assert s.shop["image_batches"]["jobs"][0]["count"] == 2
+
+
+def test_collect_stopped_by_the_cap_keeps_the_job():
+    with tempfile.TemporaryDirectory() as tmp:
+        storage, s, g, p, runner = setup(tmp)
+        runner.auto(5)
+        real_ask, calls = g.ask_json, {"n": 0}
+
+        def ask(images, prompt):
+            calls["n"] += 1
+            if calls["n"] == 4:
+                raise batch.QuotaExhausted("cap")
+            return real_ask(images, prompt)
+
+        g.ask_json = ask
+        try:
+            runner.collect()
+            raise AssertionError("expected the cap to stop the collect")
+        except batch.QuotaExhausted:
+            pass
+        assert len(s.shop["image_batches"]["jobs"]) == 1 and storage.files, "the job must stay to be read again"
+        g.ask_json = real_ask
+        runner.collect()
+        a = audit_of(s, p)
+        assert all(v["status"] == "done" for v in a["slots"].values()), a["slots"]
+        assert s.shop["image_batches"]["jobs"] == []
+
+
+def test_images_of_a_lost_job_go_back_into_the_queue():
+    with tempfile.TemporaryDirectory() as tmp:
+        storage, s, g, p, runner = setup(tmp)
+        runner.submit(5)
+        s.shop["image_batches"] = {"jobs": []}  # the job record was lost
+        (Path(tmp) / "batches.json").unlink()
+        runner2 = batch.BatchRunner(g, s, storage, out_dir=tmp, log=lambda *a: None)
+        runner2.submit(5)
+        jobs = s.shop["image_batches"]["jobs"]
+        assert len(jobs) == 1 and jobs[0]["count"] == 12  # sent again in a new job
+
+
+def test_answer_from_an_older_job_is_ignored():
+    with tempfile.TemporaryDirectory() as tmp:
+        storage, s, g, p, runner = setup(tmp)
+        runner.submit(5)
+        run = runner._run_for(s.products[p["id"]])
+        run.prepare()
+        ref = {"kind": "slot", "name": "hero-1", "value": None, "base": "ref"}
+        assert run.job_for(ref, "an-older-job") is None
+        assert run.job_for(ref, s.shop["image_batches"]["jobs"][0]["name"]) is not None
+
+
+def test_two_machines_do_not_wipe_each_others_jobs():
+    with tempfile.TemporaryDirectory() as tmp:
+        storage, s, g, p, runner = setup(tmp)
+        other = dict(name="projects/p/locations/global/batchPredictionJobs/other", prefix="lc-batches/x", created="x", count=1, state="JOB_STATE_RUNNING")
+        runner.state = {"jobs": []}
+        s.shop["image_batches"] = {"jobs": [other]}  # GitHub submitted meanwhile
+        runner.submit(5)
+        names = {j["name"] for j in s.shop["image_batches"]["jobs"]}
+        assert other["name"] in names and len(names) == 2
 
 
 if __name__ == "__main__":

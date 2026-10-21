@@ -28,39 +28,51 @@ from .gemini import GenerationFailed, QuotaExhausted
 
 class Spend:
     """Estimated spend so far. Kept in output/vertex_spend.json and, when a Shopify connection is given, in the shop
-    field "vertex_spend" too, so the cap holds across runs and across your PC and GitHub (the higher figure wins)."""
+    field "vertex_spend" too, so the cap holds across runs and across your PC and GitHub. Each save adds this run's
+    new spending to the figure freshly read from Shopify, so two machines never overwrite each other's spending."""
 
     def __init__(self, path, shopify=None):
         self.path = Path(path)
         self.shopify = shopify
         local = json.loads(self.path.read_text()) if self.path.exists() else {}
-        shared = {}
-        if shopify is not None:
-            try:
-                shared = shopify.get_shop_json("vertex_spend", {}) or {}
-            except Exception:
-                shared = {}
-        self.data = max((local, shared), key=lambda d: d.get("usd", 0)) or {}
+        shared = self._read_shared()
+        self.data = dict(max((local, shared), key=lambda d: d.get("usd", 0)) or {})
         self.data.setdefault("usd", 0.0)
-        self._unsaved = 0
+        self._delta = {"usd": 0.0}  # spent in this run and not yet added to the shared figure
+
+    def _read_shared(self):
+        if self.shopify is None:
+            return {}
+        try:
+            return self.shopify.get_shop_json("vertex_spend", {}) or {}
+        except Exception:
+            return {}
 
     def add(self, usd, kind, count=1):
         self.data["usd"] = round(self.data["usd"] + usd, 4)
         self.data[kind] = self.data.get(kind, 0) + count
         self.data["updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+        self._delta["usd"] = round(self._delta["usd"] + usd, 4)
+        self._delta[kind] = self._delta.get(kind, 0) + count
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.path.write_text(json.dumps(self.data, indent=2))
-        self._unsaved += 1
-        if self.shopify is not None and (self._unsaved >= 5 or count > 1):
+        if self.shopify is not None and (self._delta.get("checks", 0) + self._delta.get("images", 0) >= 5 or count > 1):
             self.flush()
 
     def flush(self):
-        if self.shopify is not None and self._unsaved:
-            try:
-                self.shopify.set_shop_json("vertex_spend", self.data)
-                self._unsaved = 0
-            except Exception:
-                pass  # the local file still has it; tried again next time
+        if self.shopify is None or not self._delta["usd"]:
+            return
+        try:
+            shared = self._read_shared()
+            for key, value in self._delta.items():
+                shared[key] = round(shared.get(key, 0) + value, 4)
+            shared["updated"] = self.data.get("updated")
+            self.shopify.set_shop_json("vertex_spend", shared)
+            self._delta = {"usd": 0.0}
+            if shared["usd"] > self.data["usd"]:
+                self.data["usd"] = shared["usd"]  # another machine spent too: the cap uses the higher figure
+        except Exception:
+            pass  # kept in this run's figures; added next time
 
 
 class GeminiVertex:
@@ -190,7 +202,13 @@ class GeminiVertex:
         self.calls["check"] += 1
         text = response.text or ""
         try:
-            return json.loads(text)
+            answer = json.loads(text)
         except json.JSONDecodeError:
             start, end = text.find("{"), text.rfind("}")
-            return json.loads(text[start : end + 1]) if start >= 0 else {}
+            try:
+                answer = json.loads(text[start : end + 1]) if start >= 0 else {}
+            except json.JSONDecodeError:
+                answer = {}
+        if isinstance(answer, list):  # sometimes the answer comes wrapped in a list
+            answer = next((a for a in answer if isinstance(a, dict)), {})
+        return answer if isinstance(answer, dict) else {}

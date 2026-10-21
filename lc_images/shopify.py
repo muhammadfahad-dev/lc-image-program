@@ -231,23 +231,34 @@ class Shopify:
         shop_id = getattr(self, "_shop_id", None) or self.shop_id()
         self.set_metafields([{"ownerId": shop_id, "namespace": "custom", "key": key, "type": "json", "value": json.dumps(value)}])
 
-    def placeholder(self, ratio):
-        """A plain black image in this shape, uploaded once and reused for every "do manually" position.
-        Its Files name and alt text say PLACEHOLDER, so whoever replaces it can find it."""
+    def placeholder(self, ratio, slot):
+        """A plain black image for a "do manually" position, one per image position (so a section never lists the
+        same file twice), uploaded once and reused for every product. Its Files name and alt text say PLACEHOLDER.
+        If it was deleted from Files, a new one is made."""
         if self.dry_run:
-            return f"dry-run://placeholder-{ratio}"
+            return f"dry-run://placeholder-{slot}"
         if not hasattr(self, "_placeholders"):
             self._placeholders = self.get_shop_json("image_placeholders", {}) or {}
-        if ratio not in self._placeholders:
+            self._checked = set()
+        file_id = self._placeholders.get(slot)
+        if file_id and file_id not in self._checked:
+            node = self.gql("query($id: ID!) { node(id: $id) { id } }", {"id": file_id}).get("node")
+            if node:
+                self._checked.add(file_id)
+            else:
+                file_id = None  # deleted: make a new one
+        if not file_id:
             from PIL import Image
 
             w, h = (int(x) for x in ratio.split(":"))
             size = (1024, round(1024 * h / w)) if h >= w else (round(1024 * w / h), 1024)
             buf = io.BytesIO()
             Image.new("RGB", size, (0, 0, 0)).save(buf, "JPEG", quality=90)
-            self._placeholders[ratio] = self.upload_image(buf.getvalue(), f"lc-PLACEHOLDER-{w}x{h}.jpg", "PLACEHOLDER - image to be made by hand")
+            file_id = self.upload_image(buf.getvalue(), f"lc-PLACEHOLDER-{slot}.jpg", "PLACEHOLDER - image to be made by hand")
+            self._placeholders[slot] = file_id
+            self._checked.add(file_id)
             self.set_shop_json("image_placeholders", self._placeholders)
-        return self._placeholders[ratio]
+        return file_id
 
     def save_audit(self, product_id, audit):
         self.set_metafields([{"ownerId": product_id, "namespace": "custom", "key": config.AUDIT_KEY, "type": "json", "value": json.dumps(audit)}])

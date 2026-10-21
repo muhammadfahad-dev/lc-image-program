@@ -213,9 +213,10 @@ def run_batch(args, g, s, handles):
 
     runner = BatchRunner(g, s, out_dir=OUT, dry_run=args.dry_run)
     stopped = False
+    redo = [n.strip() for n in args.redo.split(",") if n.strip()] or None
     try:
         if args.batch == "submit":
-            runner.submit(args.limit, handles)
+            runner.submit(args.limit, handles, args.retry_manual, redo)
         elif args.batch == "collect":
             runner.collect()
         elif args.batch == "status":
@@ -224,7 +225,7 @@ def run_batch(args, g, s, handles):
             if not runner.state["jobs"]:
                 print("  No Batch jobs out.")
         else:
-            runner.auto(args.limit, handles)
+            runner.auto(args.limit, handles, args.retry_manual, redo)
     except QuotaExhausted as error:
         print(f"Stopped: {str(error)[:300]}")
         stopped = True
@@ -281,6 +282,10 @@ def main():
         return test_vertex() if args.vertex else test_key()
     if args.batch and not args.vertex:
         raise SystemExit("Batch mode needs --vertex")
+    if args.batch and args.dry_run:
+        raise SystemExit("Batch jobs are real (and paid) even as a pilot. For a pilot use --vertex --dry-run without --batch.")
+    if args.redo and not args.handles:
+        raise SystemExit("--redo needs --handles, so only the products you name are made again")
 
     OUT.mkdir(exist_ok=True)
     s = Shopify(dry_run=args.dry_run)
@@ -288,17 +293,19 @@ def main():
     handles = [h.strip() for h in args.handles.split(",") if h.strip()]
 
     started = datetime.now(timezone.utc)
-    if args.batch:
-        results, counts, stopped, images_made = run_batch(args, g, s, handles)
-    else:
-        results, counts, stopped, images_made = run_products(args, g, s, handles)
-    if args.web:
-        try:
-            g.close()
-        except Exception:
-            pass
-    if args.vertex:
-        g.spend.flush()
+    try:
+        if args.batch:
+            results, counts, stopped, images_made = run_batch(args, g, s, handles)
+        else:
+            results, counts, stopped, images_made = run_products(args, g, s, handles)
+    finally:
+        if args.web:
+            try:
+                g.close()
+            except Exception:
+                pass
+        if args.vertex:
+            g.spend.flush()  # always add this run's spending to the shared figure
     summary = {
         "date": started.strftime("%Y-%m-%d %H:%M UTC"),
         "mode": ("pilot (dry run)" if args.dry_run else "live") + (f", batch {args.batch}" if args.batch else ""),
@@ -331,7 +338,8 @@ def main():
             except Exception as error:
                 print(f"Could not update the report ({str(error)[:200]}); run python run.py --report later")
     print("\nSummary:", json.dumps({k: v for k, v in summary.items() if k != "products"}, indent=2))
-    return 0
+    # Exit code for GitHub: 1 when the run stopped early (limit, cap, website problem) or a product had an error
+    return 1 if stopped or counts.get("error") else 0
 
 
 if __name__ == "__main__":

@@ -13,17 +13,19 @@ lc-batches/ folder are removed after a job has been read.
 """
 import base64
 import json
-import time
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 
 from . import config
+from .gemini import QuotaExhausted
 from .pipeline import ProductRun, to_jpeg
 
 STATE_KEY = "image_batches"
 DONE_STATES = {"JOB_STATE_SUCCEEDED", "JOB_STATE_PARTIALLY_SUCCEEDED"}
 FAILED_STATES = {"JOB_STATE_FAILED", "JOB_STATE_CANCELLED", "JOB_STATE_EXPIRED"}
-TEMPORARY_WORDS = ("resource_exhausted", "unavailable", "internal", "deadline", "429", "500", "503")
+# Google's words for a passing problem (not counted as a try); codes only as whole numbers
+TEMPORARY = re.compile(r"resource_exhausted|unavailable|internal error|deadline_exceeded|\b(429|500|503)\b", re.I)
 
 
 class Storage:
@@ -87,6 +89,7 @@ class BatchRunner:
         self.dry_run = dry_run
         self.log = log
         self.local_state = self.out / "batches.json"
+        self.removed = set()  # jobs read and cleared in this run
         self.state = self._load_state()
         self.counts = {"submitted": 0, "passed": 0, "retry": 0, "manual": 0, "again": 0}
 
@@ -100,6 +103,12 @@ class BatchRunner:
         return state or {"jobs": []}
 
     def _save_state(self):
+        """Write the job list, merged with what is in Shopify now, so a PC and GitHub never wipe each other's jobs."""
+        if not self.dry_run:
+            fresh = self.s.get_shop_json(STATE_KEY) or {"jobs": []}
+            jobs = {j["name"]: j for j in fresh.get("jobs", [])}
+            jobs.update({j["name"]: j for j in self.state["jobs"]})
+            self.state = {"jobs": [j for name, j in jobs.items() if name not in self.removed]}
         self.out.mkdir(parents=True, exist_ok=True)
         self.local_state.write_text(json.dumps(self.state, indent=2))
         if not self.dry_run:
@@ -112,11 +121,16 @@ class BatchRunner:
         return ProductRun(product, self.g, self.s, out_dir=self.out if self.dry_run else None, log=self.log)
 
     # ---------- submit ----------
-    def submit(self, limit_products, handles=None):
-        """Start one Batch job with the images still to make. Returns the job name, or None if there was nothing to do."""
+    def submit(self, limit_products, handles=None, retry_manual=False, redo=None):
+        """Start one Batch job with the images still to make. Returns the job name, or None if there was nothing to do.
+        retry_manual: also try again the images marked "do manually". redo: image or section names to make again
+        (only with handles)."""
+        self.state = self._load_state()
+        known = {j["name"] for j in self.state["jobs"]}
         size = config.VERTEX_BATCH_SIZE
         price = config.VERTEX_BATCH_PRICE_PER_IMAGE
-        room = int((config.VERTEX_BUDGET_USD - self.g.spend.data["usd"]) / price) if price else size
+        each = price + config.VERTEX_PRICE_PER_CHECK  # the check at collect time is paid too: keep room for it
+        room = int((config.VERTEX_BUDGET_USD - self.g.spend.data["usd"]) / each) if each else size
         size = min(size, max(room, 0))
         if size <= 0:
             self.log("Spending cap reached; nothing submitted.")
@@ -130,12 +144,18 @@ class BatchRunner:
             if product["productType"] not in config.PRODUCT_TYPES:
                 continue
             audit = json.loads((product.get("audit") or {}).get("value") or "{}")
-            if audit.get("status") in ("done", "manual", "needs_photo", "skipped") and not handles:
+            final = ("done", "needs_photo", "skipped") if retry_manual else ("done", "manual", "needs_photo", "skipped")
+            if audit.get("status") in final and not handles:
                 continue
             run = self._run_for(product)
+            if retry_manual:
+                run.reopen_manual()
+            if redo and handles:
+                run.reopen(redo)
             try:
                 if run.prepare():
                     continue
+                run.release_orphans(known)
                 jobs = run.pending()[: size - len(lines)]
             except Exception as error:  # one product must not stop the round
                 self.log(f"  {product['title']}: skipped this round ({str(error)[:150]})")
@@ -154,7 +174,7 @@ class BatchRunner:
                     "contents": [{"role": "user", "parts": [{"fileData": {"fileUri": uris[kind], "mimeType": "image/jpeg"}}, {"text": job.prompt}]}],
                     "generationConfig": {"responseModalities": ["IMAGE"], "imageConfig": {"aspectRatio": job.ratio}},
                 }}))
-                mapping[f"{uris[kind]}\n{job.prompt}"] = {"product": product["id"], "name": job.name, "kind": job.kind, "value": job.value}
+                mapping[f"{uris[kind]}\n{job.prompt}"] = {"product": product["id"], "name": job.name, "kind": job.kind, "value": job.value, "base": kind}
             runs.append((run, jobs))
             self.log(f"  {product['title']}: {len(jobs)} image(s)")
         if not lines:
@@ -164,13 +184,14 @@ class BatchRunner:
         src = self.storage.upload(f"{prefix}/input.jsonl", ("\n".join(lines) + "\n").encode(), "application/jsonl")
         self.storage.upload(f"{prefix}/map.json", json.dumps(mapping).encode(), "application/json")
         job = self.g.create_batch(src, f"gs://{config.VERTEX_BUCKET}/{prefix}/output", f"lc-images-{stamp}")
+        # Record the job straight away (it is running and paid for); then mark its images
+        self.g.spend.add(price * len(lines), "images", count=len(lines))
+        self.state["jobs"].append({"name": job, "prefix": prefix, "created": stamp, "count": len(lines), "state": "JOB_STATE_PENDING"})
+        self._save_state()
         for run, jobs in runs:
             for j in jobs:
                 run.mark_queued(j, job)
             run.save()
-        self.g.spend.add(price * len(lines), "images", count=len(lines))
-        self.state["jobs"].append({"name": job, "prefix": prefix, "created": stamp, "count": len(lines), "state": "JOB_STATE_PENDING"})
-        self._save_state()
         self.counts["submitted"] += len(lines)
         self.log(f"Submitted {len(lines)} image(s) for {len(runs)} product(s) as {job}")
         return job
@@ -178,19 +199,27 @@ class BatchRunner:
     # ---------- collect ----------
     def collect(self):
         """Read every finished job and act on its images. Returns how many jobs are still running."""
+        self.state = self._load_state()
         for entry in list(self.state["jobs"]):
             state = self.g.batch_state(entry["name"])
             entry["state"] = state
             if state not in DONE_STATES | FAILED_STATES:
                 self.log(f"  {entry['name']}: {state.replace('JOB_STATE_', '').lower()}, {entry['count']} image(s)")
                 continue
-            mapping = json.loads(self.storage.download(f"{entry['prefix']}/map.json"))
-            answers = self._read_answers(entry) if state in DONE_STATES else {}
-            if state in FAILED_STATES:
-                self.log(f"  {entry['name']}: {state}; its images go into the next round (no try counted)")
-            self._apply(mapping, answers)
+            try:
+                mapping = json.loads(self.storage.download(f"{entry['prefix']}/map.json"))
+            except RuntimeError:
+                mapping = None  # already read and cleared (an earlier run stopped while cleaning up)
+            if mapping is not None:
+                answers = self._read_answers(entry) if state in DONE_STATES else {}
+                if state in FAILED_STATES:
+                    self.log(f"  {entry['name']}: {state}; its images go into the next round (no try counted)")
+                if not self._apply(mapping, answers, entry["name"]):
+                    self.log(f"  {entry['name']}: kept, to be read again next time (some products could not be finished)")
+                    continue
             for name in self.storage.list(entry["prefix"] + "/"):
                 self.storage.delete(name)
+            self.removed.add(entry["name"])
             self.state["jobs"].remove(entry)
             self._save_state()
         self._save_state()
@@ -216,7 +245,7 @@ class BatchRunner:
         """(image bytes or None, problem, temporary) from one answer line."""
         status = item.get("status") or ""
         if status:
-            return None, f"Batch error: {str(status)[:200]}", any(w in str(status).lower() for w in TEMPORARY_WORDS)
+            return None, f"Batch error: {str(status)[:200]}", bool(TEMPORARY.search(str(status)))
         response = item.get("response") or {}
         for candidate in response.get("candidates") or []:
             for part in (candidate.get("content") or {}).get("parts") or []:
@@ -226,19 +255,22 @@ class BatchRunner:
         reason = ((response.get("candidates") or [{}])[0]).get("finishReason") or (response.get("promptFeedback") or {}).get("blockReason") or "no image returned"
         return None, f"Gemini gave no image ({reason})", False
 
-    def _apply(self, mapping, answers):
+    def _apply(self, mapping, answers, batch_name):
+        """Act on every answer. Returns False if a product could not be finished (the job is then read again later;
+        images already handled are skipped then). The spending cap stops it at once (QuotaExhausted)."""
+        complete = True
         by_product = {}
         for key, ref in mapping.items():
             by_product.setdefault(ref["product"], []).append((key, ref))
         for pid, refs in by_product.items():
             product = self.s.product_by_id(pid)
             if not product:
-                continue
+                continue  # the product was deleted
             run = self._run_for(product)
             try:
                 run.prepare()
                 for key, ref in refs:
-                    job = run.job_for(ref)
+                    job = run.job_for(ref, batch_name)
                     if job is None:
                         continue  # no longer queued (redone or changed by hand since)
                     item = answers.get(key)
@@ -251,13 +283,17 @@ class BatchRunner:
                     self.log(f"    {job.name}: {outcome}" + (f" ({problem[:120]})" if problem and outcome != "passed" else ""))
                 status = run.finish()
                 self.log(f"  {product['title']}: {status}")
+            except QuotaExhausted:
+                raise  # the job stays in the list and is read again once there is room
             except Exception as error:
-                self.log(f"  {product['title']}: could not finish this round ({str(error)[:200]}); its images stay queued")
+                complete = False
+                self.log(f"  {product['title']}: could not finish this round ({str(error)[:200]}); will be read again")
+        return complete
 
-    def auto(self, limit_products, handles=None):
-        """Collect what is finished, then submit the next round unless a job is still running."""
+    def auto(self, limit_products, handles=None, retry_manual=False, redo=None):
+        """Collect what is finished, then submit the next round unless a job is still out."""
         still = self.collect()
-        if still:
-            self.log(f"{still} Batch job(s) still running; the next round starts once they are read.")
+        if still or self.state["jobs"]:
+            self.log(f"{len(self.state['jobs'])} Batch job(s) still out; the next round starts once they are read.")
             return None
-        return self.submit(limit_products, handles)
+        return self.submit(limit_products, handles, retry_manual, redo)

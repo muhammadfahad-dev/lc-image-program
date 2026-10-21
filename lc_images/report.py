@@ -41,7 +41,7 @@ HEADER = (
 REPORT_FIELDS = """
   id title handle productType status templateSuffix onlineStoreUrl
   options { name values }
-  variants(first: 100) { nodes { selectedOptions { name value } media(first: 1) { nodes { id } } } }
+  variants(first: 250) { nodes { selectedOptions { name value } media(first: 1) { nodes { id } } } }
   audit: metafield(namespace: "custom", key: "image_audit") { value }
   fitting: metafield(namespace: "custom", key: "fitting_image") { value }
   multi: metafield(namespace: "custom", key: "multi_display_images") { value }
@@ -102,6 +102,8 @@ def image_section_status(field, raw, audit, placeholders):
 
 
 def media_status(audit):
+    if audit.get("status") == "needs_photo":
+        return "Needs photo"
     if not audit.get("choice"):
         return "Not started"
     plan = listing_plan(audit["choice"]["front_open"], audit["choice"]["has_design_work"])
@@ -151,7 +153,15 @@ def row_for(product, placeholders, store_slug):
     if listing.get("status") == "Needs info":
         text_overall = "Retry (needs info)"
 
+    if not is_abaya:
+        return (
+            [product["title"], f'=HYPERLINK("{admin}","Admin")', f'=HYPERLINK("{store}","Store")', product.get("templateSuffix") or "Default product", media]
+            + sections + ["Skipped"] + ["Skipped"] * len(TEXT_FIELDS)
+            + ["Skipped", "skipped", "", datetime.now(timezone.utc).strftime("%Y-%m-%d")]
+        )
     todo = []
+    if media == "Needs photo":
+        todo.append("Needs a clear full-length front photo: " + "; ".join(audit.get("notes", [])))
     for name, status in [("Media", media)] + list(zip([n for _, n in IMAGE_FIELDS], sections)):
         if status.startswith("Retry"):
             todo.append(f"{name}: {status[6:].strip('()') or 'make again'}")
@@ -167,7 +177,7 @@ def row_for(product, placeholders, store_slug):
     return (
         [product["title"], f'=HYPERLINK("{admin}","Admin")', f'=HYPERLINK("{store}","Store")', product.get("templateSuffix") or "Default product", media]
         + sections + [variants] + texts
-        + [text_overall, audit.get("status", "not started") if is_abaya else "skipped", "; ".join(todo), datetime.now(timezone.utc).strftime("%Y-%m-%d")]
+        + [text_overall, audit.get("status", "not started"), "; ".join(todo), datetime.now(timezone.utc).strftime("%Y-%m-%d")]
     )
 
 
@@ -177,7 +187,7 @@ def build_rows(shopify, log=print):
     rows, after = [], None
     while True:
         d = shopify.gql(
-            f"query($after: String) {{ products(first: 5, after: $after, sortKey: TITLE, query: \"status:active\") {{ pageInfo {{ hasNextPage endCursor }} nodes {{ {REPORT_FIELDS} }} }} }}",
+            f"query($after: String) {{ products(first: 3, after: $after, sortKey: TITLE, query: \"status:active\") {{ pageInfo {{ hasNextPage endCursor }} nodes {{ {REPORT_FIELDS} }} }} }}",
             {"after": after},
         )
         page = d["products"]

@@ -215,7 +215,13 @@ class ProductRun:
         others = list(others)[:3]
         note = OTHERS_NOTE.format(last=1 + len(others)) if others else ""
         answer = self.g.ask_json([original, generated, *others], CHECK_PROMPT.format(brief=brief, scope=scope, colour=colour, extra=extra, others=note))
-        return bool(answer.get("pass")), [str(x) for x in answer.get("problems") or []]
+        if not isinstance(answer, dict):
+            answer = {}
+        passed = answer.get("pass") is True or str(answer.get("pass")).strip().lower() == "true"
+        problems = answer.get("problems") or []
+        if not isinstance(problems, list):
+            problems = [problems]
+        return passed, [str(x) for x in problems] or ([] if passed else ["the check gave no clear answer"])
 
     def small_image(self, slot):
         """A small copy of an image already made for this product (for the repeat check), or None."""
@@ -275,9 +281,13 @@ class ProductRun:
                 continue
             for sl in hit:
                 old = audit["slots"].pop(sl)
-                if field == "media" and old.get("file") and audit.get("placed", {}).get("media"):
+                if field == "media" and old.get("file") and old["file"] in self.attached:
                     audit.setdefault("detach", []).append(old["file"])
                 reopened.append(sl)
+                if sl == "hero-1":
+                    # the colour that used the old front image is linked again to the new one
+                    for value in [v for v, st in audit["colours"].items() if st.get("status") == "main_image"]:
+                        del audit["colours"][value]
             audit.setdefault("placed", {})[field] = False
         if reopened:
             audit["status"] = "in_progress"
@@ -308,6 +318,8 @@ class ProductRun:
         if "choice" not in audit:
             small = [fetch(m["image"]["url"], 768) for m in photos]
             answer = self.g.ask_json(small, SELECT_PROMPT.format(title=p["title"], type=p["productType"], tags=", ".join(p["tags"]), colours=", ".join(colour_names) or "none"))
+            if not isinstance(answer, dict):
+                answer = {}
             index = answer.get("best_index")
             if not isinstance(index, int) or not 0 <= index < len(photos):
                 audit["notes"] = [f"No usable photo: {answer.get('reason', 'none suitable')}"]
@@ -337,7 +349,12 @@ class ProductRun:
         filled = {f: bool((p.get(f) or {}).get("value")) and f not in ours for f in ("fitting", "multi", "closer")}
         by_hand = all(filled.values())
         for field, slots in self.plan.items():
-            if by_hand or (field != "media" and filled[field]):
+            if field != "media" and filled[field]:
+                # filled by hand: leave the whole section as it is, even images this program made before
+                for slot in slots:
+                    if audit["slots"].get(slot, {}).get("status") != "existing":
+                        audit["slots"][slot] = {"status": "existing"}
+            elif by_hand:
                 for slot in slots:
                     if audit["slots"].get(slot, {}).get("status") not in RESOLVED:
                         audit["slots"][slot] = {"status": "existing"}
@@ -441,7 +458,7 @@ class ProductRun:
             else:
                 state = {"status": "manual", "problems": problems[:4]}
                 if job.field != "media":  # keeps the section's order on the page; replaced once the image is made
-                    state["placeholder"] = self.s.placeholder(job.ratio)
+                    state["placeholder"] = self.s.placeholder(job.ratio, job.name)
                 audit["slots"][job.name] = state
         else:
             value = job.value
@@ -467,8 +484,8 @@ class ProductRun:
         changed = False
         for field, slots in self.plan.items():
             states = [audit["slots"].get(s, {}) for s in slots]
-            if any(st.get("status") not in RESOLVED for st in states) or all(st.get("status") == "existing" for st in states):
-                continue
+            if any(st.get("status") not in RESOLVED for st in states) or any(st.get("status") == "existing" for st in states):
+                continue  # not finished, or (partly) filled by hand: never written by the program
             if placed.get(field) is True:  # filled completely by an earlier version of the program
                 continue
             if field == "media":
@@ -570,26 +587,39 @@ class ProductRun:
         return jobs
 
     # ---------- Batch ----------
-    def job_for(self, ref):
+    def job_for(self, ref, batch_name=None):
         """Rebuild the job for an image that is out in a Batch job (ref from the job's map), or None if it is
-        no longer queued (redone or changed by hand since)."""
+        no longer queued in that job (already handled, redone, or changed by hand since)."""
         if self.plan is None:
             return None
+        group, key = ("slots", ref["name"]) if ref["kind"] == "slot" else ("colours", ref["value"])
+        state = self.audit[group].get(key, {})
+        if state.get("status") != "queued" or (batch_name and state.get("batch") != batch_name):
+            return None
         if ref["kind"] == "slot":
-            state = self.audit["slots"].get(ref["name"], {})
             field = next((f for f, slots in self.plan.items() if ref["name"] in slots), None)
-            if state.get("status") != "queued" or field is None:
+            if field is None:
                 return None
             job = self.slot_job(field, ref["name"])
         else:
             value = ref["value"]
-            state = self.audit["colours"].get(value, {})
-            if state.get("status") != "queued":
-                return None
+            base = self.reference if ref.get("base") == "ref" else self.colour_base()
             job = Job("colour", ref["name"], COLOUR_PROMPT.format(colour=value), "4:5",
-                      f"the same abaya recoloured to {value}, everything else unchanged", value, self.colour_base(), value=value)
+                      f"the same abaya recoloured to {value}, everything else unchanged", value, base, value=value)
         job.tries = state.get("tries", 0)
         return job
+
+    def release_orphans(self, known_batches):
+        """Images marked as out in a Batch job that no longer exists go back into the queue (no try counted)."""
+        changed = False
+        for group in ("slots", "colours"):
+            for key, st in self.audit[group].items():
+                if st.get("status") == "queued" and st.get("batch") not in known_batches:
+                    self.audit[group][key] = {"status": "pending", "tries": st.get("tries", 0)}
+                    changed = True
+        if changed:
+            self.save()
+        return changed
 
     def mark_queued(self, job, batch_name):
         group = "slots" if job.kind == "slot" else "colours"

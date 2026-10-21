@@ -64,6 +64,14 @@ def test_done_section_and_batch_in_progress():
     assert cell(row, "A little closer images") == "Done" and cell(row, "Multi display images") == "In progress"
 
 
+def test_needs_photo_and_not_an_abaya():
+    row = report.row_for(product({"status": "needs_photo", "slots": {}, "notes": ["No usable photo: only a size chart"]}), set(), "shop")
+    assert cell(row, "Media images (1.1-1.4)") == "Needs photo" and "size chart" in cell(row, "To do")
+    row = report.row_for(product(ptype="Hijab"), set(), "shop")
+    assert cell(row, "Variant images") == "Skipped" and cell(row, "To do") == "" and cell(row, "Speciality") == "Skipped"
+    assert len(row) == len(report.HEADER)
+
+
 def test_csv_and_sheet_calls():
     rows = [report.row_for(product(), set(), "shop")]
     with tempfile.TemporaryDirectory() as tmp:

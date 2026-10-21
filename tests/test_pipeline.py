@@ -69,8 +69,8 @@ class FakeShopify:
     def set_metafields(self, entries):
         self.metafields.extend(entries)
 
-    def placeholder(self, ratio):
-        return f"placeholder-{ratio}"
+    def placeholder(self, ratio, slot):
+        return f"placeholder-{slot}"
 
     def detach_from_product(self, pid, ids):
         self.detached = getattr(self, "detached", []) + list(ids)
@@ -157,8 +157,8 @@ def test_failed_check_retries_then_manual():
     assert slot["status"] == "manual" and "embroidery changed at the cuff" in slot["problems"][0]
     assert g.calls["image"] == 12 - 1 + 3  # closer-2 tried three times
     closer = json.loads([m for m in s.metafields if m["key"] == "closer_images"][-1]["value"])
-    assert closer[1] == "placeholder-1:1" and len(closer) == 4, closer  # a black placeholder keeps the order
-    assert run.audit["slots"]["closer-2"]["placeholder"] == "placeholder-1:1"
+    assert closer[1] == "placeholder-closer-2" and len(closer) == 4, closer  # a black placeholder keeps the order
+    assert run.audit["slots"]["closer-2"]["placeholder"] == "placeholder-closer-2"
     assert "closer-2" in run.audit["notes"][0]
 
 
@@ -266,7 +266,7 @@ def test_retry_replaces_the_placeholder_in_place():
     run2.reopen_manual()
     assert run2.run() == "done"
     closer = json.loads([m for m in s2.metafields if m["key"] == "closer_images"][-1]["value"])
-    assert "placeholder-1:1" not in closer and closer[1] == run2.audit["slots"]["closer-2"]["file"]
+    assert "placeholder-closer-2" not in closer and closer[1] == run2.audit["slots"]["closer-2"]["file"]
     assert [m["key"] for m in s2.metafields if m["key"] in ("fitting_image", "multi_display_images")] == []  # unchanged sections not rewritten
 
 
@@ -299,6 +299,61 @@ def test_batch_result_counts_tries():
     assert run.audit["slots"]["closer-2"]["status"] == "manual"
     job = [j for j in run.pending() if j.name == "closer-1"][0]
     assert run.batch_result(job, jpeg()) == "passed" and run.audit["slots"]["closer-1"]["status"] == "done"
+
+
+def test_section_filled_by_hand_later_is_never_overwritten():
+    g, s = FakeGemini(SELECT_OPEN, quota_after=10), FakeShopify()
+    run = pipeline.ProductRun(product(colours=("Navy",)), g, s, log=lambda *a: None)
+    try:
+        run.run()
+    except QuotaExhausted:
+        pass
+    saved = json.loads(json.dumps(run.audit))
+    assert saved["slots"]["closer-1"]["status"] == "done"  # made before the stop, not placed yet
+    p2 = product(colours=("Navy",), audit=saved)
+    p2["closer"] = {"value": json.dumps(["by-hand-1", "by-hand-2", "by-hand-3", "by-hand-4"])}  # owner filled it meanwhile
+    s2 = FakeShopify()
+    run2 = pipeline.ProductRun(p2, FakeGemini(SELECT_OPEN), s2, log=lambda *a: None)
+    run2.run()
+    assert "closer_images" not in {m["key"] for m in s2.metafields}
+    assert all(run2.audit["slots"][k]["status"] == "existing" for k in ("closer-1", "closer-2", "closer-3", "closer-4"))
+
+
+def test_second_redo_before_placing_still_detaches_old_media():
+    g, s = FakeGemini(SELECT_OPEN), FakeShopify()
+    run = pipeline.ProductRun(product(colours=("Navy",)), g, s, log=lambda *a: None)
+    run.run()
+    a = json.loads(json.dumps(run.audit))
+    old1, old2 = a["slots"]["hero-1"]["file"], a["slots"]["hero-2"]["file"]
+    p2 = product(colours=("Navy",), audit=a, filled=True)
+    p2["media"]["nodes"] += [{"id": f, "mediaContentType": "IMAGE"} for f in (old1, old2)]  # they are on the product
+    run2 = pipeline.ProductRun(p2, FakeGemini(SELECT_OPEN), FakeShopify(), log=lambda *a: None)
+    run2.reopen(["hero-1"])
+    run2.reopen(["hero-2"])  # a second redo before the first was placed
+    assert set(run2.audit["detach"]) == {old1, old2}
+
+
+def test_redo_hero1_relinks_the_input_colour():
+    g, s = FakeGemini(SELECT_OPEN), FakeShopify()
+    run = pipeline.ProductRun(product(colours=("Navy",)), g, s, log=lambda *a: None)
+    run.run()
+    assert run.audit["colours"]["Navy"]["status"] == "main_image"
+    a = json.loads(json.dumps(run.audit))
+    s2 = FakeShopify()
+    run2 = pipeline.ProductRun(product(colours=("Navy",), audit=a, filled=True), FakeGemini(SELECT_OPEN), s2, log=lambda *a: None)
+    run2.reopen(["hero-1"])
+    run2.run()
+    new_hero = run2.audit["slots"]["hero-1"]["file"]
+    assert run2.audit["colours"]["Navy"] == {"status": "main_image", "file": new_hero}
+    assert ("v-Navy-S", new_hero) in s2.links
+
+
+def test_check_answer_false_as_text_is_a_fail():
+    run = pipeline.ProductRun(product(), FakeGemini(SELECT_OPEN), FakeShopify(), log=lambda *a: None)
+    run.g.ask_json = lambda images, prompt: {"pass": "false", "problems": "wrong colour"}
+    assert run.check(jpeg(), jpeg(), "b", "c") == (False, ["wrong colour"])
+    run.g.ask_json = lambda images, prompt: [{"pass": True}]
+    assert run.check(jpeg(), jpeg(), "b", "c")[0] is False  # not a clear answer
 
 
 def test_done_by_hand_only_colours():
