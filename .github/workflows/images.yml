@@ -1,17 +1,25 @@
 name: LC images
 
 on:
-  # Daily run, shortly after Gemini's free daily limit resets (midnight US Pacific time).
-  # It only does live work once the repository variable LIVE is set to "true" (after the pilot is approved).
+  # Every 3 hours. It only does work when the repository variable AUTO is set:
+  #   AUTO = batch   -> a Batch round (collect finished results, then submit the next images)
+  #   AUTO = single  -> one-by-one, up to MAX_PRODUCTS products
+  # Leave AUTO empty (or "off") and the schedule does nothing.
   schedule:
-    - cron: "20 8 * * *"
+    - cron: "20 */3 * * *"
   workflow_dispatch:
     inputs:
       mode:
-        description: "test-key = check the Gemini key · pilot = make images for review, change nothing · live = update the store"
+        description: >-
+          vertex-test = one test image ·
+          pilot = all images for the handles, change nothing in Shopify ·
+          live = one-by-one, update the store ·
+          batch-auto = a Batch round ·
+          batch-status = show Batch jobs ·
+          report = update the report
         type: choice
-        options: [test-key, pilot, live]
-        default: pilot
+        options: [vertex-test, pilot, live, batch-auto, batch-status, report]
+        default: batch-status
       handles:
         description: "Product handles, comma-separated (leave empty to go through the store)"
         required: false
@@ -23,6 +31,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write # lets the run sign in to Google Cloud without any stored key (Workload Identity)
 
 concurrency:
   group: lc-images
@@ -32,31 +41,56 @@ jobs:
   run:
     runs-on: ubuntu-latest
     timeout-minutes: 340
-    if: github.event_name == 'workflow_dispatch' || vars.LIVE == 'true'
+    if: github.event_name == 'workflow_dispatch' || vars.AUTO == 'batch' || vars.AUTO == 'single'
     env:
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       SHOPIFY_ADMIN_TOKEN: ${{ secrets.SHOPIFY_ADMIN_TOKEN }}
       SHOPIFY_CLIENT_ID: ${{ secrets.SHOPIFY_CLIENT_ID }}
       SHOPIFY_CLIENT_SECRET: ${{ secrets.SHOPIFY_CLIENT_SECRET }}
-      SHOPIFY_STORE: ${{ vars.SHOPIFY_STORE || '0anyrv-ej.myshopify.com' }}
-      MAX_PRODUCTS: ${{ vars.MAX_PRODUCTS || '25' }}
+      SHOPIFY_STORE: ${{ vars.SHOPIFY_STORE }}
+      GOOGLE_CLOUD_PROJECT: ${{ vars.GOOGLE_CLOUD_PROJECT }}
+      VERTEX_LOCATION: ${{ vars.VERTEX_LOCATION }}
+      VERTEX_IMAGE_MODEL: ${{ vars.VERTEX_IMAGE_MODEL }}
+      VERTEX_CHECK_MODEL: ${{ vars.VERTEX_CHECK_MODEL }}
+      VERTEX_PRICE_PER_IMAGE: ${{ vars.VERTEX_PRICE_PER_IMAGE }}
+      VERTEX_PRICE_PER_CHECK: ${{ vars.VERTEX_PRICE_PER_CHECK }}
+      VERTEX_BUDGET_USD: ${{ vars.VERTEX_BUDGET_USD }}
+      VERTEX_BUCKET: ${{ vars.VERTEX_BUCKET }}
+      VERTEX_BATCH_SIZE: ${{ vars.VERTEX_BATCH_SIZE }}
+      REPORT_SHEET_ID: ${{ vars.REPORT_SHEET_ID }}
+      MAX_PRODUCTS: ${{ vars.MAX_PRODUCTS }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-      - run: python tests/test_pipeline.py && python tests/test_gemini.py
+      - name: Tests (no keys needed)
+        run: |
+          for t in test_pipeline test_gemini test_vertex test_report test_batch test_run; do python tests/$t.py || exit 1; done
+      - name: Sign in to Google Cloud (no stored key)
+        if: vars.GCP_WIF_PROVIDER != ''
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
       - name: Run
         run: |
           set -o pipefail
           mkdir -p output
-          MODE="${{ github.event.inputs.mode || 'live' }}"
+          MODE="${{ github.event.inputs.mode }}"
+          if [ -z "$MODE" ]; then
+            if [ "${{ vars.AUTO }}" = "batch" ]; then MODE=batch-auto; else MODE=live; fi
+          fi
+          LIMIT="${{ github.event.inputs.limit || vars.MAX_PRODUCTS || '25' }}"
+          HANDLES="${{ github.event.inputs.handles }}"
           echo "$MODE" > output/mode.txt
           case "$MODE" in
-            test-key) python run.py --test-key 2>&1 | tee output/run.log ;;
-            pilot)    python run.py --dry-run --limit "${{ github.event.inputs.limit || '5' }}" --handles "${{ github.event.inputs.handles }}" 2>&1 | tee output/run.log ;;
-            live)     python run.py --limit "${{ github.event.inputs.limit || env.MAX_PRODUCTS }}" --handles "${{ github.event.inputs.handles }}" 2>&1 | tee output/run.log ;;
+            vertex-test)  python run.py --vertex --test-key 2>&1 | tee output/run.log ;;
+            pilot)        python run.py --vertex --dry-run --limit "$LIMIT" --handles "$HANDLES" 2>&1 | tee output/run.log ;;
+            live)         python run.py --vertex --limit "$LIMIT" --handles "$HANDLES" 2>&1 | tee output/run.log ;;
+            batch-auto)   python run.py --vertex --batch auto --limit "$LIMIT" --handles "$HANDLES" 2>&1 | tee output/run.log ;;
+            batch-status) python run.py --vertex --batch status 2>&1 | tee output/run.log ;;
+            report)       python run.py --report 2>&1 | tee output/run.log ;;
           esac
       - name: Show the error
         if: failure()
@@ -66,8 +100,8 @@ jobs:
         run: |
           RUN="runs/${{ github.run_number }}"
           mkdir -p "/tmp/report/$RUN"
-          cp output/run.log output/summary.json output/mode.txt "/tmp/report/$RUN/" 2>/dev/null || true
-          # Images are kept only for pilots (for review); live runs keep the log and summary
+          cp output/run.log output/summary.json output/mode.txt output/report.csv output/vertex_spend.json "/tmp/report/$RUN/" 2>/dev/null || true
+          # Images are kept only for pilots (for review); other runs keep the log and summary
           if [ "$(cat output/mode.txt 2>/dev/null)" = "pilot" ]; then cp -r output/. "/tmp/report/$RUN/"; fi
           git config user.name "lc-images-bot"
           git config user.email "lc-images-bot@users.noreply.github.com"

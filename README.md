@@ -126,7 +126,77 @@ One-time setup:
    (Billing → Reports, "Credits" column) that it was paid by the free-trial credit before running more.
 5. Then `python run.py --vertex --dry-run --handles <handle>` (nothing changes in Shopify), and live runs with `--vertex`.
 
+## Batch mode and running on GitHub (one-time setup, about 15 minutes)
+Do this in Command Prompt on the PC where `gcloud` is signed in. Lines starting with `set` save a value for the
+next lines; keep the same window open. Nothing here creates a key or password.
+
+**1. Your project and its number**
+```
+set PROJECT=project-c065e1d2-16ae-4565-bb0
+gcloud projects describe %PROJECT% --format="value(projectNumber)"
+set NUMBER=<the number it printed>
+gcloud services enable aiplatform.googleapis.com storage.googleapis.com iamcredentials.googleapis.com sts.googleapis.com sheets.googleapis.com
+```
+
+**2. A storage bucket for Batch** (holds the request lists and answers; the program clears each job's files after reading them)
+```
+gcloud storage buckets create gs://lc-images-%PROJECT% --location=us-central1 --uniform-bucket-level-access
+gcloud storage buckets add-iam-policy-binding gs://lc-images-%PROJECT% --member=serviceAccount:service-%NUMBER%@gcp-sa-aiplatform.iam.gserviceaccount.com --role=roles/storage.objectAdmin
+```
+Add `VERTEX_BUCKET=lc-images-project-c065e1d2-16ae-4565-bb0` to `.env`.
+
+**3. A service account for GitHub, with only what it needs** (Vertex AI and the bucket)
+```
+gcloud iam service-accounts create lc-images --display-name="LC images (GitHub)"
+gcloud projects add-iam-policy-binding %PROJECT% --member=serviceAccount:lc-images@%PROJECT%.iam.gserviceaccount.com --role=roles/aiplatform.user
+gcloud storage buckets add-iam-policy-binding gs://lc-images-%PROJECT% --member=serviceAccount:lc-images@%PROJECT%.iam.gserviceaccount.com --role=roles/storage.objectAdmin
+```
+
+**4. Let only this GitHub repository sign in as it** (Workload Identity, no key file)
+```
+gcloud iam workload-identity-pools create github --location=global --display-name="GitHub"
+gcloud iam workload-identity-pools providers create-oidc lc-repo --location=global --workload-identity-pool=github --display-name="lc-image-program" --issuer-uri="https://token.actions.githubusercontent.com" --attribute-mapping="google.subject=assertion.sub,attribute.repository=assertion.repository" --attribute-condition="assertion.repository=='muhammadfahad-dev/lc-image-program'"
+gcloud iam service-accounts add-iam-policy-binding lc-images@%PROJECT%.iam.gserviceaccount.com --role=roles/iam.workloadIdentityUser --member="principalSet://iam.googleapis.com/projects/%NUMBER%/locations/global/workloadIdentityPools/github/attribute.repository/muhammadfahad-dev/lc-image-program"
+```
+
+**5. Repository variables on GitHub** (Settings → Secrets and variables → Actions → Variables → New repository variable)
+
+| Name | Value |
+|---|---|
+| `GOOGLE_CLOUD_PROJECT` | `project-c065e1d2-16ae-4565-bb0` |
+| `GCP_WIF_PROVIDER` | `projects/<NUMBER>/locations/global/workloadIdentityPools/github/providers/lc-repo` |
+| `GCP_SERVICE_ACCOUNT` | `lc-images@project-c065e1d2-16ae-4565-bb0.iam.gserviceaccount.com` |
+| `VERTEX_BUCKET` | `lc-images-project-c065e1d2-16ae-4565-bb0` |
+| `REPORT_SHEET_ID` | the Sheet ID (see Reports) |
+| `AUTO` | leave empty until the tests are done; then `batch` (or `single`) |
+
+The Shopify secrets (`SHOPIFY_CLIENT_ID`, `SHOPIFY_CLIENT_SECRET`) are already there.
+
+**6. Test from GitHub:** Actions → LC images → Run workflow → `vertex-test`. Then `batch-status`.
+Once the credit is confirmed and a small Batch round has been checked, set `AUTO` = `batch`: from then on GitHub runs
+a Batch round every 3 hours by itself, with your PC off.
+
+**Do not run your PC and GitHub on the same products at the same time.**
+
+### Batch commands on your PC
+- `python run.py --vertex --batch submit --limit 5`: send the images still needed for up to 5 products (at most `VERTEX_BATCH_SIZE`, default 50, per job)
+- `python run.py --vertex --batch status`: show the jobs that are out
+- `python run.py --vertex --batch collect`: read finished jobs, check and upload the images
+- `python run.py --vertex --batch auto`: collect, then submit the next round
+
 ## Reports
+**Google Sheet.** Make an empty Google Sheet, copy its ID (the long part of its address between `/d/` and `/edit`)
+into `.env` as `REPORT_SHEET_ID=...` (and as a GitHub variable). Then:
+- on your PC, sign in once more with the Sheets permission:
+  `gcloud auth application-default login --scopes=https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/spreadsheets`
+- for GitHub, share the Sheet with `lc-images@project-c065e1d2-16ae-4565-bb0.iam.gserviceaccount.com` as Editor.
+
+`python run.py --report` writes it (and `output\report.csv`); live runs update it at the end. One row per product:
+Product, Admin link, Store link, Template, Media images, Fitting image, Multi display images, A little closer images,
+Variant images, the six text fields, Text content, Image status, To do. Each says **Done**, **Retry** (with what is
+missing), **In progress** (Batch work out) or **Not started**; Variant images says **Not completed** with the colours
+still without an image.
+
 - The **Image tracker** page shows every product's status, what still needs doing by hand, and the last run's summary.
 - GitHub emails you if a daily run fails completely.
 
