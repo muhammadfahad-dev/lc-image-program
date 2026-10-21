@@ -1,6 +1,7 @@
 """Run the LC image program.
 
   python run.py --test-key                     check that the Gemini key can make images
+  python run.py --sheet                        rebuild output/index.html (USED / REJECTED marks) from earlier pilots
   python run.py --dry-run --handles a,b,c      pilot: make images into ./output, change nothing in Shopify
   python run.py --limit 25                     live run: up to 25 products, then stop
   python run.py --retry-manual ...             also try again the images marked "do manually"
@@ -96,10 +97,19 @@ def contact_sheet(results):
     for handle, status in results:
         folder = OUT / handle
         report = json.loads((folder / "report.json").read_text()) if (folder / "report.json").exists() else {}
-        tiles = "".join(
-            f'<figure><img src="{handle}/{f.name}" loading="lazy"><figcaption>{html.escape(f.stem)}</figcaption></figure>'
-            for f in sorted(folder.glob("*.jpg"))
-        )
+        used = {v.get("local") for v in {**report.get("slots", {}), **report.get("colours", {})}.values() if v.get("status") == "done"}
+
+        def tile(f):
+            if f.name == "reference.jpg":
+                label, cls = "PRODUCT PHOTO (reference)", "ref"
+            elif f.name in used:
+                label, cls = "USED: passed the check", "ok"
+            else:
+                label, cls = "REJECTED: failed the check, not used", "no"
+            return f'<figure class={cls}><img src="{handle}/{f.name}" loading="lazy"><figcaption><b>{label}</b><br>{html.escape(f.stem)}</figcaption></figure>'
+
+        files = sorted(folder.glob("*.jpg"), key=lambda f: (f.name != "reference.jpg", f.name not in used, f.name))
+        tiles = "".join(tile(f) for f in files)
         issues = [f"{k}: {'; '.join(v.get('problems', []))}" for k, v in {**report.get("slots", {}), **report.get("colours", {})}.items() if v.get("status") == "manual"]
         rows.append(
             f"<section><h2>{html.escape(handle)} <small>{html.escape(status)}</small></h2>"
@@ -110,8 +120,10 @@ def contact_sheet(results):
     page = (
         "<!doctype html><meta charset=utf-8><title>Pilot images</title><style>body{font-family:Inter,system-ui,sans-serif;background:#F7F3ED;color:#25231F;margin:0;padding:24px}"
         "h2{font-weight:500}small{color:#5F6456;font-weight:400}.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}"
-        "figure{margin:0}img{width:100%;height:auto;background:#E7DED2}figcaption{font-size:12px;color:#5F6456;margin-top:4px}li{color:#7a3b2e}</style>"
-        "<h1>Pilot images</h1><p>Files ending in try2 or try3 are re-dos after a failed check. reference.jpg is the product photo Gemini worked from.</p>"
+        "figure{margin:0;padding:6px;border:3px solid #E7DED2}figure.ok{border-color:#6D7464}figure.no{border-color:#b5523b;opacity:.75}figure.ref{border-color:#C6A77B}"
+        "img{width:100%;height:auto;background:#E7DED2}figcaption{font-size:12px;color:#5F6456;margin-top:4px}figure.no b{color:#b5523b}figure.ok b{color:#5F6456}li{color:#7a3b2e}</style>"
+        "<h1>Pilot images</h1><p>Green frame: USED (passed the check). Red frame: REJECTED (failed the check, never uploaded). "
+        "Gold frame: the product photo Gemini worked from. try2 / try3 are re-dos after a failed check.</p>"
         + "".join(rows)
     )
     (OUT / "index.html").write_text(page, encoding="utf-8")
@@ -123,12 +135,18 @@ def main():
     ap.add_argument("--limit", type=int, default=config.MAX_PRODUCTS_PER_RUN)
     ap.add_argument("--handles", default="", help="comma-separated product handles to process")
     ap.add_argument("--test-key", action="store_true")
+    ap.add_argument("--sheet", action="store_true", help="rebuild output/index.html from the pilot folders already in output")
     ap.add_argument("--retry-manual", action="store_true", help="try again the images marked 'do manually'")
     ap.add_argument("--redo", default="", help="make these images again, e.g. closer-1,closer-3 or closer (use with --handles)")
     ap.add_argument("--vertex", action="store_true", help="use Vertex AI in your Google Cloud project (signed in with gcloud, no API key)")
     ap.add_argument("--web", action="store_true", help="make images on the Gemini website instead of the API (photo choice and checks too, unless CHECK_SOURCE=api)")
     args = ap.parse_args()
 
+    if args.sheet:
+        folders = [(f.name, json.loads((f / "report.json").read_text()).get("status", "")) for f in sorted(OUT.iterdir()) if (f / "report.json").exists()]
+        contact_sheet(folders)
+        print(f"Rebuilt {OUT / 'index.html'} for {len(folders)} product(s).")
+        return 0
     if args.test_key:
         return test_vertex() if args.vertex else test_key()
 

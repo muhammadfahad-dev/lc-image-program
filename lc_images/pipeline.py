@@ -414,9 +414,12 @@ class ProductRun:
                         audit["colours"][value] = {"status": "manual", "problems": problems[:4]}
                         self.save()
                         continue
+                    colour_local = self.last_local
                     media_id = self.s.upload_image(jpeg, f"{p['handle']}-colour-{slug(value)}.jpg", f"{p['title']} - {value}")
                     self.s.attach_to_product(p["id"], [media_id])
                     status = "done"
                 self.s.link_variants(p["id"], [(v["id"], media_id) for v in variants])
                 audit["colours"][value] = {"status": status, "file": media_id}
+                if self.out and status == "done":
+                    audit["colours"][value]["local"] = colour_local
                 self.save()
