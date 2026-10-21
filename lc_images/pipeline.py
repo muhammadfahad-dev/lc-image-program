@@ -617,13 +617,26 @@ class ProductRun:
         return job
 
     def release_orphans(self, known_batches):
-        """Images marked as out in a Batch job that no longer exists go back into the queue (no try counted)."""
+        """Images marked as out in a Batch job that no longer exists go back into the queue. This counts as a try,
+        so an image that can never be finished ends as "do manually" instead of being paid for again and again."""
         changed = False
         for group in ("slots", "colours"):
-            for key, st in self.audit[group].items():
-                if st.get("status") == "queued" and st.get("batch") not in known_batches:
-                    self.audit[group][key] = {"status": "pending", "tries": st.get("tries", 0)}
-                    changed = True
+            for key, st in list(self.audit[group].items()):
+                if st.get("status") != "queued" or st.get("batch") in known_batches:
+                    continue
+                tries = st.get("tries", 0) + 1
+                problem = ["its Batch job could not be finished"]
+                if tries < 1 + config.RETRIES:
+                    self.audit[group][key] = {"status": "pending", "tries": tries, "problems": problem}
+                else:
+                    state = {"status": "manual", "problems": problem}
+                    if group == "slots" and key not in self.plan["media"]:
+                        try:
+                            state["placeholder"] = self.s.placeholder(PROMPTS[key]["ratio"], key)
+                        except Exception:
+                            pass  # placed without it; the report still lists the image as to do
+                    self.audit[group][key] = state
+                changed = True
         if changed:
             self.save()
         return changed

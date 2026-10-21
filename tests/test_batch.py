@@ -240,6 +240,26 @@ def test_a_product_that_always_fails_does_not_block_batch_forever():
         assert s.shop["image_batches"]["jobs"] == [], "the job is dropped after the last read"
         s.upload_image = real
         assert runner.submit(5) is not None  # its unfinished images are sent again
+        assert audit_of(s, p)["slots"]["hero-1"]["tries"] == 1  # ... and that counted as a try
+
+
+def test_an_image_that_can_never_be_finished_ends_as_manual():
+    with tempfile.TemporaryDirectory() as tmp:
+        storage, s, g, p, runner = setup(tmp)
+        real = s.set_metafields
+        for round_ in range(3):
+            runner = batch.BatchRunner(g, s, storage, out_dir=tmp, log=lambda *a: None)
+            runner.submit(5)
+            s.upload_image = lambda *a: (_ for _ in ()).throw(RuntimeError("userError: always"))
+            for _ in range(config.VERTEX_BATCH_MAX_READS):
+                runner.collect()
+            s.upload_image = tp.FakeShopify.upload_image.__get__(s)
+        runner = batch.BatchRunner(g, s, storage, out_dir=tmp, log=lambda *a: None)
+        runner.submit(5)  # the third release ends the images as "do manually": nothing more to pay for
+        a = audit_of(s, p)
+        assert all(v["status"] == "manual" for v in a["slots"].values()), {k: v["status"] for k, v in a["slots"].items()}
+        assert a["slots"]["closer-2"].get("placeholder") == "placeholder-closer-2"
+        assert s.shop["image_batches"]["jobs"] == []
 
 
 def test_a_job_another_machine_just_started_is_not_taken_for_lost():
