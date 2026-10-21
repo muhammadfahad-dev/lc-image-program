@@ -94,6 +94,13 @@ def test_spending_cap_stops_before_the_call():
             assert m.calls == []
 
 
+def test_list_models():
+    with tempfile.TemporaryDirectory() as tmp:
+        g, m = make([], tmp)
+        m.list = lambda config: [NS(name="publishers/google/models/gemini-x-image", display_name="X Image")]
+        assert g.list_models() == [("gemini-x-image", "X Image")]
+
+
 def test_json_check():
     with tempfile.TemporaryDirectory() as tmp:
         g, m = make([NS(text='{"pass": true, "problems": []}')], tmp)

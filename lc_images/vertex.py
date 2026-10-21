@@ -66,6 +66,14 @@ class GeminiVertex:
             )
         self.client = client
 
+    def list_models(self):
+        """Google's own models this project can call, as (name, display name)."""
+        found = []
+        for model in self.client.models.list(config={"query_base": True, "page_size": 200}):
+            name = (model.name or "").split("/")[-1]
+            found.append((name, getattr(model, "display_name", "") or ""))
+        return found
+
     def choose_models(self, require_image=True):
         return self.image_model, self.check_model
 

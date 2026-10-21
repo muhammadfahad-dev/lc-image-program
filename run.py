@@ -7,6 +7,7 @@
   python run.py --retry-manual ...             also try again the images marked "do manually"
   python run.py --redo closer-1,closer-3 --handles X   make these images of product X again
   python run.py --vertex --test-key            Vertex AI (Google Cloud credit): make ONE test image
+  python run.py --vertex --list-models         the model IDs your project can use
   python run.py --vertex ...                   make the images through Vertex AI in your Google Cloud project
   python run.py --web ...                      make the images on the Gemini website (your PC, signed in with python web.py login)
 """
@@ -135,6 +136,7 @@ def main():
     ap.add_argument("--limit", type=int, default=config.MAX_PRODUCTS_PER_RUN)
     ap.add_argument("--handles", default="", help="comma-separated product handles to process")
     ap.add_argument("--test-key", action="store_true")
+    ap.add_argument("--list-models", action="store_true", help="with --vertex: list the image and Gemini models your project can use")
     ap.add_argument("--sheet", action="store_true", help="rebuild output/index.html from the pilot folders already in output")
     ap.add_argument("--retry-manual", action="store_true", help="try again the images marked 'do manually'")
     ap.add_argument("--redo", default="", help="make these images again, e.g. closer-1,closer-3 or closer (use with --handles)")
@@ -142,6 +144,23 @@ def main():
     ap.add_argument("--web", action="store_true", help="make images on the Gemini website instead of the API (photo choice and checks too, unless CHECK_SOURCE=api)")
     args = ap.parse_args()
 
+    if args.list_models and args.vertex:
+        from lc_images.vertex import GeminiVertex
+
+        try:
+            models = GeminiVertex(out_dir=OUT).list_models()
+        except Exception as error:
+            print(f"Could not list models: {str(error)[:300]}")
+            return 1
+        images = [(n, d) for n, d in models if "image" in n.lower() or "image" in d.lower() or "banana" in (n + d).lower()]
+        print("Image models:")
+        for n, d in images:
+            print(f"  {n}    {d}")
+        print("\nGemini models (for checks):")
+        for n, d in models:
+            if n.lower().startswith("gemini") and (n, d) not in images:
+                print(f"  {n}    {d}")
+        return 0
     if args.sheet:
         folders = [(f.name, json.loads((f / "report.json").read_text()).get("status", "")) for f in sorted(OUT.iterdir()) if (f / "report.json").exists()]
         contact_sheet(folders)
