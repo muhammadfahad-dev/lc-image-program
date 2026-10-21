@@ -74,6 +74,13 @@ OTHERS_NOTE = (
     "Also fail image 1 if it shows the same view or the same detail as one of them (each image in a section must show something different)."
 )
 
+CLOSE_UP_SCOPE = (
+    "Image 1 is a close-up, so judge the design details only on the part that is visible. "
+    "But it must still look like a real photo of this abaya: if the brief puts the garment on a person or mannequin, "
+    "it must be worn or dressed on them as a whole garment. Fail it if, for example, a mannequin is bare with only a "
+    "sleeve or piece of fabric attached, or the garment is cut, floating or incomplete where it should be whole."
+)
+
 CLOSE_UP_SLOTS = {"multi-3b", "closer-1", "closer-2", "closer-3", "closer-4"}
 
 
@@ -169,7 +176,7 @@ class ProductRun:
         return [m for m in self.p["media"]["nodes"] if m.get("mediaContentType") == "IMAGE" and m.get("image") and m["id"] not in ours]
 
     def check(self, original, generated, brief, colour, slot=None, others=()):
-        scope = "Image 1 is a close-up, so judge only the part that is visible." if slot in CLOSE_UP_SLOTS else ""
+        scope = CLOSE_UP_SCOPE if slot in CLOSE_UP_SLOTS else ""
         extra = FITTING_FRAMING if slot == "fitting-1" else ""
         others = list(others)[:3]
         note = OTHERS_NOTE.format(last=1 + len(others)) if others else ""
