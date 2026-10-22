@@ -41,6 +41,7 @@ MAX_PRODUCTS_PER_RUN = int(env("MAX_PRODUCTS", "25"))
 RETRIES = 2  # regenerations after the first attempt
 SECONDS_BETWEEN_CALLS = float(env("SECONDS_BETWEEN_CALLS", "7"))  # stays under free-tier per-minute limits
 MAX_SELECTION_PHOTOS = 8
+UNCHECKED_DIR = env("UNCHECKED_DIR", "output/unchecked")  # images made but not yet checked (kept across a stop)
 
 # Shopify fields (namespace custom)
 AUDIT_KEY = "image_audit"
@@ -89,6 +90,9 @@ VERTEX_SECONDS_BETWEEN_CALLS = float(env("VERTEX_SECONDS_BETWEEN_CALLS", "4"))
 VERTEX_TIMEOUT_SECONDS = int(env("VERTEX_TIMEOUT_SECONDS", "150"))
 # Waits after "too many requests" before trying again; after the last one the run stops (and continues next time)
 VERTEX_RATE_LIMIT_WAITS = [int(x) for x in env("VERTEX_RATE_LIMIT_WAITS", "15,30,60,60,90,120").split(",")]
+# When the check model stays busy, these are tried in turn (each with shorter waits) before the run stops
+VERTEX_CHECK_BACKUPS = [m for m in env("VERTEX_CHECK_BACKUPS", "gemini-3.5-flash,gemini-2.5-flash").split(",") if m]
+VERTEX_BACKUP_WAITS = [int(x) for x in env("VERTEX_BACKUP_WAITS", "15,30,60").split(",")]
 
 # Report (python run.py --report, and after every live run when REPORT_SHEET_ID is set)
 STORE_URL = env("STORE_URL", "wearlcm.com")

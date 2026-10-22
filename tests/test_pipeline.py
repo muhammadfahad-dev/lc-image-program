@@ -11,6 +11,8 @@ from lc_images import config, pipeline
 from lc_images.gemini import QuotaExhausted, TemporaryFailure
 
 config.SECONDS_BETWEEN_CALLS = 0
+import tempfile as _tempfile
+config.UNCHECKED_DIR = _tempfile.mkdtemp()
 config.TEMPORARY_WAIT_SECONDS = 0
 
 
@@ -386,6 +388,32 @@ def test_check_answer_false_as_text_is_a_fail():
     assert run.check(jpeg(), jpeg(), "b", "c") == (False, ["wrong colour"])
     run.g.ask_json = lambda images, prompt: [{"pass": True}]
     assert run.check(jpeg(), jpeg(), "b", "c")[0] is False  # not a clear answer
+
+
+def test_image_made_before_a_stop_is_checked_not_made_again():
+    g, s = FakeGemini(SELECT_OPEN), FakeShopify()
+    real_ask = g.ask_json
+    state = {"stop": True}
+
+    def ask(images, prompt):
+        if state["stop"] and "Sleeve (closer image)" in prompt:
+            raise QuotaExhausted("checker busy")
+        return real_ask(images, prompt)
+
+    g.ask_json = ask
+    run = pipeline.ProductRun(product(colours=("Navy",)), g, s, log=lambda *a: None)
+    try:
+        run.run()
+    except QuotaExhausted:
+        pass
+    made = g.calls["image"]
+    state["stop"] = False
+    saved = json.loads(json.dumps(run.audit))
+    g2 = FakeGemini(SELECT_OPEN)
+    run2 = pipeline.ProductRun(product(colours=("Navy",), audit=saved), g2, FakeShopify(), log=lambda *a: None)
+    assert run2.run() == "done"
+    assert g2.calls["image"] == 1  # only closer-4: closer-3 was checked from the kept image
+    assert not list(Path(config.UNCHECKED_DIR).glob("*.img"))
 
 
 def test_done_by_hand_only_colours():

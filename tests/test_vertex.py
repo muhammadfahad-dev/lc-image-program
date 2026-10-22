@@ -73,6 +73,14 @@ def test_rate_limit_that_never_ends_stops_the_run():
             assert "too many requests" in str(error)
 
 
+def test_busy_checker_uses_a_backup_model():
+    busy = errors.ClientError(429, {"error": {"message": "Resource exhausted"}})
+    with tempfile.TemporaryDirectory() as tmp:
+        g, m = make([busy] * (len(config.VERTEX_RATE_LIMIT_WAITS) + 1) + [NS(text='{"pass": true, "problems": []}')], tmp)
+        assert g.ask_json([b"a"], "check")["pass"] is True
+        assert m.calls[-1][0] == config.VERTEX_CHECK_BACKUPS[0]
+
+
 def test_no_image_is_generation_failed():
     with tempfile.TemporaryDirectory() as tmp:
         g, _ = make([NS(candidates=[NS(content=None, finish_reason="IMAGE_SAFETY")], prompt_feedback=None)], tmp)

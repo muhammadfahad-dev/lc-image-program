@@ -135,35 +135,45 @@ class GeminiVertex:
                 "(VERTEX_BUDGET_USD). Check the real figure in Google Cloud Billing before raising it."
             )
 
-    def _call(self, model, contents, cfg, kind):
+    def _call(self, model, contents, cfg, kind, backups=()):
+        """One request. Google's "too many requests" (its shared capacity for a model is busy), server errors and
+        no answer are waited out and tried again. Then the backup models are tried, each with shorter waits, and
+        only after that does the run stop (and continue next time)."""
         from google.genai import errors
 
-        waits = config.VERTEX_RATE_LIMIT_WAITS
-        for attempt in range(len(waits) + 1):
-            gap = time.monotonic() - self._last
-            if gap < config.VERTEX_SECONDS_BETWEEN_CALLS:
-                time.sleep(config.VERTEX_SECONDS_BETWEEN_CALLS - gap)
-            self._last = started = time.monotonic()
-            try:
-                response = self.client.models.generate_content(model=model, contents=contents, config=cfg)
-                self.log(f"    {kind} answered in {time.monotonic() - started:.0f}s")
-                return response
-            except errors.ClientError as error:
-                if error.code in (401, 403):
-                    raise RuntimeError(f"Vertex AI refused access ({error.code}): {str(error)[:300]}. Check the setup steps in lc_images/vertex.py.")
-                if error.code != 429:
-                    raise RuntimeError(f"Vertex AI {error.code}: {str(error)[:400]}")
-                reason = f"Google says too many requests ({str(error)[:120]})"
-            except errors.ServerError as error:
-                reason = f"Google server error {error.code}"
-            except Exception as error:  # timeout or dropped connection
-                if "timeout" not in type(error).__name__.lower() and "connect" not in type(error).__name__.lower() and "timed out" not in str(error).lower():
-                    raise
-                reason = f"no answer within {config.VERTEX_TIMEOUT_SECONDS}s"
-            if attempt == len(waits):
-                break
-            self.log(f"    {kind}: {reason}; waiting {waits[attempt]}s ({attempt + 1}/{len(waits)})")
-            time.sleep(waits[attempt])
+        reason = ""
+        for index, current in enumerate([model, *backups]):
+            waits = config.VERTEX_RATE_LIMIT_WAITS if index == 0 else config.VERTEX_BACKUP_WAITS
+            if index:
+                self.log(f"    {kind}: {model} stays busy; trying the backup model {current}")
+            for attempt in range(len(waits) + 1):
+                gap = time.monotonic() - self._last
+                if gap < config.VERTEX_SECONDS_BETWEEN_CALLS:
+                    time.sleep(config.VERTEX_SECONDS_BETWEEN_CALLS - gap)
+                self._last = started = time.monotonic()
+                try:
+                    response = self.client.models.generate_content(model=current, contents=contents, config=cfg)
+                    self.log(f"    {kind} answered in {time.monotonic() - started:.0f}s" + (f" ({current})" if index else ""))
+                    return response
+                except errors.ClientError as error:
+                    if error.code in (401, 403):
+                        raise RuntimeError(f"Vertex AI refused access ({error.code}): {str(error)[:300]}. Check the setup steps in lc_images/vertex.py.")
+                    if error.code == 404 and index:
+                        reason = f"{current} is not available in this project"
+                        break  # this backup does not exist here: try the next one
+                    if error.code != 429:
+                        raise RuntimeError(f"Vertex AI {error.code}: {str(error)[:400]}")
+                    reason = f"Google says too many requests ({str(error)[:120]})"
+                except errors.ServerError as error:
+                    reason = f"Google server error {error.code}"
+                except Exception as error:  # timeout or dropped connection
+                    if "timeout" not in type(error).__name__.lower() and "connect" not in type(error).__name__.lower() and "timed out" not in str(error).lower():
+                        raise
+                    reason = f"no answer within {config.VERTEX_TIMEOUT_SECONDS}s"
+                if attempt == len(waits):
+                    break
+                self.log(f"    {kind}: {reason}; waiting {waits[attempt]}s ({attempt + 1}/{len(waits)})")
+                time.sleep(waits[attempt])
         raise QuotaExhausted(f"Vertex AI kept refusing ({reason}); stopping for now. Run the same command again later to continue.")
 
     @staticmethod
@@ -200,7 +210,7 @@ class GeminiVertex:
 
         self._budget_check(config.VERTEX_PRICE_PER_CHECK)
         cfg = types.GenerateContentConfig(response_mime_type="application/json", temperature=0)
-        response = self._call(self.check_model, [*self._parts(images, labels=True), prompt], cfg, "check")
+        response = self._call(self.check_model, [*self._parts(images, labels=True), prompt], cfg, "check", config.VERTEX_CHECK_BACKUPS)
         self.spend.add(config.VERTEX_PRICE_PER_CHECK, "checks")
         self.calls["check"] += 1
         text = response.text or ""

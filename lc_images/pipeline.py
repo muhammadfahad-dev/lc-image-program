@@ -403,13 +403,24 @@ class ProductRun:
             self.small[job.name] = to_jpeg(raw, max_side=768)
         return ok, problems, jpeg
 
+    def unchecked_path(self, job):
+        """Where an image waits for its check. If a run stops between making and checking (the checker busy, Ctrl+C),
+        the next run checks this image instead of paying for a new one."""
+        folder = Path(config.UNCHECKED_DIR)
+        folder.mkdir(parents=True, exist_ok=True)
+        return folder / f"{slug(self.p['handle'])}--{job.name}.img"
+
     def make(self, job):
         """Generate and check, up to 1 + config.RETRIES tries in a row. Returns (jpeg or None, problems)."""
         problems = []
+        waiting = self.unchecked_path(job)
         for attempt in range(job.tries, 1 + config.RETRIES):
             job.tries = attempt
             raw = None
-            for pause in range(1 + config.TEMPORARY_RETRIES):
+            if waiting.exists():
+                raw = waiting.read_bytes()
+                self.log(f"    {job.name}: checking the image made last time (not paid for again)")
+            for pause in range(0 if raw is not None else 1 + config.TEMPORARY_RETRIES):
                 try:
                     raw = self.g.generate([job.base], job.prompt, job.ratio)
                     break
@@ -424,7 +435,9 @@ class ProductRun:
             if raw is None:
                 self.log(f"    {job.name}: {problems[0][:160]}, attempt {attempt + 1}")
                 continue
-            ok, problems, jpeg = self.judge(job, raw)
+            waiting.write_bytes(raw)
+            ok, problems, jpeg = self.judge(job, raw)  # if the checker stops the run here, the image is kept
+            waiting.unlink(missing_ok=True)
             if ok:
                 return jpeg, []
             self.log(f"    {job.name}: check failed ({'; '.join(problems)[:160]}), attempt {attempt + 1}")
