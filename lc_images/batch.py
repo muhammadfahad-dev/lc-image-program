@@ -96,6 +96,7 @@ class BatchRunner:
         self.log = log
         self.local_state = self.out / "batches.json"
         self.removed = set()  # jobs read and cleared in this run
+        self._sample = None  # first answer line of the last job read (for the log)
         self.created = set()  # jobs started in this run
         self.state = self._load_state()
         self.counts = {"submitted": 0, "passed": 0, "retry": 0, "manual": 0, "again": 0}
@@ -225,6 +226,15 @@ class BatchRunner:
                 mapping = None  # already read and cleared (an earlier run stopped while cleaning up)
             if mapping is not None:
                 answers = self._read_answers(entry) if state in DONE_STATES else {}
+                matched = sum(1 for key in mapping if self._key(*key.split("\n", 1)) in answers)
+                if state in DONE_STATES and mapping and not matched and entry.get("reads", 0) + 1 < config.VERTEX_BATCH_MAX_READS:
+                    # finished but no answer could be matched: keep its files and images as they are, so nothing is
+                    # paid for twice while this is looked into
+                    entry["reads"] = entry.get("reads", 0) + 1
+                    self.log(f"  {entry['name']}: none of its {len(mapping)} answers could be matched; kept to be read again. "
+                             f"First answer: {self._describe(self._sample) if self._sample else 'none'}")
+                    self._save_state()
+                    continue
                 if state in FAILED_STATES:
                     self.log(f"  {entry['name']}: {state}; its images go into the next round (no try counted)")
                 if not self._apply(mapping, answers, entry["name"]):
@@ -242,20 +252,59 @@ class BatchRunner:
         self._save_state()
         return len(self.running())
 
+    @staticmethod
+    def _key(uri, text):
+        """How an answer is matched to its image: the photo it was made from and the prompt (spacing ignored)."""
+        return f"{(uri or '').strip()}\n{' '.join((text or '').split())}"
+
+    @staticmethod
+    def _request_key(item):
+        """The key of the request an answer line repeats (Google may write it in camelCase or snake_case)."""
+        request = item.get("request") or {}
+        if isinstance(request, str):
+            try:
+                request = json.loads(request)
+            except json.JSONDecodeError:
+                request = {}
+        uri, texts = "", []
+        for content in request.get("contents") or []:
+            for part in content.get("parts") or []:
+                data = part.get("fileData") or part.get("file_data") or {}
+                uri = uri or data.get("fileUri") or data.get("file_uri") or ""
+                if part.get("text"):
+                    texts.append(part["text"])
+        return BatchRunner._key(uri, "\n".join(texts))
+
     def _read_answers(self, entry):
-        answers = {}
+        answers, files, lines, sample = {}, 0, 0, None
         for name in self.storage.list(f"{entry['prefix']}/output/"):
             if not name.endswith(".jsonl"):
                 continue
+            files += 1
             for line in self.storage.download(name).decode("utf-8").splitlines():
                 if not line.strip():
                     continue
+                lines += 1
                 item = json.loads(line)
-                parts = (((item.get("request") or {}).get("contents") or [{}])[0]).get("parts") or []
-                uri = next((p["fileData"]["fileUri"] for p in parts if p.get("fileData")), "")
-                text = next((p["text"] for p in parts if "text" in p), "")
-                answers[f"{uri}\n{text}"] = item
+                answers[self._request_key(item)] = item
+                if sample is None:
+                    sample = item
+        self.log(f"  {entry['name']}: {lines} answer(s) in {files} result file(s)")
+        self._sample = sample
         return answers
+
+    @staticmethod
+    def _describe(item):
+        """A short outline of an answer line for the log (image data left out)."""
+        def outline(value, depth=0):
+            if isinstance(value, dict):
+                return {k: outline(v, depth + 1) for k, v in value.items()} if depth < 4 else "{...}"
+            if isinstance(value, list):
+                return [outline(v, depth + 1) for v in value[:3]]
+            if isinstance(value, str) and len(value) > 80:
+                return value[:80] + "..."
+            return value
+        return json.dumps(outline(item))[:900]
 
     @staticmethod
     def _image_of(item):
@@ -290,7 +339,7 @@ class BatchRunner:
                     job = run.job_for(ref, batch_name)
                     if job is None:
                         continue  # no longer queued (redone or changed by hand since)
-                    item = answers.get(key)
+                    item = answers.get(self._key(*key.split("\n", 1)))
                     if item is None:
                         raw, problem, temporary = None, "no answer in the Batch results", True
                     else:

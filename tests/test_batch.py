@@ -44,6 +44,7 @@ class BatchGemini(tp.FakeGemini):
         self.spend = Spend(Path(tmp) / "spend.json")
         self.drop = set()  # image shapes whose answers go missing
         self.error = set()  # image shapes answered with an error status
+        self.echo = lambda request: request  # how the answer lines repeat the request
 
     def create_batch(self, src, dest, display):
         name = f"projects/p/locations/global/batchPredictionJobs/{len(self.jobs) + 1}"
@@ -64,7 +65,7 @@ class BatchGemini(tp.FakeGemini):
                     continue
                 self.calls["image"] += 1
                 data = base64.b64encode(tp.jpeg((10, 20, 30))).decode()
-                lines.append(json.dumps({"request": request, "response": {"candidates": [{"content": {"parts": [{"inlineData": {"mimeType": "image/png", "data": data}}]}}]}}))
+                lines.append(json.dumps({"request": self.echo(request), "response": {"candidates": [{"content": {"parts": [{"inlineData": {"mimeType": "image/png", "data": data}}]}}]}}))
             self.storage.upload(dest.replace("gs://bucket/", "") + "/prediction-model-1/predictions.jsonl", "\n".join(lines).encode(), "application/jsonl")
         return self.next_state
 
@@ -145,6 +146,35 @@ def test_missing_answers_and_errors_do_not_count_as_tries():
         assert a["slots"]["closer-4"]["status"] == "pending" and a["slots"]["closer-4"]["tries"] == 0
         assert "RESOURCE_EXHAUSTED" in a["slots"]["closer-4"]["problems"][0]
         assert a["slots"]["closer-3"]["status"] == "done"
+
+
+def snake_case(request):
+    """The request as Google may repeat it: snake_case keys and different spacing in the prompt."""
+    parts = request["contents"][0]["parts"]
+    return {"contents": [{"role": "user", "parts": [
+        {"file_data": {"file_uri": parts[0]["fileData"]["fileUri"], "mime_type": "image/jpeg"}},
+        {"text": "  " + parts[1]["text"].replace(" ", "  ") + "\n"},
+    ]}]}
+
+
+def test_answers_repeated_in_snake_case_are_matched():
+    with tempfile.TemporaryDirectory() as tmp:
+        storage, s, g, p, runner = setup(tmp)
+        g.echo = snake_case
+        runner.auto(5)
+        runner.collect()
+        assert all(v["status"] == "done" for v in audit_of(s, p)["slots"].values())
+
+
+def test_unmatched_answers_keep_the_job_and_its_files():
+    with tempfile.TemporaryDirectory() as tmp:
+        storage, s, g, p, runner = setup(tmp)
+        g.echo = lambda request: {}
+        runner.auto(5)
+        runner.collect()
+        a = audit_of(s, p)
+        assert all(v["status"] == "queued" for v in a["slots"].values())  # not put back, so not paid for twice
+        assert len(s.shop["image_batches"]["jobs"]) == 1 and any("/output/" in n for n in storage.files)
 
 
 def test_failed_job_puts_images_back():
