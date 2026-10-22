@@ -16,9 +16,10 @@ on:
           live = one-by-one, update the store ·
           batch-auto = a Batch round ·
           batch-status = show Batch jobs ·
+          recheck = check images already made against the current rules, remake failures ·
           report = update the report
         type: choice
-        options: [vertex-test, pilot, live, batch-auto, batch-status, report]
+        options: [vertex-test, pilot, live, batch-auto, batch-status, recheck, report]
         default: batch-status
       handles:
         description: "Product handles, comma-separated (leave empty to go through the store)"
@@ -106,6 +107,7 @@ jobs:
             live)         python run.py --vertex --limit "$LIMIT" --handles "$HANDLES" 2>&1 | tee output/run.log ;;
             batch-auto)   python run.py --vertex --batch auto --limit "$LIMIT" --handles "$HANDLES" 2>&1 | tee output/run.log ;;
             batch-status) python run.py --vertex --batch status 2>&1 | tee output/run.log ;;
+            recheck)      python run.py --vertex --recheck --limit "$LIMIT" --handles "$HANDLES" 2>&1 | tee output/run.log ;;
             report)       python run.py --report 2>&1 | tee output/run.log ;;
           esac
       - name: Show the error
