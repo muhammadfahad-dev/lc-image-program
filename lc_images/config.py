@@ -94,6 +94,8 @@ VERTEX_RATE_LIMIT_WAITS = [int(x) for x in env("VERTEX_RATE_LIMIT_WAITS", "15,30
 STORE_URL = env("STORE_URL", "wearlcm.com")
 REPORT_SHEET_ID = env("REPORT_SHEET_ID", "")  # the long part of the Sheet's address, between /d/ and /edit
 REPORT_SHEET_TAB = env("REPORT_SHEET_TAB", "Image report")
+# On your PC: the service account the report writes the Sheet as (gcloud cannot get Sheets permission itself)
+REPORT_SERVICE_ACCOUNT = env("REPORT_SERVICE_ACCOUNT", "")
 
 # Batch mode (python run.py --vertex --batch submit|collect|auto)
 VERTEX_BUCKET = env("VERTEX_BUCKET", "")  # Cloud Storage bucket for the request lists and answers

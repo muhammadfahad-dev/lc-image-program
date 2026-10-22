@@ -110,6 +110,25 @@ def test_csv_and_sheet_calls():
     assert session.calls[-1][2]["values"][0] == report.HEADER
 
 
+def test_sheet_sign_in_acts_as_the_service_account_when_set():
+    import google.auth
+    from google.auth import impersonated_credentials
+
+    seen = {}
+    real_default, real_imp = google.auth.default, impersonated_credentials.Credentials
+    google.auth.default = lambda scopes=None: (seen.setdefault("scopes", scopes), "project")
+    impersonated_credentials.Credentials = lambda **kw: seen.setdefault("imp", kw)
+    try:
+        report.config.REPORT_SERVICE_ACCOUNT = "lc-images@p.iam.gserviceaccount.com"
+        report.sheet_session()
+        assert seen["scopes"] == ["https://www.googleapis.com/auth/cloud-platform"]
+        assert seen["imp"]["target_principal"] == "lc-images@p.iam.gserviceaccount.com"
+        assert seen["imp"]["target_scopes"] == [report.SHEETS_SCOPE]
+    finally:
+        google.auth.default, impersonated_credentials.Credentials = real_default, real_imp
+        report.config.REPORT_SERVICE_ACCOUNT = ""
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

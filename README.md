@@ -185,11 +185,19 @@ a Batch round every 3 hours by itself, with your PC off.
 - `python run.py --vertex --batch auto`: collect, then submit the next round
 
 ## Reports
-**Google Sheet.** Make an empty Google Sheet, copy its ID (the long part of its address between `/d/` and `/edit`)
-into `.env` as `REPORT_SHEET_ID=...` (and as a GitHub variable). Then:
-- on your PC, sign in once more with the Sheets permission:
-  `gcloud auth application-default login --scopes=https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/spreadsheets`
-- for GitHub, share the Sheet with `lc-images@project-c065e1d2-16ae-4565-bb0.iam.gserviceaccount.com` as Editor.
+**Google Sheet.** Google does not let gcloud ask for Sheets permission, so the report writes the Sheet as the
+service account `lc-images` (the same one GitHub uses). One time, in Command Prompt:
+```
+set PROJECT=project-c065e1d2-16ae-4565-bb0
+gcloud services enable sheets.googleapis.com iamcredentials.googleapis.com
+gcloud iam service-accounts create lc-images --display-name="LC images"
+gcloud config get-value account
+gcloud iam service-accounts add-iam-policy-binding lc-images@%PROJECT%.iam.gserviceaccount.com --member=user:<the e-mail it printed> --role=roles/iam.serviceAccountTokenCreator
+```
+(If the service account already exists, skip the `create` line.) Then:
+- share the Sheet (Share, Editor) with `lc-images@project-c065e1d2-16ae-4565-bb0.iam.gserviceaccount.com`;
+- in `.env`: `REPORT_SHEET_ID=<the long part of the Sheet's address between /d/ and /edit>` and
+  `REPORT_SERVICE_ACCOUNT=lc-images@project-c065e1d2-16ae-4565-bb0.iam.gserviceaccount.com`.
 
 `python run.py --report` writes it (and `output\report.csv`); live runs update it at the end. One row per product:
 Product, Admin link, Store link, Template, Media images, Fitting image, Multi display images, A little closer images,

@@ -5,12 +5,11 @@ Columns: product, links, template, each image section, variant images, each text
 Each image or text column says Done, Retry (something failed and must be made again or by hand),
 In progress (Batch work still out), or Not started.
 
-Google Sheet access (one time):
-  - gcloud services enable sheets.googleapis.com
-  - On your PC: sign in once more with the Sheets permission added:
-      gcloud auth application-default login --scopes=https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/spreadsheets
-  - On GitHub: share the Sheet with the service account's e-mail address (Editor).
-  - Put the Sheet's ID (the long part of its address between /d/ and /edit) in REPORT_SHEET_ID.
+Google Sheet access (one time; see README "Reports"):
+  - The Sheet is shared (Editor) with the service account lc-images@<project>.iam.gserviceaccount.com.
+  - On your PC, REPORT_SERVICE_ACCOUNT in .env names that account; your own gcloud sign-in may act as it
+    (role "Service Account Token Creator"). On GitHub the run signs in as it directly.
+  - REPORT_SHEET_ID is the long part of the Sheet's address between /d/ and /edit.
 """
 import csv
 import json
@@ -209,16 +208,35 @@ def write_csv(rows, path):
             writer.writerow([c.split('"')[1] if str(c).startswith("=HYPERLINK") else c for c in row])
 
 
+SHEETS_SCOPE = "https://www.googleapis.com/auth/spreadsheets"
+
+
+def sheet_session():
+    """A signed-in connection for Google Sheets.
+    On your PC, gcloud cannot ask for Sheets permission (Google blocks it), so the program writes as the service
+    account in REPORT_SERVICE_ACCOUNT instead: your own sign-in is only allowed to act as that account, and the
+    Sheet is shared with it. On GitHub the run is already signed in as that service account."""
+    import google.auth
+    from google.auth.transport.requests import AuthorizedSession
+
+    if config.REPORT_SERVICE_ACCOUNT:
+        from google.auth import impersonated_credentials
+
+        source, _ = google.auth.default(scopes=["https://www.googleapis.com/auth/cloud-platform"])
+        creds = impersonated_credentials.Credentials(
+            source_credentials=source, target_principal=config.REPORT_SERVICE_ACCOUNT, target_scopes=[SHEETS_SCOPE], lifetime=3600,
+        )
+    else:
+        creds, _ = google.auth.default(scopes=[SHEETS_SCOPE])
+    return AuthorizedSession(creds)
+
+
 def write_sheet(rows, sheet_id=None, tab=None, session=None):
     """Replace the tab's contents with the header and rows. The tab is created (header frozen) if it does not exist."""
     sheet_id = sheet_id or config.REPORT_SHEET_ID
     tab = tab or config.REPORT_SHEET_TAB
     if session is None:
-        import google.auth
-        from google.auth.transport.requests import AuthorizedSession
-
-        creds, _ = google.auth.default(scopes=["https://www.googleapis.com/auth/spreadsheets"])
-        session = AuthorizedSession(creds)
+        session = sheet_session()
     base = f"https://sheets.googleapis.com/v4/spreadsheets/{sheet_id}"
 
     def ok(r):
