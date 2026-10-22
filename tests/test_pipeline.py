@@ -141,6 +141,11 @@ def test_main_image_colour_uses_the_new_main_image_not_its_old_photo():
     run.colour_jobs()
     assert c["Navy"] == {"status": "main_image", "file": hero}
     assert {v for v, m in s.links} == {"v-Navy-S", "v-Navy-M"}
+    # and a recheck of a finished product does the same
+    c["Navy"] = {"status": "existing_photo", "file": "gid://shopify/MediaImage/p1"}
+    run.audit["status"] = "done"
+    assert "colour Navy" in run.recheck()
+    assert run.run() == "done" and c["Navy"] == {"status": "main_image", "file": hero}
 
 
 def test_colour_generated_and_linked():

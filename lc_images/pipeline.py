@@ -662,6 +662,12 @@ class ProductRun:
                 audit.setdefault("colour_replace", {})[value] = state["file"]
                 audit["colours"][value] = {"status": "pending", "tries": 0, "problems": problems[:4]}
                 failed.append(f"colour {value}")
+        hero = audit["slots"].get("hero-1", {})
+        main = audit.get("choice", {}).get("input_colour")
+        if audit["colours"].get(main, {}).get("status") == "existing_photo" and hero.get("status") == "done":
+            # the main image's colour still shows its old photo: the run links it to the new main image
+            self.log(f"  colour {main}: will show the new main image instead of its old photo")
+            failed.append(f"colour {main}")
         slots_failed = [f for f in failed if not f.startswith("colour ")]
         if slots_failed:
             self.reopen(slots_failed)
