@@ -416,6 +416,43 @@ def test_image_made_before_a_stop_is_checked_not_made_again():
     assert not list(Path(config.UNCHECKED_DIR).glob("*.img"))
 
 
+def test_niqab_must_match_and_colour_images_recolour_it():
+    assert "niqab or headscarf that is not in the main colour of the abaya" in pipeline.CHECK_PROMPT
+    assert "niqab" not in pipeline.CHECK_PROMPT.split("Do NOT fail for small things")[1]
+    assert "change it to {colour} too" in pipeline.COLOUR_PROMPT
+
+
+def test_recheck_remakes_only_failing_images_and_replaces_colours():
+    sel = dict(SELECT_OPEN, colour_photos={}, input_colour=None)
+    g, s = FakeGemini(sel), FakeShopify()
+    run = pipeline.ProductRun(product(colours=("Emerald Green",)), g, s, log=lambda *a: None)
+    assert run.run() == "done"
+    a = json.loads(json.dumps(run.audit))
+    old_multi1, old_colour = a["slots"]["multi-1"]["file"], a["colours"]["Emerald Green"]["file"]
+
+    class Strict(FakeGemini):  # the new rules fail multi-1 and the colour image once
+        failed = set()
+
+        def ask_json(self, images, prompt):
+            for key in ("Middle: worn closed", "recoloured to Emerald Green"):
+                if key in prompt and key not in self.failed:
+                    self.failed.add(key)
+                    self.calls["check"] += 1
+                    return {"pass": False, "problems": ["black niqab with a coloured abaya"]}
+            return super().ask_json(images, prompt)
+
+    g2, s2 = Strict(sel), FakeShopify()
+    run2 = pipeline.ProductRun(product(colours=("Emerald Green",), audit=a, filled=True), g2, s2, log=lambda *a: None)
+    run2.prepare(force=True)
+    assert sorted(run2.recheck()) == ["colour Emerald Green", "multi-1"]
+    assert g2.calls["image"] == 0  # only checks so far
+    assert run2.run() == "done"
+    assert g2.calls["image"] == 2
+    multi = json.loads([m for m in s2.metafields if m["key"] == "multi_display_images"][-1]["value"])
+    assert multi[0] == run2.audit["slots"]["multi-1"]["file"] != old_multi1
+    assert old_colour in getattr(s2, "detached", []) and run2.audit["colours"]["Emerald Green"]["file"] != old_colour
+
+
 def test_done_by_hand_only_colours():
     sel = dict(SELECT_OPEN, input_colour=None, colour_photos={})
     g, s = FakeGemini(sel), FakeShopify()

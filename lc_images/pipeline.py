@@ -34,6 +34,7 @@ FITTING_FRAMING = (
 
 COLOUR_PROMPT = (
     "Use the attached image as the only reference. Change only the colour of the abaya fabric to {colour}. "
+    "If the model wears a niqab or headscarf in the abaya's colour, change it to {colour} too, so it still matches the abaya. "
     "Keep everything else exactly the same: the cut, fabric texture, drape, sleeves, neckline, length, pose, "
     "model or mannequin, background, lighting and framing. Keep every embroidery, stonework, cutdana, beadwork, "
     "lace, button and trim detail in exactly the same place, shape and colour as in the reference; only the base "
@@ -62,10 +63,11 @@ Fail image 1 ONLY for a major problem that a customer would notice and that misr
 - the fabric or detail shown does not come from the abaya in image 0 (for example a close-up of a fabric, colour or stitching that image 0 does not have);
 - the design work is missing, clearly in a different place, or added where there was none;
 - the fabric colour is clearly not {colour};
+- a model wears a niqab or headscarf that is not in the main colour of the abaya (for example a black niqab with a beige abaya); it must match the abaya;
 - any text, logo, label or watermark appears;
 - the person or mannequin is clearly deformed (extra or missing fingers, hands or limbs, a twisted body);
 - the image clearly ignores the brief (wrong view or wrong kind of shot).
-Do NOT fail for small things: embroidery, beadwork, stonework or trim that is slightly simplified or less detailed; small differences in drape, folds or volume; hands that are slightly imperfect; small differences in framing, pose, lighting or background; accessories such as hijab, niqab, shoes or jewellery.
+Do NOT fail for small things: embroidery, beadwork, stonework or trim that is slightly simplified or less detailed; small differences in drape, folds or volume; hands that are slightly imperfect; small differences in framing, pose, lighting or background; shoes or jewellery.
 {extra}{others}
 Answer in JSON: {{"pass": true or false, "problems": ["short plain reason", ...]}}. List only major problems; an image without a major problem passes."""
 
@@ -297,10 +299,11 @@ class ProductRun:
         return reopened
 
     # ---------- steps ----------
-    def prepare(self):
-        """Checks, photo choice and the reference photo. Returns a final status (nothing to do), or None to go on."""
+    def prepare(self, force=False):
+        """Checks, photo choice and the reference photo. Returns a final status (nothing to do), or None to go on.
+        force: go on even for a finished product (used by recheck)."""
         p, audit = self.p, self.audit
-        if audit.get("status") in ("done", "manual", "needs_photo", "skipped"):
+        if audit.get("status") in ("needs_photo", "skipped") or (not force and audit.get("status") in ("done", "manual")):
             return audit["status"]
         if hasattr(self.g, "start_product"):
             self.g.start_product(p["handle"])  # the website gives each product its own chat
@@ -488,6 +491,10 @@ class ProductRun:
                 self.s.attach_to_product(p["id"], [media_id])
                 self.attached.add(media_id)
                 self.s.link_variants(p["id"], [(v["id"], media_id) for v in self.variants_of(value)])
+                old = audit.get("colour_replace", {}).pop(value, None)
+                if old and old != media_id:
+                    self.s.detach_from_product(p["id"], [old])  # the replaced colour image (it stays in Files)
+                    self.attached.discard(old)
                 audit["colours"][value] = {"status": "done", "file": media_id}
                 if self.out:
                     audit["colours"][value]["local"] = self.last_local
@@ -599,7 +606,7 @@ class ProductRun:
                     continue
                 jobs.append(Job(
                     "colour", f"colour-{slug(value)}", COLOUR_PROMPT.format(colour=value), "4:5",
-                    f"the same abaya recoloured to {value}, everything else unchanged", value, None, value=value, tries=state.get("tries", 0),
+                    f"the same abaya recoloured to {value} (with a matching niqab if worn), everything else unchanged", value, None, value=value, tries=state.get("tries", 0),
                 ))
         if jobs:
             base = self.colour_base()
@@ -608,6 +615,55 @@ class ProductRun:
         if changed:
             self.save()
         return jobs
+
+    # ---------- recheck ----------
+    def file_image(self, file_id):
+        """An uploaded image, downloaded again for a check (None if it cannot be read)."""
+        if not file_id or str(file_id).startswith("dry-run"):
+            return None
+        try:
+            url = self.s.file_url(file_id)
+            return fetch(url, 1024) if url else None
+        except Exception:
+            return None
+
+    def recheck(self):
+        """Check the images already made against the current rules. The ones that fail are made again (the next run
+        replaces them in place); colour images are replaced and their variants relinked. Only the checks are paid for.
+        Returns the names of the images to make again. Call after prepare(force=True)."""
+        audit, failed = self.audit, []
+        for field, slots in self.plan.items():
+            for slot in slots:
+                state = audit["slots"].get(slot, {})
+                if state.get("status") != "done":
+                    continue
+                image = self.file_image(state["file"])
+                if image is None:
+                    continue
+                job = self.slot_job(field, slot)
+                ok, problems = self.check(self.reference, image, job.brief, job.colour, slot, self.others_for(job))
+                if not ok:
+                    self.log(f"  {slot}: fails the current check ({'; '.join(problems)[:140]}); will be made again")
+                    failed.append(slot)
+        for value, state in list(audit["colours"].items()):
+            if state.get("status") != "done":
+                continue
+            image = self.file_image(state.get("file"))
+            if image is None:
+                continue
+            ok, problems = self.check(self.colour_base(), image, f"the same abaya recoloured to {value} (with a matching niqab if worn), everything else unchanged", value)
+            if not ok:
+                self.log(f"  colour {value}: fails the current check ({'; '.join(problems)[:140]}); will be made again")
+                audit.setdefault("colour_replace", {})[value] = state["file"]
+                audit["colours"][value] = {"status": "pending", "tries": 0, "problems": problems[:4]}
+                failed.append(f"colour {value}")
+        slots_failed = [f for f in failed if not f.startswith("colour ")]
+        if slots_failed:
+            self.reopen(slots_failed)
+        if failed:
+            audit["status"] = "in_progress"
+            self.save()
+        return failed
 
     # ---------- Batch ----------
     def job_for(self, ref, batch_name=None):
@@ -628,7 +684,7 @@ class ProductRun:
             value = ref["value"]
             base = self.reference if ref.get("base") == "ref" else self.colour_base()
             job = Job("colour", ref["name"], COLOUR_PROMPT.format(colour=value), "4:5",
-                      f"the same abaya recoloured to {value}, everything else unchanged", value, base, value=value)
+                      f"the same abaya recoloured to {value} (with a matching niqab if worn), everything else unchanged", value, base, value=value)
         job.tries = state.get("tries", 0)
         return job
 

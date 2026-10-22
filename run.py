@@ -6,6 +6,7 @@
   python run.py --limit 25                     live run: up to 25 products, then stop
   python run.py --retry-manual ...             also try again the images marked "do manually"
   python run.py --redo closer-1,closer-3 --handles X   make these images of product X again
+  python run.py --vertex --recheck             check images already made against the current rules; remake failures
   python run.py --vertex --test-key            Vertex AI (Google Cloud credit): make ONE test image
   python run.py --vertex --list-models         the model IDs your project can use
   python run.py --vertex --batch auto          Batch round: collect finished results, then submit the next images
@@ -169,9 +170,13 @@ def run_products(args, g, s, handles):
         if product["productType"] not in config.PRODUCT_TYPES:
             continue
         audit = json.loads((product.get("audit") or {}).get("value") or "{}")
-        skip = ("done", "needs_photo", "skipped") if args.retry_manual else ("done", "manual", "needs_photo", "skipped")
-        if audit.get("status") in skip and not handles:
-            continue
+        if args.recheck:
+            if not audit.get("choice") or audit.get("status") in ("needs_photo", "skipped"):
+                continue  # nothing made yet to recheck
+        else:
+            skip = ("done", "needs_photo", "skipped") if args.retry_manual else ("done", "manual", "needs_photo", "skipped")
+            if audit.get("status") in skip and not handles:
+                continue
         print(f"\n{product['title']}")
         run = ProductRun(product, g, s, out_dir=OUT if args.dry_run else None)
         if args.retry_manual:
@@ -180,6 +185,10 @@ def run_products(args, g, s, handles):
             redone = run.reopen([n.strip() for n in args.redo.split(",") if n.strip()])
             print(f"  making again: {', '.join(redone) or 'nothing (no such images yet)'}")
         try:
+            if args.recheck:
+                run.prepare(force=True)
+                failed = run.recheck()
+                print(f"  recheck: {len(failed)} image(s) to make again" + (f": {', '.join(failed)}" if failed else ""))
             status = run.run()
         except QuotaExhausted as error:
             print(f"  Limit reached: {str(error)[:300]}\n  Everything made so far is kept; run the same command again later.")
@@ -244,6 +253,7 @@ def main():
     ap.add_argument("--sheet", action="store_true", help="rebuild output/index.html from the pilot folders already in output")
     ap.add_argument("--report", action="store_true", help="write the progress report (output/report.csv and the Google Sheet)")
     ap.add_argument("--retry-manual", action="store_true", help="try again the images marked 'do manually'")
+    ap.add_argument("--recheck", action="store_true", help="check images already made against the current rules and remake the ones that fail")
     ap.add_argument("--redo", default="", help="make these images again, e.g. closer-1,closer-3 or closer (use with --handles)")
     ap.add_argument("--vertex", action="store_true", help="use Vertex AI in your Google Cloud project (signed in with gcloud, no API key)")
     ap.add_argument("--batch", choices=["submit", "collect", "auto", "status"], help="with --vertex: Batch mode (half price, results within 24h)")
