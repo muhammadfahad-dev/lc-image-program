@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-22 18:51 UTC",
+  "mode": "live",
+  "products_worked_on": 1,
+  "statuses": {
+    "manual": 1
+  },
+  "images_passed": 0,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 12,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 4.083,
+  "seconds_per_website_image": null,
+  "limit_reached": false,
+  "products": [
+    {
+      "handle": "front-open-abaya-with-wildflower-embroidered-cuffs-premium-nida-fabric",
+      "status": "manual"
+    }
+  ]
+}

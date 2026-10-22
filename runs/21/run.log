@@ -1,0 +1,36 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $3.90 of $280
+
+Front Open Abaya with Wildflower Embroidered Cuffs | Premium Nida Fabric
+    check answered in 7s
+    check answered in 4s
+    check answered in 4s
+    check answered in 6s
+    check answered in 4s
+    check answered in 4s
+    check answered in 4s
+    check answered in 3s
+    check answered in 4s
+    check answered in 4s
+    check answered in 2s
+    check answered in 3s
+  recheck: 0 image(s) to make again
+  -> manual (0 images passed)
+Report: 5 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-22 18:51 UTC",
+  "mode": "live",
+  "products_worked_on": 1,
+  "statuses": {
+    "manual": 1
+  },
+  "images_passed": 0,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 12,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 4.083,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
