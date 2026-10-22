@@ -129,6 +129,28 @@ def test_sheet_sign_in_acts_as_the_service_account_when_set():
         report.config.REPORT_SERVICE_ACCOUNT = ""
 
 
+def test_only_products_the_program_worked_on():
+    class Shop:
+        domain = "shop.myshopify.com"
+
+        def get_shop_json(self, key, default=None):
+            return default
+
+        def gql(self, query, variables=None):
+            worked = product({"status": "done", "slots": {}})
+            untouched = product()
+            untouched["title"] = "Untouched"
+            return {"products": {"pageInfo": {"hasNextPage": False, "endCursor": None}, "nodes": [worked, untouched]}}
+
+    rows = report.build_rows(Shop(), log=lambda *a: None)
+    assert [r[0] for r in rows] == ["Test Abaya"]
+    report.config.REPORT_ALL_PRODUCTS = True
+    try:
+        assert len(report.build_rows(Shop(), log=lambda *a: None)) == 2
+    finally:
+        report.config.REPORT_ALL_PRODUCTS = False
+
+
 def test_sheet_errors_are_explained():
     assert "not switched on" in report.sheet_error_hint(RuntimeError("SERVICE_DISABLED iamcredentials.googleapis.com"))
     assert "not shared" in report.sheet_error_hint(RuntimeError("Google Sheets 403: denied"))

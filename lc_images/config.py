@@ -100,6 +100,7 @@ VERTEX_BACKUP_WAITS = [int(x) for x in env("VERTEX_BACKUP_WAITS", "15,30,60").sp
 STORE_URL = env("STORE_URL", "wearlcm.com")
 REPORT_SHEET_ID = env("REPORT_SHEET_ID", "")  # the long part of the Sheet's address, between /d/ and /edit
 REPORT_SHEET_TAB = env("REPORT_SHEET_TAB", "Image report")
+REPORT_ALL_PRODUCTS = env("REPORT_ALL_PRODUCTS", "") == "1"  # 1 = every active product, not only the ones worked on
 # On your PC: the service account the report writes the Sheet as (gcloud cannot get Sheets permission itself)
 REPORT_SERVICE_ACCOUNT = env("REPORT_SERVICE_ACCOUNT", "")
 

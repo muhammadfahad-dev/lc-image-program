@@ -180,6 +180,11 @@ def row_for(product, placeholders, store_slug):
     )
 
 
+def worked_on(product):
+    """True once the image program has started on the product (it has an image automation record)."""
+    return bool(_value(product, "audit"))
+
+
 def build_rows(shopify, log=print):
     placeholders = set((shopify.get_shop_json("image_placeholders", {}) or {}).values())
     store_slug = shopify.domain.split(".")[0]
@@ -190,11 +195,11 @@ def build_rows(shopify, log=print):
             {"after": after},
         )
         page = d["products"]
-        rows.extend(row_for(p, placeholders, store_slug) for p in page["nodes"])
+        rows.extend(row_for(p, placeholders, store_slug) for p in page["nodes"] if config.REPORT_ALL_PRODUCTS or worked_on(p))
         if not page["pageInfo"]["hasNextPage"]:
             break
         after = page["pageInfo"]["endCursor"]
-    log(f"Report: {len(rows)} products")
+    log(f"Report: {len(rows)} products" + ("" if config.REPORT_ALL_PRODUCTS else " the program has worked on"))
     return rows
 
 
