@@ -1,0 +1,75 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $5.39 of $280
+  projects/352302053849/locations/global/batchPredictionJobs/656081474511962112: running, 60 image(s)
+    check answered in 6s
+  Front Open Abaya with Vine Embroidered Neckline | Romantic Nida Fabric: 12 image(s)
+    check answered in 7s
+  Front Open Abaya with Coat-Style Collar & Embroidered Sleeves: 12 image(s)
+    check answered in 3s
+  Front Open Black Abaya with Flowery Sleeve Embroidery | Romantic Nida Fabric: 12 image(s)
+    check answered in 5s
+  Front Open Abaya with Rose Vine Embroidery| Premium Nida Fabric: 12 image(s)
+    check answered in 4s
+  Front Open Abaya with Meadow Vine Embroidered Cuffs | Premium Nida Fabric: 12 image(s)
+    check answered in 3s
+  Front Open Abaya with Botanical Embroidered Cuffs | Premium Nida Fabric: 12 image(s)
+    check answered in 6s
+  Front Open Black Abaya with Blossom Embroidery| Premium Nida Fabric: 12 image(s)
+    check answered in 5s
+  Front Open Black Abaya with Leaf Vine Embroidered Panels | Premium Nida Fabric: 12 image(s)
+    check answered in 5s
+  Front Open Abaya with Gold Chevron Embroidery| Premium Nida Fabric: 12 image(s)
+    check answered in 8s
+  Front Open Abaya with Iris Blossom Embroidered Cuffs | Premium Nida Fabric: 12 image(s)
+    check answered in 4s
+  Front Open Beautiful Abaya with Daisy Embroidery | Premium Nida | 10 Colors: 12 image(s)
+    check answered in 4s
+  Front Open Abaya with Jasmine Embroidery | Premium Romantic Nida Fabric: 12 image(s)
+    check answered in 6s
+  Printed Front-Closed Maxi Abaya | Side Zip & Elastic Sleeves| Premium Manjan Fabric: 11 image(s)
+    check answered in 4s
+  Floral Printed Front-Open Abaya | Premium Manjan Fabric For Everyday Wear: 12 image(s)
+    check answered in 3s
+  Front-Open Chevron Printed Abaya | Premium Manjan Fabric: 12 image(s)
+    check answered in 3s
+  Multicolor Floral Printed Front-Open Abaya | Premium Manjan Fabric: 12 image(s)
+    check answered in 5s
+  Sunset Front-Open Kimono Abaya with Scarf | Premium Tie-Dye Chiffon: 12 image(s)
+    check answered in 8s
+  Front-Open Printed Linen Abaya | Floral Print Collection: 12 image(s)
+    check answered in 5s
+  Front-Open Abaya with Floral Printed Border | Premium Nida Fabric: 12 image(s)
+    check answered in 4s
+  Cotton Candy Pastel Front-Open Kimono Abaya | Pleated Chiffon 2-Piece Set with Crystal Buttons: 12 image(s)
+    check answered in 4s
+  Pastel Ombre Front-Open Abaya | Gradient Tie-Dye Premium Nida: 12 image(s)
+    check answered in 4s
+  Two-Toned Rose Line Printed Front-Open Abaya | Premium Romantic Nida: 12 image(s)
+    check answered in 7s
+  Front-Open Self-Print Abaya With Side Pockets | Premium Windowpane Jacquard Abaya: 12 image(s)
+    check answered in 7s
+  Elegant Front-Open Self-Printed Abaya | Gradient Romantic Nida: 12 image(s)
+    check answered in 6s
+  Front-Open Desert Dune Self-Print Abaya with Pockets | Premium Romantic Nida: 12 image(s)
+    check answered in 6s
+  Front-Open Self-Print Nida Abaya | Marble Wash Abaya with Side Pockets: 1 image(s)
+Submitted 300 image(s) for 26 product(s) as projects/352302053849/locations/global/batchPredictionJobs/8405650533309743104
+Batch: 300 submitted, 0 passed, 0 to try again, 0 do manually, 0 back in the queue
+Report: 34 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-22 19:03 UTC",
+  "mode": "live, batch auto",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 0,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 26,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 11.178,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
