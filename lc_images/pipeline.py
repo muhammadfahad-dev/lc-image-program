@@ -585,6 +585,9 @@ class ProductRun:
             for value in option["values"]:
                 state = audit["colours"].get(value, {})
                 status = state.get("status", "")
+                hero_ready = hero.get("status") == "done" and audit.get("placed", {}).get("media")
+                if status == "existing_photo" and value == audit["choice"]["input_colour"] and hero_ready:
+                    status = ""  # the main image's colour now shows the new main image (see below), not the old photo
                 if status in COLOUR_FINAL or status.startswith("skipped") or status == "queued":
                     continue
                 kind = classify_colour(option["name"], value, p["productType"])
@@ -592,17 +595,19 @@ class ProductRun:
                 if kind != "single":
                     audit["colours"][value], changed = {"status": f"skipped_{kind}"}, True
                     continue
-                if any(v["media"]["nodes"] for v in variants):
+                if any(v["media"]["nodes"] for v in variants) and state.get("status") != "existing_photo":
                     audit["colours"][value], changed = {"status": "had_image"}, True
+                    continue
+                if value == audit["choice"]["input_colour"] and hero_ready:
+                    # the colour of the main image shows the new main image, which matches the rest of the listing
+                    # (an old photo of it can differ, e.g. a black niqab or a logo); the old photo stays in Media
+                    self.s.link_variants(p["id"], [(v["id"], hero["file"]) for v in variants])
+                    audit["colours"][value], changed = {"status": "main_image", "file": hero["file"]}, True
                     continue
                 if value in audit["choice"]["colour_photos"]:
                     media_id = audit["choice"]["colour_photos"][value]
                     self.s.link_variants(p["id"], [(v["id"], media_id) for v in variants])
                     audit["colours"][value], changed = {"status": "existing_photo", "file": media_id}, True
-                    continue
-                if value == audit["choice"]["input_colour"] and hero.get("status") == "done" and audit.get("placed", {}).get("media"):
-                    self.s.link_variants(p["id"], [(v["id"], hero["file"]) for v in variants])
-                    audit["colours"][value], changed = {"status": "main_image", "file": hero["file"]}, True
                     continue
                 jobs.append(Job(
                     "colour", f"colour-{slug(value)}", COLOUR_PROMPT.format(colour=value), "4:5",

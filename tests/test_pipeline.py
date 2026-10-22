@@ -126,6 +126,23 @@ def test_front_open_full_run():
     assert g.calls["image"] == 12
 
 
+def test_main_image_colour_uses_the_new_main_image_not_its_old_photo():
+    # the old photo of the main colour can differ from the new listing (black niqab, logo): its sizes show hero-1
+    sel = dict(SELECT_OPEN, colour_photos={"Navy": 1, "Maroon": 2})
+    g, s = FakeGemini(sel), FakeShopify()
+    run = pipeline.ProductRun(product(), g, s, log=lambda *a: None)
+    run.run()
+    c, hero = run.audit["colours"], run.audit["slots"]["hero-1"]["file"]
+    assert c["Navy"] == {"status": "main_image", "file": hero}
+    assert c["Maroon"]["status"] == "existing_photo"
+    # a product finished before this rule: its main colour is moved from the old photo to the new main image
+    c["Navy"] = {"status": "existing_photo", "file": "gid://shopify/MediaImage/p1"}
+    s.links.clear()
+    run.colour_jobs()
+    assert c["Navy"] == {"status": "main_image", "file": hero}
+    assert {v for v, m in s.links} == {"v-Navy-S", "v-Navy-M"}
+
+
 def test_colour_generated_and_linked():
     sel = dict(SELECT_OPEN, colour_photos={}, input_colour=None)
     g, s = FakeGemini(sel), FakeShopify()
