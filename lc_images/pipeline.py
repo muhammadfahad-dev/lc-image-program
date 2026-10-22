@@ -25,6 +25,14 @@ CLOSED_NOTES = {
     "multi-2": "Note: this abaya does not open at the front, so show a three-quarter view instead of worn open.",
 }
 
+# The source photos often show a black niqab inside the V-neck. On a mannequin Gemini copies it as a black scarf or a
+# black body showing through the neckline, which looks wrong on a coloured abaya.
+NECKLINE_NOTE = (
+    "Note: nothing black should show inside the neckline (no black scarf, niqab, inner layer or black mannequin body), "
+    "unless the abaya itself is black. Show the inside of the neckline in the abaya's colour or a light neutral tone."
+)
+NECKLINE_SLOTS = {"hero-4", "fitting-1", "multi-3a", "closer-3"}
+
 FITTING_FRAMING = (
     "For this fitting image also check the framing, roughly (within about a tenth of the frame): full-length front view, "
     "garment centred left to right, neckline in the upper part of the frame (about 20% from the top), hem near the bottom "
@@ -64,6 +72,7 @@ Fail image 1 ONLY for a major problem that a customer would notice and that misr
 - the design work is missing, clearly in a different place, or added where there was none;
 - the fabric colour is clearly not {colour};
 - a model wears a niqab or headscarf that is not in the main colour of the abaya (for example a black niqab with a beige abaya); it must match the abaya;
+- a black scarf, niqab, inner layer or black mannequin body shows inside the neckline while the abaya is not black;
 - any text, logo, label or watermark appears;
 - the person or mannequin is clearly deformed (extra or missing fingers, hands or limbs, a twisted body);
 - the image clearly ignores the brief (wrong view or wrong kind of shot).
@@ -374,6 +383,8 @@ class ProductRun:
             prompt = prompt + "\n\n" + CLOSED_NOTES[slot]
             # the checker must judge against what Gemini was really asked for
             brief += f". {CLOSED_NOTES[slot]} The brief's 'worn open' does not apply to this abaya."
+        if slot in NECKLINE_SLOTS:
+            prompt = prompt + "\n\n" + NECKLINE_NOTE
         tries = self.audit["slots"].get(slot, {}).get("tries", 0)
         return Job("slot", slot, prompt, PROMPTS[slot]["ratio"], brief, "the same as image 0", self.reference, field=field, tries=tries)
 
