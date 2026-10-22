@@ -1,0 +1,737 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $17.73 of $280
+  projects/352302053849/locations/global/batchPredictionJobs/8405650533309743104: running, 300 image(s)
+  projects/352302053849/locations/global/batchPredictionJobs/3991841423509946368: 300 answer(s) in 1 result file(s)
+    check answered in 4s
+    hero-4: passed
+    check answered in 5s
+    multi-2: passed
+    check answered in 5s
+    closer-4: passed
+  Front Open Embroidered Cuff Abaya – Premium Nida Fabric: in_progress
+    check answered in 4s
+    colour-navy: passed
+    check answered in 6s
+    colour-white: passed
+    check answered in 3s
+    colour-teal: passed
+    check answered in 3s
+    colour-sage-green: passed
+  Front Open Abaya with Floral Embroidered Cuffs – Premium Nida Fabric: done
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 4s
+    colour-black: passed
+    check answered in 3s
+    colour-purple: passed
+  Front Open Embroidery Abaya–Premium Moss Chiffon: in_progress
+    check answered in 4s
+    fitting-1: passed
+    check answered in 3s
+    colour-white: passed
+    check answered in 2s
+    colour-dusty-blue: passed
+    check answered in 2s
+    colour-forest-green: passed
+    check answered in 3s
+    colour-burgundy: passed
+    check answered in 9s
+    colour-blush-pink: passed
+  Front Open Rose Embroidery Abaya – Premium Moss Chiffon: done
+    check answered in 3s
+    hero-4: passed
+    check answered in 4s
+    closer-3: passed
+  Front Open Abaya with Flower Embroidered Cuffs | Premium Nida Fabric: in_progress
+    check answered in 5s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Self-Print Nida Abaya | Marble Wash Abaya with Side Pockets: in_progress
+    check answered in 8s
+    hero-1: passed
+    check answered in 4s
+    hero-2: passed
+    check answered in 87s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: retry
+    check answered in 4s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 5s
+    closer-4: passed
+  Dubai-Style Aurora Kimono Abaya with Attached Inner | Premium Romantic Nida: in_progress
+    check answered in 4s
+    hero-1: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 6s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 4s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 4s
+    closer-3: retry
+    check answered in 5s
+    closer-4: passed
+  Gradient Wave Printed Front Open Abaya | Premium Romantic Nida: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: retry
+    check answered in 3s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check answered in 8s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front-Open Geometric Printed Abaya with Embroidered Sleeves | Premium Jacquard: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 4s
+    hero-2: passed
+    check answered in 2s
+    hero-4: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-2.5-flash
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-3.8-flash
+    check answered in 7s (gemini-3.8-flash)
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check answered in 11s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 4s
+    closer-4: passed
+  Front-Closed Dubai Style Jacquard Abaya | Buckle Neck Detail: in_progress
+    hero-1: retry (Gemini gave no image (OTHER))
+    check answered in 6s
+    hero-2: passed
+    check answered in 5s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-2.5-flash
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-3.8-flash
+    check answered in 5s (gemini-3.8-flash)
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-2.5-flash
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-3.8-flash
+    check answered in 9s (gemini-3.8-flash)
+    closer-3: retry
+    check answered in 3s
+    closer-4: passed
+  Front-Open Self Printed Hooded Abaya with Pockets | Premium Jacquard Hoodie Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 21s
+    multi-1: passed
+    check answered in 6s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-2.5-flash
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-3.8-flash
+    check answered in 6s (gemini-3.8-flash)
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Rose Line Printed Front-Open Abaya With Attached |Inner | Premium Romantic Nida: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 6s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: retry
+    check answered in 7s
+    multi-2: passed
+    check answered in 5s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 7s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Dubai Style Self-Printed Abaya | Premium Jacquard Meridian Reversible Abaya: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 4s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    multi-3a: retry (Gemini gave no image (OTHER))
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-2.5-flash
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-3.8-flash
+    check answered in 4s (gemini-3.8-flash)
+    closer-1: passed
+    closer-2: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    closer-3: passed
+    check answered in 5s
+    closer-4: passed
+  Front-Open Dubai Style Collar Abaya with Bow-Tie Cuffs | Premium Romantic Nida Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 10s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 5s
+    multi-1: passed
+    check answered in 5s
+    multi-2: retry
+    multi-3a: retry (Gemini gave no image (OTHER))
+    check answered in 5s
+    closer-1: retry
+    check answered in 4s
+    closer-2: retry
+    check answered in 4s
+    closer-3: passed
+    closer-4: retry (Gemini gave no image (OTHER))
+  Butterfly Fin Sleeves Maxi Abaya with Tassel Tie-Belt  | Premium Romantic Nida Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check: Google server error 504; waiting 10s (1/2)
+    check answered in 29s
+    hero-4: retry
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 52s
+    multi-3a: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 5s
+    closer-2: retry
+    check answered in 3s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front-Open Butterfly Pleated Kimono Abaya with Separate Inner | Premium Chiffon 2 pc Set: in_progress
+    check answered in 7s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 4s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 4s
+    closer-2: retry
+    check answered in 4s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Elegant Maxi Abaya with Lace-Trimmed Shrug Overlay | Premium Hareer Maqsood 2pc Set: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 4s
+    hero-2: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 97s
+    multi-3a: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 5s
+    closer-3: retry
+    check answered in 3s
+    closer-4: passed
+  Dubai Style Pleated Maxi Abaya With Tassel Button | Premium Romantic Nida Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 8s
+    multi-2: passed
+    check answered in 3s
+    multi-3a: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 5s
+    closer-3: passed
+    check answered in 7s
+    closer-4: passed
+  Dubai Style Long Flair Pleated Maxi Abaya With Tassel Button | Premium Romantic Nida Abaya: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 4s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 6s
+    closer-2: passed
+    check answered in 74s
+    closer-3: retry
+    closer-4: retry (Gemini gave no image (OTHER))
+  Front-Open Cutwork Zigzag Panel Design Abaya | Premium Nida Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 7s
+    hero-2: passed
+    check answered in 11s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 5s
+    closer-3: passed
+    check answered in 5s
+    closer-4: passed
+  Long Flair Maxi Abaya With Lacework | Premium Black Nida Abaya: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 5s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 5s
+    multi-3a: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 10s
+    closer-3: passed
+    check answered in 4s
+    closer-4: retry
+  Front-Closed 3 Layered Maxi Abaya Elastic Cuff Sleeves: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-2.5-flash
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-3.8-flash
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 15s (1/3)
+    check answered in 11s (gemini-3.8-flash)
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 5s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 3s
+    multi-3a: passed
+    check answered in 4s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 6s
+    closer-3: passed
+    check answered in 7s
+    closer-4: passed
+  Front-Closed Gathered Maxi Abaya With Elastic Cuff Sleeves | Zip-Closed Neckline: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 10s
+    multi-3a: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 7s
+    closer-2: passed
+    check answered in 5s
+    closer-3: passed
+    check answered in 5s
+    closer-4: passed
+  Front-Closed Feather Cuff Maxi Abaya | Premium Chiffon Minimalistic Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 6s
+    closer-2: passed
+    check answered in 5s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-OpenEmbroidered Stone Work Abaya | Premium Romantic Nida Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 5s
+    hero-2: passed
+    check answered in 7s
+    hero-3: retry
+    check answered in 5s
+    hero-4: passed
+    check answered in 6s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 4s
+    multi-2: retry
+    check answered in 5s
+    multi-3a: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front-Open Minimalist Long Flair Abaya| Premium Romantic Nida Essential Abaya: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 13s
+    hero-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-2.5-flash
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-3.8-flash
+    check answered in 8s (gemini-3.8-flash)
+    hero-3: passed
+    check answered in 5s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    multi-1: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 4s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 6s
+    closer-1: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check answered in 10s
+    closer-2: passed
+    check answered in 6s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front-Open Abaya With Diamond Style Pintex Pockets | Premium Romantic Nida: in_progress
+    check answered in 8s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 5s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 7s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 5s
+    closer-1: passed
+    closer-2: retry (Gemini gave no image (OTHER))
+    check answered in 4s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front Open Tie-Dye Long Flair Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 4s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 4s
+    multi-3a: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 4s
+    closer-2: retry
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front Open Piping Work Abaya | Premium Korean Nida Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 5s
+    hero-3: passed
+    check answered in 6s
+    hero-4: passed
+  Front-Open Contrast Frill Abaya | Premium Nida Abaya: in_progress
+  Front Open Embroidered Cuff Abaya – Premium Nida Fabric: 7 image(s)
+  Front Open Embroidery Abaya–Premium Moss Chiffon: 1 image(s)
+  Front Open Abaya with Flower Embroidered Cuffs | Premium Nida Fabric: 7 image(s)
+  Dubai-Style Aurora Kimono Abaya with Attached Inner | Premium Romantic Nida: 1 image(s)
+  Gradient Wave Printed Front Open Abaya | Premium Romantic Nida: 1 image(s)
+  Front-Open Geometric Printed Abaya with Embroidered Sleeves | Premium Jacquard: 1 image(s)
+  Front-Closed Dubai Style Jacquard Abaya | Buckle Neck Detail: 1 image(s)
+  Front-Open Self Printed Hooded Abaya with Pockets | Premium Jacquard Hoodie Abaya: 2 image(s)
+  Rose Line Printed Front-Open Abaya With Attached |Inner | Premium Romantic Nida: 1 image(s)
+  Front-Open Dubai Style Self-Printed Abaya | Premium Jacquard Meridian Reversible Abaya: 1 image(s)
+  Front-Open Dubai Style Collar Abaya with Bow-Tie Cuffs | Premium Romantic Nida Abaya: 3 image(s)
+  Butterfly Fin Sleeves Maxi Abaya with Tassel Tie-Belt  | Premium Romantic Nida Abaya: 11 image(s)
+  Front-Open Butterfly Pleated Kimono Abaya with Separate Inner | Premium Chiffon 2 pc Set: 2 image(s)
+  Elegant Maxi Abaya with Lace-Trimmed Shrug Overlay | Premium Hareer Maqsood 2pc Set: 2 image(s)
+  Dubai Style Pleated Maxi Abaya With Tassel Button | Premium Romantic Nida Abaya: 7 image(s)
+  Dubai Style Long Flair Pleated Maxi Abaya With Tassel Button | Premium Romantic Nida Abaya: 1 image(s)
+  Front-Open Cutwork Zigzag Panel Design Abaya | Premium Nida Abaya: 2 image(s)
+  Front-Closed 3 Layered Maxi Abaya Elastic Cuff Sleeves: 1 image(s)
+  Front-Closed Gathered Maxi Abaya With Elastic Cuff Sleeves | Zip-Closed Neckline: 1 image(s)
+  Front-Closed Feather Cuff Maxi Abaya | Premium Chiffon Minimalistic Abaya: 1 image(s)
+  Front-OpenEmbroidered Stone Work Abaya | Premium Romantic Nida Abaya: 11 image(s)
+  Front-Open Minimalist Long Flair Abaya| Premium Romantic Nida Essential Abaya: 2 image(s)
+  Front-Open Abaya With Diamond Style Pintex Pockets | Premium Romantic Nida: 1 image(s)
+  Front Open Tie-Dye Long Flair Abaya: 9 image(s)
+  Front Open Piping Work Abaya | Premium Korean Nida Abaya: 3 image(s)
+  Front-Open Contrast Frill Abaya | Premium Nida Abaya: 8 image(s)
+    check answered in 4s
+  Front-Open Abaya with Front Pintex Pockets | Premium Romantic Nida: 12 image(s)
+    check answered in 5s
+  Frill-Front-Open Collar Style Abaya with Balloon Sleeves: 12 image(s)
+    check answered in 10s
+  Front-Open Abaya with Contrast Cuff Detail | Premium Korean Nida Abaya: 12 image(s)
+    check answered in 6s
+  Front-Open Full-Zip Abaya With Long Flair  | Premium Nida: 12 image(s)
+    check answered in 7s
+  Butterfly Kimono Set with Scarf & Niqab | 4 Pcs Premium Moss Chiffon Abaya: 12 image(s)
+    check answered in 4s
+  Front Open Full Zip Butterfly Abaya | Premium Nida Abaya: 12 image(s)
+    check answered in 4s
+  Front Open Pleated Kimono Abaya with Attached Inner & Crystal Buttons: 12 image(s)
+    check answered in 9s
+  Front-Closed Butterfly Maxi Abaya | Premium Nida Essential Abaya: 11 image(s)
+    check answered in 4s
+  Front-Open Full-Zip Abaya  | Premium Nida  Long Flair Abaya: 12 image(s)
+    check answered in 5s
+  2-in-1 Front-Open Reversible Abaya | Premium Nida Abaya: 12 image(s)
+    check answered in 5s
+  Front-Open Butterfly Scalloped Cutwork Abaya | Premium Nida Abaya: 12 image(s)
+    check answered in 4s
+  Front-Open Dubai Collar Abaya With Bow-Tie Cuffs: 12 image(s)
+    check answered in 6s
+  Front-Open Reversible Abaya | 2-in-1 Premium Nida Abaya: 12 image(s)
+    check answered in 4s
+  Front-Open Long Flair Black Abaya | Premium Nida Abaya: 12 image(s)
+    check answered in 9s
+  Ombré Kimono Abaya With Attached Inner | Premium Gradient Nida Abaya: 12 image(s)
+    check answered in 12s
+  Front-Closed Butterfly Maxi Abaya With Lace Cuffs: 11 image(s)
+    check answered in 5s
+  Front-Open Self Striped Abaya | Premium Zoom Abaya: 12 image(s)
+    check answered in 4s
+  Front-Open Minimalistic Essential Abaya | Premium Plain Abaya: 10 image(s)
+Submitted 300 image(s) for 44 product(s) as projects/352302053849/locations/global/batchPredictionJobs/5768054079670452224
+Batch: 300 submitted, 265 passed, 35 to try again, 0 do manually, 0 back in the queue
+Report: 76 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-22 20:53 UTC",
+  "mode": "live, batch auto",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 265,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 300,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 27.633,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
