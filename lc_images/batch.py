@@ -308,9 +308,11 @@ class BatchRunner:
         return complete
 
     def auto(self, limit_products, handles=None, retry_manual=False, redo=None):
-        """Collect what is finished, then submit the next round unless a job is still out."""
-        still = self.collect()
-        if still or self.state["jobs"]:
-            self.log(f"{len(self.state['jobs'])} Batch job(s) still out; the next round starts once they are read.")
+        """Collect what is finished, then submit the next round unless VERTEX_BATCH_MAX_JOBS jobs are still out
+        (images already out in a job are never sent twice)."""
+        self.collect()
+        out = len(self.state["jobs"])
+        if out >= config.VERTEX_BATCH_MAX_JOBS:
+            self.log(f"{out} Batch job(s) still out; the next round starts once one of them is read.")
             return None
         return self.submit(limit_products, handles, retry_manual, redo)

@@ -1,12 +1,12 @@
 name: LC images
 
 on:
-  # Every 3 hours. It only does work when the repository variable AUTO is set:
-  #   AUTO = batch   -> a Batch round (collect finished results, then submit the next images)
-  #   AUTO = single  -> one-by-one, up to MAX_PRODUCTS products
-  # Leave AUTO empty (or "off") and the schedule does nothing.
+  # Every hour. What the hourly run does is set by AUTO below (in this file, so it can be changed by a commit):
+  #   batch  -> a Batch round: read finished Batch jobs, check and place their images, send the next images
+  #   single -> one-by-one, up to MAX_PRODUCTS products
+  #   off    -> nothing (the hourly run stops straight away)
   schedule:
-    - cron: "20 */3 * * *"
+    - cron: "20 * * * *"
   workflow_dispatch:
     inputs:
       mode:
@@ -29,6 +29,18 @@ on:
         required: false
         default: "5"
 
+# Settings that are not secret (the Shopify keys stay in GitHub secrets).
+env:
+  AUTO: "off"
+  GOOGLE_CLOUD_PROJECT: project-c065e1d2-16ae-4565-bb0
+  GCP_SERVICE_ACCOUNT: lc-images@project-c065e1d2-16ae-4565-bb0.iam.gserviceaccount.com
+  GCP_WIF_PROVIDER: "" # projects/<project number>/locations/global/workloadIdentityPools/github/providers/lc-repo
+  VERTEX_BUCKET: lc-images-project-c065e1d2-16ae-4565-bb0
+  VERTEX_BATCH_SIZE: "300"
+  VERTEX_BATCH_MAX_JOBS: "2"
+  REPORT_SHEET_ID: 1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+  BATCH_PRODUCTS_PER_ROUND: "60"
+
 permissions:
   contents: write
   id-token: write # lets the run sign in to Google Cloud without any stored key (Workload Identity)
@@ -41,47 +53,51 @@ jobs:
   run:
     runs-on: ubuntu-latest
     timeout-minutes: 340
-    if: github.event_name == 'workflow_dispatch' || vars.AUTO == 'batch' || vars.AUTO == 'single'
     env:
       SHOPIFY_ADMIN_TOKEN: ${{ secrets.SHOPIFY_ADMIN_TOKEN }}
       SHOPIFY_CLIENT_ID: ${{ secrets.SHOPIFY_CLIENT_ID }}
       SHOPIFY_CLIENT_SECRET: ${{ secrets.SHOPIFY_CLIENT_SECRET }}
       SHOPIFY_STORE: ${{ vars.SHOPIFY_STORE }}
-      GOOGLE_CLOUD_PROJECT: ${{ vars.GOOGLE_CLOUD_PROJECT }}
-      VERTEX_LOCATION: ${{ vars.VERTEX_LOCATION }}
-      VERTEX_IMAGE_MODEL: ${{ vars.VERTEX_IMAGE_MODEL }}
-      VERTEX_CHECK_MODEL: ${{ vars.VERTEX_CHECK_MODEL }}
-      VERTEX_PRICE_PER_IMAGE: ${{ vars.VERTEX_PRICE_PER_IMAGE }}
-      VERTEX_PRICE_PER_CHECK: ${{ vars.VERTEX_PRICE_PER_CHECK }}
-      VERTEX_BUDGET_USD: ${{ vars.VERTEX_BUDGET_USD }}
-      VERTEX_BUCKET: ${{ vars.VERTEX_BUCKET }}
-      VERTEX_BATCH_SIZE: ${{ vars.VERTEX_BATCH_SIZE }}
-      REPORT_SHEET_ID: ${{ vars.REPORT_SHEET_ID }}
       MAX_PRODUCTS: ${{ vars.MAX_PRODUCTS }}
     steps:
+      - name: Is there work to do?
+        id: gate
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$AUTO" != "batch" ] && [ "$AUTO" != "single" ]; then
+            echo "AUTO is off in .github/workflows/images.yml; nothing to do."
+            echo "go=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "go=true" >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/checkout@v5
+        if: steps.gate.outputs.go == 'true'
       - uses: actions/setup-python@v6
+        if: steps.gate.outputs.go == 'true'
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
+        if: steps.gate.outputs.go == 'true'
       - name: Tests (no keys needed)
+        if: steps.gate.outputs.go == 'true'
         run: |
           for t in test_pipeline test_gemini test_vertex test_report test_batch test_run; do python tests/$t.py || exit 1; done
       - name: Sign in to Google Cloud (no stored key)
-        if: vars.GCP_WIF_PROVIDER != ''
+        if: steps.gate.outputs.go == 'true' && env.GCP_WIF_PROVIDER != ''
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
-          service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
+          workload_identity_provider: ${{ env.GCP_WIF_PROVIDER }}
+          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
       - name: Run
+        if: steps.gate.outputs.go == 'true'
         run: |
           set -o pipefail
           mkdir -p output
           MODE="${{ github.event.inputs.mode }}"
           if [ -z "$MODE" ]; then
-            if [ "${{ vars.AUTO }}" = "batch" ]; then MODE=batch-auto; else MODE=live; fi
+            if [ "$AUTO" = "batch" ]; then MODE=batch-auto; else MODE=live; fi
           fi
           LIMIT="${{ github.event.inputs.limit || vars.MAX_PRODUCTS || '25' }}"
+          if [ "$MODE" = "batch-auto" ] && [ -z "${{ github.event.inputs.limit }}" ]; then LIMIT="$BATCH_PRODUCTS_PER_ROUND"; fi
           HANDLES="${{ github.event.inputs.handles }}"
           echo "$MODE" > output/mode.txt
           case "$MODE" in
@@ -93,10 +109,10 @@ jobs:
             report)       python run.py --report 2>&1 | tee output/run.log ;;
           esac
       - name: Show the error
-        if: failure()
+        if: failure() && steps.gate.outputs.go == 'true'
         run: tail -n 12 output/run.log 2>/dev/null | sed 's/%/%25/g' | while IFS= read -r line; do echo "::error::$line"; done
       - name: Save the report to the reports branch
-        if: always()
+        if: always() && steps.gate.outputs.go == 'true'
         run: |
           RUN="runs/${{ github.run_number }}"
           mkdir -p "/tmp/report/$RUN"

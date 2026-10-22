@@ -109,3 +109,4 @@ VERTEX_BUCKET = env("VERTEX_BUCKET", "")  # Cloud Storage bucket for the request
 VERTEX_BATCH_SIZE = int(env("VERTEX_BATCH_SIZE", "50"))  # most images in one Batch job; start small
 VERTEX_BATCH_PRICE_PER_IMAGE = float(env("VERTEX_BATCH_PRICE_PER_IMAGE", str(round(VERTEX_PRICE_PER_IMAGE / 2, 4))))
 VERTEX_BATCH_MAX_READS = int(env("VERTEX_BATCH_MAX_READS", "3"))  # a job that cannot be finished is dropped after this many reads
+VERTEX_BATCH_MAX_JOBS = int(env("VERTEX_BATCH_MAX_JOBS", "2"))  # Batch jobs out at the same time
