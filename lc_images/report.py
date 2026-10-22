@@ -275,5 +275,21 @@ def make_report(shopify, out_dir="output", log=print):
     write_csv(rows, csv_path)
     where = [str(csv_path)]
     if config.REPORT_SHEET_ID:
-        where.append(write_sheet(rows))
+        try:
+            where.append(write_sheet(rows))
+        except Exception as error:
+            log(f"The CSV is saved, but the Google Sheet could not be updated: {sheet_error_hint(error)}")
     return where
+
+
+def sheet_error_hint(error):
+    """A short, plain reason for a Google Sheet error, with what to do."""
+    text = str(error)
+    if "SERVICE_DISABLED" in text or "has not been used in project" in text:
+        api = "IAM Service Account Credentials API" if "iamcredentials" in text else ("Google Sheets API" if "sheets" in text else "a Google API")
+        return f"the {api} is not switched on. Run: gcloud services enable iamcredentials.googleapis.com sheets.googleapis.com, wait 2-3 minutes, then try again."
+    if "getAccessToken" in text or "iam.serviceAccounts" in text:
+        return "you are not allowed to act as the service account yet. Run the add-iam-policy-binding command from the README (Reports), wait 2 minutes, then try again."
+    if "Google Sheets 403" in text or "Google Sheets 404" in text:
+        return "the Sheet is not shared (Editor) with the service account, or REPORT_SHEET_ID in .env is wrong."
+    return text[:300]

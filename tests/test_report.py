@@ -129,6 +129,11 @@ def test_sheet_sign_in_acts_as_the_service_account_when_set():
         report.config.REPORT_SERVICE_ACCOUNT = ""
 
 
+def test_sheet_errors_are_explained():
+    assert "not switched on" in report.sheet_error_hint(RuntimeError("SERVICE_DISABLED iamcredentials.googleapis.com"))
+    assert "not shared" in report.sheet_error_hint(RuntimeError("Google Sheets 403: denied"))
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):
