@@ -1,0 +1,56 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $4.26 of $280
+    hero-1: again (no answer in the Batch results)
+    hero-2: again (no answer in the Batch results)
+    hero-3: again (no answer in the Batch results)
+    hero-4: again (no answer in the Batch results)
+    fitting-1: again (no answer in the Batch results)
+    multi-1: again (no answer in the Batch results)
+    multi-2: again (no answer in the Batch results)
+    multi-3b: again (no answer in the Batch results)
+    closer-1: again (no answer in the Batch results)
+    closer-2: again (no answer in the Batch results)
+    closer-3: again (no answer in the Batch results)
+    closer-4: again (no answer in the Batch results)
+  Front Open Embroidered Cuff Abaya – Premium Nida Fabric: in_progress
+    hero-1: again (no answer in the Batch results)
+    hero-2: again (no answer in the Batch results)
+    hero-3: again (no answer in the Batch results)
+    hero-4: again (no answer in the Batch results)
+    fitting-1: again (no answer in the Batch results)
+    multi-1: again (no answer in the Batch results)
+    multi-2: again (no answer in the Batch results)
+    multi-3b: again (no answer in the Batch results)
+    closer-1: again (no answer in the Batch results)
+    closer-2: again (no answer in the Batch results)
+    closer-3: again (no answer in the Batch results)
+    closer-4: again (no answer in the Batch results)
+  Front Open Abaya with Floral Embroidered Cuffs – Premium Nida Fabric: in_progress
+  Front Open Embroidered Cuff Abaya – Premium Nida Fabric: 12 image(s)
+  Front Open Abaya with Floral Embroidered Cuffs – Premium Nida Fabric: 12 image(s)
+    check answered in 4s
+  Front Open Embroidery Abaya–Premium Moss Chiffon: 12 image(s)
+    check answered in 5s
+  Front Open Rose Embroidery Abaya – Premium Moss Chiffon: 12 image(s)
+    check answered in 4s
+  Front Open Abaya with Flower Embroidered Cuffs | Premium Nida Fabric: 12 image(s)
+Submitted 60 image(s) for 5 product(s) as projects/352302053849/locations/global/batchPredictionJobs/656081474511962112
+Batch: 60 submitted, 0 passed, 0 to try again, 0 do manually, 24 back in the queue
+Report: 8 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-22 18:58 UTC",
+  "mode": "live, batch auto",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 0,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 3,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 5.388,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
