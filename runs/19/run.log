@@ -1,0 +1,133 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $2.24 of $280
+
+Front Open Abaya with Wildflower Embroidered Cuffs | Premium Nida Fabric
+    check answered in 5s
+    check answered in 5s
+    check answered in 4s
+    check answered in 3s
+  hero-4: fails the current check (a black mannequin body shows inside the neckline while the abaya is not black); will be made again
+    check answered in 3s
+  fitting-1: fails the current check (a black mannequin body shows inside the neckline while the abaya is not black); will be made again
+    check answered in 4s
+    check answered in 7s
+    check answered in 7s
+    check answered in 5s
+    check answered in 3s
+    check answered in 6s
+    check answered in 4s
+    check answered in 2s
+    check answered in 2s
+  recheck: 2 image(s) to make again: hero-4, fitting-1
+  hero-4: generating
+    image answered in 18s
+    check answered in 17s
+    hero-4: check failed (a black mannequin body shows inside the neckline while the abaya is not black), attempt 1
+    image answered in 15s
+    check answered in 5s
+    hero-4: check failed (the black mannequin body shows inside the neckline of the non-black abaya), attempt 2
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 17s
+    check answered in 3s
+    hero-4: check failed (black mannequin body shows inside the neckline of a non-black abaya), attempt 3
+  hero-4: do manually, 1m 35s in all
+  fitting-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 18s
+    check answered in 4s
+    fitting-1: check failed (a black mannequin body shows inside the neckline of a non-black abaya), attempt 1
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 17s
+    fitting-1: Gemini gave no image (FinishReason.OTHER), attempt 2
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 19s
+    check answered in 5s
+    fitting-1: check failed (a black mannequin body shows inside the neckline while the abaya is not black), attempt 3
+  fitting-1: do manually, 3m 24s in all
+  -> manual (0 images passed)
+
+Butterfly Fins Style Maxi Abaya with Tassels | Premium Hareer Maqsood
+    check answered in 4s
+    check answered in 3s
+    check answered in 6s
+    check answered in 3s
+  fitting-1: fails the current check (a black mannequin body shows inside the neckline while the abaya is not black); will be made again
+    check answered in 5s
+    check answered in 3s
+    check answered in 4s
+  multi-3a: fails the current check (a black mannequin body shows inside the neckline while the abaya is not black); will be made again
+    check answered in 4s
+    check answered in 3s
+    check answered in 3s
+    check answered in 3s
+    check answered in 4s
+    check answered in 3s
+    check answered in 2s
+  recheck: 2 image(s) to make again: fitting-1, multi-3a
+  fitting-1: generating
+    image answered in 18s
+    check answered in 3s
+    fitting-1: check failed (a black mannequin body shows inside the neckline while the abaya is not black), attempt 1
+    image answered in 18s
+    check answered in 3s
+    fitting-1: check failed (a black mannequin body shows inside the neckline while the abaya is not black), attempt 2
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 17s
+    check answered in 4s
+    fitting-1: check failed (a black mannequin body shows inside the neckline while the abaya is not black), attempt 3
+  fitting-1: do manually, 1m 53s in all
+  multi-3a: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 20s
+    check answered in 7s
+    multi-3a: check failed (black mannequin body shows inside the neckline while the abaya is not black), attempt 1
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 19s
+    check answered in 4s
+    multi-3a: check failed (a black mannequin body shows inside the neckline while the abaya is not black), attempt 2
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 17s
+    check answered in 8s
+  multi-3a: passed, 3m 06s in all
+  -> manual (1 images passed)
+
+Maxi Abaya with Pulse Work Shrug Overlay | Premium Nida Abaya
+    check answered in 4s
+    check answered in 4s
+    check answered in 4s
+    check answered in 4s
+    check answered in 3s
+    check answered in 4s
+    check answered in 5s
+    check answered in 4s
+    check answered in 4s
+    check answered in 4s
+    check answered in 3s
+    check answered in 4s
+  recheck: 0 image(s) to make again
+  -> done (0 images passed)
+Report: 3 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-22 18:15 UTC",
+  "mode": "live",
+  "products_worked_on": 3,
+  "statuses": {
+    "manual": 2,
+    "done": 1
+  },
+  "images_passed": 1,
+  "gemini_image_calls": 12,
+  "gemini_check_calls": 51,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 3.441,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
