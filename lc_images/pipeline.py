@@ -454,9 +454,12 @@ class ProductRun:
                 break
             for job in jobs:
                 self.log(f"  {job.name}: generating")
+                started = time.monotonic()
                 jpeg, problems = self.make(job)
                 self.record(job, jpeg, problems)
                 self.place_fields()
+                took = int(time.monotonic() - started)
+                self.log(f"  {job.name}: {'passed' if jpeg is not None else 'do manually'}, {took // 60}m {took % 60:02d}s in all")
         return self.finish()
 
     # ---------- results ----------

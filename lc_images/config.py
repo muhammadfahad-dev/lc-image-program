@@ -81,17 +81,19 @@ TEMPORARY_WAIT_SECONDS = float(env("TEMPORARY_WAIT_SECONDS", "60"))
 VERTEX_PROJECT = env("GOOGLE_CLOUD_PROJECT", "")
 VERTEX_LOCATION = env("VERTEX_LOCATION", "global")
 VERTEX_IMAGE_MODEL = env("VERTEX_IMAGE_MODEL", "gemini-nano-banana-2.1")  # Google's own model; takes the product photo
-VERTEX_CHECK_MODEL = env("VERTEX_CHECK_MODEL", "gemini-3.8-flash")
+VERTEX_CHECK_MODEL = env("VERTEX_CHECK_MODEL", "gemini-3.5-flash")  # 3.8 Flash was often busy (429); 3.5 answered at once
 VERTEX_BUDGET_USD = float(env("VERTEX_BUDGET_USD", "280"))  # the program stops before its estimate passes this
 # Estimates used for the cap; check them against Google's Vertex AI price list and Billing reports
 VERTEX_PRICE_PER_IMAGE = float(env("VERTEX_PRICE_PER_IMAGE", "0.036"))  # Nano Banana 2.1, 1K image + photo
-VERTEX_PRICE_PER_CHECK = float(env("VERTEX_PRICE_PER_CHECK", "0.01"))
+VERTEX_PRICE_PER_CHECK = float(env("VERTEX_PRICE_PER_CHECK", "0.015"))
 VERTEX_SECONDS_BETWEEN_CALLS = float(env("VERTEX_SECONDS_BETWEEN_CALLS", "4"))
-VERTEX_TIMEOUT_SECONDS = int(env("VERTEX_TIMEOUT_SECONDS", "150"))
+VERTEX_TIMEOUT_SECONDS = int(env("VERTEX_TIMEOUT_SECONDS", "120"))
 # Waits after "too many requests" before trying again; after the last one the run stops (and continues next time)
 VERTEX_RATE_LIMIT_WAITS = [int(x) for x in env("VERTEX_RATE_LIMIT_WAITS", "15,30,60,60,90,120").split(",")]
 # When the check model stays busy, these are tried in turn (each with shorter waits) before the run stops
-VERTEX_CHECK_BACKUPS = [m for m in env("VERTEX_CHECK_BACKUPS", "gemini-3.5-flash,gemini-2.5-flash").split(",") if m]
+VERTEX_CHECK_BACKUPS = [m for m in env("VERTEX_CHECK_BACKUPS", "gemini-2.5-flash,gemini-3.8-flash").split(",") if m]
+# A busy check model is only waited for briefly before a backup model takes over
+VERTEX_CHECK_WAITS = [int(x) for x in env("VERTEX_CHECK_WAITS", "10,20").split(",")]
 VERTEX_BACKUP_WAITS = [int(x) for x in env("VERTEX_BACKUP_WAITS", "15,30,60").split(",")]
 
 # Report (python run.py --report, and after every live run when REPORT_SHEET_ID is set)

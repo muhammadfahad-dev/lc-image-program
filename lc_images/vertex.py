@@ -143,7 +143,10 @@ class GeminiVertex:
 
         reason = ""
         for index, current in enumerate([model, *backups]):
-            waits = config.VERTEX_RATE_LIMIT_WAITS if index == 0 else config.VERTEX_BACKUP_WAITS
+            if index:
+                waits = config.VERTEX_BACKUP_WAITS
+            else:
+                waits = config.VERTEX_CHECK_WAITS if backups else config.VERTEX_RATE_LIMIT_WAITS
             if index:
                 self.log(f"    {kind}: {model} stays busy; trying the backup model {current}")
             for attempt in range(len(waits) + 1):
