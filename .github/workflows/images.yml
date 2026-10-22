@@ -35,7 +35,7 @@ env:
   AUTO: "off"
   GOOGLE_CLOUD_PROJECT: project-c065e1d2-16ae-4565-bb0
   GCP_SERVICE_ACCOUNT: lc-images@project-c065e1d2-16ae-4565-bb0.iam.gserviceaccount.com
-  GCP_WIF_PROVIDER: "" # projects/<project number>/locations/global/workloadIdentityPools/github/providers/lc-repo
+  GCP_WIF_PROVIDER: projects/352302053849/locations/global/workloadIdentityPools/github/providers/lc-repo
   VERTEX_BUCKET: lc-images-project-c065e1d2-16ae-4565-bb0
   VERTEX_BATCH_SIZE: "300"
   VERTEX_BATCH_MAX_JOBS: "2"
