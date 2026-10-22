@@ -1,0 +1,88 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $1.49 of $280
+
+Front Open Abaya with Wildflower Embroidered Cuffs | Premium Nida Fabric
+    check answered in 6s
+    check answered in 4s
+    check answered in 5s
+    check answered in 22s
+    check answered in 4s
+    check answered in 6s
+    check answered in 5s
+    check answered in 3s
+    check answered in 4s
+    check answered in 4s
+    check answered in 5s
+    check answered in 5s
+    check answered in 3s
+    check answered in 3s
+  recheck: 0 image(s) to make again
+  -> done (0 images passed)
+
+Butterfly Fins Style Maxi Abaya with Tassels | Premium Hareer Maqsood
+    check answered in 5s
+    check answered in 3s
+    check answered in 4s
+    check answered in 4s
+    check answered in 3s
+    check answered in 3s
+    check answered in 4s
+    check answered in 3s
+    check answered in 4s
+    check answered in 3s
+    check answered in 3s
+    check answered in 4s
+    check answered in 3s
+    check answered in 3s
+  recheck: 0 image(s) to make again
+  -> done (0 images passed)
+
+Maxi Abaya with Pulse Work Shrug Overlay | Premium Nida Abaya
+    check answered in 3s
+    check answered in 4s
+    check answered in 7s
+  hero-3: fails the current check (the image clearly ignores the brief (shows a full-length, closed abaya instead of a three-quarter view worn open)); will be made again
+    check answered in 3s
+    check answered in 3s
+    check answered in 3s
+    check answered in 4s
+  multi-2: fails the current check (The image ignores the brief to show the abaya worn open; The image shows the same full-length front view as Image 2); will be made again
+    check answered in 3s
+    check answered in 6s
+  closer-1: fails the current check (The trim in the close-up shows silver/clear rhinestones, whereas the actual product has dark/black beads.); will be made again
+    check answered in 5s
+    check answered in 5s
+    check answered in 4s
+  recheck: 3 image(s) to make again: hero-3, multi-2, closer-1
+  hero-3: generating
+    image answered in 15s
+    check answered in 3s
+  hero-3: passed, 0m 25s in all
+  multi-2: generating
+    image answered in 15s
+    check answered in 4s
+  multi-2: passed, 0m 22s in all
+  closer-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 14s
+    check answered in 7s
+  closer-1: passed, 0m 41s in all
+  -> done (3 images passed)
+Report: 3 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-22 18:07 UTC",
+  "mode": "live",
+  "products_worked_on": 3,
+  "statuses": {
+    "done": 3
+  },
+  "images_passed": 3,
+  "gemini_image_calls": 3,
+  "gemini_check_calls": 43,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 2.244,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
