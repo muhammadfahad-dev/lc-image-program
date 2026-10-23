@@ -119,21 +119,33 @@ def media_status(audit):
     return "In progress" if any(states) else "Not started"
 
 
-def variant_status(product):
+def variant_status(product, audit=None):
+    """Done, In progress (colour images still being made), or Not completed with the colours left to do."""
+    audit = audit or {}
     colour_opts = [o for o in product["options"] if o["name"].strip().lower() in config.COLOUR_OPTION_NAMES]
     if not colour_opts:
         return "No colours"
-    missing, total = [], 0
+    # the program is still on this product: single colours without an image yet are on their way
+    # (they are made once the Media images are finished)
+    working = audit.get("status") == "in_progress"
+    missing, waiting, total = [], [], 0
     for option in colour_opts:
         for value in option["values"]:
             total += 1
             variants = [v for v in product["variants"]["nodes"] if any(o["name"] == option["name"] and o["value"] == value for o in v["selectedOptions"])]
             if not variants or not all(v["media"]["nodes"] for v in variants):
                 kind = classify_colour(option["name"], value, product["productType"])
-                missing.append(value if kind == "single" else f"{value} ({kind}, by hand)")
-    if not missing:
+                state = (audit.get("colours") or {}).get(value, {}).get("status", "")
+                if kind == "single" and (state in ("queued", "pending") or (working and not state)):
+                    waiting.append(value)
+                else:
+                    missing.append(value if kind == "single" else f"{value} ({kind}, by hand)")
+    done = total - len(missing) - len(waiting)
+    if not missing and not waiting:
         return "Done"
-    return f"Not completed ({total - len(missing)} of {total}): {', '.join(missing)}"
+    if not missing:
+        return f"In progress ({done} of {total} done)"
+    return f"Not completed ({done} of {total}): {', '.join(missing)}" + (f"; in progress: {len(waiting)}" if waiting else "")
 
 
 def row_for(product, placeholders, store_slug):
@@ -164,7 +176,7 @@ def row_for(product, placeholders, store_slug):
     for name, status in [("Media", media)] + list(zip([n for _, n in IMAGE_FIELDS], sections)):
         if status.startswith("Retry"):
             todo.append(f"{name}: {status[6:].strip('()') or 'make again'}")
-    variants = variant_status(product)
+    variants = variant_status(product, audit)
     if variants.startswith("Not completed"):
         todo.append("Variant images: " + variants.split(": ", 1)[1])
     bad_texts = [name for (_, name, _), t in zip(TEXT_FIELDS, texts) if t != "Done"]
@@ -176,8 +188,19 @@ def row_for(product, placeholders, store_slug):
     return (
         [product["title"], f'=HYPERLINK("{admin}","Admin")', f'=HYPERLINK("{store}","Store")', product.get("templateSuffix") or "Default product", media]
         + sections + [variants] + texts
-        + [text_overall, audit.get("status", "not started"), "; ".join(todo), datetime.now(timezone.utc).strftime("%Y-%m-%d")]
+        + [text_overall, IMAGE_STATUS.get(audit.get("status", ""), audit.get("status") or "Not started"), "; ".join(todo), datetime.now(timezone.utc).strftime("%Y-%m-%d")]
     )
+
+
+# The program's own status for the product, in plain words (the "Image status" column)
+IMAGE_STATUS = {
+    "in_progress": "In progress",
+    "done": "Done",
+    "manual": "Done, some images by hand",
+    "needs_photo": "Needs photo",
+    "skipped": "Skipped",
+    "": "Not started",
+}
 
 
 def worked_on(product):

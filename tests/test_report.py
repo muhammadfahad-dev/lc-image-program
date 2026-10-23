@@ -62,6 +62,17 @@ def test_done_section_and_batch_in_progress():
     audit = {"status": "in_progress", "choice": CHOICE, "slots": {"multi-1": {"status": "queued"}}}
     row = report.row_for(product(audit, closer=["a", "b", "c", "d"]), set(), "shop")
     assert cell(row, "A little closer images") == "Done" and cell(row, "Multi display images") == "In progress"
+    # colour images still being made are In progress, not Not completed, and are not in To do
+    assert cell(row, "Variant images") == "Not completed (1 of 3): Black-Pink (mixed, by hand); in progress: 1"
+    assert cell(row, "Image status") == "In progress" and "White" not in cell(row, "To do")
+    p = product(audit, closer=["a", "b", "c", "d"])
+    p["options"][0]["values"] = ["Black", "White"]
+    assert report.row_for(p, set(), "shop")[report.HEADER.index("Variant images")] == "In progress (1 of 2 done)"
+    audit["colours"] = {"White": {"status": "queued"}}
+    audit["status"] = "manual"
+    row = report.row_for(product(audit), set(), "shop")
+    assert cell(row, "Variant images") == "Not completed (1 of 3): Black-Pink (mixed, by hand); in progress: 1"
+    assert cell(row, "Image status") == "Done, some images by hand"
 
 
 def test_needs_photo_and_not_an_abaya():
