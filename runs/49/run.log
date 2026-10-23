@@ -1,0 +1,697 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $83.16 of $290
+  projects/352302053849/locations/global/batchPredictionJobs/7968910221105954816: running, 300 image(s)
+  projects/352302053849/locations/global/batchPredictionJobs/3942692154236731392: 300 answer(s) in 1 result file(s)
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: retry
+    check answered in 4s
+    closer-4: passed
+  Front-Closed Contrast Stone-Embroidered Petal Cuff Maxi Abaya | Premium Nida Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 6s
+    hero-2: passed
+    check answered in 2s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 5s
+    multi-1: passed
+    check answered in 3s
+    multi-2: retry
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 4s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Closed Abaya With Blossom Stone-Embroidered Cuffs | Premium Nida Maxi Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 4s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 5s
+    multi-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    closer-4: passed
+  Front-Open Abaya With Stone-Embroidered Sleeves & Ruffled Cuffs | Premium Moss Chiffon Abaya with Scarf: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Closed Butterfly Abaya with Traditional Stonework & Embroidery | Premium Nida Butterfly Abaya: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 6s
+    hero-3: passed
+    check answered in 5s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 12s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Stonework Abaya With Floral Vine Embroidery On Sleeves & Back | Premium Nida Stonework Abaya: done
+    check answered in 2s
+    hero-1: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Stonework Abaya with Crown Motif Embroidery on Sleeves & Back | Premium Nida Fancy Abaya: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front-Open Stonework Black Abaya With Rosewood Trail Embroidery | Premium Nida Fancy Abaya: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: retry
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 5s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Black Abaya with Stone-Embellished Cuffs | Premium Zoom Stonework Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    closer-1: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    closer-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 2s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Abaya with Pointed Embroidered Cuffs | Premium Zoom Abaya: in_progress
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 4s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-2.5-flash
+    check answered in 3s (gemini-2.5-flash)
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-2.5-flash
+    check answered in 5s (gemini-2.5-flash)
+    closer-4: retry
+  Front-Open Handcrafted Cutdana Abaya | Premium Korean Nida Black Cutdana Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 7s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Handmade Cutdana Abaya | Premium Romantic Nida Abaya With Diamond Trailed Sleeves: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Abaya with Beaded Floral Handwork | Premium Korean Nida Handcrafted Cutdana Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+  Front-Open Brown Cutdana Handcrafted Abaya | Premium Nida Jeweled Cutdana Handwork Abaya: could not finish this round (Vertex AI 499: 499 CANCELLED. {'error': {'code': 499, 'message': 'The operation was cancelled.', 'status': 'CANCELLED'}}); will be read again
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-2.5-flash
+    check answered in 3s (gemini-2.5-flash)
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 7s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    closer-4: passed
+  Front-Open Handcrafted Minimalist Cutdana Abaya | Premium Korean Nida with Tissue Cutdana Cuffs with Scarf: in_progress
+    check answered in 5s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 4s
+    closer-2: retry
+    check answered in 2s
+    closer-3: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-2.5-flash
+    check answered in 5s (gemini-2.5-flash)
+    closer-4: passed
+  Front-Open Abaya with Tissue Cutdana Embroidery on Hem & Cuffs | Premium Romantic Nida Cutdana Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    closer-2: retry (Gemini gave no image (OTHER))
+    check answered in 4s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Abaya with Tissue Cutdana Cuffs | Premium Korean Nida Handcrafted Cutdana Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open 3D Handwork Abaya With Attached Inner | Premium Korean Nida Embellished 3D Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: retry
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 6s
+    closer-3: passed
+    check answered in 5s
+    closer-4: passed
+  Front-Open Scattered Leaf Tissue-Cutdana Abaya | Premium Romantic Nida Abaya with Cutdana Leaf Embroidery: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 6s
+    fitting-1: retry
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: retry
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 2s
+    closer-4: passed
+  Front-Open Abaya with Tissue Cutdana Cuffs | Premium Korean Nida Cutdana Embroidered Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 5s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Frill Abaya with Cutdana Handwork & Scarf | Premium Hareer Maqsood Cutdana Abaya: in_progress
+    hero-1: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 4s
+    fitting-1: passed
+    check answered in 5s
+    multi-1: passed
+    check answered in 4s
+    multi-2: retry
+    check answered in 4s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: retry
+    check answered in 5s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open 3 pc Set Abaya with Separate Inner & Chiffon Overlay | Premium Chiffon Abaya with Cutdana Work on Sleeves & Back: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Kids Front-Closed Printed Floral Maxi Abaya with Belt | Premium Chiffon Maxi Abaya for Kids: done
+    check answered in 4s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 34s
+    closer-4: passed
+  Kids Front-Closed Delicate Rose Printed Maxi Abaya With Belt | Premium  Chiffon Maxi Abaya For Kids: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 6s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 3s
+    closer-2: passed
+    check answered in 7s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Kids Front-Closed Blue Blossom Printed Abaya with Belt | Premium Chiffon Kids Maxi Abaya: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 3s
+    closer-3: retry
+    check answered in 3s
+    closer-4: passed
+  Kids Front-Closed Floral Printed Multicolor Abaya With Belt | Premium Chiffon Kids Maxi Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 4s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+  Kids Front-Closed Animal Print Abaya with Belt | Premium Chiffon Maxi Abaya: in_progress
+  projects/352302053849/locations/global/batchPredictionJobs/3942692154236731392: kept, to be read again next time (some products could not be finished)
+  projects/352302053849/locations/global/batchPredictionJobs/5520500136188313600: running, 300 image(s)
+  Front-Closed Contrast Stone-Embroidered Petal Cuff Maxi Abaya | Premium Nida Abaya: 2 image(s)
+  Front-Closed Abaya With Blossom Stone-Embroidered Cuffs | Premium Nida Maxi Abaya: 2 image(s)
+  Front-Open Abaya With Stone-Embroidered Sleeves & Ruffled Cuffs | Premium Moss Chiffon Abaya with Scarf: 2 image(s)
+  Front-Open Black Abaya with Stone-Embellished Cuffs | Premium Zoom Stonework Abaya: 1 image(s)
+  Front-Open Abaya with Pointed Embroidered Cuffs | Premium Zoom Abaya: 1 image(s)
+  Front-Open Handcrafted Cutdana Abaya | Premium Korean Nida Black Cutdana Abaya: 1 image(s)
+  Front-Open Handmade Cutdana Abaya | Premium Romantic Nida Abaya With Diamond Trailed Sleeves: 7 image(s)
+  Front-Open Abaya with Beaded Floral Handwork | Premium Korean Nida Handcrafted Cutdana Abaya: 1 image(s)
+  Front-Open Handcrafted Minimalist Cutdana Abaya | Premium Korean Nida with Tissue Cutdana Cuffs with Scarf: 1 image(s)
+  Front-Open Abaya with Tissue Cutdana Embroidery on Hem & Cuffs | Premium Romantic Nida Cutdana Abaya: 1 image(s)
+  Front-Open Abaya with Tissue Cutdana Cuffs | Premium Korean Nida Handcrafted Cutdana Abaya: 2 image(s)
+  Front-Open 3D Handwork Abaya With Attached Inner | Premium Korean Nida Embellished 3D Abaya: 11 image(s)
+  Front-Open Scattered Leaf Tissue-Cutdana Abaya | Premium Romantic Nida Abaya with Cutdana Leaf Embroidery: 6 image(s)
+  Front-Open Abaya with Tissue Cutdana Cuffs | Premium Korean Nida Cutdana Embroidered Abaya: 3 image(s)
+  Front-Open Frill Abaya with Cutdana Handwork & Scarf | Premium Hareer Maqsood Cutdana Abaya: 5 image(s)
+  Front-Open 3 pc Set Abaya with Separate Inner & Chiffon Overlay | Premium Chiffon Abaya with Cutdana Work on Sleeves & Back: 4 image(s)
+  Kids Front-Closed Floral Printed Multicolor Abaya With Belt | Premium Chiffon Kids Maxi Abaya: 1 image(s)
+  Front-Open Abaya with Peacock Stone Embroidery | Premium Romantic Nida Peacock Stonework Abaya: 3 image(s)
+    check answered in 2s
+  Front-Open Stone Embroidered Abaya with Fringed Cuffs | Premium Romantic Nida Stonework Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Stone-Embroidered Crystal Lily Abaya | Premium Moss Chiffon Stonework Abaya With Fringe Cuffs: 12 image(s)
+    check answered in 2s
+  Front-Open Handcrafted Cutdana Abaya with Matching Scarf | Premium Romantic Nida 2 pc Abaya Set: 12 image(s)
+    check answered in 2s
+  Front-Open Embellished Abaya with Fringed Cuffs | Premium Romantic Nida Cutdana Embroidery Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Contrast Handwork Abaya | Premium Romantic Nida Abaya with Cutdana Embellishment: 12 image(s)
+    check answered in 2s
+  Front-Open Abaya with Cutdana Handwork & Scarf | Premium Romantic Nida Handcrafted Cutdana Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Abaya with Handmade Cutdana Vine Embroidery | Premium Romantic Nida Handcrafted Cutdana Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Black Abaya with Beaded Cutdana Handwork | Premium Romantic Nida Jeweled Cutdana Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Black Abaya with Honeycomb Cutdana Handwork Broad Cuffs | Premium Romantic Nida Cutdana Abaya: 12 image(s)
+    check answered in 4s
+  Front-Open Dubai Style Zip Abaya with Cutdana Handwork | Premium Romantic Nida Zigzag Cutdana Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Vintage Floral Cutdana Handwork Abaya | Premium Romantic Nida Handcrafted Cutdana Abaya: 12 image(s)
+    check answered in 4s
+  Front-Open Kimono Handwork Abaya with Attached Inner | Premium Velvet Shimmer Nida Cutdana Abaya: 12 image(s)
+    check answered in 2s
+  Front Open Leafy Stone Embroidered Abaya | Premium Romantic Nida Stonework Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Stonework Embroidered Abaya | Premium Romantic Nida Stone-Embroidered Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Rosebud Stone-Embroidered Abaya | Premium Romantic Nida Stonework Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Floral & Butterfly Stonework & Embroidered Abaya | Premium Romantic Nida Stone-Studded Black Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Tulips Stonework Abaya with Butterfly Embroidery on Sleeves | Premium Romantic Nida Black Stonework Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Scattered Leaves Stone-Embroidered Abaya | Premium Romantic Nida Stonework Abaya: 12 image(s)
+    check answered in 2s
+  Front Open Black Stonework Embroidered Abaya | Premium R. Nida Stonework Black Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Black Abaya with Stone Embroidery | Premium Romantic Nida Stonework Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Black Abaya with Rose Bloom Stone Embroidery | Premium Romantic Nida Black Stonework Abaya: 6 image(s)
+Submitted 300 image(s) for 39 product(s) as projects/352302053849/locations/global/batchPredictionJobs/8556207760012738560
+Batch: 300 submitted, 265 passed, 24 to try again, 0 do manually, 0 back in the queue
+Report: 214 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-23 19:01 UTC",
+  "mode": "live, batch auto",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 265,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 297,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 90.345,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
