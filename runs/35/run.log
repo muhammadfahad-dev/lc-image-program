@@ -1,0 +1,170 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $48.21 of $280
+  projects/352302053849/locations/global/batchPredictionJobs/5768054079670452224: 300 answer(s) in 1 result file(s)
+  Front Open Embroidered Cuff Abaya – Premium Nida Fabric: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front Open Embroidery Abaya–Premium Moss Chiffon: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front Open Abaya with Flower Embroidered Cuffs | Premium Nida Fabric: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Dubai-Style Aurora Kimono Abaya with Attached Inner | Premium Romantic Nida: in_progress
+  Gradient Wave Printed Front Open Abaya | Premium Romantic Nida: in_progress
+  Front-Open Geometric Printed Abaya with Embroidered Sleeves | Premium Jacquard: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Closed Dubai Style Jacquard Abaya | Buckle Neck Detail: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Self Printed Hooded Abaya with Pockets | Premium Jacquard Hoodie Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Rose Line Printed Front-Open Abaya With Attached |Inner | Premium Romantic Nida: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Dubai Style Self-Printed Abaya | Premium Jacquard Meridian Reversible Abaya: in_progress
+  Front-Open Dubai Style Collar Abaya with Bow-Tie Cuffs | Premium Romantic Nida Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Butterfly Fin Sleeves Maxi Abaya with Tassel Tie-Belt  | Premium Romantic Nida Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Butterfly Pleated Kimono Abaya with Separate Inner | Premium Chiffon 2 pc Set: in_progress
+  Elegant Maxi Abaya with Lace-Trimmed Shrug Overlay | Premium Hareer Maqsood 2pc Set: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+    check answered in 2s
+    colour-teal: passed
+    check answered in 2s
+    colour-taupe: passed
+    check answered in 3s
+    colour-silver: passed
+  Dubai Style Pleated Maxi Abaya With Tassel Button | Premium Romantic Nida Abaya: done
+    check answered in 5s
+    hero-4: passed
+  Dubai Style Long Flair Pleated Maxi Abaya With Tassel Button | Premium Romantic Nida Abaya: in_progress
+    check answered in 3s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front-Open Cutwork Zigzag Panel Design Abaya | Premium Nida Abaya: done
+    closer-4: retry (Gemini gave no image (OTHER))
+  Front-Closed 3 Layered Maxi Abaya Elastic Cuff Sleeves: in_progress
+    fitting-1: retry (Gemini gave no image (OTHER))
+  Front-Closed Gathered Maxi Abaya With Elastic Cuff Sleeves | Zip-Closed Neckline: in_progress
+    check answered in 3s
+    hero-4: passed
+  Front-Closed Feather Cuff Maxi Abaya | Premium Chiffon Minimalistic Abaya: done
+    check answered in 4s
+    colour-navy: passed
+    check answered in 3s
+    colour-teal: passed
+    check answered in 3s
+    colour-brown: passed
+    check answered in 3s
+    colour-camel-brown: passed
+    check answered in 3s
+    colour-blush-pink: passed
+    check answered in 2s
+    colour-mauve-purple: passed
+    check answered in 2s
+    colour-dusty-lavender: passed
+    check answered in 3s
+    colour-ruby-red: passed
+    check answered in 3s
+    colour-taupe: passed
+    check answered in 3s
+    colour-blue: passed
+    check answered in 3s
+    colour-green: passed
+  Front-OpenEmbroidered Stone Work Abaya | Premium Romantic Nida Abaya: done
+    check answered in 4s
+    hero-3: passed
+    check answered in 4s
+    multi-2: retry
+  Front-Open Minimalist Long Flair Abaya| Premium Romantic Nida Essential Abaya: in_progress
+    fitting-1: retry (Gemini gave no image (OTHER))
+  Front-Open Abaya With Diamond Style Pintex Pockets | Premium Romantic Nida: in_progress
+    check answered in 4s
+    closer-2: passed
+    check answered in 3s
+    colour-pink: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 2s
+    colour-brown: passed
+    check answered in 2s
+    colour-silver: passed
+    check answered in 3s
+    colour-grey: passed
+    check answered in 2s
+    colour-charcoal: passed
+    check answered in 3s
+    colour-dusty-lavender: passed
+    check answered in 2s
+    colour-silver-gray: passed
+    check answered in 3s
+    colour-orange: passed
+  Front Open Tie-Dye Long Flair Abaya: done
+    check answered in 4s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 5s
+    closer-2: passed
+  Front Open Piping Work Abaya | Premium Korean Nida Abaya: in_progress
+    check answered in 4s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 3s
+    multi-3a: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 4s
+    closer-2: retry
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    closer-4: passed
+  Front-Open Contrast Frill Abaya | Premium Nida Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 4s
+    hero-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-2.5-flash
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-3.8-flash
+    check answered in 24s (gemini-3.8-flash)
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-2.5-flash
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-3.8-flash
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 15s (1/3)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 30s (2/3)
+    check answered in 10s (gemini-3.8-flash)
+    multi-2: retry
+    check answered in 4s
+    multi-3b: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 3s
+    closer-1: passed
+    check answered in 6s
+    closer-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-2.5-flash
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-3.8-flash
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 15s (1/3)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 30s (2/3)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 60s (3/3)
+Stopped: Vertex AI kept refusing (Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to )); stopping for now. Run the same command again later to continue.
+Batch: 0 submitted, 46 passed, 7 to try again, 0 do manually, 0 back in the queue
+Report: 118 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-23 05:53 UTC",
+  "mode": "live, batch auto",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 46,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 49,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 48.948,
+  "seconds_per_website_image": null,
+  "limit_reached": true
+}
