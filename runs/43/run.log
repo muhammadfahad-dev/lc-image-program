@@ -1,0 +1,113 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $59.66 of $280
+  projects/352302053849/locations/global/batchPredictionJobs/455565737977708544: 300 answer(s) in 1 result file(s)
+  Front Open Abaya with Vine Embroidered Neckline | Romantic Nida Fabric: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front Open Abaya with Rose Vine Embroidery| Premium Nida Fabric: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front Open Abaya with Iris Blossom Embroidered Cuffs | Premium Nida Fabric: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front Open Abaya with Jasmine Embroidery | Premium Romantic Nida Fabric: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Multicolor Floral Printed Front-Open Abaya | Premium Manjan Fabric: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Abaya with Floral Printed Border | Premium Nida Fabric: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Plain Abaya | Premium Chiffon Abaya: in_progress
+  Front-Closed Long Flare Maxi Abaya | Plain Essential Daily Abaya: in_progress
+  Front-Open Fringe Cuff Abaya | 2pcs Plain Abaya with Contrast Scarf: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open One-Side Pleated Abaya | Premium Romantic Nida Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Plain Abaya with Fringe Cuffs | Premium Korean Nida Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Plain Basic Abaya | Premium Cey Abaya: in_progress
+  Front-Open Glossy Plain Abaya | Premium Romantic Nida: in_progress
+  Front-Closed Zip Maxi Abaya With Side Pockets | Premium Striped Zoom Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Abaya With Contrast Lace Cuffs | Premium Cherry Fabric: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open White Self Embossed Abaya With Pockets | Premium Broshia Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Plain Black Abaya with Side Pockets | Premium Romantic Nida Abaya: in_progress
+  Front-Closed Maxi Abaya With Split Bow Sleeves | Premium Zoom Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front Open Plain Abaya With Cutwork & Tassel Neckline | Premium Romantic Nida Abaya: in_progress
+  Front-Open Self Printed Abaya | Premium Nida Minimalist Daily Wear Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Closed Pleated Maxi Abaya | Premium Romantic Nida V-Neck Maxi Abaya with Pleats: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front Close Zip Neckline Abaya with Brooch: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front Open Self Printed Abaya with Side Pockets | Premium Cey Fabric Printed Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Closed Butterfly Maxi Abaya | Premium Striped Print Zoom Abaya: in_progress
+  Front-Open Plain Daily Wear Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Closed Embroidered Maxi Abaya | Premium Zoom Fancy Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front Open Plain Essential Abaya For Daily Wear: in_progress
+  Front Open Plain Abaya With Attached Inner | Premium Nida Abaya: in_progress
+  Front-Open Black Textured Abaya | Premium Crinkle Nida Abaya: in_progress
+  Front-Open Plain Black Abaya | Premium Nida Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Plain Abaya With Side Pockets |: in_progress
+  Front-Open Essential Abaya | Premium Plain Romantic Nida Abaya: in_progress
+    check answered in 7s
+    multi-2: passed
+    check answered in 4s
+    multi-3a: passed
+    check answered in 4s
+    closer-1: passed
+    check answered in 11s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 5s
+    closer-4: passed
+  Front-Open Plain Abaya With Hanging Tassel on Sleeves | Premium Essential Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 10s
+    hero-4: passed
+    check answered in 7s
+    fitting-1: retry
+    check answered in 3s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 4s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 5s
+    closer-4: passed
+  Floral Embroidered Hem Maxi Abaya | Premium Romantic Nida Classic Black Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 7s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-2.5-flash
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-3.8-flash
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 15s (1/3)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 30s (2/3)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 60s (3/3)
+Stopped: Vertex AI kept refusing (Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to )); stopping for now. Run the same command again later to continue.
+Batch: 0 submitted, 22 passed, 3 to try again, 0 do manually, 0 back in the queue
+Report: 132 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-23 13:59 UTC",
+  "mode": "live, batch auto",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 22,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 23,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 60.003,
+  "seconds_per_website_image": null,
+  "limit_reached": true
+}
