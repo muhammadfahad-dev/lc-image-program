@@ -1,0 +1,26 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $95.96 of $290
+  projects/352302053849/locations/global/batchPredictionJobs/7968910221105954816: running, 300 image(s)
+  projects/352302053849/locations/global/batchPredictionJobs/5520500136188313600: running, 300 image(s)
+  projects/352302053849/locations/global/batchPredictionJobs/8556207760012738560: running, 300 image(s)
+  projects/352302053849/locations/global/batchPredictionJobs/5316536331189354496: running, 300 image(s)
+4 Batch job(s) still out; the next round starts once one of them is read.
+Batch: 0 submitted, 0 passed, 0 to try again, 0 do manually, 0 back in the queue
+Report: 239 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-23 21:51 UTC",
+  "mode": "live, batch auto",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 0,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 0,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 95.961,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
