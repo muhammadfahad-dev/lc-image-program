@@ -38,7 +38,7 @@ env:
   GCP_WIF_PROVIDER: projects/352302053849/locations/global/workloadIdentityPools/github/providers/lc-repo
   VERTEX_BUCKET: lc-images-project-c065e1d2-16ae-4565-bb0
   VERTEX_BATCH_SIZE: "300"
-  VERTEX_BATCH_MAX_JOBS: "2"
+  VERTEX_BATCH_MAX_JOBS: "4"
   REPORT_SHEET_ID: 1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
   BATCH_PRODUCTS_PER_ROUND: "60"
 
