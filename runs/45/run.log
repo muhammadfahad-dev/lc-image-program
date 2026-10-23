@@ -1,0 +1,850 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $61.10 of $280
+  projects/352302053849/locations/global/batchPredictionJobs/455565737977708544: 300 answer(s) in 1 result file(s)
+  Front Open Abaya with Vine Embroidered Neckline | Romantic Nida Fabric: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front Open Abaya with Rose Vine Embroidery| Premium Nida Fabric: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front Open Abaya with Iris Blossom Embroidered Cuffs | Premium Nida Fabric: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front Open Abaya with Jasmine Embroidery | Premium Romantic Nida Fabric: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Multicolor Floral Printed Front-Open Abaya | Premium Manjan Fabric: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Abaya with Floral Printed Border | Premium Nida Fabric: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Plain Abaya | Premium Chiffon Abaya: in_progress
+  Front-Closed Long Flare Maxi Abaya | Plain Essential Daily Abaya: in_progress
+  Front-Open Fringe Cuff Abaya | 2pcs Plain Abaya with Contrast Scarf: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open One-Side Pleated Abaya | Premium Romantic Nida Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Plain Abaya with Fringe Cuffs | Premium Korean Nida Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Plain Basic Abaya | Premium Cey Abaya: in_progress
+  Front-Open Glossy Plain Abaya | Premium Romantic Nida: in_progress
+  Front-Closed Zip Maxi Abaya With Side Pockets | Premium Striped Zoom Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Abaya With Contrast Lace Cuffs | Premium Cherry Fabric: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open White Self Embossed Abaya With Pockets | Premium Broshia Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Plain Black Abaya with Side Pockets | Premium Romantic Nida Abaya: in_progress
+  Front-Closed Maxi Abaya With Split Bow Sleeves | Premium Zoom Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front Open Plain Abaya With Cutwork & Tassel Neckline | Premium Romantic Nida Abaya: in_progress
+  Front-Open Self Printed Abaya | Premium Nida Minimalist Daily Wear Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Closed Pleated Maxi Abaya | Premium Romantic Nida V-Neck Maxi Abaya with Pleats: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front Close Zip Neckline Abaya with Brooch: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front Open Self Printed Abaya with Side Pockets | Premium Cey Fabric Printed Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Closed Butterfly Maxi Abaya | Premium Striped Print Zoom Abaya: in_progress
+  Front-Open Plain Daily Wear Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Closed Embroidered Maxi Abaya | Premium Zoom Fancy Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front Open Plain Essential Abaya For Daily Wear: in_progress
+  Front Open Plain Abaya With Attached Inner | Premium Nida Abaya: in_progress
+  Front-Open Black Textured Abaya | Premium Crinkle Nida Abaya: in_progress
+  Front-Open Plain Black Abaya | Premium Nida Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Plain Abaya With Side Pockets |: in_progress
+  Front-Open Essential Abaya | Premium Plain Romantic Nida Abaya: in_progress
+  Front-Open Plain Abaya With Hanging Tassel on Sleeves | Premium Essential Abaya: in_progress
+  Floral Embroidered Hem Maxi Abaya | Premium Romantic Nida Classic Black Abaya: in_progress
+  Front Open Striped Self Embossed Abaya | Premium Broshia Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Pintex Abaya with Side Pockets | Premium Romantic Nida White Abaya: in_progress
+  Front-Open Pintex Textured Abaya | Premium Romantic Nida Black Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Plain Essential Abaya | Premium Cherry Fabric: in_progress
+  Front-Open Effortless Plain Abaya | Premium Cherry Fabric Abaya: in_progress
+  Front-Open Plain Brown Nida Abaya | Premium Korean Nida Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Classic Plain Abaya | Premium Korean Nida Abaya: in_progress
+    check answered in 4s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 4s
+    multi-3a: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 5s
+    closer-3: retry
+    check answered in 3s
+    closer-4: passed
+  Front-Closed Maxi Abaya with Side Pockets | Premium Plain Romantic Nida Abaya: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 3s
+    multi-3a: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front-Open Elegant Plain Abaya | Premium Nida Colored Abayas: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    hero-3: retry (Gemini gave no image (OTHER))
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 5s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3a: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 7s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 5s
+    closer-4: passed
+  Front-Open Plain Abaya With 3 Layer Fringe Sleeves | Premium Chiffon Abaya with Scarf: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 3s
+    multi-3a: passed
+  Front-Open Plain Elegant Abaya | Premium Nida Abaya: in_progress
+  projects/352302053849/locations/global/batchPredictionJobs/455565737977708544: kept, to be read again next time (some products could not be finished)
+  projects/352302053849/locations/global/batchPredictionJobs/436850950561333248: 300 answer(s) in 1 result file(s)
+    check answered in 6s
+    multi-1: manual
+  Dubai-Style Aurora Kimono Abaya with Attached Inner | Premium Romantic Nida: manual
+    check answered in 4s
+    closer-3: manual
+  Gradient Wave Printed Front Open Abaya | Premium Romantic Nida: manual
+    check answered in 4s
+    multi-1: manual
+  Front-Open Dubai Style Self-Printed Abaya | Premium Jacquard Meridian Reversible Abaya: manual
+    check answered in 2s
+    colour-skyblue: passed
+    check answered in 3s
+    colour-white: passed
+    check answered in 3s
+    colour-grey: passed
+    check answered in 2s
+    colour-peach: passed
+  Front-Open Butterfly Pleated Kimono Abaya with Separate Inner | Premium Chiffon 2 pc Set: done
+    check answered in 3s
+    colour-black: passed
+    check answered in 3s
+    colour-grey: passed
+    check answered in 4s
+    colour-teal: passed
+    check answered in 3s
+    colour-green: passed
+    check answered in 3s
+    colour-ruby-red: passed
+    check answered in 3s
+    colour-purple: passed
+    check answered in 3s
+    colour-pink: passed
+  Dubai Style Long Flair Pleated Maxi Abaya With Tassel Button | Premium Romantic Nida Abaya: done
+    check answered in 4s
+    closer-4: passed
+  Front-Closed 3 Layered Maxi Abaya Elastic Cuff Sleeves: done
+    check answered in 3s
+    fitting-1: passed
+  Front-Closed Gathered Maxi Abaya With Elastic Cuff Sleeves | Zip-Closed Neckline: done
+    check answered in 3s
+    multi-2: manual
+    check answered in 3s
+    colour-taupe: passed
+    check answered in 2s
+    colour-mint-green: passed
+    check answered in 2s
+    colour-powder-blue: passed
+    check answered in 4s
+    colour-charcoal: passed
+    check answered in 3s
+    colour-teal: passed
+    check answered in 2s
+    colour-grey: passed
+    check answered in 2s
+    colour-camel-brown: passed
+    check answered in 3s
+    colour-maroon: passed
+  Front-Open Minimalist Long Flair Abaya| Premium Romantic Nida Essential Abaya: manual
+    check answered in 4s
+    fitting-1: passed
+  Front-Open Abaya With Diamond Style Pintex Pockets | Premium Romantic Nida: done
+    check answered in 2s
+    colour-black: passed
+  Front Open Piping Work Abaya | Premium Korean Nida Abaya: done
+    check answered in 4s
+    closer-2: retry
+    check answered in 4s
+    closer-3: passed
+  Front-Open Contrast Frill Abaya | Premium Nida Abaya: in_progress
+    check answered in 5s
+    multi-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 2s
+    colour-blue: passed
+    check answered in 2s
+    colour-brown: passed
+    check answered in 3s
+    colour-camel-brown: passed
+    check answered in 2s
+    colour-pink: passed
+    check answered in 2s
+    colour-teal: passed
+    check answered in 4s
+    colour-navy: passed
+    check answered in 3s
+    colour-grey: passed
+    check answered in 3s
+    colour-green: passed
+  Front-Open Abaya with Front Pintex Pockets | Premium Romantic Nida: done
+    check answered in 11s
+    closer-3: retry
+    check answered in 3s
+    colour-lavender: passed
+    check answered in 3s
+    colour-maroon: passed
+    check answered in 3s
+    colour-green: passed
+    check answered in 3s
+    colour-navy: passed
+    check answered in 2s
+    colour-peach: passed
+    check answered in 3s
+    colour-brown: passed
+    check answered in 3s
+    colour-powder-blue: passed
+    check answered in 2s
+    colour-grey: passed
+    check answered in 6s
+    colour-purple: passed
+    check answered in 3s
+    colour-skyblue: passed
+  Frill-Front-Open Collar Style Abaya with Balloon Sleeves: in_progress
+    check answered in 7s
+    multi-3a: retry
+    check answered in 5s
+    closer-2: retry
+    check answered in 3s
+    colour-forest-green: passed
+    check answered in 2s
+    colour-pink: passed
+    check answered in 6s
+    colour-lavender: passed
+    check answered in 3s
+    colour-grey: passed
+  Front-Open Abaya with Contrast Cuff Detail | Premium Korean Nida Abaya: in_progress
+    check answered in 3s
+    fitting-1: passed
+    check answered in 4s
+    multi-3a: passed
+    check answered in 3s
+    colour-brown: passed
+    check answered in 2s
+    colour-green: passed
+    check answered in 3s
+    colour-teal: passed
+    check answered in 2s
+    colour-mauve: passed
+    check answered in 3s
+    colour-beige: passed
+    check answered in 5s
+    colour-mauve-purple: passed
+    check answered in 3s
+    colour-blue: passed
+    check answered in 3s
+    colour-mint-green: passed
+    check answered in 3s
+    colour-white: passed
+    check answered in 7s
+    colour-ruby-red: passed
+  Front-Open Full-Zip Abaya With Long Flair  | Premium Nida: done
+    check answered in 4s
+    hero-4: passed
+    check answered in 3s
+    multi-2: passed
+  Butterfly Kimono Set with Scarf & Niqab | 4 Pcs Premium Moss Chiffon Abaya: in_progress
+    check answered in 4s
+    fitting-1: passed
+    check answered in 6s
+    multi-3a: passed
+    check answered in 3s
+    colour-green: passed
+    check answered in 3s
+    colour-purple: passed
+    check answered in 2s
+    colour-taupe: passed
+    check answered in 2s
+    colour-brown: passed
+    check answered in 2s
+    colour-blue: passed
+  Front Open Full Zip Butterfly Abaya | Premium Nida Abaya: done
+    check answered in 4s
+    multi-2: retry
+    check answered in 4s
+    closer-2: retry
+    check answered in 3s
+    colour-grey: passed
+    check answered in 2s
+    colour-peach: passed
+    check answered in 3s
+    colour-green: passed
+    check answered in 2s
+    colour-lavender: passed
+    check answered in 2s
+    colour-navy: passed
+  Front Open Pleated Kimono Abaya with Attached Inner & Crystal Buttons: in_progress
+    check answered in 3s
+    colour-taupe: passed
+    check answered in 3s
+    colour-navy: passed
+    check answered in 4s
+    colour-ruby-red: passed
+    check answered in 3s
+    colour-orange: passed
+    check answered in 2s
+    colour-skyblue: passed
+    check answered in 3s
+    colour-cream: passed
+    check answered in 2s
+    colour-green: passed
+  Front-Closed Butterfly Maxi Abaya | Premium Nida Essential Abaya: done
+    check answered in 4s
+    colour-light-blue: passed
+    check answered in 3s
+    colour-brown: passed
+    check answered in 2s
+    colour-skyblue: passed
+    check answered in 4s
+    colour-grey: passed
+    check answered in 3s
+    colour-light-brown: passed
+    check answered in 3s
+    colour-lavender: passed
+    check answered in 5s
+    colour-purple: passed
+    check answered in 3s
+    colour-taupe: passed
+    check answered in 5s
+    colour-camel-brown: passed
+    check answered in 2s
+    colour-white: passed
+    check answered in 3s
+    colour-black: passed
+    check answered in 3s
+    colour-pink: passed
+  Front-Open Full-Zip Abaya  | Premium Nida  Long Flair Abaya: done
+    check answered in 4s
+    hero-3: passed
+    check answered in 4s
+    closer-4: passed
+  2-in-1 Front-Open Reversible Abaya | Premium Nida Abaya: done
+    check answered in 4s
+    multi-2: retry
+    check answered in 4s
+    colour-grey: passed
+    check answered in 3s
+    colour-peach: passed
+    check answered in 2s
+    colour-red: passed
+    check answered in 2s
+    colour-navy: passed
+    check answered in 3s
+    colour-purple: passed
+    check answered in 4s
+    colour-pink: passed
+    check answered in 3s
+    colour-light-grey: passed
+  Front-Open Butterfly Scalloped Cutwork Abaya | Premium Nida Abaya: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 3s
+    closer-1: passed
+  Front-Open Dubai Collar Abaya With Bow-Tie Cuffs: in_progress
+    check answered in 31s
+    closer-2: passed
+  Front-Open Reversible Abaya | 2-in-1 Premium Nida Abaya: done
+    check answered in 6s
+    hero-4: passed
+    check answered in 3s
+    multi-2: passed
+  Front-Open Long Flair Black Abaya | Premium Nida Abaya: done
+    check answered in 5s
+    multi-2: passed
+    check answered in 4s
+    multi-3a: passed
+    check answered in 4s
+    colour-brown: passed
+    check answered in 4s
+    colour-taupe: passed
+    check answered in 3s
+    colour-pink: passed
+    check answered in 3s
+    colour-skyblue: passed
+    check answered in 2s
+    colour-powder-blue: passed
+    check answered in 3s
+    colour-navy: passed
+  Ombré Kimono Abaya With Attached Inner | Premium Gradient Nida Abaya: done
+    check answered in 4s
+    hero-1: passed
+    check answered in 5s
+    closer-4: passed
+  Front-Closed Butterfly Maxi Abaya With Lace Cuffs: in_progress
+    check answered in 4s
+    closer-4: passed
+    check answered in 3s
+    colour-green: passed
+    check answered in 3s
+    colour-forest-green: passed
+    check answered in 2s
+    colour-mustard-gold: passed
+    check answered in 3s
+    colour-beige: passed
+    check answered in 2s
+    colour-black: passed
+  Front-Open Self Striped Abaya | Premium Zoom Abaya: done
+    check answered in 3s
+    hero-4: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 3s
+    multi-2: passed
+  Front-Open Minimalistic Essential Abaya | Premium Plain Abaya: in_progress
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Plain Elegant Abaya | Premium Nida Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 7s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 4s
+    multi-3a: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 5s
+    closer-3: retry
+    check answered in 3s
+    closer-4: passed
+  Front-Open Textured Plain Abaya | Premium Lychee Crinkle Abaya: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 5s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 5s
+    closer-4: passed
+  Front-Closed Maxi Abaya With Pleated Sleeves | Premium Zoom Striped Abaya: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 4s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    multi-3a: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 9s
+    closer-3: passed
+    check answered in 6s
+    closer-4: passed
+  Front-Open Fringe-Cuff Abaya | Premium Romantic Nida Plain Abaya: in_progress
+    check answered in 5s
+    hero-1: passed
+    check answered in 6s
+    hero-2: passed
+    check answered in 5s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 5s
+    fitting-1: passed
+    check answered in 17s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front-Open Tie-Style Stonework Abaya | Premium Zoom Striped Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    multi-3a: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    closer-1: passed
+    check answered in 6s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Closed Pleated Maxi Abaya | Premium Romantic Nida Abaya With Tassel: in_progress
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 3s
+    hero-1: passed
+    check answered in 5s
+    hero-2: retry
+    check answered in 5s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 4s
+    fitting-1: passed
+    check answered in 65s
+    multi-1: retry
+    check answered in 11s
+    multi-2: retry
+    check answered in 4s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 7s
+    closer-3: passed
+    check answered in 5s
+    closer-4: passed
+  Front-Open Self Printed Ombre Abaya | Premium Romantic Nida Abaya: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 6s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: passed
+    multi-1: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    multi-2: passed
+    check answered in 4s
+    multi-3a: passed
+    check answered in 7s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 5s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front-Open Plain Long Flared Abaya | Premium Nida Abaya: in_progress
+    check answered in 4s
+    hero-1: passed
+    check: Google server error 504; waiting 10s (1/2)
+    check answered in 5s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 4s
+    multi-1: passed
+    check answered in 6s
+    multi-2: passed
+    check answered in 9s
+    multi-3a: retry
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 5s
+    closer-3: passed
+    check answered in 22s
+    closer-4: retry
+  Front-Open Sleek Abaya | Premium Nida Glossy Plain Abaya: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 10s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 16s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 6s
+    multi-3b: passed
+    check answered in 5s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 5s
+    closer-3: passed
+    check answered in 5s
+    closer-4: passed
+  Front-Open Stonework Embroidered Long Flair Abaya | Premium Romantic Nida Abaya: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 5s
+    hero-4: passed
+    check answered in 8s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 5s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front-Open Blossom Stonework Abaya | Premium Romantic Nida Stone Embroidery Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    hero-3: retry (Gemini gave no image (OTHER))
+    check answered in 4s
+    hero-4: retry
+    check answered in 4s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 4s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 5s
+    closer-4: passed
+  Front-Open Floral Stone Embroidery Abaya | Premium Nida Abaya with Stone Embroidered Sleeves: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 7s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check answered in 5s
+    multi-2: passed
+    check answered in 59s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 5s
+    closer-4: passed
+  Front-Open Bloom Stone Embroidered Abaya | Premium Romantic Nida Floral Stonework Abaya: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 8s
+    multi-3b: passed
+    check answered in 4s
+    closer-1: passed
+    check answered in 9s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Tissue Cut-Dana Beadwork Abaya | Premium Romantic Nida Cut-dana Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 8s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+  Front-Open CTC Stonework Abaya | Premium Romantic Nida Abaya with Frilled Cuffs: in_progress
+  Front-Open Contrast Frill Abaya | Premium Nida Abaya: 1 image(s)
+  Frill-Front-Open Collar Style Abaya with Balloon Sleeves: 1 image(s)
+  Front-Open Abaya with Contrast Cuff Detail | Premium Korean Nida Abaya: 2 image(s)
+  Butterfly Kimono Set with Scarf & Niqab | 4 Pcs Premium Moss Chiffon Abaya: 14 image(s)
+  Front Open Pleated Kimono Abaya with Attached Inner & Crystal Buttons: 2 image(s)
+  Front-Open Butterfly Scalloped Cutwork Abaya | Premium Nida Abaya: 1 image(s)
+  Front-Open Dubai Collar Abaya With Bow-Tie Cuffs: 8 image(s)
+  Front-Closed Butterfly Maxi Abaya With Lace Cuffs: 9 image(s)
+  Front-Open Minimalistic Essential Abaya | Premium Plain Abaya: 8 image(s)
+  Front-Open Plain Abaya | Premium Chiffon Abaya: 1 image(s)
+  Front-Closed Long Flare Maxi Abaya | Plain Essential Daily Abaya: 3 image(s)
+  Front-Open Plain Basic Abaya | Premium Cey Abaya: 1 image(s)
+  Front-Open Glossy Plain Abaya | Premium Romantic Nida: 7 image(s)
+  Front-Open Plain Black Abaya with Side Pockets | Premium Romantic Nida Abaya: 1 image(s)
+  Front Open Plain Abaya With Cutwork & Tassel Neckline | Premium Romantic Nida Abaya: 6 image(s)
+  Front-Closed Butterfly Maxi Abaya | Premium Striped Print Zoom Abaya: 1 image(s)
+  Front Open Plain Essential Abaya For Daily Wear: 2 image(s)
+  Front Open Plain Abaya With Attached Inner | Premium Nida Abaya: 1 image(s)
+  Front-Open Black Textured Abaya | Premium Crinkle Nida Abaya: 1 image(s)
+  Front-Open Plain Abaya With Side Pockets |: 1 image(s)
+  Front-Open Essential Abaya | Premium Plain Romantic Nida Abaya: 2 image(s)
+  Front-Open Plain Abaya With Hanging Tassel on Sleeves | Premium Essential Abaya: 2 image(s)
+  Floral Embroidered Hem Maxi Abaya | Premium Romantic Nida Classic Black Abaya: 2 image(s)
+  Front-Open Pintex Abaya with Side Pockets | Premium Romantic Nida White Abaya: 1 image(s)
+  Front-Open Plain Essential Abaya | Premium Cherry Fabric: 2 image(s)
+  Front-Open Effortless Plain Abaya | Premium Cherry Fabric Abaya: 14 image(s)
+  Front-Open Classic Plain Abaya | Premium Korean Nida Abaya: 7 image(s)
+  Front-Closed Maxi Abaya with Side Pockets | Premium Plain Romantic Nida Abaya: 10 image(s)
+  Front-Open Elegant Plain Abaya | Premium Nida Colored Abayas: 6 image(s)
+  Front-Open Plain Abaya With 3 Layer Fringe Sleeves | Premium Chiffon Abaya with Scarf: 2 image(s)
+  Front-Open Plain Elegant Abaya | Premium Nida Abaya: 4 image(s)
+  Front-Open Textured Plain Abaya | Premium Lychee Crinkle Abaya: 8 image(s)
+  Front-Open Fringe-Cuff Abaya | Premium Romantic Nida Plain Abaya: 2 image(s)
+  Front-Open Tie-Style Stonework Abaya | Premium Zoom Striped Abaya: 6 image(s)
+  Front-Closed Pleated Maxi Abaya | Premium Romantic Nida Abaya With Tassel: 7 image(s)
+  Front-Open Self Printed Ombre Abaya | Premium Romantic Nida Abaya: 4 image(s)
+    check answered in 4s
+  Front-Open Contrast Lace Abaya | Premium Cotton Crinkle Abaya with Fringe Cuffs: 12 image(s)
+  Front-Open Plain Long Flared Abaya | Premium Nida Abaya: 6 image(s)
+  Front-Open Sleek Abaya | Premium Nida Glossy Plain Abaya: 4 image(s)
+  Front-Open Stonework Embroidered Long Flair Abaya | Premium Romantic Nida Abaya: 7 image(s)
+  Front-Open Blossom Stonework Abaya | Premium Romantic Nida Stone Embroidery Abaya: 5 image(s)
+  Front-Open Floral Stone Embroidery Abaya | Premium Nida Abaya with Stone Embroidered Sleeves: 2 image(s)
+  Front-Open Bloom Stone Embroidered Abaya | Premium Romantic Nida Floral Stonework Abaya: 6 image(s)
+  Front-Open Tissue Cut-Dana Beadwork Abaya | Premium Romantic Nida Cut-dana Abaya: 4 image(s)
+  Front-Open CTC Stonework Abaya | Premium Romantic Nida Abaya with Frilled Cuffs: 19 image(s)
+    check answered in 13s
+  Front-Open Stonework Rose Embroidered Abaya | Premium Romantic Nida Long Flare Abaya: 12 image(s)
+    check answered in 6s
+  Front-Closed Long Flare Stone Embroidered Abaya | Premium Nida Stonework Abaya: 11 image(s)
+    check answered in 8s
+  2pc Front-Open Butterfly Kimono Stonework Abaya | Premium Black Nida Abaya With Stone Embroidery: 12 image(s)
+    check answered in 6s
+  Front-Open Floral Stonework Abaya | Premium Romantic Nida Bloom Embroidered Abaya: 12 image(s)
+    check answered in 4s
+  Front-Closed Long Flared Petal Stone Embroidered Cuff Abaya | Premium Nida Maxi Abaya: 11 image(s)
+    check answered in 8s
+  Front-Open Abaya With Contrast Stone Embroidered Cuffs | Premium Nida Stonework Abaya: 12 image(s)
+    check answered in 4s
+  Front-Open Abaya With Bloom Stone-Embroidered Cuffs | Premium Nida Stonework Abaya: 12 image(s)
+    check answered in 36s
+  Front-Closed Contrast Stone-Embroidered Petal Cuff Maxi Abaya | Premium Nida Abaya: 3 image(s)
+Submitted 300 image(s) for 53 product(s) as projects/352302053849/locations/global/batchPredictionJobs/7968910221105954816
+Batch: 300 submitted, 311 passed, 26 to try again, 4 do manually, 0 back in the queue
+Report: 141 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-23 15:57 UTC",
+  "mode": "live, batch auto",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 311,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 339,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 71.583,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
