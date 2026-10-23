@@ -1,0 +1,75 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $90.34 of $290
+  projects/352302053849/locations/global/batchPredictionJobs/7968910221105954816: running, 300 image(s)
+  projects/352302053849/locations/global/batchPredictionJobs/3942692154236731392: 300 answer(s) in 1 result file(s)
+  Front-Closed Contrast Stone-Embroidered Petal Cuff Maxi Abaya | Premium Nida Abaya: in_progress
+  Front-Closed Abaya With Blossom Stone-Embroidered Cuffs | Premium Nida Maxi Abaya: in_progress
+  Front-Open Abaya With Stone-Embroidered Sleeves & Ruffled Cuffs | Premium Moss Chiffon Abaya with Scarf: in_progress
+  Front-Closed Butterfly Abaya with Traditional Stonework & Embroidery | Premium Nida Butterfly Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Stonework Abaya With Floral Vine Embroidery On Sleeves & Back | Premium Nida Stonework Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Stonework Abaya with Crown Motif Embroidery on Sleeves & Back | Premium Nida Fancy Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Stonework Black Abaya With Rosewood Trail Embroidery | Premium Nida Fancy Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Front-Open Black Abaya with Stone-Embellished Cuffs | Premium Zoom Stonework Abaya: in_progress
+  Front-Open Abaya with Pointed Embroidered Cuffs | Premium Zoom Abaya: in_progress
+  Front-Open Handcrafted Cutdana Abaya | Premium Korean Nida Black Cutdana Abaya: in_progress
+  Front-Open Handmade Cutdana Abaya | Premium Romantic Nida Abaya With Diamond Trailed Sleeves: in_progress
+  Front-Open Abaya with Beaded Floral Handwork | Premium Korean Nida Handcrafted Cutdana Abaya: in_progress
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 5s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Brown Cutdana Handcrafted Abaya | Premium Nida Jeweled Cutdana Handwork Abaya: done
+  Front-Open Handcrafted Minimalist Cutdana Abaya | Premium Korean Nida with Tissue Cutdana Cuffs with Scarf: in_progress
+  Front-Open Abaya with Tissue Cutdana Embroidery on Hem & Cuffs | Premium Romantic Nida Cutdana Abaya: in_progress
+  Front-Open Abaya with Tissue Cutdana Cuffs | Premium Korean Nida Handcrafted Cutdana Abaya: in_progress
+  Front-Open 3D Handwork Abaya With Attached Inner | Premium Korean Nida Embellished 3D Abaya: in_progress
+  Front-Open Scattered Leaf Tissue-Cutdana Abaya | Premium Romantic Nida Abaya with Cutdana Leaf Embroidery: in_progress
+  Front-Open Abaya with Tissue Cutdana Cuffs | Premium Korean Nida Cutdana Embroidered Abaya: in_progress
+  Front-Open Frill Abaya with Cutdana Handwork & Scarf | Premium Hareer Maqsood Cutdana Abaya: in_progress
+  Front-Open 3 pc Set Abaya with Separate Inner & Chiffon Overlay | Premium Chiffon Abaya with Cutdana Work on Sleeves & Back: in_progress
+  Kids Front-Closed Printed Floral Maxi Abaya with Belt | Premium Chiffon Maxi Abaya for Kids: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Kids Front-Closed Delicate Rose Printed Maxi Abaya With Belt | Premium  Chiffon Maxi Abaya For Kids: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Kids Front-Closed Blue Blossom Printed Abaya with Belt | Premium Chiffon Kids Maxi Abaya: could not finish this round ('NoneType' object has no attribute 'items'); will be read again
+  Kids Front-Closed Floral Printed Multicolor Abaya With Belt | Premium Chiffon Kids Maxi Abaya: in_progress
+  Kids Front-Closed Animal Print Abaya with Belt | Premium Chiffon Maxi Abaya: in_progress
+  projects/352302053849/locations/global/batchPredictionJobs/3942692154236731392: kept, to be read again next time (some products could not be finished)
+  projects/352302053849/locations/global/batchPredictionJobs/5520500136188313600: running, 300 image(s)
+  projects/352302053849/locations/global/batchPredictionJobs/8556207760012738560: running, 300 image(s)
+4 Batch job(s) still out; the next round starts once one of them is read.
+Batch: 0 submitted, 11 passed, 0 to try again, 0 do manually, 0 back in the queue
+Report: 214 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-23 19:53 UTC",
+  "mode": "live, batch auto",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 11,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 11,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 90.411,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
