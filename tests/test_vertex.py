@@ -79,6 +79,10 @@ def test_busy_checker_uses_a_backup_model():
         g, m = make([busy] * (len(config.VERTEX_CHECK_WAITS) + 1) + [NS(text='{"pass": true, "problems": []}')], tmp)
         assert g.ask_json([b"a"], "check")["pass"] is True
         assert m.calls[-1][0] == config.VERTEX_CHECK_BACKUPS[0]
+        # checks look in medium detail and think briefly; Gemini 2.x gets a thinking budget instead of a level
+        first, last = m.calls[0][2], m.calls[-1][2]
+        assert first.media_resolution.name == "MEDIA_RESOLUTION_MEDIUM" and first.thinking_config.thinking_level.name == "LOW"
+        assert last.thinking_config.thinking_budget == 512 and last.thinking_config.thinking_level is None
 
 
 def test_no_image_is_generation_failed():

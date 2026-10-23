@@ -82,10 +82,17 @@ VERTEX_PROJECT = env("GOOGLE_CLOUD_PROJECT", "")
 VERTEX_LOCATION = env("VERTEX_LOCATION", "global")
 VERTEX_IMAGE_MODEL = env("VERTEX_IMAGE_MODEL", "gemini-nano-banana-2.1")  # Google's own model; takes the product photo
 VERTEX_CHECK_MODEL = env("VERTEX_CHECK_MODEL", "gemini-3.5-flash")  # 3.8 Flash was often busy (429); 3.5 answered at once
-VERTEX_BUDGET_USD = float(env("VERTEX_BUDGET_USD", "280"))  # the program stops before its estimate passes this
+# The program stops before its estimate passes this. Its estimate ran above Google's real charge (Billing,
+# 23 Oct: about $36-43 real against $57 estimated), so 290 still stops before the $300 free credit is used up.
+VERTEX_BUDGET_USD = float(env("VERTEX_BUDGET_USD", "290"))
 # Estimates used for the cap; check them against Google's Vertex AI price list and Billing reports
 VERTEX_PRICE_PER_IMAGE = float(env("VERTEX_PRICE_PER_IMAGE", "0.036"))  # Nano Banana 2.1, 1K image + photo
-VERTEX_PRICE_PER_CHECK = float(env("VERTEX_PRICE_PER_CHECK", "0.015"))
+# About $0.009 a check in Billing with full picture detail and thinking; less with the settings below
+VERTEX_PRICE_PER_CHECK = float(env("VERTEX_PRICE_PER_CHECK", "0.006"))
+# Checks look at the pictures in medium detail (enough for colour, design work and the garment's shape) and think
+# briefly: these two were most of a check's cost
+VERTEX_CHECK_MEDIA_RESOLUTION = env("VERTEX_CHECK_MEDIA_RESOLUTION", "medium")  # low, medium or high
+VERTEX_CHECK_THINKING = env("VERTEX_CHECK_THINKING", "low")  # minimal, low, medium or high
 VERTEX_SECONDS_BETWEEN_CALLS = float(env("VERTEX_SECONDS_BETWEEN_CALLS", "4"))
 VERTEX_TIMEOUT_SECONDS = int(env("VERTEX_TIMEOUT_SECONDS", "120"))
 # Waits after "too many requests" before trying again; after the last one the run stops (and continues next time)

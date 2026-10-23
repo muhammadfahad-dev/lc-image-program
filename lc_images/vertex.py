@@ -155,7 +155,7 @@ class GeminiVertex:
                     time.sleep(config.VERTEX_SECONDS_BETWEEN_CALLS - gap)
                 self._last = started = time.monotonic()
                 try:
-                    response = self.client.models.generate_content(model=current, contents=contents, config=cfg)
+                    response = self.client.models.generate_content(model=current, contents=contents, config=cfg(current) if callable(cfg) else cfg)
                     self.log(f"    {kind} answered in {time.monotonic() - started:.0f}s" + (f" ({current})" if index else ""))
                     return response
                 except errors.ClientError as error:
@@ -212,7 +212,19 @@ class GeminiVertex:
         from google.genai import types
 
         self._budget_check(config.VERTEX_PRICE_PER_CHECK)
-        cfg = types.GenerateContentConfig(response_mime_type="application/json", temperature=0)
+        resolution = getattr(types.MediaResolution, f"MEDIA_RESOLUTION_{config.VERTEX_CHECK_MEDIA_RESOLUTION.upper()}")
+        budgets = {"minimal": 128, "low": 512, "medium": 2048, "high": 8192}
+
+        def cfg(model):
+            # Gemini 2.x sets thinking by a token budget, later models by a level
+            if model.startswith("gemini-2"):
+                thinking = types.ThinkingConfig(thinking_budget=budgets.get(config.VERTEX_CHECK_THINKING, 512))
+            else:
+                thinking = types.ThinkingConfig(thinking_level=getattr(types.ThinkingLevel, config.VERTEX_CHECK_THINKING.upper()))
+            return types.GenerateContentConfig(
+                response_mime_type="application/json", temperature=0, media_resolution=resolution, thinking_config=thinking,
+            )
+
         response = self._call(self.check_model, [*self._parts(images, labels=True), prompt], cfg, "check", config.VERTEX_CHECK_BACKUPS)
         self.spend.add(config.VERTEX_PRICE_PER_CHECK, "checks")
         self.calls["check"] += 1

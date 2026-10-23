@@ -25,7 +25,7 @@ from pathlib import Path
 
 from lc_images import config
 from lc_images.gemini import Gemini, GenerationFailed, QuotaExhausted
-from lc_images.pipeline import ProductRun, now
+from lc_images.pipeline import ProductRun, now, to_jpeg
 from lc_images.shopify import Shopify
 
 try:
@@ -92,6 +92,13 @@ def test_vertex():
     OUT.mkdir(exist_ok=True)
     (OUT / "vertex-test.png").write_bytes(data)
     print(f"OK: Vertex AI made a test image ({len(data)} bytes), saved as output/vertex-test.png.")
+    try:
+        # one check, with the same picture detail and thinking settings the real checks use
+        answer = g.ask_json([to_jpeg(data, max_side=1024)], 'Is there a picture? Reply as JSON: {"ok": true or false, "seen": "a few words"}')
+        print(f"Check model {g.check_model}: {'OK' if answer.get('ok') else 'unexpected answer'} ({answer})")
+    except (QuotaExhausted, RuntimeError) as error:
+        print(f"Check model {g.check_model} REFUSED: {str(error)[:800]}")
+        return 1
     print(f"Estimated spend so far: ${g.spend.data['usd']:.2f}. Tomorrow, check in Google Cloud: Billing > Reports, that it was paid by the credit.")
     return 0
 
