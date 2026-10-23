@@ -1,0 +1,6 @@
+Project: project-c065e1d2-16ae-4565-bb0 | location: global | image model: gemini-nano-banana-2.1 | check model: gemini-3.5-flash
+    image answered in 13s
+OK: Vertex AI made a test image (1684821 bytes), saved as output/vertex-test.png.
+    check answered in 2s
+Check model gemini-3.5-flash: OK ({'ok': True, 'seen': 'a watercolor painting of a ceramic cup and an olive branch on a folded cloth'})
+Estimated spend so far: $0.04. Tomorrow, check in Google Cloud: Billing > Reports, that it was paid by the credit.
