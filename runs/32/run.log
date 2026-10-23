@@ -1,0 +1,704 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $27.63 of $280
+  projects/352302053849/locations/global/batchPredictionJobs/8405650533309743104: 300 answer(s) in 1 result file(s)
+    hero-1: retry (Gemini gave no image (OTHER))
+    check answered in 5s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 6s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    closer-4: retry (Gemini gave no image (OTHER))
+  Front Open Abaya with Vine Embroidered Neckline | Romantic Nida Fabric: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 5s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    closer-4: passed
+  Front Open Abaya with Coat-Style Collar & Embroidered Sleeves: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 4s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front Open Black Abaya with Flowery Sleeve Embroidery | Romantic Nida Fabric: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 5s
+    hero-2: passed
+    hero-3: retry (Gemini gave no image (OTHER))
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 4s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check answered in 6s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front Open Abaya with Rose Vine Embroidery| Premium Nida Fabric: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 4s
+    hero-2: passed
+    check answered in 5s
+    hero-3: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 3s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: passed
+    check answered in 5s
+    multi-1: passed
+    check answered in 6s
+    multi-2: passed
+    check answered in 5s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front Open Abaya with Meadow Vine Embroidered Cuffs | Premium Nida Fabric: done
+    check answered in 5s
+    hero-1: passed
+    check answered in 4s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check answered in 6s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 8s
+    closer-3: passed
+    check answered in 5s
+    closer-4: passed
+  Front Open Abaya with Botanical Embroidered Cuffs | Premium Nida Fabric: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 5s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: passed
+    check answered in 10s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 5s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front Open Black Abaya with Blossom Embroidery| Premium Nida Fabric: done
+    check answered in 7s
+    hero-1: passed
+    check answered in 4s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check answered in 10s
+    multi-2: passed
+    check answered in 31s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 25s
+    closer-3: passed
+    check answered in 38s
+    closer-4: passed
+  Front Open Black Abaya with Leaf Vine Embroidered Panels | Premium Nida Fabric: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: retry
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front Open Abaya with Gold Chevron Embroidery| Premium Nida Fabric: in_progress
+    check answered in 4s
+    hero-1: passed
+    hero-2: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front Open Abaya with Iris Blossom Embroidered Cuffs | Premium Nida Fabric: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 4s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 7s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 20s
+    closer-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-2.5-flash
+    check: gemini-3.5-flash stays busy; trying the backup model gemini-3.8-flash
+    check answered in 5s (gemini-3.8-flash)
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front Open Beautiful Abaya with Daisy Embroidery | Premium Nida | 10 Colors: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 4s
+    hero-2: passed
+    hero-3: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 28s
+    closer-4: passed
+  Front Open Abaya with Jasmine Embroidery | Premium Romantic Nida Fabric: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Printed Front-Closed Maxi Abaya | Side Zip & Elastic Sleeves| Premium Manjan Fabric: done
+    check answered in 4s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 8s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    multi-3b: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 5s
+    closer-4: passed
+  Floral Printed Front-Open Abaya | Premium Manjan Fabric For Everyday Wear: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    closer-4: retry (Gemini gave no image (OTHER))
+  Front-Open Chevron Printed Abaya | Premium Manjan Fabric: in_progress
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 20s (2/2)
+    check answered in 6s
+    hero-1: passed
+    check answered in 4s
+    hero-2: passed
+    check answered in 5s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: retry
+    check answered in 4s
+    closer-4: retry
+  Multicolor Floral Printed Front-Open Abaya | Premium Manjan Fabric: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 6s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 4s
+    multi-1: passed
+    check answered in 6s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 15s
+    closer-4: passed
+  Sunset Front-Open Kimono Abaya with Scarf | Premium Tie-Dye Chiffon: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 4s
+    hero-2: passed
+    check answered in 5s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 4s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front-Open Printed Linen Abaya | Floral Print Collection: done
+    check answered in 5s
+    hero-1: passed
+    check answered in 5s
+    hero-2: passed
+    check answered in 22s
+    hero-3: passed
+    check answered in 5s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 4s
+    multi-1: passed
+    check answered in 5s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    closer-4: passed
+  Front-Open Abaya with Floral Printed Border | Premium Nida Fabric: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    multi-3b: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 7s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Cotton Candy Pastel Front-Open Kimono Abaya | Pleated Chiffon 2-Piece Set with Crystal Buttons: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: retry
+    check answered in 3s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    closer-4: passed
+  Pastel Ombre Front-Open Abaya | Gradient Tie-Dye Premium Nida: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Two-Toned Rose Line Printed Front-Open Abaya | Premium Romantic Nida: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front-Open Self-Print Abaya With Side Pockets | Premium Windowpane Jacquard Abaya: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    hero-3: retry (Gemini gave no image (OTHER))
+    check answered in 4s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 6s
+    multi-2: retry
+    check answered in 4s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Elegant Front-Open Self-Printed Abaya | Gradient Romantic Nida: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 5s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    closer-4: retry (Gemini gave no image (OTHER))
+  Front-Open Desert Dune Self-Print Abaya with Pockets | Premium Romantic Nida: in_progress
+    check answered in 4s
+    hero-1: passed
+  Front-Open Self-Print Nida Abaya | Marble Wash Abaya with Side Pockets: done
+  projects/352302053849/locations/global/batchPredictionJobs/5768054079670452224: running, 300 image(s)
+  Front Open Abaya with Vine Embroidered Neckline | Romantic Nida Fabric: 2 image(s)
+  Front Open Abaya with Coat-Style Collar & Embroidered Sleeves: 1 image(s)
+  Front Open Black Abaya with Flowery Sleeve Embroidery | Romantic Nida Fabric: 1 image(s)
+  Front Open Abaya with Rose Vine Embroidery| Premium Nida Fabric: 1 image(s)
+  Front Open Abaya with Gold Chevron Embroidery| Premium Nida Fabric: 1 image(s)
+  Front Open Abaya with Iris Blossom Embroidered Cuffs | Premium Nida Fabric: 2 image(s)
+  Front Open Beautiful Abaya with Daisy Embroidery | Premium Nida | 10 Colors: 9 image(s)
+  Front Open Abaya with Jasmine Embroidery | Premium Romantic Nida Fabric: 1 image(s)
+  Floral Printed Front-Open Abaya | Premium Manjan Fabric For Everyday Wear: 3 image(s)
+  Front-Open Chevron Printed Abaya | Premium Manjan Fabric: 1 image(s)
+  Multicolor Floral Printed Front-Open Abaya | Premium Manjan Fabric: 3 image(s)
+  Sunset Front-Open Kimono Abaya with Scarf | Premium Tie-Dye Chiffon: 1 image(s)
+  Front-Open Abaya with Floral Printed Border | Premium Nida Fabric: 2 image(s)
+  Cotton Candy Pastel Front-Open Kimono Abaya | Pleated Chiffon 2-Piece Set with Crystal Buttons: 1 image(s)
+  Pastel Ombre Front-Open Abaya | Gradient Tie-Dye Premium Nida: 2 image(s)
+  Elegant Front-Open Self-Printed Abaya | Gradient Romantic Nida: 2 image(s)
+  Front-Open Desert Dune Self-Print Abaya with Pockets | Premium Romantic Nida: 1 image(s)
+  Front-Open Minimalistic Essential Abaya | Premium Plain Abaya: 2 image(s)
+    check answered in 4s
+  Front-Open Plain Abaya | Premium Chiffon Abaya: 12 image(s)
+    check answered in 4s
+  Front-Closed Long Flare Maxi Abaya | Plain Essential Daily Abaya: 11 image(s)
+    check answered in 7s
+  Front-Open Self-Textured Jacquard Abaya: 12 image(s)
+    check answered in 5s
+  Front-Open Fringe Cuff Abaya | 2pcs Plain Abaya with Contrast Scarf: 12 image(s)
+    check answered in 3s
+  Front-Open Self-Print Abaya | Premium Cey Abaya: 12 image(s)
+    check answered in 5s
+  Front-Open One-Side Pleated Abaya | Premium Romantic Nida Abaya: 12 image(s)
+    check answered in 5s
+  Front-Open Plain Abaya with Fringe Cuffs | Premium Korean Nida Abaya: 12 image(s)
+    check answered in 4s
+  Front-Open Plain Basic Abaya | Premium Cey Abaya: 12 image(s)
+    check answered in 9s
+  Front-Closed Tie Style Maxi Abaya | Premium Striped Zoom Abaya: 11 image(s)
+    check answered in 7s
+  Front-Open Glossy Plain Abaya | Premium Romantic Nida: 12 image(s)
+    check answered in 5s
+  Front-Closed Zip Maxi Abaya With Side Pockets | Premium Striped Zoom Abaya: 11 image(s)
+    check answered in 4s
+  Front-Open Abaya With Contrast Lace Cuffs | Premium Cherry Fabric: 12 image(s)
+    check answered in 5s
+  Front-Open White Self Embossed Abaya With Pockets | Premium Broshia Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Plain Black Abaya with Side Pockets | Premium Romantic Nida Abaya: 12 image(s)
+    check answered in 5s
+  Front-Closed Maxi Abaya With Split Bow Sleeves | Premium Zoom Abaya: 11 image(s)
+    check answered in 7s
+  Front Open Plain Abaya With Cutwork & Tassel Neckline | Premium Romantic Nida Abaya: 12 image(s)
+    check answered in 6s
+  Front-Open Self Printed Abaya | Premium Nida Minimalist Daily Wear Abaya: 12 image(s)
+    check answered in 4s
+  Front-Closed Pleated Maxi Abaya | Premium Romantic Nida V-Neck Maxi Abaya with Pleats: 11 image(s)
+    check answered in 8s
+  Front Close Zip Neckline Abaya with Brooch: 12 image(s)
+    check answered in 4s
+  Front Open Self Printed Abaya with Side Pockets | Premium Cey Fabric Printed Abaya: 12 image(s)
+    check answered in 4s
+  Front-Closed Butterfly Maxi Abaya | Premium Striped Print Zoom Abaya: 11 image(s)
+    check answered in 3s
+  Front-Open Plain Daily Wear Abaya: 12 image(s)
+    check answered in 3s
+  Front-Closed Embroidered Maxi Abaya | Premium Zoom Fancy Abaya: 6 image(s)
+Submitted 300 image(s) for 41 product(s) as projects/352302053849/locations/global/batchPredictionJobs/792561653844541440
+Batch: 300 submitted, 275 passed, 25 to try again, 0 do manually, 0 back in the queue
+Report: 99 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-23 02:55 UTC",
+  "mode": "live, batch auto",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 275,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 303,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 37.578,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
