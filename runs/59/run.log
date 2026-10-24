@@ -1,0 +1,710 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $110.42 of $290
+  projects/352302053849/locations/global/batchPredictionJobs/5520500136188313600: 300 answer(s) in 1 result file(s)
+    check answered in 4s
+    closer-4: passed
+  Kids Front-Closed Animal Print Abaya with Belt | Premium Chiffon Maxi Abaya: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: retry
+    check answered in 4s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 5s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front-Closed Maxi Abaya with Stonework & Elastic Sleeves | Premium Nida Kids Embellished Maxi Abaya: in_progress
+    check answered in 10s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 5s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: retry
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Kids Front-Closed Abaya with Stonework Waist Belt | Premium Nida Kids Embellished Maxi Abaya with Elastic Sleeves: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 4s
+    hero-2: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 17s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Kids Front-Closed Embroidered Bow Maxi Abaya | Premium Chiffon Embroidered Maxi Abaya: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-4: retry
+    check answered in 4s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: retry
+    check answered in 3s
+    closer-3: passed
+    check answered in 2s
+    closer-4: passed
+  Kids Front-Closed Abaya with Fancy Buttons | Premium Nida Fancy Maxi Abaya with Elastic Cuffs: in_progress
+    check answered in 5s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 4s
+    hero-4: retry
+    check answered in 2s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3a: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: retry
+    check answered in 2s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Kids Front-Closed Plain Maxi Abaya | Premium Nida Black Plain Kids Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 7s
+    hero-4: retry
+    check answered in 4s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 4s
+    multi-3a: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Kids Front-Closed Ombre Abaya With Tassel Tie | Premium Chiffon Kids Two Toned Maxi Belt Abaya: in_progress
+    check answered in 5s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Kids White Front-Closed Bow Embroidered Abaya | Premium Chiffon Kids Embroidered Maxi Abaya: done
+    check answered in 10s
+    hero-1: retry
+    check answered in 8s
+    hero-2: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Kids Front-Closed Floral Print Maxi Abaya With Belt | Premium Chiffon Kids Printed Maxi Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 5s
+    multi-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 3s
+    multi-3b: passed
+    check answered in 10s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: retry
+    check answered in 3s
+    closer-4: passed
+  Kids Front-Open Bow Embroidered Abaya | Premium Nida Colorful Embroidered Abayas for Kids: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: retry
+    check answered in 3s
+    multi-3a: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    closer-4: passed
+  Kids Front-Open Plain Black Abaya | Premium Nida Black Abaya For Kids: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 6s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 4s
+    closer-2: retry
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Kids Front-Open Embroidered Bow White Abaya | Premium Nida Embroidered Abaya For Kids: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 5s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Kids Black Front-Open Cute Bow Embroidered Abaya | Premium Black Embroidered Nida Abaya For Kids: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 4s
+    closer-2: retry
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Kids Front-Open Stonework Abaya | Premium Black Nida Stonework Abaya For Kids: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 11s
+    hero-2: passed
+    check answered in 7s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 4s
+    multi-3a: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Kids Front-Closed Maxi Abaya with Pleated Sleeves | Premium Nida Black Balloon Sleeves Kids Abaya: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 5s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    closer-4: retry (Gemini gave no image (OTHER))
+  Kids Front-Open Black Stonework Abaya | Premium Nida Stone Studded Abaya For Kids: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Kids Front-Open Sparkling Stonework Black Abaya | Premium Nida Kids Stone-Studded Black Abaya: done
+    check answered in 4s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Kids Front-Closed Maxi Abaya with Celestial Stonework | Premium Nida Black Stonework Abaya for Kids: done
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Stone Embroidered Abaya | Premium Romantic Nida Stonework Fancy Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Abaya with Stonework Embroidered Sleeves | Premium Romantic Nida with Studded Cuffs: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 11s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 8s
+    closer-4: passed
+  Front-Open Rose Stone-Embroidered Abaya with Feathery Sleeves | Premium Moss Chiffon Stonework Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    hero-3: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front-Open Bloom Embroidered Stonework Abaya | Premium Romantic Nida Stone-studded Abaya: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 7s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 3s
+    closer-3: passed
+    check answered in 2s
+    closer-4: passed
+  Front-Open Abaya with Stone-Embroidered Sleeves & Back | Premium Romantic Nida Stonework Abaya: done
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Abaya with Radiant Stone Embroidery on Sleeves & Back | Premium Romantic Nida Stonework Abaya: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    hero-3: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Black Abaya with Rose Stone-Embroidered & Ruffled Cuffs | Premium Moss Chiffon Stonework Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Rose Stone-Embroidered Pastel Abaya With Scarf | Premium Moss Chiffon 2pcs Stonework Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: retry
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+  Front-Open Abaya with Peacock Stone Embroidery | Premium Romantic Nida Peacock Stonework Abaya: in_progress
+  projects/352302053849/locations/global/batchPredictionJobs/8556207760012738560: running, 300 image(s)
+  projects/352302053849/locations/global/batchPredictionJobs/8795285568356352000: running, 300 image(s)
+  projects/352302053849/locations/global/batchPredictionJobs/9191602335564955648: running, 300 image(s)
+  Front-Closed Maxi Abaya with Stonework & Elastic Sleeves | Premium Nida Kids Embellished Maxi Abaya: 1 image(s)
+  Kids Front-Closed Abaya with Stonework Waist Belt | Premium Nida Kids Embellished Maxi Abaya with Elastic Sleeves: 1 image(s)
+  Kids Front-Closed Abaya with Fancy Buttons | Premium Nida Fancy Maxi Abaya with Elastic Cuffs: 2 image(s)
+  Kids Front-Closed Plain Maxi Abaya | Premium Nida Black Plain Kids Abaya: 2 image(s)
+  Kids Front-Closed Ombre Abaya With Tassel Tie | Premium Chiffon Kids Two Toned Maxi Belt Abaya: 1 image(s)
+  Kids Front-Closed Floral Print Maxi Abaya With Belt | Premium Chiffon Kids Printed Maxi Abaya: 2 image(s)
+  Kids Front-Open Bow Embroidered Abaya | Premium Nida Colorful Embroidered Abayas for Kids: 5 image(s)
+  Kids Front-Open Plain Black Abaya | Premium Nida Black Abaya For Kids: 3 image(s)
+  Kids Front-Open Embroidered Bow White Abaya | Premium Nida Embroidered Abaya For Kids: 1 image(s)
+  Kids Front-Open Stonework Abaya | Premium Black Nida Stonework Abaya For Kids: 1 image(s)
+  Kids Front-Open Black Stonework Abaya | Premium Nida Stone Studded Abaya For Kids: 1 image(s)
+  Front-Open Stone Embroidered Abaya | Premium Romantic Nida Stonework Fancy Abaya: 4 image(s)
+  Front-Open Rose Stone-Embroidered Abaya with Feathery Sleeves | Premium Moss Chiffon Stonework Abaya: 6 image(s)
+  Front-Open Bloom Embroidered Stonework Abaya | Premium Romantic Nida Stone-studded Abaya: 1 image(s)
+  Front-Open Black Abaya with Rose Stone-Embroidered & Ruffled Cuffs | Premium Moss Chiffon Stonework Abaya: 1 image(s)
+  Front-Open Rose Stone-Embroidered Pastel Abaya With Scarf | Premium Moss Chiffon 2pcs Stonework Abaya: 6 image(s)
+  Front-Open Abaya with Peacock Stone Embroidery | Premium Romantic Nida Peacock Stonework Abaya: 1 image(s)
+  Front-Open Scatter Dot Stonework Butterfly Abaya with Scarf | Premium Nida Three-Dot Embellished Butterfly Sleeve Abaya: 11 image(s)
+    check answered in 3s
+  Front-Open Chevron Stonework Black Butterfly Abaya | Premium Nida Butterfly Black Abaya with Stone Embellishment: 12 image(s)
+    check answered in 4s
+  Front-Open Zigzag Stone-Studded Butterfly Colored Abaya | Premium Nida Stonework Butterfly Abaya: 12 image(s)
+    check answered in 1s
+  Front-Open Golden Vines Stone-Studded Butterfly Black Abaya | Premium Nida Golden Stonework Butterfly Abaya: 12 image(s)
+    check answered in 6s
+  Front-Open Sparkling Stonework Butterfly Abaya | Premium Romantic Nida Stone-Studded Butterfly Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Floral Tissue Beaded Handwork Black Abaya | Premium Romantic Nida Cutdana Floral Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Black Abaya with Floral Tissue Cutdana Handwork on Sleeves | Premium Romantic Nida Cutdana Floral Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Handcrafted Poppy Tissue Cutdana Abaya | Premium Romantic Nida Handwork Cutdana Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Handcrafted Starburst Cutdana Abaya | Premium Romantic Nida Handwork Embellished Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Handcrafted Lotus Vine Cutdana Abaya | Premium Romantic Nida Handwork Embellished Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open  Petal Cascade Cutdana Handwork Abaya | Premium Romantic Nida Handcrafted Cutdana Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Petal Cutdana Handwork Abaya | Premium Romantic Nida Handcrafted Cutdana Colored Abaya: 12 image(s)
+    check answered in 7s
+  Front-Open Fan Motif Cutdana Handwork Abaya | Premium Romantic Nida Handcrafted Embellished Abaya: 12 image(s)
+    check answered in 1s
+  Front-Open Diamond Handcrafted Cutdana Abaya | Premium Romantic Nida Handwork Embellished Black Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Pleated Handcrafted Cutdana Bead Stripe Abaya | Premium Nida Pleated Cutdana Handwork Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Black Handcrafted Tissue Cutdana Abaya | Premium Nida Tissue Cutdana Handwork Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Rosette Motif Feather-Trim Cutdana Handwork Abaya | Premium Moss Chiffon Embellished Abaya with Matching Scarf: 12 image(s)
+    check answered in 2s
+  Front-Open Vine Cutdana Handwork Abaya | Premium Romantic Nida Handcrafted Cutdana Colored Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Floral Cuff Cutdana Handwork Abaya | Premium Nida Handcrafted Cutdana Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Handcrafted Fern Cutdana Abaya | Premium Romantic Nida Cutdana Handwork Colored Abayas: 12 image(s)
+    check answered in 2s
+  Front-Open Handcrafted Fan Blossom Tissue Cutdana Abaya | Premium Romantic Nida Handwork Cutdana Colored Abayas: 12 image(s)
+    check answered in 3s
+  Front-Open Colorful Blossom Cutdana Handwork Abaya | Premium Romantic Nida Handcrafted Cutdana Colored Abayas: 10 image(s)
+Submitted 300 image(s) for 39 product(s) as projects/352302053849/locations/global/batchPredictionJobs/1573270984658518016
+Batch: 300 submitted, 280 passed, 20 to try again, 0 do manually, 0 back in the queue
+Report: 296 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-24 04:51 UTC",
+  "mode": "live, batch auto",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 280,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 314,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 117.705,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
