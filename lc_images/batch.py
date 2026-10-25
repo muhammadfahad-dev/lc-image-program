@@ -236,7 +236,8 @@ class BatchRunner:
                     self._save_state()
                     continue
                 if state in FAILED_STATES:
-                    self.log(f"  {entry['name']}: {state}; its images go into the next round (no try counted)")
+                    detail = self.g.batch_detail(entry["name"]) if hasattr(self.g, "batch_detail") else state
+                    self.log(f"  {entry['name']}: {detail}; its images go into the next round (no try counted)")
                 if not self._apply(mapping, answers, entry["name"]):
                     entry["reads"] = entry.get("reads", 0) + 1
                     if entry["reads"] < config.VERTEX_BATCH_MAX_READS:

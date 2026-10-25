@@ -237,7 +237,8 @@ def run_batch(args, g, s, handles):
             runner.collect()
         elif args.batch == "status":
             for job in runner.state["jobs"]:
-                print(f"  {job['name']}: {g.batch_state(job['name'])}, {job['count']} image(s), started {job['created']} UTC")
+                detail = g.batch_detail(job["name"]) if hasattr(g, "batch_detail") else g.batch_state(job["name"])
+                print(f"  {job['name']}: {detail}; {job['count']} image(s), started {job['created']} UTC")
             if not runner.state["jobs"]:
                 print("  No Batch jobs out.")
         else:

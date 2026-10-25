@@ -124,6 +124,24 @@ class GeminiVertex:
         state = job.state
         return getattr(state, "name", None) or str(state)
 
+    def batch_detail(self, name):
+        """A line about a Batch job for the log: its state, how long it has been out, how many answers are done and
+        Google's error message if it failed."""
+        job = self.client.batches.get(name=name)
+        state = getattr(job.state, "name", None) or str(job.state)
+        parts = [state.replace("JOB_STATE_", "").lower()]
+        if job.create_time:
+            from datetime import datetime, timezone
+
+            hours = (datetime.now(timezone.utc) - job.create_time).total_seconds() / 3600
+            parts.append(f"out for {hours:.1f} h")
+        stats = job.completion_stats
+        if stats is not None:
+            parts.append(f"{stats.successful_count or 0} done, {stats.failed_count or 0} failed, {stats.incomplete_count or 0} not yet done")
+        if job.error is not None and (job.error.message or job.error.code):
+            parts.append(f"Google's error: {job.error.code} {job.error.message}")
+        return "; ".join(parts)
+
     def choose_models(self, require_image=True):
         return self.image_model, self.check_model
 
