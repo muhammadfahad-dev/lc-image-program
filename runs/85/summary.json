@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-25 07:06 UTC",
+  "mode": "live, batch auto",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 0,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 0,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 139.305,
+  "seconds_per_website_image": null,
+  "limit_reached": false,
+  "products": []
+}
