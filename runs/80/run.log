@@ -1,0 +1,51 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $128.50 of $290
+  projects/352302053849/locations/global/batchPredictionJobs/1573270984658518016: running, 300 image(s)
+  projects/352302053849/locations/global/batchPredictionJobs/7428495858007539712: running, 300 image(s)
+  projects/352302053849/locations/global/batchPredictionJobs/5168955482462748672: running, 300 image(s)
+  Front-Open Bloom Cuff Stonework Abaya | Premium Nida Beaded Sleeve Abaya: 11 image(s)
+  Front-Open Stonework Butterfly Abaya | Premium Nida Sparkling Stone-Studded Abaya: 12 image(s)
+  Front-Open Zig-Zac Stone Embellished Abaya | Premium Nida Stonework Abaya with Scarf: 12 image(s)
+  Front-Open Zigzag Stonework Butterfly Abaya | Premium Romantic Nida Stonework Abaya: 12 image(s)
+  Front-Open Stonework Kimono Abaya with Separate Inner & Scarf | Premium Chiffon Stone-Studded 3 pc Set Abaya+Inner+Scarf: 12 image(s)
+  Front-Open Stonework Butterfly Abaya | Premium Romantic Nida Butterfly Stone-Studded Abaya: 12 image(s)
+  Front-Open Stone-Studded Leaf Butterfly Abaya with Scarf | Premium Nida Stonework Butterfly Abaya: 12 image(s)
+  Front-Open Teardrop Stonework Butterfly Abaya | Premium Nida Stone-Studded Butterfly Abaya: 12 image(s)
+  Front-Open Frill Stonework Abaya | Premium Nida Pleated Panel Stone-Studded Abaya: 12 image(s)
+  Front-Open Trinity Stonework Abaya with Matching Black Scarf | Premium Nida Stone-Studded Abaya: 12 image(s)
+  Front-Open Vine Trail Stone-Studded Butterfly Abaya | Premium Nida Stonework Butterfly Abaya: 12 image(s)
+  Front-Open Vine Bloom Stonework Butterfly Abaya | Premium Nida Fully Stone-Studded Butterfly Abaya: 12 image(s)
+  Front-Open Petal Drop Stonework Butterfly Abaya | Premium Nida Stone-Studded Butterfly Abaya: 12 image(s)
+  Front-Open Diagonal Stonework Butterfly Abaya | Premium Nida Butterfly Sleeve Abaya: 12 image(s)
+  Front-Open Black-Stonework Butterfly Abaya | Premium Nida All Black Butterfly Stonework Abaya: 12 image(s)
+  Front-Open Falling Leaves Stone Embellished Abaya With Scarf & Belt | Premium Nida Stonework Colored Abaya: 12 image(s)
+  Front-Open Interlocking Rings Stonework Abaya | Premium Romantic Nida Stonework Abaya: 12 image(s)
+  Front-Open Rose Bloom Stonework Abaya | Premium Nida Floral Stonework Colored Abaya: 12 image(s)
+  Front-Open Golden Feather Stonework Butterfly Abaya | Premium Nida Stone-Studded Butterfly Sleeve Abaya: 12 image(s)
+  Front-Open Silver Feather Abaya | Premium Nida Feather Stonework Abaya: 12 image(s)
+  Front-Open Dubai Style Stone-Embroidered Abaya with Belt | Premium Romantic Nida Stonework Abaya with Belt: 12 image(s)
+  Front-Open Floral Vine Stonework Butterfly Abaya | Premium Romantic Nida Floral Stone-Studded Butterfly Abaya: 12 image(s)
+  Front-Open Metallic Stone-Studded Luxurious Abaya | Premium Romantic Nida Stonework Abaya: 12 image(s)
+  Front-Open High-Neck Stone-Studded Abaya | Premium Nida Teardrop Stonework Abaya: 12 image(s)
+  Front-Open High-Neck Leaf Cluster Stonework Abaya | Premium Nida Abaya with Stonework on Sleeves & Back: 12 image(s)
+  Front-Open Scatter Dot Stonework Butterfly Abaya with Scarf | Premium Nida Three-Dot Embellished Butterfly Sleeve Abaya: 1 image(s)
+Submitted 300 image(s) for 26 product(s) as projects/352302053849/locations/global/batchPredictionJobs/5417884914991235072
+Batch: 300 submitted, 0 passed, 0 to try again, 0 do manually, 0 back in the queue
+Report: 296 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-25 01:49 UTC",
+  "mode": "live, batch auto",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 0,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 0,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 133.905,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
