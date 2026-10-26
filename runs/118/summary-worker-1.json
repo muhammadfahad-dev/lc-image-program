@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-26 15:47 UTC",
+  "mode": "live",
+  "products_worked_on": 3,
+  "statuses": {
+    "done": 2,
+    "paused (limit)": 1
+  },
+  "images_passed": 29,
+  "gemini_image_calls": 33,
+  "gemini_check_calls": 35,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 182.613,
+  "seconds_per_website_image": null,
+  "limit_reached": false,
+  "products": [
+    {
+      "handle": "front-open-starflower-stonework-embroidered-black-abaya-premium-nida-black-embroidered-stone-studded-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-scattered-heart-stonework-embroidery-abaya-premium-romantic-nida-embroidered-stonework-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-scattered-butterflies-stonework-embroidered-black-abaya-premium-romantic-nida-black-embroidered-stone-studdedabaya",
+      "status": "done"
+    }
+  ]
+}
