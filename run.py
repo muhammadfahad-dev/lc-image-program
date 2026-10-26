@@ -11,6 +11,7 @@
   python run.py --vertex --list-models         the model IDs your project can use
   python run.py --vertex --batch auto          Batch round: collect finished results, then submit the next images
   python run.py --vertex --batch status        show the Batch jobs that are out
+  python run.py --vertex --shard 0/3 --minutes 45 --no-report   worker 0 of 3 (GitHub runs 3 at once)
   python run.py --report                       write the progress report (output/report.csv and the Google Sheet)
   python run.py --vertex ...                   make the images through Vertex AI in your Google Cloud project
   python run.py --web ...                      make the images on the Gemini website (your PC, signed in with python web.py login)
@@ -19,6 +20,7 @@ import argparse
 import html
 import json
 import sys
+import time
 import traceback
 from datetime import datetime, timezone
 from pathlib import Path
@@ -171,11 +173,17 @@ def make_generator(args, s):
 def run_products(args, g, s, handles):
     """One-by-one: work through the products. Returns (results, counts, stopped, images passed)."""
     results, counts, stopped, images_made = [], {}, False, 0
+    started = time.monotonic()
     for product in s.iter_products(handles or None):
         if len(results) >= args.limit:
             break
+        if args.minutes and time.monotonic() - started >= args.minutes * 60:
+            print(f"\n{args.minutes} minutes used: no new product is started; the next round carries on")
+            break
         if product["productType"] not in config.PRODUCT_TYPES:
             continue
+        if not in_shard(product, args.shard):
+            continue  # another worker's product
         audit = json.loads((product.get("audit") or {}).get("value") or "{}")
         if args.recheck:
             if not audit.get("choice") or audit.get("status") in ("needs_photo", "skipped"):
@@ -225,6 +233,14 @@ def run_products(args, g, s, handles):
     return results, counts, stopped, images_made
 
 
+def in_shard(product, shard):
+    """With --shard K/N (parallel workers), True for the products worker K looks after: product number modulo N is K."""
+    if not shard:
+        return True
+    k, n = (int(x) for x in shard.split("/"))
+    return int(product["id"].rsplit("/", 1)[-1]) % n == k
+
+
 def waiting_on_batch(audit):
     """True when all the product's open images are out in Batch jobs, so there is nothing to make now."""
     states = [v.get("status") for group in ("slots", "colours") for v in (audit.get(group) or {}).values()]
@@ -271,6 +287,9 @@ def main():
     ap.add_argument("--retry-manual", action="store_true", help="try again the images marked 'do manually'")
     ap.add_argument("--recheck", action="store_true", help="check images already made against the current rules and remake the ones that fail")
     ap.add_argument("--redo", default="", help="make these images again, e.g. closer-1,closer-3 or closer (use with --handles)")
+    ap.add_argument("--shard", default="", help="K/N: work only on worker K's share of the products (for N parallel workers)")
+    ap.add_argument("--minutes", type=int, default=0, help="start no new product after this many minutes (0 = no time limit)")
+    ap.add_argument("--no-report", action="store_true", help="do not update the report at the end (another step does it once)")
     ap.add_argument("--vertex", action="store_true", help="use Vertex AI in your Google Cloud project (signed in with gcloud, no API key)")
     ap.add_argument("--batch", choices=["submit", "collect", "auto", "status"], help="with --vertex: Batch mode (half price, results within 24h)")
     ap.add_argument("--web", action="store_true", help="make images on the Gemini website instead of the API (photo choice and checks too, unless CHECK_SOURCE=api)")
@@ -355,7 +374,7 @@ def main():
             s.set_metafields([{"ownerId": s.shop_id(), "namespace": "custom", "key": config.SUMMARY_KEY, "type": "json", "value": json.dumps({k: v for k, v in summary.items() if k != "products"})}])
         except Exception as error:  # the summary is a convenience; the products' own progress is already saved
             print(f"Could not save the run summary to Shopify ({str(error)[:150]}); it is in output/summary.json")
-        if config.REPORT_SHEET_ID:
+        if config.REPORT_SHEET_ID and not args.no_report:
             from lc_images.report import make_report
 
             try:

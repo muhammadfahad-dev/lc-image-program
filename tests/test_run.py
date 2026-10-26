@@ -49,6 +49,16 @@ def test_pilot_and_live_and_batch():
         assert "batch auto" in json.loads((Path(tmp) / "summary.json").read_text())["mode"]
 
 
+def test_shards_split_products():
+    from run import in_shard
+
+    ids = [{"id": f"gid://shopify/Product/{n}"} for n in range(100, 130)]
+    shares = [[p for p in ids if in_shard(p, f"{k}/3")] for k in range(3)]
+    assert sum(len(x) for x in shares) == len(ids) and all(shares)
+    assert not set(map(id, shares[0])) & set(map(id, shares[1]))
+    assert all(in_shard(p, "") for p in ids)
+
+
 if __name__ == "__main__":
     config.REPORT_SHEET_ID = ""
     for name, fn in list(globals().items()):

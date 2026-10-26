@@ -3,7 +3,7 @@ name: LC images
 on:
   # Every hour. What the hourly run does is set by AUTO below (in this file, so it can be changed by a commit):
   #   batch  -> a Batch round: read finished Batch jobs, check and place their images, send the next images
-  #   single -> one-by-one, up to MAX_PRODUCTS products
+  #   single -> one-by-one by WORKERS parallel workers, each starting no new product after WORKER_MINUTES
   #   off    -> nothing (the hourly run stops straight away)
   schedule:
     - cron: "20 * * * *"
@@ -41,6 +41,8 @@ env:
   VERTEX_BATCH_MAX_JOBS: "4"
   REPORT_SHEET_ID: 1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
   BATCH_PRODUCTS_PER_ROUND: "60"
+  WORKERS: "3" # keep in step with the shard list of the workers job below
+  WORKER_MINUTES: "45"
 
 permissions:
   contents: write
@@ -51,7 +53,37 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Decides what this run does. A live round over the whole store (the hourly run, or "live" without handles) goes to
+  # the 3 parallel workers; everything else runs in the single job as before.
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      go: ${{ steps.p.outputs.go }}
+      mode: ${{ steps.p.outputs.mode }}
+      limit: ${{ steps.p.outputs.limit }}
+      parallel: ${{ steps.p.outputs.parallel }}
+    steps:
+      - id: p
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$AUTO" != "batch" ] && [ "$AUTO" != "single" ]; then
+            echo "AUTO is off in .github/workflows/images.yml; nothing to do."
+            echo "go=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          MODE="${{ github.event.inputs.mode }}"
+          if [ -z "$MODE" ]; then
+            if [ "$AUTO" = "batch" ]; then MODE=batch-auto; else MODE=live; fi
+          fi
+          LIMIT="${{ github.event.inputs.limit || vars.MAX_PRODUCTS || '25' }}"
+          if [ "$MODE" = "batch-auto" ] && [ -z "${{ github.event.inputs.limit }}" ]; then LIMIT="$BATCH_PRODUCTS_PER_ROUND"; fi
+          PARALLEL=false
+          if [ "$MODE" = "live" ] && [ -z "${{ github.event.inputs.handles }}" ]; then PARALLEL=true; fi
+          { echo "go=true"; echo "mode=$MODE"; echo "limit=$LIMIT"; echo "parallel=$PARALLEL"; } >> "$GITHUB_OUTPUT"
+          echo "mode $MODE, limit $LIMIT, parallel workers: $PARALLEL"
+
+  # Modes other than a whole-store live round
   run:
+    needs: plan
+    if: needs.plan.outputs.go == 'true' && needs.plan.outputs.parallel != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 340
     env:
@@ -61,69 +93,177 @@ jobs:
       SHOPIFY_STORE: ${{ vars.SHOPIFY_STORE }}
       MAX_PRODUCTS: ${{ vars.MAX_PRODUCTS }}
     steps:
-      - name: Is there work to do?
-        id: gate
-        run: |
-          if [ "${{ github.event_name }}" = "schedule" ] && [ "$AUTO" != "batch" ] && [ "$AUTO" != "single" ]; then
-            echo "AUTO is off in .github/workflows/images.yml; nothing to do."
-            echo "go=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "go=true" >> "$GITHUB_OUTPUT"
-          fi
       - uses: actions/checkout@v5
-        if: steps.gate.outputs.go == 'true'
       - uses: actions/setup-python@v6
-        if: steps.gate.outputs.go == 'true'
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-        if: steps.gate.outputs.go == 'true'
       - name: Tests (no keys needed)
-        if: steps.gate.outputs.go == 'true'
         run: |
           for t in test_pipeline test_gemini test_vertex test_report test_batch test_run; do python tests/$t.py || exit 1; done
       - name: Sign in to Google Cloud (no stored key)
-        if: steps.gate.outputs.go == 'true' && env.GCP_WIF_PROVIDER != ''
+        if: env.GCP_WIF_PROVIDER != ''
         uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ env.GCP_WIF_PROVIDER }}
           service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
       - name: Run
-        if: steps.gate.outputs.go == 'true'
         run: |
           set -o pipefail
           mkdir -p output
-          MODE="${{ github.event.inputs.mode }}"
-          if [ -z "$MODE" ]; then
-            if [ "$AUTO" = "batch" ]; then MODE=batch-auto; else MODE=live; fi
-          fi
-          LIMIT="${{ github.event.inputs.limit || vars.MAX_PRODUCTS || '25' }}"
-          if [ "$MODE" = "batch-auto" ] && [ -z "${{ github.event.inputs.limit }}" ]; then LIMIT="$BATCH_PRODUCTS_PER_ROUND"; fi
+          MODE="${{ needs.plan.outputs.mode }}"
+          LIMIT="${{ needs.plan.outputs.limit }}"
           HANDLES="${{ github.event.inputs.handles }}"
           echo "$MODE" > output/mode.txt
           case "$MODE" in
             vertex-test)  python run.py --vertex --test-key 2>&1 | tee output/run.log ;;
             pilot)        python run.py --vertex --dry-run --limit "$LIMIT" --handles "$HANDLES" 2>&1 | tee output/run.log ;;
-            live)
-              # Batch jobs still out are read first (their images are used, or go back into the queue), then images
-              # are made one by one
-              { python run.py --vertex --batch collect; python run.py --vertex --limit "$LIMIT" --handles "$HANDLES"; } 2>&1 | tee output/run.log ;;
+            live)         { python run.py --vertex --batch collect; python run.py --vertex --limit "$LIMIT" --handles "$HANDLES"; } 2>&1 | tee output/run.log ;;
             batch-auto)   python run.py --vertex --batch auto --limit "$LIMIT" --handles "$HANDLES" 2>&1 | tee output/run.log ;;
             batch-status) python run.py --vertex --batch status 2>&1 | tee output/run.log ;;
             recheck)      python run.py --vertex --recheck --limit "$LIMIT" --handles "$HANDLES" 2>&1 | tee output/run.log ;;
             report)       python run.py --report 2>&1 | tee output/run.log ;;
           esac
       - name: Show the error
-        if: failure() && steps.gate.outputs.go == 'true'
+        if: failure()
         run: tail -n 12 output/run.log 2>/dev/null | sed 's/%/%25/g' | while IFS= read -r line; do echo "::error::$line"; done
       - name: Save the report to the reports branch
-        if: always() && steps.gate.outputs.go == 'true'
+        if: always()
         run: |
           RUN="runs/${{ github.run_number }}"
           mkdir -p "/tmp/report/$RUN"
           cp output/run.log output/summary.json output/mode.txt output/report.csv output/vertex_spend.json "/tmp/report/$RUN/" 2>/dev/null || true
           # Images are kept only for pilots (for review); other runs keep the log and summary
           if [ "$(cat output/mode.txt 2>/dev/null)" = "pilot" ]; then cp -r output/. "/tmp/report/$RUN/"; fi
+          git config user.name "lc-images-bot"
+          git config user.email "lc-images-bot@users.noreply.github.com"
+          if git fetch --depth 1 origin reports 2>/dev/null; then git checkout -q -B reports origin/reports; else git checkout -q --orphan reports; git rm -rq --cached . 2>/dev/null || true; find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +; fi
+          mkdir -p runs && cp -r "/tmp/report/runs/." runs/
+          git add runs
+          git commit -q -m "Report for run ${{ github.run_number }}" && git push -q origin reports || echo "Nothing to save"
+
+  # Whole-store live round, step 1: read the Batch jobs still out, once, before the workers start
+  collect:
+    needs: plan
+    if: needs.plan.outputs.parallel == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      SHOPIFY_ADMIN_TOKEN: ${{ secrets.SHOPIFY_ADMIN_TOKEN }}
+      SHOPIFY_CLIENT_ID: ${{ secrets.SHOPIFY_CLIENT_ID }}
+      SHOPIFY_CLIENT_SECRET: ${{ secrets.SHOPIFY_CLIENT_SECRET }}
+      SHOPIFY_STORE: ${{ vars.SHOPIFY_STORE }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Tests (no keys needed)
+        run: |
+          for t in test_pipeline test_gemini test_vertex test_report test_batch test_run; do python tests/$t.py || exit 1; done
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.GCP_WIF_PROVIDER }}
+          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
+      - name: Collect Batch jobs
+        run: |
+          set -o pipefail
+          mkdir -p output
+          python run.py --vertex --batch collect --no-report 2>&1 | tee output/run.log
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: log-collect
+          path: output/run.log
+          if-no-files-found: ignore
+
+  # Step 2: 3 workers at the same time, each on its own third of the products (product number modulo 3)
+  workers:
+    needs: [plan, collect]
+    if: ${{ !cancelled() && needs.plan.outputs.parallel == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2]
+    env:
+      SHOPIFY_ADMIN_TOKEN: ${{ secrets.SHOPIFY_ADMIN_TOKEN }}
+      SHOPIFY_CLIENT_ID: ${{ secrets.SHOPIFY_CLIENT_ID }}
+      SHOPIFY_CLIENT_SECRET: ${{ secrets.SHOPIFY_CLIENT_SECRET }}
+      SHOPIFY_STORE: ${{ vars.SHOPIFY_STORE }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.GCP_WIF_PROVIDER }}
+          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
+      - name: Make images (worker ${{ matrix.shard }})
+        run: |
+          set -o pipefail
+          mkdir -p output
+          python run.py --vertex --limit "${{ needs.plan.outputs.limit }}" --shard "${{ matrix.shard }}/$WORKERS" --minutes "$WORKER_MINUTES" --no-report 2>&1 | tee output/run.log
+      - name: Show the error
+        if: failure()
+        run: tail -n 12 output/run.log 2>/dev/null | sed 's/%/%25/g' | while IFS= read -r line; do echo "::error::$line"; done
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: log-worker-${{ matrix.shard }}
+          path: |
+            output/run.log
+            output/summary.json
+            output/vertex_spend.json
+          if-no-files-found: ignore
+
+  # Step 3: when all 3 workers have finished, update the Google Sheet once and save the logs once
+  report:
+    needs: [plan, workers]
+    if: ${{ !cancelled() && needs.plan.outputs.parallel == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      SHOPIFY_ADMIN_TOKEN: ${{ secrets.SHOPIFY_ADMIN_TOKEN }}
+      SHOPIFY_CLIENT_ID: ${{ secrets.SHOPIFY_CLIENT_ID }}
+      SHOPIFY_CLIENT_SECRET: ${{ secrets.SHOPIFY_CLIENT_SECRET }}
+      SHOPIFY_STORE: ${{ vars.SHOPIFY_STORE }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.GCP_WIF_PROVIDER }}
+          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
+      - name: Update the Google Sheet
+        run: |
+          set -o pipefail
+          mkdir -p output
+          echo live > output/mode.txt
+          python run.py --report 2>&1 | tee output/run.log
+      - uses: actions/download-artifact@v4
+        if: always()
+        with:
+          path: /tmp/logs
+      - name: Save the report to the reports branch
+        if: always()
+        run: |
+          RUN="runs/${{ github.run_number }}"
+          mkdir -p "/tmp/report/$RUN"
+          { for part in collect worker-0 worker-1 worker-2; do
+              echo "===== $part ====="; cat "/tmp/logs/log-$part/run.log" 2>/dev/null || echo "(no log)"; echo
+            done; echo "===== report ====="; cat output/run.log; } > "/tmp/report/$RUN/run.log"
+          for k in 0 1 2; do
+            cp "/tmp/logs/log-worker-$k/summary.json" "/tmp/report/$RUN/summary-worker-$k.json" 2>/dev/null || true
+          done
+          cp output/mode.txt output/report.csv "/tmp/report/$RUN/" 2>/dev/null || true
           git config user.name "lc-images-bot"
           git config user.email "lc-images-bot@users.noreply.github.com"
           if git fetch --depth 1 origin reports 2>/dev/null; then git checkout -q -B reports origin/reports; else git checkout -q --orphan reports; git rm -rq --cached . 2>/dev/null || true; find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +; fi
