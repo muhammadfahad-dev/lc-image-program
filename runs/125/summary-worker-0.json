@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-26 23:00 UTC",
+  "mode": "live",
+  "products_worked_on": 5,
+  "statuses": {
+    "done": 2,
+    "paused (limit)": 2,
+    "manual": 1
+  },
+  "images_passed": 20,
+  "gemini_image_calls": 23,
+  "gemini_check_calls": 22,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 199.935,
+  "seconds_per_website_image": null,
+  "limit_reached": false,
+  "products": [
+    {
+      "handle": "front-open-3d-handwork-abaya-with-attached-inner-premium-korean-nida-embellished-3d-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-embellished-abaya-with-fringed-cuffs-premium-romantic-nida-cutdana-embroidery-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-black-abaya-with-honeycomb-cutdana-handwork-broad-cuffs-premium-romantic-nida-cutdana-abaya",
+      "status": "manual"
+    },
+    {
+      "handle": "front-open-scattered-leaves-stone-embroidered-abaya-premium-romantic-nida-stonework-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-black-stonework-embroidered-abaya-premium-r-nida-stonework-black-abaya",
+      "status": "done"
+    }
+  ]
+}
