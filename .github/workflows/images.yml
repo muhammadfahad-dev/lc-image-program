@@ -32,7 +32,7 @@ on:
 
 # Settings that are not secret (the Shopify keys stay in GitHub secrets).
 env:
-  AUTO: "batch"
+  AUTO: "single"
   GOOGLE_CLOUD_PROJECT: project-c065e1d2-16ae-4565-bb0
   GCP_SERVICE_ACCOUNT: lc-images@project-c065e1d2-16ae-4565-bb0.iam.gserviceaccount.com
   GCP_WIF_PROVIDER: projects/352302053849/locations/global/workloadIdentityPools/github/providers/lc-repo
@@ -104,7 +104,10 @@ jobs:
           case "$MODE" in
             vertex-test)  python run.py --vertex --test-key 2>&1 | tee output/run.log ;;
             pilot)        python run.py --vertex --dry-run --limit "$LIMIT" --handles "$HANDLES" 2>&1 | tee output/run.log ;;
-            live)         python run.py --vertex --limit "$LIMIT" --handles "$HANDLES" 2>&1 | tee output/run.log ;;
+            live)
+              # Batch jobs still out are read first (their images are used, or go back into the queue), then images
+              # are made one by one
+              { python run.py --vertex --batch collect; python run.py --vertex --limit "$LIMIT" --handles "$HANDLES"; } 2>&1 | tee output/run.log ;;
             batch-auto)   python run.py --vertex --batch auto --limit "$LIMIT" --handles "$HANDLES" 2>&1 | tee output/run.log ;;
             batch-status) python run.py --vertex --batch status 2>&1 | tee output/run.log ;;
             recheck)      python run.py --vertex --recheck --limit "$LIMIT" --handles "$HANDLES" 2>&1 | tee output/run.log ;;

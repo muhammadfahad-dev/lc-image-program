@@ -184,6 +184,8 @@ def run_products(args, g, s, handles):
             skip = ("done", "needs_photo", "skipped") if args.retry_manual else ("done", "manual", "needs_photo", "skipped")
             if audit.get("status") in skip and not handles:
                 continue
+            if waiting_on_batch(audit) and not handles:
+                continue  # its images are out in a Batch job; the run's places go to products with work to do
         print(f"\n{product['title']}")
         run = ProductRun(product, g, s, out_dir=OUT if args.dry_run else None)
         if args.retry_manual:
@@ -221,6 +223,12 @@ def run_products(args, g, s, handles):
         if stopped:
             break
     return results, counts, stopped, images_made
+
+
+def waiting_on_batch(audit):
+    """True when all the product's open images are out in Batch jobs, so there is nothing to make now."""
+    states = [v.get("status") for group in ("slots", "colours") for v in (audit.get(group) or {}).values()]
+    return "queued" in states and "pending" not in states
 
 
 def run_batch(args, g, s, handles):
