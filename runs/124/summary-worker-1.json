@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-26 22:10 UTC",
+  "mode": "live",
+  "products_worked_on": 6,
+  "statuses": {
+    "paused (limit)": 3,
+    "done": 2,
+    "manual": 1
+  },
+  "images_passed": 10,
+  "gemini_image_calls": 13,
+  "gemini_check_calls": 12,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 197.349,
+  "seconds_per_website_image": null,
+  "limit_reached": true,
+  "products": [
+    {
+      "handle": "front-closed-contrast-stone-embroidered-petal-cuff-maxi-abaya-premium-nida-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-abaya-with-stone-embroidered-sleeves-ruffled-cuffs-premium-nida-abaya-with-scarf",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-handmade-cutdana-abaya-premium-romantic-nida-abaya-with-diamond-trailed-sleeves",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-abaya-with-tissue-cutdana-cuffs-premium-korean-nida-cutdana-embroidered-abaya",
+      "status": "manual"
+    },
+    {
+      "handle": "front-open-frill-abaya-with-cutdana-handwork-scarf-premium-hareer-maqsood-cutdana-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-stone-embroidered-crystal-lily-abaya-premium-moss-chiffon-stonework-abaya-with-fringe-cuffs",
+      "status": "paused (limit)"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-26 22:10 UTC",
+  "mode": "live",
+  "products_worked_on": 5,
+  "statuses": {
+    "manual": 2,
+    "paused (limit)": 2,
+    "done": 1
+  },
+  "images_passed": 16,
+  "gemini_image_calls": 21,
+  "gemini_check_calls": 17,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 197.727,
+  "seconds_per_website_image": null,
+  "limit_reached": false,
+  "products": [
+    {
+      "handle": "front-open-abaya-with-beaded-floral-handwork-premium-korean-nida-handcrafted-cutdana-abaya",
+      "status": "manual"
+    },
+    {
+      "handle": "front-open-3-pc-set-abaya-with-separate-inner-chiffon-overlay-premium-chiffon-abaya-with-cutdana-work-on-sleeves-back",
+      "status": "manual"
+    },
+    {
+      "handle": "front-open-abaya-with-peacock-stone-embroidery-premium-romantic-nida-peacock-stonework-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-stone-embroidered-abaya-with-fringed-cuffs-premium-romantic-nida-stonework-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-contrast-handwork-abaya-premium-romantic-nida-abaya-with-cutdana-embellishment",
+      "status": "done"
+    }
+  ]
+}
