@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-26 18:01 UTC",
+  "mode": "live",
+  "products_worked_on": 4,
+  "statuses": {
+    "done": 1,
+    "paused (limit)": 3
+  },
+  "images_passed": 11,
+  "gemini_image_calls": 12,
+  "gemini_check_calls": 15,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 187.641,
+  "seconds_per_website_image": null,
+  "limit_reached": true,
+  "products": [
+    {
+      "handle": "front-open-abaya-with-starburst-stonework-embroidery-scarf-premium-nida-embroidered-stonework-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-amber-bloom-stonework-embroidery-abaya-premium-romantic-nida-embroidered-stone-studded-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-silver-bloom-embroidered-stonework-black-abaya-premium-romantic-nida-stone-studded-embroidery-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-scattered-leaf-embroidered-stonework-black-abaya-premium-romantic-nida-stone-studded-embroidery-abaya",
+      "status": "paused (limit)"
+    }
+  ]
+}
