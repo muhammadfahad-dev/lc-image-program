@@ -210,6 +210,13 @@ def run_products(args, g, s, handles):
         except QuotaExhausted as error:
             print(f"  Limit reached: {str(error)[:300]}\n  Everything made so far is kept; run the same command again later.")
             status, stopped = "paused (limit)", True
+            # A parallel worker that Google keeps turning away (busy, not the spending cap) waits and carries on with
+            # the next product while it still has time; this product is picked up again next round
+            left = args.minutes * 60 - (time.monotonic() - started) if args.minutes else 0
+            if "Spending cap" not in str(error) and left > config.WORKER_BUSY_WAIT_SECONDS + 300:
+                print(f"  Google is busy: waiting {config.WORKER_BUSY_WAIT_SECONDS // 60} minutes, then the next product")
+                time.sleep(config.WORKER_BUSY_WAIT_SECONDS)
+                stopped = False
         except KeyboardInterrupt:
             print("  Stopped by you (Ctrl+C). Everything made so far is kept; run the same command again to continue.")
             status, stopped = "paused (stopped by you)", True

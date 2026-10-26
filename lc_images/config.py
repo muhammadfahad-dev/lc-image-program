@@ -94,6 +94,8 @@ VERTEX_PRICE_PER_CHECK = float(env("VERTEX_PRICE_PER_CHECK", "0.006"))
 VERTEX_CHECK_MEDIA_RESOLUTION = env("VERTEX_CHECK_MEDIA_RESOLUTION", "medium")  # low, medium or high
 VERTEX_CHECK_THINKING = env("VERTEX_CHECK_THINKING", "low")  # minimal, low, medium or high
 VERTEX_SECONDS_BETWEEN_CALLS = float(env("VERTEX_SECONDS_BETWEEN_CALLS", "4"))
+# A parallel worker (--minutes) that Google keeps turning away waits this long, then goes on with the next product
+WORKER_BUSY_WAIT_SECONDS = int(env("WORKER_BUSY_WAIT_SECONDS", "300"))
 VERTEX_TIMEOUT_SECONDS = int(env("VERTEX_TIMEOUT_SECONDS", "120"))
 # Waits after "too many requests" before trying again; after the last one the run stops (and continues next time)
 VERTEX_RATE_LIMIT_WAITS = [int(x) for x in env("VERTEX_RATE_LIMIT_WAITS", "15,30,60,60,90,120").split(",")]
