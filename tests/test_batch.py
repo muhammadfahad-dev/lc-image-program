@@ -190,6 +190,21 @@ def test_failed_job_puts_images_back():
         assert runner.collect() == 1  # still running: nothing read, nothing lost
 
 
+def test_failed_job_still_uses_its_finished_images_and_refunds_the_rest():
+    with tempfile.TemporaryDirectory() as tmp:
+        storage, s, g, p, runner = setup(tmp)
+        g.drop = {"1:1"}  # closer-2 was never made
+        runner.auto(5)
+        spent = g.spend.data["usd"]
+        g.batch_state(s.shop["image_batches"]["jobs"][0]["name"])  # Google writes what it finished
+        g.next_state = "JOB_STATE_FAILED"
+        runner.collect()
+        a = audit_of(s, p)
+        assert a["slots"]["closer-3"]["status"] == "done"
+        assert a["slots"]["closer-2"]["status"] == "pending" and a["slots"]["closer-2"]["tries"] == 0
+        assert abs(g.spend.data["usd"] - (spent - config.VERTEX_BATCH_PRICE_PER_IMAGE)) < 1e-6 + config.VERTEX_PRICE_PER_CHECK * 12
+
+
 def test_spending_cap_limits_the_round():
     with tempfile.TemporaryDirectory() as tmp:
         storage, s, g, p, runner = setup(tmp)

@@ -225,7 +225,8 @@ class BatchRunner:
             except NotFound:
                 mapping = None  # already read and cleared (an earlier run stopped while cleaning up)
             if mapping is not None:
-                answers = self._read_answers(entry) if state in DONE_STATES else {}
+                # a failed job (e.g. stopped by Google after 24 hours) can still hold finished images: use them
+                answers = self._read_answers(entry)
                 matched = sum(1 for key in mapping if self._key(*key.split("\n", 1)) in answers)
                 if state in DONE_STATES and mapping and not matched and entry.get("reads", 0) + 1 < config.VERTEX_BATCH_MAX_READS:
                     # finished but no answer could be matched: keep its files and images as they are, so nothing is
@@ -237,7 +238,12 @@ class BatchRunner:
                     continue
                 if state in FAILED_STATES:
                     detail = self.g.batch_detail(entry["name"]) if hasattr(self.g, "batch_detail") else state
-                    self.log(f"  {entry['name']}: {detail}; its images go into the next round (no try counted)")
+                    self.log(f"  {entry['name']}: {detail}; {matched} finished image(s) used, the rest go into the next round (no try counted)")
+                unanswered = len(mapping) - matched
+                if unanswered > 0 and not entry.get("refunded"):
+                    # images Google never made are not charged: take them back out of the spending estimate
+                    entry["refunded"] = True
+                    self.g.spend.add(-config.VERTEX_BATCH_PRICE_PER_IMAGE * unanswered, "images", count=-unanswered)
                 if not self._apply(mapping, answers, entry["name"]):
                     entry["reads"] = entry.get("reads", 0) + 1
                     if entry["reads"] < config.VERTEX_BATCH_MAX_READS:
