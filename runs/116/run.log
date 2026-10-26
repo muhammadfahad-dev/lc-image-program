@@ -1,0 +1,469 @@
+===== collect =====
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $175.37 of $290
+  projects/352302053849/locations/global/batchPredictionJobs/34491267446472704: running, 300 image(s)
+  projects/352302053849/locations/global/batchPredictionJobs/8985325158101155840: running, 300 image(s)
+  projects/352302053849/locations/global/batchPredictionJobs/257067605280423936: running, 300 image(s)
+  projects/352302053849/locations/global/batchPredictionJobs/4468179547476459520: running, 300 image(s)
+Batch: 0 submitted, 0 passed, 0 to try again, 0 do manually, 0 back in the queue
+
+Summary: {
+  "date": "2026-10-26 13:30 UTC",
+  "mode": "live, batch collect",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 0,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 0,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 175.365,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
+
+===== worker-0 =====
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $175.37 of $290
+
+Front-Open Stonework Embroidery Abaya | Premium Romantic Nida Embroidered Stone-Studded Abaya
+    check answered in 3s
+  hero-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image answered in 13s
+    check answered in 2s
+  hero-1: passed, 2m 05s in all
+  hero-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 16s
+    check answered in 5s
+  hero-2: passed, 1m 10s in all
+  hero-3: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 12s
+    check answered in 2s
+  hero-3: passed, 1m 03s in all
+  hero-4: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 15s
+    check answered in 2s
+  hero-4: passed, 1m 09s in all
+  fitting-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 120s (6/6)
+    image answered in 13s
+    check answered in 3s
+  fitting-1: passed, 8m 12s in all
+  multi-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image answered in 15s
+    check answered in 3s
+  multi-1: passed, 4m 37s in all
+  multi-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 15s
+    check answered in 3s
+  multi-2: passed, 1m 08s in all
+  multi-3b: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 16s
+    multi-3b: Gemini gave no image (FinishReason.OTHER), attempt 1
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 12s
+    check answered in 4s
+  multi-3b: passed, 2m 07s in all
+  closer-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 14s
+    check answered in 3s
+  closer-1: passed, 0m 36s in all
+  closer-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 15s
+    check answered in 2s
+  closer-2: passed, 1m 07s in all
+  closer-3: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 120s (6/6)
+  Limit reached: Vertex AI kept refusing (Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': )); stopping for now. Run the same command again later to continue.
+  Everything made so far is kept; run the same command again later.
+  -> paused (limit) (10 images passed)
+
+Summary: {
+  "date": "2026-10-26 13:31 UTC",
+  "mode": "live",
+  "products_worked_on": 1,
+  "statuses": {
+    "paused (limit)": 1
+  },
+  "images_passed": 10,
+  "gemini_image_calls": 11,
+  "gemini_check_calls": 11,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 176.673,
+  "seconds_per_website_image": null,
+  "limit_reached": true
+}
+
+===== worker-1 =====
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $175.37 of $290
+
+Front-Open Vine Leaf Embroidery Stonework Abaya | Premium Romantic Nida Stone-Studded Embroidered Abaya
+  closer-2: generating
+    image answered in 15s
+    check answered in 3s
+  closer-2: passed, 0m 23s in all
+  closer-3: generating
+    image answered in 17s
+    check answered in 3s
+  closer-3: passed, 0m 24s in all
+  closer-4: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 15s
+    check answered in 3s
+  closer-4: passed, 1m 08s in all
+  colour-bronze: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image answered in 15s
+    check answered in 2s
+  colour-bronze: passed, 4m 40s in all
+  colour-baby-pink: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 2s
+  colour-baby-pink: passed, 1m 05s in all
+  colour-ruby-red: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 3s
+  colour-ruby-red: passed, 1m 06s in all
+  colour-teal: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 28s
+    check answered in 2s
+  colour-teal: passed, 1m 20s in all
+  colour-navy: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 13s
+    check answered in 3s
+  colour-navy: passed, 0m 35s in all
+  colour-blue: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 2s
+  colour-blue: passed, 1m 07s in all
+  colour-olive-green: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image answered in 12s
+    check answered in 2s
+  colour-olive-green: passed, 2m 08s in all
+  colour-dusty-lavender: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 12s
+    check answered in 6s
+  colour-dusty-lavender: passed, 0m 38s in all
+  colour-beige: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 3s
+  colour-beige: passed, 1m 07s in all
+  -> done (12 images passed)
+
+Front-Open Embroidered Stonework Border Abaya | Premium Romantic Nida Embroidered Stonework Colorful Abaya
+    check answered in 2s
+  hero-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 15s
+    check answered in 3s
+  hero-1: passed, 1m 08s in all
+  hero-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 15s
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 4s
+  hero-2: passed, 0m 53s in all
+  hero-3: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 120s (6/6)
+    image answered in 15s
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 4s
+  hero-3: passed, 7m 07s in all
+  hero-4: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 13s
+    check answered in 3s
+  hero-4: passed, 0m 38s in all
+  fitting-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 16s
+    check answered in 4s
+  fitting-1: passed, 1m 10s in all
+  multi-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 3s
+  multi-1: passed, 1m 05s in all
+  multi-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 4s
+  multi-2: passed, 1m 06s in all
+  multi-3b: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 16s
+    check answered in 3s
+  multi-3b: passed, 0m 39s in all
+  closer-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 12s
+    check answered in 2s
+  closer-1: passed, 1m 03s in all
+  closer-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 15s
+    check answered in 3s
+  closer-2: passed, 1m 07s in all
+  closer-3: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 20s
+    closer-3: Gemini gave no image (FinishReason.OTHER), attempt 1
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 15s
+    check answered in 3s
+  closer-3: passed, 1m 42s in all
+  closer-4: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 17s
+    check answered in 3s
+  closer-4: passed, 1m 10s in all
+  colour-purple: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 3s
+  colour-purple: passed, 1m 05s in all
+  colour-emerald-green: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 11s
+    check answered in 2s
+  colour-emerald-green: passed, 1m 03s in all
+  colour-green: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 15s
+    check answered in 3s
+  colour-green: passed, 1m 08s in all
+  colour-navy: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 14s
+    check answered in 3s
+  colour-navy: passed, 0m 41s in all
+  colour-brown: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 12s
+    check answered in 3s
+  colour-brown: passed, 1m 06s in all
+  colour-maroon: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 10s
+    check answered in 3s
+  colour-maroon: passed, 1m 03s in all
+  -> done (18 images passed)
+
+Front-Open Stonework Embroidered Sleeves Abaya | Premium Romantic Nida Embroidered Stonework Abaya
+    check answered in 3s
+  hero-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 18s
+    check answered in 5s
+  hero-1: passed, 0m 43s in all
+  hero-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 12s
+    check answered in 3s
+  hero-2: passed, 1m 05s in all
+  hero-3: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 17s
+    check answered in 4s
+  hero-3: passed, 1m 11s in all
+  hero-4: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 17s
+    check answered in 2s
+  hero-4: passed, 0m 41s in all
+  fitting-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 18s
+    check answered in 3s
+  fitting-1: passed, 0m 56s in all
+  multi-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 2s
+  multi-1: passed, 1m 05s in all
+  multi-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 14s
+    check answered in 2s
+  multi-2: passed, 1m 05s in all
+  multi-3b: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 2s
+  multi-3b: passed, 1m 05s in all
+  closer-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 16s
+    check answered in 2s
+  closer-1: passed, 1m 08s in all
+  closer-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 17s
+    check answered in 3s
+  closer-2: passed, 0m 38s in all
+  closer-3: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 17s
+    check answered in 2s
+  closer-3: passed, 1m 09s in all
+  closer-4: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 12s
+    check answered in 2s
+  closer-4: passed, 1m 04s in all
+  colour-mauve: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 14s
+    check answered in 3s
+  colour-mauve: passed, 0m 37s in all
+  colour-brown: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 21s
+    check answered in 3s
+  colour-brown: passed, 1m 14s in all
+  colour-navy: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 14s
+    check answered in 2s
+  colour-navy: passed, 1m 05s in all
+  colour-dark-brown: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 3s
+  colour-dark-brown: passed, 1m 06s in all
+  -> done (16 images passed)
+
+45 minutes used: no new product is started; the next round carries on
+
+Summary: {
+  "date": "2026-10-26 13:30 UTC",
+  "mode": "live",
+  "products_worked_on": 3,
+  "statuses": {
+    "done": 3
+  },
+  "images_passed": 46,
+  "gemini_image_calls": 47,
+  "gemini_check_calls": 48,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 177.813,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
+
+===== worker-2 =====
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $175.37 of $290
+
+Front-Open Jeweled Vine Stonework Embroidered Abaya | Premium Romantic Nida Abaya with Stone Embellished Embroidery
+    check answered in 2s
+  hero-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 120s (6/6)
+  Limit reached: Vertex AI kept refusing (Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': )); stopping for now. Run the same command again later to continue.
+  Everything made so far is kept; run the same command again later.
+  -> paused (limit) (0 images passed)
+
+Summary: {
+  "date": "2026-10-26 13:30 UTC",
+  "mode": "live",
+  "products_worked_on": 1,
+  "statuses": {
+    "paused (limit)": 1
+  },
+  "images_passed": 0,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 1,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 175.581,
+  "seconds_per_website_image": null,
+  "limit_reached": true
+}
+
+===== report =====
+Report: 322 products the program has worked on
+Report written: output/report.csv
+Report written: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
