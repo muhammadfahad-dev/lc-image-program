@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-26 17:04 UTC",
+  "mode": "live",
+  "products_worked_on": 2,
+  "statuses": {
+    "paused (limit)": 1,
+    "done": 1
+  },
+  "images_passed": 23,
+  "gemini_image_calls": 24,
+  "gemini_check_calls": 23,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 185.097,
+  "seconds_per_website_image": null,
+  "limit_reached": false,
+  "products": [
+    {
+      "handle": "front-open-jeweled-vine-stonework-embroidered-abaya-premium-romantic-nida-abaya-with-stone-embellished-embroidery",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-white-abaya-with-stonework-embroidered-cuffs-scarf-premium-nida-white-embroidered-stonework-abaya",
+      "status": "done"
+    }
+  ]
+}
