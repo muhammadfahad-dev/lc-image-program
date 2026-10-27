@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-27 13:11 UTC",
+  "mode": "live",
+  "products_worked_on": 4,
+  "statuses": {
+    "paused (limit)": 2,
+    "done": 1,
+    "manual": 1
+  },
+  "images_passed": 23,
+  "gemini_image_calls": 26,
+  "gemini_check_calls": 25,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 236.049,
+  "seconds_per_website_image": null,
+  "limit_reached": false,
+  "products": [
+    {
+      "handle": "front-open-petal-drop-stonework-butterfly-abaya-premium-nida-stone-studded-butterfly-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-black-stonework-butterfly-abaya-premium-nida-all-black-butterfly-stonework-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-rose-bloom-stonework-abaya-premium-nida-floral-stonework-colored-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-golden-feather-stonework-butterfly-abaya-premium-nida-stone-studded-butterfly-sleeve-abaya",
+      "status": "manual"
+    }
+  ]
+}
