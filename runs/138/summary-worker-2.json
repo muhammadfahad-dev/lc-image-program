@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-27 12:09 UTC",
+  "mode": "live",
+  "products_worked_on": 3,
+  "statuses": {
+    "paused (limit)": 2,
+    "manual": 1
+  },
+  "images_passed": 6,
+  "gemini_image_calls": 8,
+  "gemini_check_calls": 8,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 233.769,
+  "seconds_per_website_image": null,
+  "limit_reached": false,
+  "products": [
+    {
+      "handle": "front-open-teardrop-stonework-butterfly-abaya-premium-nida-stone-studded-butterfly-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-vine-trail-stone-studded-butterfly-abaya-premium-nida-stonework-butterfly-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-floral-vine-stonework-butterfly-abaya-premium-romantic-nida-floral-stone-studded-butterfly-abaya",
+      "status": "manual"
+    }
+  ]
+}
