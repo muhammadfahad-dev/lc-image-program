@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-27 05:28 UTC",
+  "mode": "live",
+  "products_worked_on": 4,
+  "statuses": {
+    "paused (limit)": 2,
+    "manual": 1,
+    "done": 1
+  },
+  "images_passed": 26,
+  "gemini_image_calls": 28,
+  "gemini_check_calls": 26,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 216.621,
+  "seconds_per_website_image": null,
+  "limit_reached": false,
+  "products": [
+    {
+      "handle": "front-open-stonework-embroidered-abaya-premium-romantic-nida-stone-embroidered-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-dubai-style-high-neck-cutdana-abaya-premium-romantic-nida-abaya-with-handcrafted-cutdana-abaya",
+      "status": "manual"
+    },
+    {
+      "handle": "front-open-abaya-with-fleur-de-lis-cutdana-motifs-premium-romantic-nida-handcrafted-cutdana-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-abaya-with-cutdana-embroidery-on-sleeves-premium-romantic-nida-cutdana-abaya",
+      "status": "done"
+    }
+  ]
+}

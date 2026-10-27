@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-27 05:28 UTC",
+  "mode": "live",
+  "products_worked_on": 8,
+  "statuses": {
+    "done": 5,
+    "paused (limit)": 3
+  },
+  "images_passed": 13,
+  "gemini_image_calls": 15,
+  "gemini_check_calls": 13,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 216.117,
+  "seconds_per_website_image": null,
+  "limit_reached": true,
+  "products": [
+    {
+      "handle": "front-closed-long-flared-petal-stone-embroidered-cuff-abaya-premium-romantic-nida-maxi-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-closed-contrast-stone-embroidered-petal-cuff-maxi-abaya-premium-nida-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-rosebud-stone-embroidered-abaya-premium-romantic-nida-stonework-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-floral-butterfly-stonework-embroidered-abaya-premium-romantic-nida-stone-studded-black-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-black-abaya-with-rose-bloom-stone-embroidery-premium-romantic-nida-black-stonework-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-black-stonework-abaya-premium-romantic-nida-black-feather-leaf-stone-embroidered-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-scattered-floral-stone-embroidered-black-abaya-premium-romantic-nida-black-stonework-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-abaya-with-vine-stone-embroidery-on-sleeves-back-premium-romantic-nida-colored-stonework-abaya",
+      "status": "paused (limit)"
+    }
+  ]
+}
