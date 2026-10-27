@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-27 07:42 UTC",
+  "mode": "live",
+  "products_worked_on": 7,
+  "statuses": {
+    "manual": 1,
+    "done": 4,
+    "paused (limit)": 2
+  },
+  "images_passed": 20,
+  "gemini_image_calls": 21,
+  "gemini_check_calls": 20,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 222.279,
+  "seconds_per_website_image": null,
+  "limit_reached": true,
+  "products": [
+    {
+      "handle": "kids-front-closed-floral-print-maxi-abaya-with-belt-premium-chiffon-kids-printed-maxi-abaya",
+      "status": "manual"
+    },
+    {
+      "handle": "kids-front-open-stonework-abaya-premium-black-nida-stonework-abaya-for-kids",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-stone-embroidered-abaya-premium-romantic-nida-stonework-fancy-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-rose-stone-embroidered-abaya-with-feathery-sleeves-premium-moss-chiffon-stonework-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-abaya-with-peacock-stone-embroidery-premium-romantic-nida-peacock-stonework-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-stonework-embroidered-abaya-premium-romantic-nida-stone-embroidered-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-cutdana-fleur-de-lis-motif-abaya",
+      "status": "paused (limit)"
+    }
+  ]
+}

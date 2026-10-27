@@ -1,0 +1,1035 @@
+===== collect =====
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $219.06 of $290
+  projects/352302053849/locations/global/batchPredictionJobs/4468179547476459520: 300 answer(s) in 1 result file(s)
+  projects/352302053849/locations/global/batchPredictionJobs/4468179547476459520: failed; out for 24.1 h; 142 done, 0 failed, 158 not yet done; Google's error: 4 Deadline exceeded due to job running for maximum allowed duration of 24 hours. Please retry the unprocessed rows or start over with a smaller batch size.; 300 finished image(s) used, the rest go into the next round (no try counted)
+    hero-2: retry (Gemini gave no image (no image returned))
+  Front-Closed Maxi Abaya with Stonework & Elastic Sleeves | Premium Nida Kids Embellished Maxi Abaya: in_progress
+    check answered in 3s
+    multi-3b: passed
+  Kids Front-Closed Abaya with Stonework Waist Belt | Premium Nida Kids Embellished Maxi Abaya with Elastic Sleeves: done
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    closer-2: passed
+  Kids Front-Closed Abaya with Fancy Buttons | Premium Nida Fancy Maxi Abaya with Elastic Cuffs: in_progress
+    hero-4: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    closer-2: passed
+  Kids Front-Closed Plain Maxi Abaya | Premium Nida Black Plain Kids Abaya: in_progress
+    check answered in 5s
+    hero-4: retry
+  Kids Front-Closed Ombre Abaya With Tassel Tie | Premium Chiffon Kids Two Toned Maxi Belt Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+  Kids Front-Closed Floral Print Maxi Abaya With Belt | Premium Chiffon Kids Printed Maxi Abaya: in_progress
+    closer-3: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    colour-blue: passed
+    colour-olive-green: retry (Gemini gave no image (no image returned))
+    colour-brown: retry (Gemini gave no image (no image returned))
+    colour-mauve-purple: retry (Gemini gave no image (no image returned))
+  Kids Front-Open Bow Embroidered Abaya | Premium Nida Colorful Embroidered Abayas for Kids: in_progress
+    check answered in 3s
+    fitting-1: passed
+    multi-2: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    closer-3: passed
+  Kids Front-Open Plain Black Abaya | Premium Nida Black Abaya For Kids: in_progress
+    closer-2: retry (Gemini gave no image (no image returned))
+  Kids Front-Open Embroidered Bow White Abaya | Premium Nida Embroidered Abaya For Kids: in_progress
+    closer-2: retry (Gemini gave no image (no image returned))
+  Kids Front-Open Stonework Abaya | Premium Black Nida Stonework Abaya For Kids: in_progress
+    closer-4: retry (Gemini gave no image (no image returned))
+  Kids Front-Open Black Stonework Abaya | Premium Nida Stone Studded Abaya For Kids: in_progress
+    colour-mauve-purple: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    colour-brown: passed
+    colour-rust-gold: retry (Gemini gave no image (no image returned))
+    colour-purple: retry (Gemini gave no image (no image returned))
+  Front-Open Stone Embroidered Abaya | Premium Romantic Nida Stonework Fancy Abaya: in_progress
+    closer-3: retry (Gemini gave no image (OTHER))
+    colour-pink: retry (Gemini gave no image (no image returned))
+    colour-peach: retry (Gemini gave no image (no image returned))
+    colour-beige: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    colour-light-purple: passed
+    check answered in 3s
+    colour-light-orange: passed
+  Front-Open Rose Stone-Embroidered Abaya with Feathery Sleeves | Premium Moss Chiffon Stonework Abaya: in_progress
+    check answered in 6s
+    hero-3: passed
+  Front-Open Bloom Embroidered Stonework Abaya | Premium Romantic Nida Stone-studded Abaya: done
+    check answered in 3s
+    hero-3: passed
+  Front-Open Black Abaya with Rose Stone-Embroidered & Ruffled Cuffs | Premium Moss Chiffon Stonework Abaya: done
+    colour-pink: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    colour-taupe: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 3s
+    colour-yellow: passed
+    colour-light-purple: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    colour-powder-blue: passed
+    colour-peach: retry (Gemini gave no image (no image returned))
+  Front-Open Rose Stone-Embroidered Pastel Abaya With Scarf | Premium Moss Chiffon 2pcs Stonework Abaya: in_progress
+    fitting-1: retry (Gemini gave no image (no image returned))
+  Front-Open Abaya with Peacock Stone Embroidery | Premium Romantic Nida Peacock Stonework Abaya: in_progress
+    hero-2: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (OTHER))
+    multi-1: retry (Gemini gave no image (no image returned))
+    check answered in 19s
+    multi-2: retry
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 3s
+    closer-4: passed
+  Front-Open Scatter Dot Stonework Butterfly Abaya with Scarf | Premium Nida Three-Dot Embellished Butterfly Sleeve Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: retry
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    closer-1: passed
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Chevron Stonework Black Butterfly Abaya | Premium Nida Butterfly Black Abaya with Stone Embellishment: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    multi-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    multi-2: retry
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Zigzag Stone-Studded Butterfly Colored Abaya | Premium Nida Stonework Butterfly Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    hero-3: retry (Gemini gave no image (OTHER))
+    hero-4: retry (Gemini gave no image (OTHER))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    multi-1: retry (Gemini gave no image (no image returned))
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Golden Vines Stone-Studded Butterfly Black Abaya | Premium Nida Golden Stonework Butterfly Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    hero-2: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    multi-3b: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Sparkling Stonework Butterfly Abaya | Premium Romantic Nida Stone-Studded Butterfly Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Floral Tissue Beaded Handwork Black Abaya | Premium Romantic Nida Cutdana Floral Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    multi-3b: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    closer-1: passed
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Black Abaya with Floral Tissue Cutdana Handwork on Sleeves | Premium Romantic Nida Cutdana Floral Abaya: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (no image returned))
+    multi-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    multi-2: passed
+    multi-3b: retry (Gemini gave no image (no image returned))
+    check answered in 5s
+    closer-1: passed
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    closer-4: passed
+  Front-Open Handcrafted Poppy Tissue Cutdana Abaya | Premium Romantic Nida Handwork Cutdana Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 6s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    multi-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: retry
+    check answered in 3s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-4: passed
+  Front-Open Handcrafted Starburst Cutdana Abaya | Premium Romantic Nida Handwork Embellished Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    hero-2: passed
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Handcrafted Lotus Vine Cutdana Abaya | Premium Romantic Nida Handwork Embellished Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    multi-1: retry (Gemini gave no image (no image returned))
+    check answered in 4s
+    multi-2: retry
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open  Petal Cascade Cutdana Handwork Abaya | Premium Romantic Nida Handcrafted Cutdana Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    hero-2: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    hero-3: retry
+    hero-4: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    fitting-1: passed
+    multi-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Petal Cutdana Handwork Abaya | Premium Romantic Nida Handcrafted Cutdana Colored Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    multi-2: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    multi-3b: passed
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-4: passed
+  Front-Open Fan Motif Cutdana Handwork Abaya | Premium Romantic Nida Handcrafted Embellished Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    check answered in 6s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-2: passed
+    check answered in 13s
+    closer-3: passed
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Diamond Handcrafted Cutdana Abaya | Premium Romantic Nida Handwork Embellished Black Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (no image returned))
+    multi-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 5s
+    closer-2: retry
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Pleated Handcrafted Cutdana Bead Stripe Abaya | Premium Nida Pleated Cutdana Handwork Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (no image returned))
+    multi-1: retry (Gemini gave no image (no image returned))
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Black Handcrafted Tissue Cutdana Abaya | Premium Nida Tissue Cutdana Handwork Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    multi-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    multi-2: retry
+    check answered in 2s
+    multi-3b: passed
+    closer-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Rosette Motif Feather-Trim Cutdana Handwork Abaya | Premium Moss Chiffon Embellished Abaya with Matching Scarf: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    multi-3b: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-1: passed
+    closer-2: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Vine Cutdana Handwork Abaya | Premium Romantic Nida Handcrafted Cutdana Colored Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (OTHER))
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    check answered in 4s
+    multi-1: passed
+    multi-2: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Floral Cuff Cutdana Handwork Abaya | Premium Nida Handcrafted Cutdana Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    hero-2: passed
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    fitting-1: passed
+    multi-1: retry (Gemini gave no image (no image returned))
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Handcrafted Fern Cutdana Abaya | Premium Romantic Nida Cutdana Handwork Colored Abayas: in_progress
+    check answered in 3s
+    hero-1: passed
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    multi-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    closer-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Handcrafted Fan Blossom Tissue Cutdana Abaya | Premium Romantic Nida Handwork Cutdana Colored Abayas: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    hero-2: passed
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    multi-2: retry (Gemini gave no image (no image returned))
+    check answered in 8s
+    multi-3b: passed
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+  Front-Open Colorful Blossom Cutdana Handwork Abaya | Premium Romantic Nida Handcrafted Cutdana Colored Abayas: in_progress
+Batch: 0 submitted, 124 passed, 176 to try again, 0 do manually, 0 back in the queue
+
+Summary: {
+  "date": "2026-10-27 07:24 UTC",
+  "mode": "live, batch collect",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 124,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 133,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 219.855,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
+
+===== worker-0 =====
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $219.85 of $290
+
+Front-Closed Maxi Abaya with Stonework & Elastic Sleeves | Premium Nida Kids Embellished Maxi Abaya
+  hero-2: generating
+    image answered in 13s
+    check answered in 3s
+  hero-2: passed, 0m 23s in all
+  -> done (1 images passed)
+
+Kids Front-Closed Plain Maxi Abaya | Premium Nida Black Plain Kids Abaya
+  hero-4: generating
+    image answered in 13s
+    check answered in 4s
+  hero-4: passed, 0m 24s in all
+  -> done (1 images passed)
+
+Kids Front-Open Black Stonework Abaya | Premium Nida Stone Studded Abaya For Kids
+  closer-4: generating
+    image answered in 15s
+    check answered in 3s
+  closer-4: passed, 0m 23s in all
+  -> done (1 images passed)
+
+Front-Open Rose Stone-Embroidered Pastel Abaya With Scarf | Premium Moss Chiffon 2pcs Stonework Abaya
+  colour-pink: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 120s (6/6)
+  Limit reached: Vertex AI kept refusing (Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': )); stopping for now. Run the same command again later to continue.
+  Everything made so far is kept; run the same command again later.
+  Google is busy: waiting 5 minutes, then the next product
+  -> paused (limit) (0 images passed)
+
+Front-Open Rosevine Handcrafted Cutdana Abaya | Premium Romantic Nida Abaya with Handmade Embellishments
+  multi-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 15s
+    check answered in 3s
+  multi-2: passed, 0m 38s in all
+  closer-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image answered in 14s
+    check answered in 6s
+  closer-1: passed, 2m 10s in all
+  closer-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 14s
+    check answered in 3s
+  closer-2: passed, 0m 36s in all
+  closer-3: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 3s
+  closer-3: passed, 1m 05s in all
+  colour-brown: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 12s
+    check answered in 3s
+  colour-brown: passed, 1m 05s in all
+  colour-purple: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 120s (6/6)
+  Limit reached: Vertex AI kept refusing (Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': )); stopping for now. Run the same command again later to continue.
+  Everything made so far is kept; run the same command again later.
+  Google is busy: waiting 5 minutes, then the next product
+  -> paused (limit) (5 images passed)
+
+Front-Open Cutdana Handwork Abaya | Premium Romantic Nida Abaya with Handcrafted Cutdana on Sleeves
+  multi-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image answered in 13s
+    check answered in 3s
+  multi-1: passed, 2m 05s in all
+  multi-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 120s (6/6)
+  Limit reached: Vertex AI kept refusing (Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': )); stopping for now. Run the same command again later to continue.
+  Everything made so far is kept; run the same command again later.
+  -> paused (limit) (1 images passed)
+
+Summary: {
+  "date": "2026-10-27 07:42 UTC",
+  "mode": "live",
+  "products_worked_on": 6,
+  "statuses": {
+    "done": 3,
+    "paused (limit)": 3
+  },
+  "images_passed": 9,
+  "gemini_image_calls": 9,
+  "gemini_check_calls": 9,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 222.153,
+  "seconds_per_website_image": null,
+  "limit_reached": true
+}
+
+===== worker-1 =====
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $219.85 of $290
+
+Kids Front-Closed Abaya with Fancy Buttons | Premium Nida Fancy Maxi Abaya with Elastic Cuffs
+  hero-4: generating
+    image answered in 15s
+    check answered in 4s
+  hero-4: passed, 0m 26s in all
+  -> done (1 images passed)
+
+Kids Front-Closed Ombre Abaya With Tassel Tie | Premium Chiffon Kids Two Toned Maxi Belt Abaya
+  hero-4: generating
+    image answered in 17s
+    check answered in 3s
+  hero-4: passed, 0m 27s in all
+  -> done (1 images passed)
+
+Kids Front-Open Bow Embroidered Abaya | Premium Nida Colorful Embroidered Abayas for Kids
+  closer-3: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 17s
+    check answered in 4s
+    closer-3: check failed (The mannequin is wearing a black body/dress with only the abaya sleeve attached, rather than wearing the whole abaya garment as required.), attempt 3
+  closer-3: do manually, 0m 37s in all
+  colour-olive-green: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 2s
+  colour-olive-green: passed, 1m 05s in all
+  colour-brown: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 10s
+    check answered in 2s
+  colour-brown: passed, 0m 32s in all
+  colour-mauve-purple: generating
+    image answered in 11s
+    check answered in 2s
+  colour-mauve-purple: passed, 0m 17s in all
+  -> manual (3 images passed)
+
+Kids Front-Open Plain Black Abaya | Premium Nida Black Abaya For Kids
+  multi-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 16s
+    check answered in 3s
+  multi-2: passed, 1m 09s in all
+  -> done (1 images passed)
+
+Kids Front-Open Embroidered Bow White Abaya | Premium Nida Embroidered Abaya For Kids
+  closer-2: generating
+    image answered in 14s
+    check answered in 3s
+  closer-2: passed, 0m 23s in all
+  -> done (1 images passed)
+
+Front-Open Star Stone-Embroidered Abaya | Premium Romantic Nida Stonework Colorful Abaya
+  colour-baby-pink: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 12s
+    check answered in 3s
+  colour-baby-pink: passed, 0m 35s in all
+  colour-maroon: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image answered in 10s
+    check answered in 3s
+  colour-maroon: passed, 2m 03s in all
+  -> done (2 images passed)
+
+Front Open Cutdana Handwork Abaya | Premium Romantic Nida Cutdana Motifs Abaya
+  colour-navy: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 11s
+    check answered in 4s
+  colour-navy: passed, 1m 04s in all
+  colour-mauve: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 120s (6/6)
+  Limit reached: Vertex AI kept refusing (Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': )); stopping for now. Run the same command again later to continue.
+  Everything made so far is kept; run the same command again later.
+  Google is busy: waiting 5 minutes, then the next product
+  -> paused (limit) (1 images passed)
+
+Front-Open Lotus Tissue Handcrafted Cutdana Abaya | Premium Romantic Nida Abaya with Cutdana Handwork
+  colour-light-purple: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 13s
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 3s
+  colour-light-purple: passed, 0m 49s in all
+  colour-skyblue: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 12s
+    check answered in 3s
+  colour-skyblue: passed, 0m 34s in all
+  colour-emerald-green: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 23s
+    check answered in 2s
+  colour-emerald-green: passed, 1m 15s in all
+  colour-red: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 14s
+    check answered in 2s
+  colour-red: passed, 1m 06s in all
+  colour-taupe: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 4s
+  colour-taupe: passed, 1m 07s in all
+  colour-beige: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 12s
+    check answered in 2s
+  colour-beige: passed, 0m 33s in all
+  colour-navy: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 2s
+  colour-navy: passed, 1m 05s in all
+  colour-mauve: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 12s
+    check answered in 3s
+  colour-mauve: passed, 1m 04s in all
+  -> done (8 images passed)
+
+Front-Open Camellia Blossom Handcrafted Tissue Cutdana | Premium Romantic Nida Handmade Cutdana Abaya
+  colour-emerald-green: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 14s
+    check answered in 2s
+  colour-emerald-green: passed, 1m 05s in all
+  colour-light-purple: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image answered in 12s
+    check answered in 3s
+  colour-light-purple: passed, 2m 04s in all
+  colour-mauve-purple: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image answered in 14s
+    check answered in 2s
+  colour-mauve-purple: passed, 4m 36s in all
+  colour-navy: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 2s
+  colour-navy: passed, 1m 06s in all
+  -> done (4 images passed)
+
+Front-Open Dew-Drop Handwork Cutdana Abaya | Premium Romantic Nida Handcrafted Cutdana Abaya
+  multi-3b: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 12s
+    check answered in 3s
+  multi-3b: passed, 1m 06s in all
+  closer-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 3s
+  closer-1: passed, 1m 05s in all
+  closer-3: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 26s
+    check answered in 5s
+  closer-3: passed, 1m 19s in all
+  closer-4: generating
+    image answered in 14s
+    check answered in 2s
+  closer-4: passed, 0m 21s in all
+  colour-navy: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 12s
+    check answered in 2s
+  colour-navy: passed, 1m 04s in all
+  colour-light-purple: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 17s
+    check answered in 12s
+  colour-light-purple: passed, 1m 18s in all
+  colour-silver-gray: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 12s
+    check answered in 2s
+  colour-silver-gray: passed, 1m 04s in all
+  colour-grey: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 12s
+    check answered in 4s
+  colour-grey: passed, 0m 35s in all
+  colour-pink: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 12s
+    check answered in 5s
+  colour-pink: passed, 1m 06s in all
+  -> done (9 images passed)
+
+45 minutes used: no new product is started; the next round carries on
+
+Summary: {
+  "date": "2026-10-27 07:42 UTC",
+  "mode": "live",
+  "products_worked_on": 10,
+  "statuses": {
+    "done": 8,
+    "manual": 1,
+    "paused (limit)": 1
+  },
+  "images_passed": 31,
+  "gemini_image_calls": 32,
+  "gemini_check_calls": 32,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 222.453,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
+
+===== worker-2 =====
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $219.85 of $290
+
+Kids Front-Closed Floral Print Maxi Abaya With Belt | Premium Chiffon Kids Printed Maxi Abaya
+  hero-1: generating
+    image answered in 17s
+    check answered in 5s
+  hero-1: passed, 0m 26s in all
+  hero-4: generating
+    image answered in 18s
+    hero-4: Gemini gave no image (FinishReason.OTHER), attempt 3
+  hero-4: do manually, 0m 21s in all
+  -> manual (1 images passed)
+
+Kids Front-Open Stonework Abaya | Premium Black Nida Stonework Abaya For Kids
+  closer-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 11s
+    check answered in 3s
+  closer-2: passed, 0m 35s in all
+  -> done (1 images passed)
+
+Front-Open Stone Embroidered Abaya | Premium Romantic Nida Stonework Fancy Abaya
+  colour-mauve-purple: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 14s
+    check answered in 2s
+  colour-mauve-purple: passed, 1m 06s in all
+  colour-rust-gold: generating
+    image answered in 12s
+    check answered in 3s
+  colour-rust-gold: passed, 0m 19s in all
+  colour-purple: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image answered in 15s
+    check answered in 3s
+  colour-purple: passed, 3m 09s in all
+  -> done (3 images passed)
+
+Front-Open Rose Stone-Embroidered Abaya with Feathery Sleeves | Premium Moss Chiffon Stonework Abaya
+  closer-3: generating
+    image answered in 15s
+    check answered in 2s
+  closer-3: passed, 0m 23s in all
+  colour-pink: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 11s
+    check answered in 3s
+  colour-pink: passed, 1m 04s in all
+  colour-peach: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 11s
+    check answered in 3s
+  colour-peach: passed, 1m 03s in all
+  colour-beige: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 15s
+    check answered in 3s
+  colour-beige: passed, 1m 08s in all
+  -> done (4 images passed)
+
+Front-Open Abaya with Peacock Stone Embroidery | Premium Romantic Nida Peacock Stonework Abaya
+  fitting-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 17s
+    check answered in 3s
+  fitting-1: passed, 0m 40s in all
+  -> done (1 images passed)
+
+Front-Open Stonework Embroidered Abaya | Premium Romantic Nida Stone-Embroidered Abaya
+  hero-4: generating
+    image answered in 17s
+    check answered in 4s
+  hero-4: passed, 0m 30s in all
+  multi-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 16s
+    check answered in 17s
+  multi-1: passed, 0m 52s in all
+  multi-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 14s
+    check answered in 4s
+  multi-2: passed, 0m 36s in all
+  multi-3b: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 2s
+  multi-3b: passed, 1m 05s in all
+  closer-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 11s
+    check answered in 3s
+  closer-1: passed, 1m 04s in all
+  closer-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 14s
+    check answered in 3s
+  closer-2: passed, 1m 06s in all
+  closer-4: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 120s (6/6)
+  Limit reached: Vertex AI kept refusing (Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': )); stopping for now. Run the same command again later to continue.
+  Everything made so far is kept; run the same command again later.
+  Google is busy: waiting 5 minutes, then the next product
+  -> paused (limit) (6 images passed)
+
+Front-Open Cutdana Fleur-De-Lis Motif Abaya | Premium Romantic Nida Cutdana Handwork Abaya
+  multi-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 15s
+    check answered in 2s
+  multi-1: passed, 1m 07s in all
+  multi-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image answered in 16s
+    check answered in 4s
+  multi-2: passed, 2m 09s in all
+  multi-3b: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 13s
+    check answered in 3s
+  multi-3b: passed, 0m 35s in all
+  closer-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 14s
+    check answered in 3s
+  closer-2: passed, 1m 07s in all
+  closer-3: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 120s (6/6)
+  Limit reached: Vertex AI kept refusing (Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': )); stopping for now. Run the same command again later to continue.
+  Everything made so far is kept; run the same command again later.
+  -> paused (limit) (4 images passed)
+
+Summary: {
+  "date": "2026-10-27 07:42 UTC",
+  "mode": "live",
+  "products_worked_on": 7,
+  "statuses": {
+    "manual": 1,
+    "done": 4,
+    "paused (limit)": 2
+  },
+  "images_passed": 20,
+  "gemini_image_calls": 21,
+  "gemini_check_calls": 20,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 222.279,
+  "seconds_per_website_image": null,
+  "limit_reached": true
+}
+
+===== report =====
+Report: 350 products the program has worked on
+Report written: output/report.csv
+Report written: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU

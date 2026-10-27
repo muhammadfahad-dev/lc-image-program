@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-27 07:42 UTC",
+  "mode": "live",
+  "products_worked_on": 6,
+  "statuses": {
+    "done": 3,
+    "paused (limit)": 3
+  },
+  "images_passed": 9,
+  "gemini_image_calls": 9,
+  "gemini_check_calls": 9,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 222.153,
+  "seconds_per_website_image": null,
+  "limit_reached": true,
+  "products": [
+    {
+      "handle": "front-closed-maxi-abaya-with-stonework-elastic-sleeves-premium-nida-kids-embellished-maxi-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "kids-front-closed-plain-maxi-abaya-premium-nida-black-plain-kids-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "kids-front-open-black-stonework-abaya-premium-nida-stone-studded-abaya-for-kids",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-rose-stone-embroidered-pastel-abaya-with-scarf-premium-moss-chiffon-2pcs-stonework-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-handwork-cutdana-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-cutdana-handwork-abaya-premium-romantic-nida-abaya-with-handcrafted-cutdana-on-sleeves",
+      "status": "paused (limit)"
+    }
+  ]
+}
