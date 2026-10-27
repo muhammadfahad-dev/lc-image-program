@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-27 21:54 UTC",
+  "mode": "live",
+  "products_worked_on": 2,
+  "statuses": {
+    "done": 1,
+    "paused (limit)": 1
+  },
+  "images_passed": 18,
+  "gemini_image_calls": 20,
+  "gemini_check_calls": 19,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 257.733,
+  "seconds_per_website_image": null,
+  "limit_reached": true,
+  "products": [
+    {
+      "handle": "front-open-black-chevron-stonework-embroidery-butterfly-abaya-premium-nida-embroidered-stone-studded-black-butterfly-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-embroidered-stone-embellished-black-butterfly-abaya-premium-nida-embroidered-stonework-butterfly-abaya",
+      "status": "paused (limit)"
+    }
+  ]
+}
