@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-27 04:23 UTC",
+  "mode": "live",
+  "products_worked_on": 5,
+  "statuses": {
+    "paused (limit)": 3,
+    "done": 2
+  },
+  "images_passed": 12,
+  "gemini_image_calls": 12,
+  "gemini_check_calls": 12,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 213.699,
+  "seconds_per_website_image": null,
+  "limit_reached": true,
+  "products": [
+    {
+      "handle": "front-closed-long-flared-petal-stone-embroidered-cuff-abaya-premium-romantic-nida-maxi-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-abaya-with-bloom-stone-embroidered-cuffs-premium-romantic-nida-stonework-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-closed-contrast-stone-embroidered-petal-cuff-maxi-abaya-premium-nida-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-handcrafted-cutdana-abaya-with-matching-scarf-premium-romantic-nida-2-pc-abaya-set",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-rosebud-stone-embroidered-abaya-premium-romantic-nida-stonework-abaya",
+      "status": "paused (limit)"
+    }
+  ]
+}

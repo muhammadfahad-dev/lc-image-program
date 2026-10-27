@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-27 04:23 UTC",
+  "mode": "live",
+  "products_worked_on": 7,
+  "statuses": {
+    "done": 5,
+    "paused (limit)": 2
+  },
+  "images_passed": 25,
+  "gemini_image_calls": 26,
+  "gemini_check_calls": 25,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 213.825,
+  "seconds_per_website_image": null,
+  "limit_reached": true,
+  "products": [
+    {
+      "handle": "front-open-contrast-lace-abaya-premium-cotton-crinkle-abaya-with-fringe-cuffs",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-stonework-embroidered-abaya-premium-romantic-nida-stone-embroidered-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-tulips-stonework-abaya-with-butterfly-embroidery-on-sleeves-premium-romantic-nida-black-stonework-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-leaf-motif-stonework-black-abaya-premium-romantic-nida-stone-embroidered-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-colorful-abaya-with-floral-stonework-premium-romantic-nida-stone-embroidered-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-scattered-floral-stonework-abaya-premium-romantic-nida-stone-embroidered-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-dubai-style-high-neck-cutdana-abaya-premium-romantic-nida-abaya-with-handcrafted-cutdana-abaya",
+      "status": "paused (limit)"
+    }
+  ]
+}

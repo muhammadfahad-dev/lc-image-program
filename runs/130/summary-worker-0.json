@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-27 04:23 UTC",
+  "mode": "live",
+  "products_worked_on": 8,
+  "statuses": {
+    "done": 5,
+    "paused (limit)": 2,
+    "manual": 1
+  },
+  "images_passed": 30,
+  "gemini_image_calls": 34,
+  "gemini_check_calls": 34,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 214.293,
+  "seconds_per_website_image": null,
+  "limit_reached": false,
+  "products": [
+    {
+      "handle": "front-open-floral-stone-embroidery-abaya-premium-nida-abaya-with-stone-embroidered-sleeves",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-scattered-lotus-stone-embroidered-abaya-premium-romantic-nida-stonework-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-tissue-cutdana-handwork-abaya-premium-romantic-nida-handcrafted-cutdana-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-abaya-with-handcrafted-tissue-cutdana-floral-embroidery-premium-romantic-nida-cutdana-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-star-tissue-handwork-cutdana-abaya-premium-romantic-nida-handcrafted-cutdana-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-giant-rose-tissue-cutdana-handwork-abaya-premium-romantic-nida-handcrafted-tissue-cutdanaabaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-tissue-diamond-pattern-handmade-embellishment-abaya-premium-romantic-nida-cutdana-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-contrast-panel-handwork-embellished-abaya-premium-hareer-maqsood-nida-handcrafted-cutdana-abaya",
+      "status": "manual"
+    }
+  ]
+}
