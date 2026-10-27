@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-27 06:25 UTC",
+  "mode": "live",
+  "products_worked_on": 4,
+  "statuses": {
+    "paused (limit)": 3,
+    "done": 1
+  },
+  "images_passed": 21,
+  "gemini_image_calls": 21,
+  "gemini_check_calls": 21,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 218.847,
+  "seconds_per_website_image": null,
+  "limit_reached": true,
+  "products": [
+    {
+      "handle": "front-open-handwork-cutdana-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-cutdana-handwork-abaya-premium-romantic-nida-abaya-with-handcrafted-cutdana-on-sleeves",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-bloom-cuff-stonework-abaya-premium-nida-beaded-sleeve-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-zig-zac-stone-embellished-abaya-premium-nida-stonework-abaya-with-scarf",
+      "status": "paused (limit)"
+    }
+  ]
+}
