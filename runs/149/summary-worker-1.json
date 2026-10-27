@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-27 22:57 UTC",
+  "mode": "live",
+  "products_worked_on": 3,
+  "statuses": {
+    "done": 1,
+    "paused (limit)": 2
+  },
+  "images_passed": 12,
+  "gemini_image_calls": 12,
+  "gemini_check_calls": 13,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 260.157,
+  "seconds_per_website_image": null,
+  "limit_reached": true,
+  "products": [
+    {
+      "handle": "front-open-flame-leaf-stonework-abaya-premium-romantic-nida-stone-embellished-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-butterfly-abaya-with-cascade-stonework-premium-nida-stone-studded-butterfly-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-button-abaya-with-scattered-leaf-stonework-premium-romantic-nida-stone-studded-abaya",
+      "status": "paused (limit)"
+    }
+  ]
+}
