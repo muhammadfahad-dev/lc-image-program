@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-27 19:59 UTC",
+  "mode": "live",
+  "products_worked_on": 3,
+  "statuses": {
+    "paused (limit)": 2,
+    "done": 1
+  },
+  "images_passed": 21,
+  "gemini_image_calls": 21,
+  "gemini_check_calls": 21,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 253.293,
+  "seconds_per_website_image": null,
+  "limit_reached": true,
+  "products": [
+    {
+      "handle": "front-open-regal-butterfly-stonework-abaya-scarf-premium-nida-butterfly-stone-studded-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-cascading-raindrop-stonework-butterfly-abaya-contrast-scarf-premium-nida-stone-studded-colored-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-starlit-stonework-butterfly-abaya-front-open-premium-nida-colored-butterfly-abaya",
+      "status": "paused (limit)"
+    }
+  ]
+}
