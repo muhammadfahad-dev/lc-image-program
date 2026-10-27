@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-27 03:28 UTC",
+  "mode": "live",
+  "products_worked_on": 7,
+  "statuses": {
+    "manual": 3,
+    "paused (limit)": 1,
+    "done": 3
+  },
+  "images_passed": 32,
+  "gemini_image_calls": 33,
+  "gemini_check_calls": 32,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 211.275,
+  "seconds_per_website_image": null,
+  "limit_reached": false,
+  "products": [
+    {
+      "handle": "front-open-fringe-cuff-abaya-premium-romantic-nida-plain-abaya",
+      "status": "manual"
+    },
+    {
+      "handle": "front-open-contrast-lace-abaya-premium-cotton-crinkle-abaya-with-fringe-cuffs",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-sleek-abaya-premium-nida-glossy-plain-abaya",
+      "status": "manual"
+    },
+    {
+      "handle": "front-open-ctc-stonework-abaya-premium-romantic-nida-abaya-with-frilled-cuffs",
+      "status": "done"
+    },
+    {
+      "handle": "2pc-front-open-butterfly-kimono-stonework-abaya-premium-black-nida-abaya-with-stone-embroidery",
+      "status": "manual"
+    },
+    {
+      "handle": "front-open-abaya-with-contrast-stone-embroidered-cuffs-premium-romantic-nida-stonework-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-vintage-floral-cutdana-handwork-abaya-premium-romantic-nida-handcrafted-cutdana-abaya",
+      "status": "done"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-27 03:28 UTC",
+  "mode": "live",
+  "products_worked_on": 5,
+  "statuses": {
+    "done": 2,
+    "paused (limit)": 2,
+    "manual": 1
+  },
+  "images_passed": 15,
+  "gemini_image_calls": 16,
+  "gemini_check_calls": 15,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 210.555,
+  "seconds_per_website_image": null,
+  "limit_reached": true,
+  "products": [
+    {
+      "handle": "front-open-plain-essential-abaya-premium-cherry-fabric",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-floral-stone-embroidery-abaya-premium-nida-abaya-with-stone-embroidered-sleeves",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-rose-blooms-stone-embroidery-abaya-premium-romantic-nida-abaya-with-stonework-sleeves",
+      "status": "manual"
+    },
+    {
+      "handle": "front-open-star-flower-stone-embroidery-abaya-premium-romantic-nida-stonework-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-scattered-lotus-stone-embroidered-abaya-premium-romantic-nida-stonework-abaya",
+      "status": "paused (limit)"
+    }
+  ]
+}
