@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-27 02:40 UTC",
+  "mode": "live",
+  "products_worked_on": 4,
+  "statuses": {
+    "manual": 1,
+    "paused (limit)": 3
+  },
+  "images_passed": 8,
+  "gemini_image_calls": 8,
+  "gemini_check_calls": 8,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 208.557,
+  "seconds_per_website_image": null,
+  "limit_reached": true,
+  "products": [
+    {
+      "handle": "front-open-plain-abaya-with-hanging-tassel-on-sleeves-premium-essential-abaya",
+      "status": "manual"
+    },
+    {
+      "handle": "front-open-fringe-cuff-abaya-premium-romantic-nida-plain-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-contrast-lace-abaya-premium-cotton-crinkle-abaya-with-fringe-cuffs",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-sleek-abaya-premium-nida-glossy-plain-abaya",
+      "status": "paused (limit)"
+    }
+  ]
+}

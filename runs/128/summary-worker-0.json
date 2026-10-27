@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-27 02:40 UTC",
+  "mode": "live",
+  "products_worked_on": 7,
+  "statuses": {
+    "paused (limit)": 2,
+    "done": 5
+  },
+  "images_passed": 19,
+  "gemini_image_calls": 19,
+  "gemini_check_calls": 19,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 209.019,
+  "seconds_per_website_image": null,
+  "limit_reached": false,
+  "products": [
+    {
+      "handle": "front-open-plain-essential-abaya-premium-cherry-fabric",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-floral-stone-embroidery-abaya-premium-nida-abaya-with-stone-embroidered-sleeves",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-closed-long-flare-stone-embroidered-abaya-premium-nida-stonework-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-embellished-abaya-with-fringed-cuffs-premium-romantic-nida-cutdana-embroidery-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-rose-stone-embroidered-abaya-premium-romantic-nida-stonework-colorful-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-stone-embroidered-colored-abayas-premium-romantic-nida-oval-cascade-stonework-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-palm-leaf-stone-embroidered-black-abaya-premium-romantic-nida-stonework-abaya",
+      "status": "done"
+    }
+  ]
+}

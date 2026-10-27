@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-27 02:40 UTC",
+  "mode": "live",
+  "products_worked_on": 4,
+  "statuses": {
+    "done": 2,
+    "manual": 1,
+    "paused (limit)": 1
+  },
+  "images_passed": 24,
+  "gemini_image_calls": 25,
+  "gemini_check_calls": 24,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 208.761,
+  "seconds_per_website_image": null,
+  "limit_reached": true,
+  "products": [
+    {
+      "handle": "front-open-essential-abaya-premium-plain-romantic-nida-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-plain-abaya-with-3-layer-fringe-sleeves-premium-chiffon-abaya-with-scarf",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-stonework-rose-embroidered-abaya-premium-romantic-nida-long-flare-abaya",
+      "status": "manual"
+    },
+    {
+      "handle": "front-open-floral-stonework-abaya-premium-romantic-nida-bloom-embroidered-abaya",
+      "status": "paused (limit)"
+    }
+  ]
+}

@@ -1,0 +1,1371 @@
+===== collect =====
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $205.72 of $290
+  projects/352302053849/locations/global/batchPredictionJobs/8985325158101155840: 300 answer(s) in 1 result file(s)
+  projects/352302053849/locations/global/batchPredictionJobs/8985325158101155840: failed; out for 24.9 h; 91 done, 0 failed, 209 not yet done; Google's error: 4 Deadline exceeded due to job running for maximum allowed duration of 24 hours. Please retry the unprocessed rows or start over with a smaller batch size.; 300 finished image(s) used, the rest go into the next round (no try counted)
+    multi-2: manual (Gemini gave no image (no image returned))
+  Front Open Plain Abaya With Attached Inner | Premium Nida Abaya: manual
+    closer-4: manual (Gemini gave no image (no image returned))
+  Front-Open Black Textured Abaya | Premium Crinkle Nida Abaya: manual
+    hero-3: manual (Gemini gave no image (no image returned))
+  Front-Open Plain Abaya With Side Pockets |: manual
+    check answered in 3s
+    hero-4: passed
+  Front-Open Essential Abaya | Premium Plain Romantic Nida Abaya: in_progress
+    closer-3: manual (Gemini gave no image (no image returned))
+    colour-ruby-red: retry (Gemini gave no image (no image returned))
+    colour-dusty-lavender: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    colour-blue: passed
+    colour-pink: retry (Gemini gave no image (no image returned))
+  Front-Open Plain Abaya With Hanging Tassel on Sleeves | Premium Essential Abaya: in_progress
+    colour-maroon: retry (Gemini gave no image (no image returned))
+    colour-pink: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    colour-skyblue: passed
+    colour-beige: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    colour-black: passed
+    colour-green: retry (Gemini gave no image (no image returned))
+    colour-light-green: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    colour-taupe: passed
+    colour-mulberry: retry (Gemini gave no image (no image returned))
+  Front-Open Plain Essential Abaya | Premium Cherry Fabric: in_progress
+    closer-3: manual (Gemini gave no image (no image returned))
+  Front-Open Effortless Plain Abaya | Premium Cherry Fabric Abaya: manual
+    colour-pink: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    colour-powder-blue: passed
+    check answered in 2s
+    colour-cream: passed
+    check answered in 2s
+    colour-black: passed
+    check answered in 2s
+    colour-yellow: passed
+  Front-Open Plain Abaya With 3 Layer Fringe Sleeves | Premium Chiffon Abaya with Scarf: in_progress
+    hero-4: manual (Gemini gave no image (no image returned))
+  Front-Open Fringe-Cuff Abaya | Premium Romantic Nida Plain Abaya: in_progress
+    multi-2: manual (Gemini gave no image (no image returned))
+  Front-Open Self Printed Ombre Abaya | Premium Romantic Nida Abaya: manual
+    hero-4: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+  Front-Open Contrast Lace Abaya | Premium Cotton Crinkle Abaya with Fringe Cuffs: in_progress
+    multi-3a: manual (Gemini gave no image (no image returned))
+    colour-brown: retry (Gemini gave no image (no image returned))
+    colour-light-green: retry (Gemini gave no image (no image returned))
+    check answered in 11s
+    colour-navy: passed
+    colour-grey: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    colour-deep-plum: passed
+    check answered in 3s
+    colour-teal: passed
+    colour-silver-gray: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    colour-maroon: passed
+  Front-Open Sleek Abaya | Premium Nida Glossy Plain Abaya: in_progress
+    check answered in 2s
+    colour-olive-green: passed
+    colour-pink: retry (Gemini gave no image (no image returned))
+    colour-purple: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    colour-dark-pink: passed
+    colour-red: retry (Gemini gave no image (no image returned))
+    colour-navy: retry (Gemini gave no image (no image returned))
+    colour-orange: retry (Gemini gave no image (no image returned))
+  Front-Open Floral Stone Embroidery Abaya | Premium Nida Abaya with Stone Embroidered Sleeves: in_progress
+    multi-2: retry (Gemini gave no image (no image returned))
+  Front-Open CTC Stonework Abaya | Premium Romantic Nida Abaya with Frilled Cuffs: in_progress
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+  Front-Open Stonework Rose Embroidered Abaya | Premium Romantic Nida Long Flare Abaya: in_progress
+    colour-navy: retry (Gemini gave no image (no image returned))
+    colour-olive-green: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    colour-blue: passed
+  Front-Closed Long Flare Stone Embroidered Abaya | Premium Nida Stonework Abaya: in_progress
+    fitting-1: retry (Gemini gave no image (no image returned))
+    colour-mustard-gold: retry (Gemini gave no image (no image returned))
+    colour-green: retry (Gemini gave no image (no image returned))
+    check answered in 17s
+    colour-pink: passed
+    colour-blue: retry (Gemini gave no image (no image returned))
+    colour-silver: retry (Gemini gave no image (no image returned))
+  2pc Front-Open Butterfly Kimono Stonework Abaya | Premium Black Nida Abaya With Stone Embroidery: in_progress
+    check answered in 2s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (no image returned))
+  Front-Open Floral Stonework Abaya | Premium Romantic Nida Bloom Embroidered Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+  Front-Closed Long Flared Petal Stone Embroidered Cuff Abaya | Premium Nida Maxi Abaya: in_progress
+    colour-deep-plum: retry (Gemini gave no image (no image returned))
+    colour-taupe: retry (Gemini gave no image (no image returned))
+    colour-teal: retry (Gemini gave no image (no image returned))
+    colour-beige: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    colour-purple: passed
+  Front-Open Abaya With Contrast Stone Embroidered Cuffs | Premium Nida Stonework Abaya: in_progress
+    colour-brown: retry (Gemini gave no image (no image returned))
+    colour-ruby-red: retry (Gemini gave no image (no image returned))
+    colour-emerald-green: retry (Gemini gave no image (no image returned))
+    check answered in 4s
+    colour-navy: passed
+    colour-peach: retry (Gemini gave no image (no image returned))
+  Front-Open Abaya With Bloom Stone-Embroidered Cuffs | Premium Nida Stonework Abaya: in_progress
+    hero-4: retry (Gemini gave no image (no image returned))
+  Front-Closed Contrast Stone-Embroidered Petal Cuff Maxi Abaya | Premium Nida Abaya: in_progress
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Black Stonework Abaya | Premium Romantic Nida Black Feather-Leaf Stone-Embroidered Abaya: in_progress
+    closer-2: retry (Gemini gave no image (no image returned))
+  Front-Open Leaf Motif Stonework Black Abaya | Premium Romantic Nida Stone-Embroidered Abaya: in_progress
+    multi-1: retry (Gemini gave no image (no image returned))
+  Front-Open Scattered Floral Stone Embroidered Black Abaya | Premium Romantic Nida Black Stonework Abaya: in_progress
+    colour-purple: retry (Gemini gave no image (no image returned))
+    colour-navy: retry (Gemini gave no image (no image returned))
+    colour-brown: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    colour-dark-brown: passed
+  Front-Open Colorful Abaya with Floral Stonework | Premium Romantic Nida Stone-Embroidered Abaya: in_progress
+    colour-black: retry (Gemini gave no image (no image returned))
+    check answered in 22s
+    colour-green: passed
+    colour-mauve: retry (Gemini gave no image (no image returned))
+    colour-brown: retry (Gemini gave no image (no image returned))
+    colour-navy: retry (Gemini gave no image (no image returned))
+    colour-pink: retry (Gemini gave no image (no image returned))
+    colour-blue: retry (Gemini gave no image (no image returned))
+  Front-Open Rose Stone-Embroidered Abaya | Premium Romantic Nida Stonework Colorful Abaya: in_progress
+    fitting-1: retry (Gemini gave no image (no image returned))
+    colour-mauve-purple: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    colour-black: passed
+    colour-skyblue: retry (Gemini gave no image (no image returned))
+    colour-navy: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    colour-green: passed
+    check answered in 3s
+    colour-blue: passed
+    colour-brown: retry (Gemini gave no image (no image returned))
+  Front-Open Scattered Floral Stonework Abaya | Premium Romantic Nida Stone-Embroidered Abaya: in_progress
+    colour-purple: retry (Gemini gave no image (no image returned))
+    colour-blue: retry (Gemini gave no image (no image returned))
+    colour-dark-brown: retry (Gemini gave no image (no image returned))
+    check answered in 5s
+    colour-navy: passed
+  Front-Open Stone-Embroidered Colored Abayas | Premium Romantic Nida Oval Cascade Stonework Abaya: in_progress
+    hero-4: retry (Gemini gave no image (no image returned))
+  Front-Open Abaya with Vine Stone-Embroidery on Sleeves & Back | Premium Romantic Nida Colored Stonework Abaya: in_progress
+    hero-4: retry (Gemini gave no image (no image returned))
+  Front-Open Palm Leaf Stone-Embroidered Black Abaya | Premium Romantic Nida Stonework Abaya: in_progress
+    check answered in 3s
+    colour-blush-pink: passed
+    colour-charcoal: retry (Gemini gave no image (no image returned))
+    colour-baby-pink: retry (Gemini gave no image (no image returned))
+    colour-maroon: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    colour-powder-blue: passed
+    check answered in 2s
+    colour-dusty-blue: passed
+  Front-Open Star Stone-Embroidered Abaya | Premium Romantic Nida Stonework Colorful Abaya: in_progress
+    hero-4: retry (Gemini gave no image (no image returned))
+  Front-Open Rose Blooms Stone-Embroidery Abaya | Premium Romantic Nida Abaya with Stonework Sleeves: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+  Front-Open Star Flower Stone Embroidery Abaya | Premium Romantic Nida Stonework Abaya: in_progress
+    closer-4: retry (Gemini gave no image (no image returned))
+    colour-magenta: retry (Gemini gave no image (no image returned))
+    check answered in 4s
+    colour-navy: passed
+    check answered in 2s
+    colour-beige: passed
+    colour-brown: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    colour-powder-blue: passed
+  Front-Open Scattered Lotus Stone-Embroidered Abaya | Premium Romantic Nida Stonework Abaya: in_progress
+    closer-3: retry (Gemini gave no image (no image returned))
+    colour-navy: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    colour-purple: passed
+    colour-mauve: retry (Gemini gave no image (no image returned))
+    colour-bronze: retry (Gemini gave no image (no image returned))
+  Front Open Cutdana Handwork Abaya | Premium Romantic Nida Cutdana Motifs Abaya: in_progress
+    colour-silver-gray: retry (Gemini gave no image (no image returned))
+    colour-brown: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    colour-navy: passed
+    colour-emerald-green: retry (Gemini gave no image (no image returned))
+  Front-Open Tissue Cutdana Handwork Abaya | Premium Romantic Nida Handcrafted Cutdana Abaya: in_progress
+    colour-light-purple: retry (Gemini gave no image (no image returned))
+    colour-skyblue: retry (Gemini gave no image (no image returned))
+    colour-emerald-green: retry (Gemini gave no image (no image returned))
+    colour-red: retry (Gemini gave no image (no image returned))
+    colour-taupe: retry (Gemini gave no image (no image returned))
+    colour-beige: retry (Gemini gave no image (no image returned))
+    colour-navy: retry (Gemini gave no image (no image returned))
+    colour-mauve: retry (Gemini gave no image (no image returned))
+  Front-Open Lotus Tissue Handcrafted Cutdana Abaya | Premium Romantic Nida Abaya with Cutdana Handwork: in_progress
+    colour-emerald-green: retry (Gemini gave no image (no image returned))
+    colour-light-purple: retry (Gemini gave no image (no image returned))
+    colour-mauve-purple: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    colour-grey: passed
+    colour-navy: retry (Gemini gave no image (no image returned))
+  Front-Open Camellia Blossom Handcrafted Tissue Cutdana | Premium Romantic Nida Handmade Cutdana Abaya: in_progress
+    colour-pink: retry (Gemini gave no image (no image returned))
+    colour-brown: retry (Gemini gave no image (no image returned))
+    colour-grey: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    colour-light-purple: passed
+  Front-Open Abaya with Handcrafted Tissue Cutdana Floral Embroidery | Premium Romantic Nida Cutdana Abaya: in_progress
+    check answered in 3s
+    closer-3: passed
+    colour-navy: retry (Gemini gave no image (no image returned))
+    colour-light-purple: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    colour-skyblue: passed
+    colour-brown: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    colour-ruby-red: passed
+    check answered in 3s
+    colour-taupe: passed
+    colour-emerald-green: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    colour-mauve-purple: passed
+  Front-Open Star Tissue Handwork Cutdana Abaya | Premium Romantic Nida Handcrafted Cutdana Abaya: in_progress
+    colour-brown: retry (Gemini gave no image (no image returned))
+    colour-purple: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    colour-blue: passed
+    colour-red: retry (Gemini gave no image (no image returned))
+    colour-light-purple: retry (Gemini gave no image (no image returned))
+    colour-navy: retry (Gemini gave no image (no image returned))
+  Front-Open Giant Rose Tissue Cutdana Handwork Abaya | Premium Romantic Nida Handcrafted Tissue CutdanaAbaya: in_progress
+    colour-peach: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    colour-purple: passed
+    colour-teal: retry (Gemini gave no image (no image returned))
+    colour-brown: retry (Gemini gave no image (no image returned))
+    colour-gray: retry (Gemini gave no image (no image returned))
+    colour-pink: retry (Gemini gave no image (no image returned))
+  Front-Open Tissue Diamond Pattern Handmade Embellishment Abaya | Premium Romantic Nida Cutdana Abaya: in_progress
+    check answered in 3s
+    hero-4: passed
+  Front Open Stonework Embroidery Black Abaya | Premium Romantic Nida Floral Stone-Embroidered Abaya: done
+    check answered in 4s
+    hero-3: passed
+    fitting-1: retry (Gemini gave no image (no image returned))
+  Front-Open Dubai Style High-Neck Cutdana Abaya | Premium Romantic Nida Abaya with Handcrafted Cutdana Abaya: in_progress
+    check answered in 3s
+    multi-2: passed
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    colour-ruby-red: passed
+    check answered in 3s
+    colour-teal: passed
+    check answered in 3s
+    colour-emerald-green: passed
+    colour-navy: retry (Gemini gave no image (no image returned))
+    colour-light-purple: retry (Gemini gave no image (no image returned))
+    colour-silver-gray: retry (Gemini gave no image (no image returned))
+    colour-grey: retry (Gemini gave no image (no image returned))
+    colour-pink: retry (Gemini gave no image (no image returned))
+  Front-Open Dew-Drop Handwork Cutdana Abaya | Premium Romantic Nida Handcrafted Cutdana Abaya: in_progress
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 4s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    check answered in 4s
+    multi-1: passed
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    closer-1: passed
+    check answered in 6s
+    closer-2: retry
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Abaya with Fleur-De-Lis Cutdana Motifs | Premium Romantic Nida Handcrafted Cutdana Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    check answered in 4s
+    hero-2: passed
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 5s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Contrast Panel Handwork Embellished Abaya | Premium Hareer Maqsood+Nida Handcrafted Cutdana Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    multi-1: passed
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-4: passed
+  Front-Open Tissue Beaded Handwork Floral Abaya | Premium Romantic Nida Cutdana Floral Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    fitting-1: passed
+    multi-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    multi-2: passed
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-3: passed
+    check answered in 2s
+    closer-4: passed
+  Front-Open Abaya with Cutdana Embroidery on  Sleeves | Premium Romantic Nida Cutdana Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    multi-1: retry (Gemini gave no image (no image returned))
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    closer-1: passed
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (OTHER))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Cutdana Fleur-De-Lis Motif Abaya | Premium Romantic Nida Cutdana Handwork Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Handmade Embellishment Abaya | Premium Romantic Nida Floral Handcrafted Cutdana Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    multi-1: passed
+    multi-2: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    multi-3b: passed
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-4: passed
+  Front-Open Rosevine Handcrafted Cutdana Abaya | Premium Romantic Nida Abaya with Handmade Embellishments: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    fitting-1: passed
+    multi-1: retry (Gemini gave no image (no image returned))
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    closer-3: passed
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Cutdana Handwork Abaya | Premium Romantic Nida Abaya with Handcrafted Cutdana on Sleeves: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    hero-2: passed
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-1: passed
+    closer-2: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    closer-3: passed
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Meraki Stonework Abaya | Premium Romantic Nida Stone-Studded Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    multi-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-4: passed
+  Front-Open Stonework Abaya | Premium Nida Full-Body Stonework Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+  Front-Open Bloom Cuff Stonework Abaya | Premium Nida Beaded Sleeve Abaya: in_progress
+  projects/352302053849/locations/global/batchPredictionJobs/257067605280423936: 300 answer(s) in 1 result file(s)
+  projects/352302053849/locations/global/batchPredictionJobs/257067605280423936: failed; out for 24.4 h; 105 done, 0 failed, 195 not yet done; Google's error: 4 Deadline exceeded due to job running for maximum allowed duration of 24 hours. Please retry the unprocessed rows or start over with a smaller batch size.; 300 finished image(s) used, the rest go into the next round (no try counted)
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    multi-1: retry (Gemini gave no image (no image returned))
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Bloom Cuff Stonework Abaya | Premium Nida Beaded Sleeve Abaya: in_progress
+    check answered in 6s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-3: passed
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Stonework Butterfly Abaya | Premium Nida Sparkling Stone-Studded Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (no image returned))
+    multi-1: retry (Gemini gave no image (no image returned))
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    closer-4: retry (Gemini gave no image (OTHER))
+  Front-Open Zig-Zac Stone Embellished Abaya | Premium Nida Stonework Abaya with Scarf: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    check answered in 4s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    multi-1: retry (Gemini gave no image (no image returned))
+    multi-2: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    multi-3b: passed
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Zigzag Stonework Butterfly Abaya | Premium Romantic Nida Stonework Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (no image returned))
+    multi-1: retry (Gemini gave no image (no image returned))
+    check answered in 4s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-4: passed
+  Front-Open Stonework Kimono Abaya with Separate Inner & Scarf | Premium Chiffon Stone-Studded 3 pc Set Abaya+Inner+Scarf: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    multi-1: retry (Gemini gave no image (no image returned))
+    check answered in 5s
+    multi-2: passed
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    check answered in 4s
+    closer-3: retry
+    check answered in 2s
+    closer-4: passed
+  Front-Open Stonework Butterfly Abaya | Premium Romantic Nida Butterfly Stone-Studded Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    hero-2: retry (Gemini gave no image (no image returned))
+    check answered in 6s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (no image returned))
+    multi-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-4: passed
+  Front-Open Stone-Studded Leaf Butterfly Abaya with Scarf | Premium Nida Stonework Butterfly Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (no image returned))
+    check answered in 4s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-1: passed
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Teardrop Stonework Butterfly Abaya | Premium Nida Stone-Studded Butterfly Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    multi-1: passed
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    closer-1: passed
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Frill Stonework Abaya | Premium Nida Pleated Panel Stone-Studded Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    check answered in 4s
+    multi-1: passed
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Trinity Stonework Abaya with Matching Black Scarf | Premium Nida Stone-Studded Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    multi-1: passed
+    multi-2: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    multi-3b: passed
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Vine Trail Stone-Studded Butterfly Abaya | Premium Nida Stonework Butterfly Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (OTHER))
+    multi-1: retry (Gemini gave no image (no image returned))
+    multi-2: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    multi-3b: passed
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    closer-4: passed
+  Front-Open Vine Bloom Stonework Butterfly Abaya | Premium Nida Fully Stone-Studded Butterfly Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (no image returned))
+    multi-1: retry (Gemini gave no image (no image returned))
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Petal Drop Stonework Butterfly Abaya | Premium Nida Stone-Studded Butterfly Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    multi-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Diagonal Stonework Butterfly Abaya | Premium Nida Butterfly Sleeve Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    multi-1: passed
+    multi-2: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Black-Stonework Butterfly Abaya | Premium Nida All Black Butterfly Stonework Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    fitting-1: passed
+    multi-1: retry (Gemini gave no image (no image returned))
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Falling Leaves Stone Embellished Abaya With Scarf & Belt | Premium Nida Stonework Colored Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    multi-1: passed
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Interlocking Rings Stonework Abaya | Premium Romantic Nida Stonework Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    hero-2: passed
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (OTHER))
+    multi-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    multi-2: retry
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Rose Bloom Stonework Abaya | Premium Nida Floral Stonework Colored Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    multi-1: passed
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Golden Feather Stonework Butterfly Abaya | Premium Nida Stone-Studded Butterfly Sleeve Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    multi-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    multi-2: passed
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: retry
+  Front-Open Silver Feather Abaya | Premium Nida Feather Stonework Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    fitting-1: passed
+    multi-1: retry (Gemini gave no image (no image returned))
+    multi-2: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    multi-3b: passed
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    closer-4: passed
+  Front-Open Dubai Style Stone-Embroidered Abaya with Belt | Premium Romantic Nida Stonework Abaya with Belt: in_progress
+    check answered in 20s
+    hero-1: passed
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    check answered in 5s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    multi-1: passed
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-1: passed
+    check answered in 28s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open Floral Vine Stonework Butterfly Abaya | Premium Romantic Nida Floral Stone-Studded Butterfly Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    multi-1: retry (Gemini gave no image (no image returned))
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    closer-4: passed
+  Front-Open Metallic Stone-Studded Luxurious Abaya | Premium Romantic Nida Stonework Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    hero-2: retry (Gemini gave no image (no image returned))
+    hero-3: retry (Gemini gave no image (no image returned))
+    hero-4: retry (Gemini gave no image (no image returned))
+    fitting-1: retry (Gemini gave no image (no image returned))
+    multi-1: retry (Gemini gave no image (no image returned))
+    multi-2: retry (Gemini gave no image (no image returned))
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    closer-2: retry (Gemini gave no image (no image returned))
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (OTHER))
+  Front-Open High-Neck Stone-Studded Abaya | Premium Nida Teardrop Stonework Abaya: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (no image returned))
+    check answered in 3s
+    fitting-1: passed
+    multi-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    multi-2: passed
+    multi-3b: retry (Gemini gave no image (no image returned))
+    closer-1: retry (Gemini gave no image (no image returned))
+    check answered in 2s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (no image returned))
+    closer-4: retry (Gemini gave no image (no image returned))
+  Front-Open High-Neck Leaf Cluster Stonework Abaya | Premium Nida Abaya with Stonework on Sleeves & Back: in_progress
+    hero-1: retry (Gemini gave no image (no image returned))
+  Front-Open Scatter Dot Stonework Butterfly Abaya with Scarf | Premium Nida Three-Dot Embellished Butterfly Sleeve Abaya: in_progress
+  projects/352302053849/locations/global/batchPredictionJobs/4468179547476459520: running, 300 image(s)
+Batch: 0 submitted, 183 passed, 409 to try again, 8 do manually, 0 back in the queue
+
+Summary: {
+  "date": "2026-10-27 02:13 UTC",
+  "mode": "live, batch collect",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 183,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 187,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 206.841,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
+
+===== worker-0 =====
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $206.84 of $290
+
+Front-Open Plain Essential Abaya | Premium Cherry Fabric
+  colour-maroon: generating
+    image answered in 13s
+    check answered in 2s
+  colour-maroon: passed, 0m 19s in all
+  colour-pink: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 11s
+    check answered in 2s
+  colour-pink: passed, 1m 03s in all
+  colour-beige: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image answered in 12s
+    check answered in 2s
+  colour-beige: passed, 2m 04s in all
+  colour-green: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image answered in 12s
+    check answered in 2s
+  colour-green: passed, 3m 04s in all
+  colour-light-green: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image answered in 12s
+    check answered in 2s
+  colour-light-green: passed, 2m 04s in all
+  colour-mulberry: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 120s (6/6)
+  Limit reached: Vertex AI kept refusing (Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': )); stopping for now. Run the same command again later to continue.
+  Everything made so far is kept; run the same command again later.
+  Google is busy: waiting 5 minutes, then the next product
+  -> paused (limit) (5 images passed)
+
+Front-Open Floral Stone Embroidery Abaya | Premium Nida Abaya with Stone Embroidered Sleeves
+  colour-pink: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 120s (6/6)
+  Limit reached: Vertex AI kept refusing (Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': )); stopping for now. Run the same command again later to continue.
+  Everything made so far is kept; run the same command again later.
+  Google is busy: waiting 5 minutes, then the next product
+  -> paused (limit) (0 images passed)
+
+Front-Closed Long Flare Stone Embroidered Abaya | Premium Nida Stonework Abaya
+  colour-navy: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 11s
+    check answered in 2s
+  colour-navy: passed, 0m 33s in all
+  colour-olive-green: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 11s
+    check answered in 2s
+  colour-olive-green: passed, 1m 03s in all
+  -> done (2 images passed)
+
+Front-Open Embellished Abaya with Fringed Cuffs | Premium Romantic Nida Cutdana Embroidery Abaya
+  colour-blue: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 12s
+    check answered in 2s
+  colour-blue: passed, 1m 04s in all
+  colour-skyblue: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 11s
+    check answered in 2s
+  colour-skyblue: passed, 1m 03s in all
+  -> done (2 images passed)
+
+Front-Open Rose Stone-Embroidered Abaya | Premium Romantic Nida Stonework Colorful Abaya
+  colour-black: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 4s
+  colour-black: passed, 1m 07s in all
+  colour-mauve: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 10s
+    check answered in 3s
+  colour-mauve: passed, 0m 33s in all
+  colour-brown: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 10s
+    check answered in 2s
+  colour-brown: passed, 1m 02s in all
+  colour-navy: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 10s
+    check answered in 3s
+  colour-navy: passed, 1m 03s in all
+  colour-pink: generating
+    image answered in 11s
+    check answered in 2s
+  colour-pink: passed, 0m 17s in all
+  colour-blue: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 11s
+    check answered in 4s
+  colour-blue: passed, 1m 04s in all
+  -> done (6 images passed)
+
+Front-Open Stone-Embroidered Colored Abayas | Premium Romantic Nida Oval Cascade Stonework Abaya
+  colour-purple: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 11s
+    check answered in 2s
+  colour-purple: passed, 0m 32s in all
+  colour-blue: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 12s
+    check answered in 3s
+  colour-blue: passed, 1m 04s in all
+  colour-dark-brown: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 11s
+    check answered in 3s
+  colour-dark-brown: passed, 1m 04s in all
+  -> done (3 images passed)
+
+Front-Open Palm Leaf Stone-Embroidered Black Abaya | Premium Romantic Nida Stonework Abaya
+  hero-4: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 18s
+    check answered in 11s
+  hero-4: passed, 1m 22s in all
+  -> done (1 images passed)
+
+45 minutes used: no new product is started; the next round carries on
+
+Summary: {
+  "date": "2026-10-27 02:40 UTC",
+  "mode": "live",
+  "products_worked_on": 7,
+  "statuses": {
+    "paused (limit)": 2,
+    "done": 5
+  },
+  "images_passed": 19,
+  "gemini_image_calls": 19,
+  "gemini_check_calls": 19,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 209.019,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
+
+===== worker-1 =====
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $206.84 of $290
+
+Front-Open Essential Abaya | Premium Plain Romantic Nida Abaya
+  colour-red: generating
+    image answered in 12s
+    check answered in 2s
+  colour-red: passed, 0m 18s in all
+  colour-green: generating
+    image answered in 11s
+    check answered in 2s
+  colour-green: passed, 0m 18s in all
+  colour-forest-green: generating
+    image answered in 12s
+    check answered in 2s
+  colour-forest-green: passed, 0m 19s in all
+  colour-powder-blue: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image answered in 11s
+    check answered in 2s
+  colour-powder-blue: passed, 4m 34s in all
+  -> done (4 images passed)
+
+Front-Open Plain Abaya With 3 Layer Fringe Sleeves | Premium Chiffon Abaya with Scarf
+  colour-pink: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image answered in 12s
+    check answered in 4s
+  colour-pink: passed, 2m 06s in all
+  -> done (1 images passed)
+
+Front-Open Stonework Rose Embroidered Abaya | Premium Romantic Nida Long Flare Abaya
+  hero-4: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image answered in 17s
+    hero-4: Gemini gave no image (FinishReason.OTHER), attempt 3
+  hero-4: do manually, 2m 05s in all
+  fitting-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 15s
+    check answered in 4s
+  fitting-1: passed, 0m 39s in all
+  closer-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 3s
+  closer-2: passed, 1m 06s in all
+  closer-3: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 14s
+    check answered in 4s
+  closer-3: passed, 1m 08s in all
+  colour-dark-brown: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 12s
+    check answered in 3s
+  colour-dark-brown: passed, 1m 05s in all
+  colour-pink: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 16s
+    check answered in 3s
+  colour-pink: passed, 0m 39s in all
+  colour-dark-pink: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 2s
+  colour-dark-pink: passed, 1m 05s in all
+  colour-mint-green: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image answered in 10s
+    check answered in 3s
+  colour-mint-green: passed, 2m 04s in all
+  colour-brown: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image answered in 10s
+    check answered in 2s
+  colour-brown: passed, 3m 03s in all
+  colour-magenta: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 12s
+    check answered in 3s
+  colour-magenta: passed, 1m 04s in all
+  colour-deep-plum: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 12s
+    check answered in 2s
+  colour-deep-plum: passed, 0m 35s in all
+  -> manual (10 images passed)
+
+Front-Open Floral Stonework Abaya | Premium Romantic Nida Bloom Embroidered Abaya
+  fitting-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 15s
+    check answered in 3s
+  fitting-1: passed, 1m 07s in all
+  colour-beige: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 11s
+    check answered in 3s
+  colour-beige: passed, 1m 04s in all
+  colour-navy: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 12s
+    check answered in 3s
+  colour-navy: passed, 1m 05s in all
+  colour-grey: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 11s
+    check answered in 2s
+  colour-grey: passed, 1m 03s in all
+  colour-red: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 14s
+    check answered in 3s
+  colour-red: passed, 1m 07s in all
+  colour-green: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 11s
+    check answered in 3s
+  colour-green: passed, 0m 33s in all
+  colour-purple: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 12s
+    check answered in 2s
+  colour-purple: passed, 1m 04s in all
+  colour-teal: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 11s
+    check answered in 2s
+  colour-teal: passed, 1m 04s in all
+  colour-taupe: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image answered in 12s
+    check answered in 2s
+  colour-taupe: passed, 2m 04s in all
+  colour-skyblue: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 120s (6/6)
+  Limit reached: Vertex AI kept refusing (Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': )); stopping for now. Run the same command again later to continue.
+  Everything made so far is kept; run the same command again later.
+  -> paused (limit) (9 images passed)
+
+Summary: {
+  "date": "2026-10-27 02:40 UTC",
+  "mode": "live",
+  "products_worked_on": 4,
+  "statuses": {
+    "done": 2,
+    "manual": 1,
+    "paused (limit)": 1
+  },
+  "images_passed": 24,
+  "gemini_image_calls": 25,
+  "gemini_check_calls": 24,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 208.761,
+  "seconds_per_website_image": null,
+  "limit_reached": true
+}
+
+===== worker-2 =====
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $206.84 of $290
+
+Front-Open Plain Abaya With Hanging Tassel on Sleeves | Premium Essential Abaya
+  colour-ruby-red: generating
+    image answered in 15s
+    check answered in 2s
+  colour-ruby-red: passed, 0m 21s in all
+  colour-dusty-lavender: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 11s
+    check answered in 2s
+  colour-dusty-lavender: passed, 1m 03s in all
+  colour-pink: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 13s
+    check answered in 2s
+  colour-pink: passed, 1m 05s in all
+  -> manual (3 images passed)
+
+Front-Open Fringe-Cuff Abaya | Premium Romantic Nida Plain Abaya
+  colour-pink: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image answered in 13s
+    check answered in 2s
+  colour-pink: passed, 2m 05s in all
+  colour-navy: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 120s (6/6)
+  Limit reached: Vertex AI kept refusing (Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': )); stopping for now. Run the same command again later to continue.
+  Everything made so far is kept; run the same command again later.
+  Google is busy: waiting 5 minutes, then the next product
+  -> paused (limit) (1 images passed)
+
+Front-Open Contrast Lace Abaya | Premium Cotton Crinkle Abaya with Fringe Cuffs
+  hero-4: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 15s
+    check answered in 3s
+  hero-4: passed, 0m 41s in all
+  closer-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image answered in 17s
+    check answered in 2s
+  closer-1: passed, 2m 10s in all
+  closer-3: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 13s
+    check answered in 21s
+  closer-3: passed, 0m 54s in all
+  colour-blush-pink: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 120s (6/6)
+  Limit reached: Vertex AI kept refusing (Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': )); stopping for now. Run the same command again later to continue.
+  Everything made so far is kept; run the same command again later.
+  Google is busy: waiting 5 minutes, then the next product
+  -> paused (limit) (3 images passed)
+
+Front-Open Sleek Abaya | Premium Nida Glossy Plain Abaya
+  colour-brown: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 14s
+    check answered in 2s
+  colour-brown: passed, 0m 36s in all
+  colour-light-green: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 120s (6/6)
+  Limit reached: Vertex AI kept refusing (Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': )); stopping for now. Run the same command again later to continue.
+  Everything made so far is kept; run the same command again later.
+  -> paused (limit) (1 images passed)
+
+Summary: {
+  "date": "2026-10-27 02:40 UTC",
+  "mode": "live",
+  "products_worked_on": 4,
+  "statuses": {
+    "manual": 1,
+    "paused (limit)": 3
+  },
+  "images_passed": 8,
+  "gemini_image_calls": 8,
+  "gemini_check_calls": 8,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 208.557,
+  "seconds_per_website_image": null,
+  "limit_reached": true
+}
+
+===== report =====
+Report: 350 products the program has worked on
+Report written: output/report.csv
+Report written: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
