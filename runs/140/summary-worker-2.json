@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-27 14:09 UTC",
+  "mode": "live",
+  "products_worked_on": 3,
+  "statuses": {
+    "paused (limit)": 1,
+    "done": 2
+  },
+  "images_passed": 32,
+  "gemini_image_calls": 32,
+  "gemini_check_calls": 32,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 238.563,
+  "seconds_per_website_image": null,
+  "limit_reached": false,
+  "products": [
+    {
+      "handle": "front-open-chevron-stonework-black-butterfly-abaya-premium-nida-butterfly-black-abaya-with-stone-embellishment",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-zigzag-stone-studded-butterfly-colored-abaya-premium-nida-stonework-butterfly-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-black-handcrafted-cutdana-abaya-premium-nida-cutdana-handwork-abaya",
+      "status": "done"
+    }
+  ]
+}
