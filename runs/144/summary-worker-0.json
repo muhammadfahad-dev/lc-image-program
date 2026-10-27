@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-27 18:13 UTC",
+  "mode": "live",
+  "products_worked_on": 3,
+  "statuses": {
+    "paused (limit)": 2,
+    "done": 1
+  },
+  "images_passed": 22,
+  "gemini_image_calls": 23,
+  "gemini_check_calls": 24,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 248.049,
+  "seconds_per_website_image": null,
+  "limit_reached": true,
+  "products": [
+    {
+      "handle": "front-open-petal-cutdana-handwork-abaya-premium-romantic-nida-handcrafted-cutdana-colored-abaya-copy",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-cascading-fern-stonework-black-abaya-premium-nida-black-stone-studded-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-regal-butterfly-stonework-abaya-scarf-premium-nida-butterfly-stone-studded-abaya",
+      "status": "paused (limit)"
+    }
+  ]
+}

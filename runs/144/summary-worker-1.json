@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-27 18:13 UTC",
+  "mode": "live",
+  "products_worked_on": 5,
+  "statuses": {
+    "done": 4,
+    "paused (limit)": 1
+  },
+  "images_passed": 27,
+  "gemini_image_calls": 30,
+  "gemini_check_calls": 28,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 248.427,
+  "seconds_per_website_image": null,
+  "limit_reached": false,
+  "products": [
+    {
+      "handle": "front-open-golden-vines-stone-studded-butterfly-black-abaya-premium-nida-golden-stonework-butterfly-abaya-copy",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-handcrafted-starburst-cutdana-abaya-premium-romantic-nida-handwork-embellished-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-handcrafted-lotus-vine-cutdana-abaya-premium-romantic-nida-handwork-embellished-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-floral-cuff-cutdana-handwork-abaya-premium-nida-handcrafted-cutdana-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-handcrafted-fern-cutdana-abaya-premium-romantic-nida-cutdana-handwork-colored-abayas-copy",
+      "status": "done"
+    }
+  ]
+}
