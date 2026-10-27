@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-27 01:11 UTC",
+  "mode": "live",
+  "products_worked_on": 3,
+  "statuses": {
+    "paused (limit)": 2,
+    "manual": 1
+  },
+  "images_passed": 15,
+  "gemini_image_calls": 17,
+  "gemini_check_calls": 17,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 204.657,
+  "seconds_per_website_image": null,
+  "limit_reached": true,
+  "products": [
+    {
+      "handle": "front-open-handcrafted-cutdana-abaya-with-matching-scarf-premium-romantic-nida-2-pc-abaya-set",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-kimono-handwork-abaya-with-attached-inner-premium-velvet-shimmer-nida-cutdana-abaya",
+      "status": "manual"
+    },
+    {
+      "handle": "front-open-rosebud-stone-embroidered-abaya-premium-romantic-nida-stonework-abaya",
+      "status": "paused (limit)"
+    }
+  ]
+}
