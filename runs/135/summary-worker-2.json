@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-27 09:23 UTC",
+  "mode": "live",
+  "products_worked_on": 4,
+  "statuses": {
+    "manual": 1,
+    "paused (limit)": 2,
+    "done": 1
+  },
+  "images_passed": 16,
+  "gemini_image_calls": 17,
+  "gemini_check_calls": 17,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 226.431,
+  "seconds_per_website_image": null,
+  "limit_reached": true,
+  "products": [
+    {
+      "handle": "front-open-cutdana-fleur-de-lis-motif-abaya",
+      "status": "manual"
+    },
+    {
+      "handle": "front-open-stonework-kimono-abaya-with-separate-inner-scarf-premium-chiffon-stone-studded-2-pc-set-abaya-inner",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-stonework-butterfly-abaya-premium-romantic-nida-butterfly-stone-studded-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-teardrop-stonework-butterfly-abaya-premium-nida-stone-studded-butterfly-abaya",
+      "status": "paused (limit)"
+    }
+  ]
+}
