@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-26 23:50 UTC",
+  "mode": "live",
+  "products_worked_on": 3,
+  "statuses": {
+    "paused (limit)": 2,
+    "done": 1
+  },
+  "images_passed": 17,
+  "gemini_image_calls": 17,
+  "gemini_check_calls": 17,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 202.401,
+  "seconds_per_website_image": null,
+  "limit_reached": false,
+  "products": [
+    {
+      "handle": "front-open-embellished-abaya-with-fringed-cuffs-premium-romantic-nida-cutdana-embroidery-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-scattered-leaves-stone-embroidered-abaya-premium-romantic-nida-stonework-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-black-abaya-with-stone-embroidery-premium-romantic-nida-stonework-abaya",
+      "status": "done"
+    }
+  ]
+}
