@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-27 10:26 UTC",
+  "mode": "live",
+  "products_worked_on": 4,
+  "statuses": {
+    "done": 1,
+    "manual": 1,
+    "paused (limit)": 2
+  },
+  "images_passed": 17,
+  "gemini_image_calls": 17,
+  "gemini_check_calls": 17,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 229.041,
+  "seconds_per_website_image": null,
+  "limit_reached": true,
+  "products": [
+    {
+      "handle": "front-open-stone-studded-leaf-butterfly-abaya-with-scarf-premium-nida-stonework-butterfly-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-diagonal-stonework-butterfly-abaya-premium-nida-butterfly-sleeve-abaya",
+      "status": "manual"
+    },
+    {
+      "handle": "front-open-interlocking-rings-stonework-abaya-premium-romantic-nida-stonework-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-dubai-style-stone-embroidered-abaya-with-belt-premium-romantic-nida-stonework-abaya-with-belt",
+      "status": "paused (limit)"
+    }
+  ]
+}

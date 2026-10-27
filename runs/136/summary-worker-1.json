@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-27 10:26 UTC",
+  "mode": "live",
+  "products_worked_on": 3,
+  "statuses": {
+    "done": 1,
+    "paused (limit)": 2
+  },
+  "images_passed": 16,
+  "gemini_image_calls": 17,
+  "gemini_check_calls": 17,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 229.335,
+  "seconds_per_website_image": null,
+  "limit_reached": true,
+  "products": [
+    {
+      "handle": "front-open-tissue-beaded-handwork-floral-abaya-premium-romantic-nida-cutdana-floral-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-stonework-abaya-premium-nida-full-body-stonework-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-zigzag-stonework-butterfly-abaya-premium-romantic-nida-stonework-abaya",
+      "status": "paused (limit)"
+    }
+  ]
+}
