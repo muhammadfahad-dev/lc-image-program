@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-27 15:07 UTC",
+  "mode": "live",
+  "products_worked_on": 6,
+  "statuses": {
+    "done": 4,
+    "paused (limit)": 2
+  },
+  "images_passed": 19,
+  "gemini_image_calls": 20,
+  "gemini_check_calls": 19,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 240.861,
+  "seconds_per_website_image": null,
+  "limit_reached": false,
+  "products": [
+    {
+      "handle": "front-open-black-abaya-with-floral-tissue-cutdana-handwork-on-sleeves-premium-romantic-nida-cutdana-floral-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-handcrafted-poppy-tissue-cutdana-abaya-premium-romantic-nida-handwork-cutdana-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-petal-cascade-cutdana-handwork-abaya-premium-romantic-nida-handcrafted-cutdana-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-petal-cutdana-handwork-abaya-premium-romantic-nida-handcrafted-cutdana-colored-abaya-copy",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-diamond-handcrafted-cutdana-abaya-premium-romantic-nida-handwork-embellished-black-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-black-handcrafted-cutdana-abaya-premium-romantic-nida-handwork-embellished-black-abaya",
+      "status": "done"
+    }
+  ]
+}
