@@ -1,0 +1,692 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $276.37 of $290
+  projects/352302053849/locations/global/batchPredictionJobs/1758591470496907264: 300 answer(s) in 1 result file(s)
+    check answered in 4s
+    colour-dark-brown: passed
+    check answered in 3s
+    colour-brown: passed
+    check answered in 2s
+    colour-navy: passed
+    check answered in 2s
+    colour-beige: passed
+    check answered in 3s
+    colour-mulberry: passed
+    check answered in 3s
+    colour-maroon: passed
+  Front-Open Butterfly Abaya with Chain-Link Stonework | Premium Nida Colored Stone-Embellished Butterfly Abaya: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 49s
+    closer-4: passed
+  Front-Open Silver Vine Stonework Butterfly Abaya | Premium Romantic Nida Colored Stone-Embellished Butterfly Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 5s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Feather Stonework Abaya | Premium Romantic Nida Stone-Studded Abaya: done
+    check answered in 4s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 5s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Hearts Stonework Abaya | Premium Romantic Nida Stone-Studded Abaya: done
+    check answered in 3s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front-Open Paisley Petal Stonework Abaya | Premium Romantic Nida Stone-Studded Abaya: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 5s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 2s
+    closer-4: passed
+  Front-Open Heart Floral Stonework Abaya | Premium Romantic Nida Stone-Studded Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: retry
+  Front-Open Circle Trail Stonework Abaya | Premium Romantic Nida Stone-Studded Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 4s
+    hero-2: passed
+    check answered in 3s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: retry
+  Front-Closed Stonework Tassel Abaya | Premium Nida Stone-Studded Colored Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: retry
+    check answered in 2s
+    multi-3b: passed
+    check answered in 5s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Closed Black Stonework Abaya with Lace & Tassel | Premium Nida Stone-Studded Black Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Closed Swirl Stonework Abaya with Belt | Premium Nida Colored Stone-Studded Tie-Back Abaya: in_progress
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 5s
+    closer-4: passed
+    check answered in 3s
+    colour-olive-green: passed
+    check answered in 2s
+    colour-purple: passed
+    check answered in 2s
+    colour-navy: passed
+    check answered in 2s
+    colour-magenta: passed
+  Front-Open Floral Stonework Long Flared Abaya | Premium Nida Colored Stone-Studded Abaya: done
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 6s
+    multi-3b: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 22s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front-Open Line Stonework Black Abaya with Attached Inner | Premium Nida Black Stone-Studded Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 48s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    closer-4: passed
+  Front-Open Diamond Trail Stonework Abaya | Premium Romantic Nida Colored Stone-Studded Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 13s
+    closer-3: passed
+    check answered in 6s
+    closer-4: passed
+  Front-Open Scattered Bloom Motif Stonework Abaya | Premium Romantic Nida Colored Stone-Studded Abaya: in_progress
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+    check answered in 2s
+    colour-navy: passed
+    check answered in 2s
+    colour-taupe: passed
+    check answered in 26s
+    colour-beige: passed
+    check answered in 2s
+    colour-skyblue: passed
+    check answered in 2s
+    colour-light-grey: passed
+    check answered in 3s
+    colour-mauve: passed
+    check answered in 3s
+    colour-dusty-lavender: passed
+  Front-Open Feathered Vine Stonework Abaya | Premium Romantic Nida Colored Stone-Embellished Abaya: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 18s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Scattered Floral Sprigs Motif Stonework Abaya | Premium Romantic Nida Colored Stone-Embellished Abaya: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: retry
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: retry
+  Front-Open Shimmer Panel Stonework Butterfly Black Abaya | Premium Nida Black Stone-Embellished Butterfly Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    closer-4: retry (Gemini gave no image (OTHER))
+  Front-Open Rose Vine Panel Stonework Abaya | Premium Romantic Nida Colored Stone-Embellished Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    hero-3: retry (Gemini gave no image (OTHER))
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 4s
+    fitting-1: passed
+    multi-1: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Dotted Stonework Abaya | Premium Romantic Nida Colored Stone-Studded Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 2s
+    closer-4: passed
+  Front-Open Swirl Stonework Butterfly Black Abaya | Premium Nida Black Stone-Embellished Butterfly Abaya: done
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 48s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 6s
+    closer-4: passed
+  Front-Open Bow Stonework Black Abaya & Scarf | Premium Nida Black Stone-Embellished Abaya: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 9s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Closed Stonework Butterfly Abaya With Attached Inner, Scarf & Niqab | 2 pc Set Premium Nida Abaya with Scarf & Niqab: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 18s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    closer-4: passed
+  Front-Open Linear Stonework Black Abaya | Premium Nida Black Stone-Studded Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 14s
+    fitting-1: passed
+    check answered in 8s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Sparkling Stonework Black Abaya | Premium Nida Black Stone-Studded Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 8s
+    closer-2: passed
+    check answered in 4s
+    closer-3: retry
+    closer-4: retry (Gemini gave no image (OTHER))
+  Front-Open Swirling Stonework Black Abaya | Premium Nida Black Stone-Studded Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 27s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Zigzag Stonework Black Abaya | Premium Nida Black Stone-Studded Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+  Front-Open Stripe Stonework Panel Black Abaya | Premium Nida Black Stone-Studded Abaya: in_progress
+  Front-Open Silver Vine Stonework Butterfly Abaya | Premium Romantic Nida Colored Stone-Embellished Butterfly Abaya: 10 image(s)
+  Front-Open Heart Floral Stonework Abaya | Premium Romantic Nida Stone-Studded Abaya: 1 image(s)
+  Front-Open Circle Trail Stonework Abaya | Premium Romantic Nida Stone-Studded Abaya: 1 image(s)
+  Front-Closed Stonework Tassel Abaya | Premium Nida Stone-Studded Colored Abaya: 5 image(s)
+  Front-Closed Black Stonework Abaya with Lace & Tassel | Premium Nida Stone-Studded Black Abaya: 1 image(s)
+  Front-Closed Swirl Stonework Abaya with Belt | Premium Nida Colored Stone-Studded Tie-Back Abaya: 8 image(s)
+  Front-Open Line Stonework Black Abaya with Attached Inner | Premium Nida Black Stone-Studded Abaya: 1 image(s)
+  Front-Open Diamond Trail Stonework Abaya | Premium Romantic Nida Colored Stone-Studded Abaya: 4 image(s)
+  Front-Open Scattered Bloom Motif Stonework Abaya | Premium Romantic Nida Colored Stone-Studded Abaya: 12 image(s)
+  Front-Open Scattered Floral Sprigs Motif Stonework Abaya | Premium Romantic Nida Colored Stone-Embellished Abaya: 5 image(s)
+  Front-Open Shimmer Panel Stonework Butterfly Black Abaya | Premium Nida Black Stone-Embellished Butterfly Abaya: 3 image(s)
+  Front-Open Rose Vine Panel Stonework Abaya | Premium Romantic Nida Colored Stone-Embellished Abaya: 8 image(s)
+  Front-Open Dotted Stonework Abaya | Premium Romantic Nida Colored Stone-Studded Abaya: 3 image(s)
+  Front-Closed Stonework Butterfly Abaya With Attached Inner, Scarf & Niqab | 2 pc Set Premium Nida Abaya with Scarf & Niqab: 6 image(s)
+  Front-Open Linear Stonework Black Abaya | Premium Nida Black Stone-Studded Abaya: 1 image(s)
+  Front-Open Sparkling Stonework Black Abaya | Premium Nida Black Stone-Studded Abaya: 1 image(s)
+  Front-Open Swirling Stonework Black Abaya | Premium Nida Black Stone-Studded Abaya: 2 image(s)
+  Front-Open Zigzag Stonework Black Abaya | Premium Nida Black Stone-Studded Abaya: 2 image(s)
+  Front-Open Stripe Stonework Panel Black Abaya | Premium Nida Black Stone-Studded Abaya: 8 image(s)
+    check answered in 18s
+  Front-Open Radiant Stonework Butterfly Black Abaya | Premium Nida Black Stone-Studded Butterfly Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Patterned Stonework Cuff Abaya | Premium Romantic Nida Abaya with Stone-Studded Cuffs: 12 image(s)
+    check answered in 3s
+  Front-Open Dotted Stonework Butterfly Abaya | Premium Romantic Nida Butterfly Abaya with Stone-Studded Panel & Cuffs: 12 image(s)
+    check answered in 14s
+  Front-Open Leaf Stonework Abaya with Tassels | Premium Romantic Nida Stone-Studded Abaya: 12 image(s)
+    check answered in 4s
+  Front-Open Leaf Stonework Black Abaya with Tassels | Premium Romantic Nida Black Stone-Studded Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Rose-Gold Floral Stonework Black Abaya | Premium Romantic Nida Stone-Studded Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Handcrafted Cutdana Contrast Abaya | Premium Romantic Nida Handwork Cutdana Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Golden Rosette Handcrafted Cutdana Black Abaya | Premium Romantic Nida Black Handwork Cutdana Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Floral Vine Handcrafted Cutdana Abaya | Premium Romantic Nida Colored Handwork Cutdana Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Black Vine Handcrafted Cutdana Abaya with Tassels | Premium Romantic Nida Handwork Cutdana Black Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Long Flared Abaya with Floral Vine Cutdana Handwork & Tassels | Premium Romantic Nida Handwork Cutdana Colored Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Black Abaya with Scattered Sprig Cutdana Handwork | Premium Romantic Nida Handwork Cutdana Black Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Abaya with Golden Handcrafted Cutdana Cuffs | Premium Romantic Nida Handwork Cutdana Colored Abaya: 12 image(s)
+    check answered in 3s
+  Front-Closed Plain Maxi Abaya with Belt | Premium Nida Plain Belted Maxi Abaya with Tasseled Cuff: 11 image(s)
+    check answered in 2s
+  Front-Open Abaya with Cutdana Handwork Cuffs | Premium Korean Nida Handcrafted Cutdana Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Pleated Abaya with Crystal Buttons & Tassel | Premium Romantic Nida Handcrafted Cutdana Abaya: 12 image(s)
+    check answered in 4s
+  Front-Open Pintuck Panel Abaya with Crystal Buttons & Tassel | Premium Romantic Nida Handcrafted Cutdana Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Long Flare Abaya with Cutdana Handwork | Premium Nida Handcrafted Beaded Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Black Abaya with Handcrafted Cutdana Cuffs | Premium Nida Handwork Cutdana Black Abaya: 3 image(s)
+Submitted 300 image(s) for 38 product(s) as projects/352302053849/locations/global/batchPredictionJobs/3081066464199835648
+Batch: 300 submitted, 278 passed, 22 to try again, 0 do manually, 0 back in the queue
+Report: 428 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-28 05:03 UTC",
+  "mode": "live, batch auto",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 278,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 303,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 283.587,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
