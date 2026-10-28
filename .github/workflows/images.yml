@@ -41,6 +41,9 @@ env:
   VERTEX_BATCH_MAX_JOBS: "4"
   REPORT_SHEET_ID: 1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
   BATCH_PRODUCTS_PER_ROUND: "60"
+  # Spending cap, in the program's own estimate (Google's real bill has run at about 84% of it).
+  # $315 estimated is about $265 real, keeping about $35 of the $300 credit in reserve.
+  VERTEX_BUDGET_USD: "315"
   WORKERS: "3" # keep in step with the shard list of the workers job below
   WORKER_MINUTES: "45"
 
