@@ -1,0 +1,77 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $289.14 of $315
+  projects/352302053849/locations/global/batchPredictionJobs/3081066464199835648: running, 300 image(s)
+  projects/352302053849/locations/global/batchPredictionJobs/9221724556119506944: running, 300 image(s)
+  Front-Open Contrast Trim Minimalist Abaya with Scarf | Premium Moss Chiffon Contrast Abaya: 8 image(s)
+    check answered in 4s
+  Front-Closed Contrast Trim Abaya with Scarf | Premium Moss Chiffon Contrast Button Maxi Abaya: 11 image(s)
+    check answered in 3s
+  Front-Open Contrast Abaya with Scarf | Premium Moss Chiffon Dual-Tone Button Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Green Trim White Abaya with Matching Scarf | Premium Moss Chiffon Contrast Trim Abaya: 12 image(s)
+    check answered in 4s
+  Front-Open Plain White Abaya with Green Trim & Matching Scarf | Premium Moss Chiffon Contrast Trim Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Plain Dual Tone Abaya & Matching Scarf | Premium Moss Chiffon Colorblock Abaya: 12 image(s)
+    check answered in 4s
+  Front-Open Black Stonework Abaya | Premium Nida Stone Embellished Black Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Black Handwork Cutdana Abaya | Premium Nida Handcrafted Beaded Black Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Stonework Abaya with Side Pockets | Premium Romantic Nida Stone-Studded Colored Abaya: 12 image(s)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 4s
+  Front-Open Embroidered Cuff Minimal Abaya | Premium Romantic Nida Colored Embroidered Abaya: 12 image(s)
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 2s
+  Front-Open Scattered Floral Embroidery Abaya with Fringe Cuffs | Premium Romantic Nida Colored Embroidered Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Tassel Stonework Abaya | Premium Romantic Nida Colored Stonework Abaya: 12 image(s)
+    check answered in 4s
+  Front-Open Vine Leaf Embroidered Abaya | Premium Romantic Nida Colored Embroidery Abaya: 12 image(s)
+    check answered in 3s
+  Front-Closed Handcrafted Cutdana Cuffs White Maxi Abaya | Premium Nida White Handwork Cutdana Abaya: 11 image(s)
+    check answered in 2s
+  Front-Open Handcrafted Scattered Botanical Cutdana Abaya | Premium Romantic Nida Colored Handwork Cutdana Abaya: 12 image(s)
+    check answered in 2s
+  Front-Closed Black Maxi Abaya with Crystal Buttons & Tassels | Premium Romantic Nida Colored Black Maxi Abaya: 11 image(s)
+    check answered in 5s
+  Front-Open Abaya with Floral Embroidered Sleeves | Premium Nida Colored Embroidery Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Black Abaya with Handwork Cutdana Cuffs | Premium Nida Black Handcrafted Cutdana Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Black Stonework Embroidery Abaya | Premium Nida Black Chevron Stone-Embroidered Abaya: 12 image(s)
+    check answered in 1s
+  Front-Open Black Abaya with Floral Handwork Tissue Cutdana Cuffs | Premium Nida Black Handcrafted Cutdana Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Black Abaya with Floral Stone-Embroidered Cuffs | Premium Nida Black Stonework Embroidery Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Black Abaya with 3D Floral Handcrafted Tissue Cutdana Cuffs | Premium Nida Black Tissue Cutdana Handwork Abaya: 12 image(s)
+    check answered in 4s
+  Front-Open Black Handcrafted Floral Cutdana Abaya | Premium Nida Black Abaya with Embellished Hem & Sleeves: 12 image(s)
+    check answered in 56s
+  Front-Open Black Abaya with Floral Handcrafted Cutdana Hem | Premium Nida Black Abaya with Embellished Hem: 12 image(s)
+    check answered in 2s
+  Front-Open Abaya with Cascading Cutdana Handwork | Premium Nida Black Cutdana Embellished Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Abaya with Blooming Flower Cutdana Handwork | Premium Nida Black Handcrafted Flower Cutdana Embellished Abaya: 7 image(s)
+Submitted 300 image(s) for 26 product(s) as projects/352302053849/locations/global/batchPredictionJobs/869376834695856128
+Batch: 300 submitted, 0 passed, 0 to try again, 0 do manually, 0 back in the queue
+Report: 478 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-28 07:23 UTC",
+  "mode": "live, batch auto",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 0,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 25,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 294.687,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
