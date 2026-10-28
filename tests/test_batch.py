@@ -334,6 +334,26 @@ def test_storage_error_is_not_taken_for_already_read():
         assert len(s.shop["image_batches"]["jobs"]) == 1  # kept, to be read when storage works
 
 
+def test_final_round_waits_for_jobs_out_then_sends_one_only():
+    with tempfile.TemporaryDirectory() as tmp:
+        storage, s, g, p, runner = setup(tmp)
+        try:
+            assert runner.auto(5) is not None  # a normal round is out
+            config.VERTEX_BATCH_FINAL_ROUND = "last"
+            config.VERTEX_BATCH_MAX_JOBS, old_max = 4, config.VERTEX_BATCH_MAX_JOBS
+            runner.collect = lambda: None  # the job out is not finished yet
+            assert runner.auto(5) is None  # waits: a job is still out
+            del runner.collect
+            assert runner.auto(5) is not None  # collect it, then the final round (the colour image)
+            assert s.shop["image_batches"]["final_round"] == "last"
+            assert batch.BatchRunner(g, s, storage, out_dir=tmp, log=lambda *a: None).auto(5) is None  # collect; no new round
+            assert s.shop["image_batches"]["jobs"] == [] and s.shop["image_batches"]["final_round"] == "last"
+            assert audit_of(s, p)["colours"]["Emerald Green"]["status"] == "done"
+        finally:
+            config.VERTEX_BATCH_FINAL_ROUND = ""
+            config.VERTEX_BATCH_MAX_JOBS = old_max
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

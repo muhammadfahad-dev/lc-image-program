@@ -119,3 +119,5 @@ VERTEX_BATCH_SIZE = int(env("VERTEX_BATCH_SIZE", "50"))  # most images in one Ba
 VERTEX_BATCH_PRICE_PER_IMAGE = float(env("VERTEX_BATCH_PRICE_PER_IMAGE", str(round(VERTEX_PRICE_PER_IMAGE / 2, 4))))
 VERTEX_BATCH_MAX_READS = int(env("VERTEX_BATCH_MAX_READS", "3"))  # a job that cannot be finished is dropped after this many reads
 VERTEX_BATCH_MAX_JOBS = int(env("VERTEX_BATCH_MAX_JOBS", "2"))  # Batch jobs out at the same time
+# A name for one last Batch round: sent once every job out is read, then no new rounds until this is cleared or renamed
+VERTEX_BATCH_FINAL_ROUND = env("VERTEX_BATCH_FINAL_ROUND", "").strip()

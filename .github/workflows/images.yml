@@ -40,7 +40,10 @@ env:
   VERTEX_BATCH_SIZE: "300"
   VERTEX_BATCH_MAX_JOBS: "4"
   REPORT_SHEET_ID: 1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
-  BATCH_PRODUCTS_PER_ROUND: "60"
+  BATCH_PRODUCTS_PER_ROUND: "20"
+  # One last round, then a pause: once every Batch job out is read, one round of BATCH_PRODUCTS_PER_ROUND products is
+  # sent; after that the hourly run only reads what comes back. Clear it (or give it a new name) to send rounds again.
+  VERTEX_BATCH_FINAL_ROUND: "2026-10-28"
   # Spending cap, in the program's own estimate (Google's real bill has run at about 84% of it).
   # $315 estimated is about $265 real, keeping about $35 of the $300 credit in reserve.
   VERTEX_BUDGET_USD: "315"

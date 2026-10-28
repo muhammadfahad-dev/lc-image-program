@@ -119,7 +119,8 @@ class BatchRunner:
                 # update the jobs still listed; add back only jobs this run created (not ones another machine cleared)
                 if j["name"] in jobs or j["name"] in self.created:
                     jobs[j["name"]] = j
-            self.state = {"jobs": [j for name, j in jobs.items() if name not in self.removed]}
+            self.state = {"jobs": [j for name, j in jobs.items() if name not in self.removed],
+                          **{k: v for k, v in {**fresh, **self.state}.items() if k != "jobs"}}
         self.out.mkdir(parents=True, exist_ok=True)
         self.local_state.write_text(json.dumps(self.state, indent=2))
         if not self.dry_run:
@@ -368,6 +369,21 @@ class BatchRunner:
         (images already out in a job are never sent twice)."""
         self.collect()
         out = len(self.state["jobs"])
+        final = config.VERTEX_BATCH_FINAL_ROUND
+        if final:
+            # One last round: wait until every job is read, send one, then only read what comes back
+            if self.state.get("final_round") == final:
+                self.log(f"Final round '{final}' already sent; {out} Batch job(s) still out. No new rounds "
+                         "(clear VERTEX_BATCH_FINAL_ROUND to start again).")
+                return None
+            if out:
+                self.log(f"{out} Batch job(s) still out; the final round '{final}' is sent once all of them are read.")
+                return None
+            job = self.submit(limit_products, handles, retry_manual, redo)
+            if job:
+                self.state["final_round"] = final
+                self._save_state()
+            return job
         if out >= config.VERTEX_BATCH_MAX_JOBS:
             self.log(f"{out} Batch job(s) still out; the next round starts once one of them is read.")
             return None
