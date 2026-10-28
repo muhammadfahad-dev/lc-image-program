@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-28 03:02 UTC",
+  "mode": "live",
+  "products_worked_on": 3,
+  "statuses": {
+    "done": 1,
+    "paused (limit)": 2
+  },
+  "images_passed": 15,
+  "gemini_image_calls": 15,
+  "gemini_check_calls": 15,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 268.053,
+  "seconds_per_website_image": null,
+  "limit_reached": true,
+  "products": [
+    {
+      "handle": "front-open-blossom-stonework-butterfly-abaya-premium-romantic-stone-studded-butterflynida-abaya",
+      "status": "done"
+    },
+    {
+      "handle": "front-open-butterfly-abaya-with-chain-link-stonework-premium-nida-colored-stone-embellished-butterfly-abaya",
+      "status": "paused (limit)"
+    },
+    {
+      "handle": "front-open-butterfly-abaya-with-scattered-cluster-stonework-premium-nida-colored-stone-embellished-butterfly-abaya",
+      "status": "paused (limit)"
+    }
+  ]
+}
