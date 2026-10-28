@@ -354,6 +354,34 @@ def test_final_round_waits_for_jobs_out_then_sends_one_only():
             config.VERTEX_BATCH_MAX_JOBS = old_max
 
 
+def test_new_rounds_off_only_reads_jobs_out():
+    with tempfile.TemporaryDirectory() as tmp:
+        storage, s, g, p, runner = setup(tmp)
+        try:
+            assert runner.auto(5) is not None  # round 1 is out
+            config.VERTEX_BATCH_NEW_ROUNDS = False
+            assert runner.auto(5) is None  # round 1 is read, the colour round is not sent
+            assert s.shop["image_batches"]["jobs"] == []
+            a = audit_of(s, p)
+            assert all(v["status"] == "done" for v in a["slots"].values()) and "Emerald Green" not in a["colours"]
+        finally:
+            config.VERTEX_BATCH_NEW_ROUNDS = True
+
+
+def test_new_rounds_off_only_reads_jobs_out():
+    with tempfile.TemporaryDirectory() as tmp:
+        storage, s, g, p, runner = setup(tmp)
+        try:
+            assert runner.auto(5) is not None  # round 1 is out
+            config.VERTEX_BATCH_NEW_ROUNDS = False
+            assert runner.auto(5) is None  # round 1 is read, the colour round is not sent
+            assert s.shop["image_batches"]["jobs"] == []
+            a = audit_of(s, p)
+            assert all(v["status"] == "done" for v in a["slots"].values()) and "Emerald Green" not in a["colours"]
+        finally:
+            config.VERTEX_BATCH_NEW_ROUNDS = True
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

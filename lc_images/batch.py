@@ -369,6 +369,9 @@ class BatchRunner:
         (images already out in a job are never sent twice)."""
         self.collect()
         out = len(self.state["jobs"])
+        if not config.VERTEX_BATCH_NEW_ROUNDS:
+            self.log(f"New Batch rounds are off (VERTEX_BATCH_NEW_ROUNDS); {out} Batch job(s) still out, nothing new sent.")
+            return None
         final = config.VERTEX_BATCH_FINAL_ROUND
         if final:
             # One last round: wait until every job is read, send one, then only read what comes back

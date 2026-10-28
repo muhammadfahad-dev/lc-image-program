@@ -121,3 +121,5 @@ VERTEX_BATCH_MAX_READS = int(env("VERTEX_BATCH_MAX_READS", "3"))  # a job that c
 VERTEX_BATCH_MAX_JOBS = int(env("VERTEX_BATCH_MAX_JOBS", "2"))  # Batch jobs out at the same time
 # A name for one last Batch round: sent once every job out is read, then no new rounds until this is cleared or renamed
 VERTEX_BATCH_FINAL_ROUND = env("VERTEX_BATCH_FINAL_ROUND", "").strip()
+# off: Batch rounds only read the jobs already out and send nothing new (no new spending starts)
+VERTEX_BATCH_NEW_ROUNDS = env("VERTEX_BATCH_NEW_ROUNDS", "on").lower() not in ("off", "0", "false", "no")
