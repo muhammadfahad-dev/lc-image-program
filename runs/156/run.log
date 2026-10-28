@@ -1,0 +1,74 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $283.59 of $315
+  projects/352302053849/locations/global/batchPredictionJobs/3081066464199835648: running, 300 image(s)
+  Front-Open Black Abaya with Handcrafted Cutdana Cuffs | Premium Nida Handwork Cutdana Black Abaya: 9 image(s)
+    check answered in 2s
+  Front-Open Black Pintuck Placket Abaya with Tassel | Premium Nida Handwork Crystal Button & Tassel Black Abaya: 12 image(s)
+    check answered in 2s
+  Front-Closed Maxi Abaya with Crystal Buttons & Tassel | Premium Romantic Nida Crystal Button & Tassel Colored Abaya: 11 image(s)
+    check answered in 3s
+  Front-Open Abaya with Stonework Panel | Premium Romantic Nida Colored Stonework Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Black Abaya with Cutdana Handwork & Tassel | Premium Nida Black Handcrafted Cutdana Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Black Abaya with Cutdana Handwork on Cuffs | Premium Nida Black Handcrafted Cutdana Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Abaya with Cutdana Handwork on Cuffs | Premium Cey Handcrafted Cutdana Colored Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Handwork Cutdana Abaya with a Tassel | Premium Romantic Nida Handcrafted Cutdana Colored Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Handwork Cutdana Abaya | Premium Moss Chiffon Handcrafted Cutdana Colored Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Petal Vine Handcrafted Tissue Cutdana Abaya | Premium Romantic Nida Handwork Cutdana Colored Abaya: 12 image(s)
+    check answered in 9s
+  Front-Open Abaya with Droplets Handcrafted Cutdana Cuffs | Premium Korean Nida Handwork Cutdana Colored Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Abaya with Bloom Tissue Handcrafted Cutdana | Premium Romantic Nida Handwork Cutdana Colored Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Black Abaya with Cutdana Handwork | Premium Nida Black Handcrafted Cutdana Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Abaya with Diamond Lattice Cutdana Handwork Cuffs | Premium Cey Handcrafted Cutdana Colored Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Abaya with Swirly Cutdana Handwork Cuffs | Premium Moss Chiffon Handcrafted Cutdana Colored Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Black Abaya with Cutdana Handwork | Premium Nida Handcrafted Cutdana Black Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Minimal Butterfly Abaya | Premium Romantic Nida Colored Butterfly Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Handcrafted Cutdana Chevron Pintex Abaya | Premium Nida Colored Cutdana Handwork Abaya: 12 image(s)
+    check answered in 6s
+  Front-Open Black Abaya with Fringe Cutdana Handwork | Premium Nida Handcrafted Cutdana Black Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Black Abaya with Handcrafted Floral Band Cutdana Cuffs | Premium Nida Handcrafted Cutdana Black Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Scattered Bloom Embroidery Abaya | Premium Romantic Nida Colored Embroidered Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Handcrafted Floral Cutdana Abaya | Premium Romantic Nida Cutdana Handwork Colored Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Black Abaya with Handcrafted Paisley Cutdana Sleeves | Premium Nida Handcrafted Cutdana Black Abaya: 12 image(s)
+    check answered in 4s
+  Front-Open Scattered Floral Motifs Embroidered Abaya | Premium Romantic Nida Embroidery Colored Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Black Abaya with Floral Stonework Cuffs | Premium Nida Stone Embellished Black Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Contrast Trim Minimalist Abaya with Scarf | Premium Moss Chiffon Contrast Abaya: 4 image(s)
+Submitted 300 image(s) for 26 product(s) as projects/352302053849/locations/global/batchPredictionJobs/9221724556119506944
+Batch: 300 submitted, 0 passed, 0 to try again, 0 do manually, 0 back in the queue
+Report: 453 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-28 05:59 UTC",
+  "mode": "live, batch auto",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 0,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 25,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 289.137,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
