@@ -1,0 +1,69 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $270.85 of $290
+  Front-Open Butterfly Abaya with Chain-Link Stonework | Premium Nida Colored Stone-Embellished Butterfly Abaya: 6 image(s)
+  Front-Open Silver Vine Stonework Butterfly Abaya | Premium Romantic Nida Colored Stone-Embellished Butterfly Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Feather Stonework Abaya | Premium Romantic Nida Stone-Studded Abaya: 12 image(s)
+  Front-Open Hearts Stonework Abaya | Premium Romantic Nida Stone-Studded Abaya: 10 image(s)
+  Front-Open Paisley Petal Stonework Abaya | Premium Romantic Nida Stone-Studded Abaya: 10 image(s)
+    check answered in 3s
+  Front-Open Heart Floral Stonework Abaya | Premium Romantic Nida Stone-Studded Abaya: 12 image(s)
+    check answered in 25s
+  Front-Open Circle Trail Stonework Abaya | Premium Romantic Nida Stone-Studded Abaya: 12 image(s)
+    check answered in 2s
+  Front-Closed Stonework Tassel Abaya | Premium Nida Stone-Studded Colored Abaya: 11 image(s)
+    check answered in 3s
+  Front-Closed Black Stonework Abaya with Lace & Tassel | Premium Nida Stone-Studded Black Abaya: 11 image(s)
+    check answered in 5s
+  Front-Closed Swirl Stonework Abaya with Belt | Premium Nida Colored Stone-Studded Tie-Back Abaya: 11 image(s)
+  Front-Open Floral Stonework Long Flared Abaya | Premium Nida Colored Stone-Studded Abaya: 12 image(s)
+  Front-Open Line Stonework Black Abaya with Attached Inner | Premium Nida Black Stone-Studded Abaya: 9 image(s)
+    check answered in 2s
+  Front-Open Diamond Trail Stonework Abaya | Premium Romantic Nida Colored Stone-Studded Abaya: 12 image(s)
+    check answered in 4s
+  Front-Open Scattered Bloom Motif Stonework Abaya | Premium Romantic Nida Colored Stone-Studded Abaya: 12 image(s)
+  Front-Open Feathered Vine Stonework Abaya | Premium Romantic Nida Colored Stone-Embellished Abaya: 13 image(s)
+    check answered in 2s
+  Front-Open Scattered Floral Sprigs Motif Stonework Abaya | Premium Romantic Nida Colored Stone-Embellished Abaya: 12 image(s)
+    check answered in 57s
+  Front-Open Shimmer Panel Stonework Butterfly Black Abaya | Premium Nida Black Stone-Embellished Butterfly Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Rose Vine Panel Stonework Abaya | Premium Romantic Nida Colored Stone-Embellished Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Dotted Stonework Abaya | Premium Romantic Nida Colored Stone-Studded Abaya: 12 image(s)
+    check answered in 9s
+  Front-Open Swirl Stonework Butterfly Black Abaya | Premium Nida Black Stone-Embellished Butterfly Abaya: 12 image(s)
+    check answered in 1s
+  Front-Open Bow Stonework Black Abaya & Scarf | Premium Nida Black Stone-Embellished Abaya: 12 image(s)
+    check answered in 2s
+  Front-Closed Stonework Butterfly Abaya With Attached Inner, Scarf & Niqab | 2 pc Set Premium Nida Abaya with Scarf & Niqab: 11 image(s)
+    check answered in 2s
+  Front-Open Linear Stonework Black Abaya | Premium Nida Black Stone-Studded Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Sparkling Stonework Black Abaya | Premium Nida Black Stone-Studded Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Swirling Stonework Black Abaya | Premium Nida Black Stone-Studded Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Zigzag Stonework Black Abaya | Premium Nida Black Stone-Studded Abaya: 12 image(s)
+    check answered in 2s
+  Front-Open Stripe Stonework Panel Black Abaya | Premium Nida Black Stone-Studded Abaya: 4 image(s)
+Submitted 300 image(s) for 27 product(s) as projects/352302053849/locations/global/batchPredictionJobs/1758591470496907264
+Batch: 300 submitted, 0 passed, 0 to try again, 0 do manually, 0 back in the queue
+Report: 409 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-28 04:47 UTC",
+  "mode": "live, batch auto",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 0,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 20,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 276.369,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
