@@ -1,0 +1,27 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $314.38 of $328
+  Front-Open Abaya with Golden Handcrafted Cutdana Cuffs | Premium Romantic Nida Handwork Cutdana Colored Abaya: 7 image(s)
+  Front-Closed Maxi Abaya with Crystal Buttons & Tassel | Premium Romantic Nida Crystal Button & Tassel Colored Abaya: 8 image(s)
+  Front-Open Abaya with Stonework Panel | Premium Romantic Nida Colored Stonework Abaya: 8 image(s)
+  Front-Open Black Abaya with Cutdana Handwork on Cuffs | Premium Nida Black Handcrafted Cutdana Abaya: 2 image(s)
+  Front-Open Abaya with Cutdana Handwork on Cuffs | Premium Cey Handcrafted Cutdana Colored Abaya: 8 image(s)
+Submitted 33 image(s) for 5 product(s) as projects/352302053849/locations/global/batchPredictionJobs/1151247635592511488
+Batch: 33 submitted, 0 passed, 0 to try again, 0 do manually, 0 back in the queue
+Report: 517 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-29 10:28 UTC",
+  "mode": "live, batch auto",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 0,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 0,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 314.973,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
