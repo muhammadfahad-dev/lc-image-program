@@ -40,17 +40,17 @@ env:
   VERTEX_BATCH_SIZE: "300"
   VERTEX_BATCH_MAX_JOBS: "4"
   REPORT_SHEET_ID: 1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
-  BATCH_PRODUCTS_PER_ROUND: "20"
+  BATCH_PRODUCTS_PER_ROUND: "60"
   # One last round, then a pause: once every Batch job out is read, one round of BATCH_PRODUCTS_PER_ROUND products is
   # sent; after that the hourly run only reads what comes back. Clear it (or give it a new name) to send rounds again.
   VERTEX_BATCH_FINAL_ROUND: ""
   # off = the hourly run only reads the Batch jobs already out and sends nothing new. "on" to send rounds again.
-  VERTEX_BATCH_NEW_ROUNDS: "off"
+  VERTEX_BATCH_NEW_ROUNDS: "on"
   # Spending cap, in the program's own estimate. Set so Google's real bill stays under $280 even in the worst case:
-  # Billing showed $234 on Oct 28 with the estimate at $300.24. If none of Oct 28's 4 Batch jobs (1,200 images, about
-  # $21.60) were billed yet and every further estimated dollar costs a real dollar: 234 + 21.60 + (322 - 300.24) = $277.
-  # (The real bill has run at about 78-84% of the estimate, so it should stop well before that.)
-  VERTEX_BUDGET_USD: "322"
+  # Billing showed $249 on Oct 29 with every job read and the estimate at $314.38. If the last $14.14 of estimate
+  # (since Oct 28's $300.24) was not billed yet and every further estimated dollar costs a real dollar:
+  # 249 + 14.14 + (328 - 314.38) = $276.76. (The real bill has run at about 79% of the estimate.)
+  VERTEX_BUDGET_USD: "328"
   WORKERS: "3" # keep in step with the shard list of the workers job below
   WORKER_MINUTES: "45"
 
