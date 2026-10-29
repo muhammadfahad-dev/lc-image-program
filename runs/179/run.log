@@ -1,0 +1,1923 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $309.17 of $322
+  projects/352302053849/locations/global/batchPredictionJobs/9221724556119506944: 300 answer(s) in 1 result file(s)
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 51s
+    closer-2: passed
+    check answered in 13s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Black Abaya with Handcrafted Cutdana Cuffs | Premium Nida Handwork Cutdana Black Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 4s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 6s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 25s
+    closer-4: passed
+  Front-Open Black Pintuck Placket Abaya with Tassel | Premium Nida Handwork Crystal Button & Tassel Black Abaya: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 14s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3a: passed
+    check answered in 9s
+    closer-1: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 3s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Closed Maxi Abaya with Crystal Buttons & Tassel | Premium Romantic Nida Crystal Button & Tassel Colored Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 62s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: passed
+    check answered in 8s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 5s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front-Open Abaya with Stonework Panel | Premium Romantic Nida Colored Stonework Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 3s
+    multi-1: passed
+    check answered in 4s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Black Abaya with Cutdana Handwork & Tassel | Premium Nida Black Handcrafted Cutdana Abaya: done
+    check answered in 2s
+    hero-1: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 9s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 6s
+    closer-3: retry
+    check answered in 2s
+    closer-4: passed
+  Front-Open Black Abaya with Cutdana Handwork on Cuffs | Premium Nida Black Handcrafted Cutdana Abaya: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 1s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: retry
+  Front-Open Abaya with Cutdana Handwork on Cuffs | Premium Cey Handcrafted Cutdana Colored Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 4s
+    hero-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 21s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 2s
+    closer-4: passed
+  Front-Open Handwork Cutdana Abaya with a Tassel | Premium Romantic Nida Handcrafted Cutdana Colored Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    hero-3: retry (Gemini gave no image (OTHER))
+    check answered in 5s
+    hero-4: passed
+    check answered in 5s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 6s
+    closer-4: retry
+  Front-Open Handwork Cutdana Abaya | Premium Moss Chiffon Handcrafted Cutdana Colored Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 5s
+    closer-4: passed
+  Front-Open Petal Vine Handcrafted Tissue Cutdana Abaya | Premium Romantic Nida Handwork Cutdana Colored Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Abaya with Droplets Handcrafted Cutdana Cuffs | Premium Korean Nida Handwork Cutdana Colored Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 1s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 7s
+    closer-4: passed
+  Front-Open Abaya with Bloom Tissue Handcrafted Cutdana | Premium Romantic Nida Handwork Cutdana Colored Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 37s
+    closer-3: passed
+    check answered in 5s
+    closer-4: passed
+  Front-Open Black Abaya with Cutdana Handwork | Premium Nida Black Handcrafted Cutdana Abaya: done
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 49s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    closer-4: passed
+  Front-Open Abaya with Diamond Lattice Cutdana Handwork Cuffs | Premium Cey Handcrafted Cutdana Colored Abaya: in_progress
+    check answered in 4s
+    hero-1: passed
+    check answered in 4s
+    hero-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 3s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check answered in 6s
+    multi-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 14s
+    closer-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 2s
+    closer-3: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 4s
+    closer-4: retry
+  Front-Open Abaya with Swirly Cutdana Handwork Cuffs | Premium Moss Chiffon Handcrafted Cutdana Colored Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 3s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 2s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check answered in 6s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 5s
+    closer-3: passed
+    check answered in 4s
+    closer-4: retry
+  Front-Open Black Abaya with Cutdana Handwork | Premium Nida Handcrafted Cutdana Black Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 4s
+    multi-3a: passed
+    check answered in 2s
+    closer-1: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 2s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    closer-4: passed
+  Front-Open Minimal Butterfly Abaya | Premium Romantic Nida Colored Butterfly Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: retry
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: retry
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: retry
+    check answered in 3s
+    closer-4: passed
+  Front-Open Handcrafted Cutdana Chevron Pintex Abaya | Premium Nida Colored Cutdana Handwork Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    closer-4: passed
+  Front-Open Black Abaya with Fringe Cutdana Handwork | Premium Nida Handcrafted Cutdana Black Abaya: in_progress
+    check answered in 6s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 27s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 2s
+    closer-4: passed
+  Front-Open Black Abaya with Handcrafted Floral Band Cutdana Cuffs | Premium Nida Handcrafted Cutdana Black Abaya: done
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 27s
+    closer-4: passed
+  Front-Open Scattered Bloom Embroidery Abaya | Premium Romantic Nida Colored Embroidered Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 60s
+    closer-1: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 2s
+    closer-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 2s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Handcrafted Floral Cutdana Abaya | Premium Romantic Nida Cutdana Handwork Colored Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: retry
+    check answered in 17s
+    multi-3b: passed
+    check answered in 4s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Black Abaya with Handcrafted Paisley Cutdana Sleeves | Premium Nida Handcrafted Cutdana Black Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 4s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 5s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: retry
+  Front-Open Scattered Floral Motifs Embroidered Abaya | Premium Romantic Nida Embroidery Colored Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 35s
+    closer-4: passed
+  Front-Open Black Abaya with Floral Stonework Cuffs | Premium Nida Stone Embellished Black Abaya: done
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+  Front-Open Contrast Trim Minimalist Abaya with Scarf | Premium Moss Chiffon Contrast Abaya: in_progress
+  projects/352302053849/locations/global/batchPredictionJobs/3012808782347501568: 300 answer(s) in 1 result file(s)
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 3s
+    closer-4: retry
+  Front-Open Abaya with Blooming Flower Cutdana Handwork | Premium Nida Black Handcrafted Flower Cutdana Embellished Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 6s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 2s
+    closer-4: passed
+  Front-Open Abaya with Handcrafted Paisley Flower Cutdana Cuffs | Premium Nida Black Cutdana Handwork Abaya: done
+    check answered in 41s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 30s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    multi-1: passed
+    multi-2: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 3s
+    closer-4: passed
+  Front-Open Abaya with Contrast Piping & Cutdana Cuffs | Premium Nida Black Cutdana Handwork Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-4: retry
+    check answered in 10s
+    fitting-1: passed
+    check answered in 4s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 2s
+    closer-4: passed
+  Front-Closed Black Maxi Abaya with Handcrafted Cutdana Cuffs | Premium Nida Black Cutdana Handwork Maxi Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 5s
+    closer-1: passed
+    check answered in 3s
+    closer-2: retry
+    check answered in 4s
+    closer-3: retry
+    check answered in 3s
+    closer-4: passed
+  Front-Open Black Abaya with Handcrafted Colorful Tissue Cutdana Cuffs | Premium Nida Black Cutdana Handwork Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Scattered Floral Embroidered Abaya | Premium Nida Colored Embroidery Abaya: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 4s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 1s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 11s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Black Abaya with Black All Over Stonework | Premium Nida Black Stonework Abaya: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 5s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Black Leaf & Flower Stonework Embroidery Abaya | Premium Nida Black Stonework Embroidered Abaya: done
+    check answered in 2s
+    hero-1: passed
+    check answered in 43s
+    hero-2: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 2s
+    closer-2: retry
+    check answered in 3s
+    closer-3: passed
+    check answered in 2s
+    closer-4: passed
+  Front-Closed Black Handcrafted Flower Cutdana Maxi Abaya | Premium Nida Black Handwork Cutdana Maxi Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 23s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 5s
+    closer-4: passed
+  Front-Open Scattered Butterfly Stonework Embroidery Black Abaya | Premium Nida Black Stonework Embroidered Abaya: done
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 2s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Scalloped Floral Embroidery Abaya | Premium Romantic Nida Colored Floral Embroidered Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 4s
+    closer-3: passed
+    check answered in 2s
+    closer-4: passed
+  Front-Open Handcrafted Floret Beaded Black Abaya | Premium Nida Black Handwork Cutdana Abaya: done
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 34s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    multi-2: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    closer-4: passed
+  Front-Open Black Abaya with Embroidered Stonework Cuffs | Premium Nida Black Stone-Studded Embroidery Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    multi-3b: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 15s
+    closer-4: retry
+  Front-Open Black Abaya with Scattered Handcrafted Floral Cutdana | Premium Nida Black Beaded Handwork Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 7s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 2s
+    closer-4: passed
+  Front-Open Scattered Handcrafted Rosette Cutdana Abaya | Premium Romantic Nida Beaded Handwork Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 3s
+    closer-3: retry
+    check answered in 2s
+    closer-4: passed
+  Front-Open Handcrafted Floral Cutdana Abaya | Premium Romantic Nida Beaded Handwork Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 5s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 6s
+    closer-1: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 2s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    closer-4: passed
+  Front-Open Handcrafted Paisley Cutdana Embroidered Abaya | Premium Romantic Nida Beaded Handwork Embroidery Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front-Open Stonework Embroidered Abaya with Scarf | Premium Moss Chiffon Abaya with Embroidery & Fringe Cuffs: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to ); waiting 10s (1/2)
+    check answered in 2s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    closer-4: passed
+  Front-Open Stonework Abaya with Tassels | Premium Romantic Nida Stone-Studded Tassel Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 5s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 2s
+    closer-4: passed
+  Front-Open Handcrafted Lattice Cutdana Cuff Abaya | Premium Romantic Nida Beaded Sleeves Handwork Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 16s
+    closer-3: passed
+    check answered in 2s
+    closer-4: passed
+  Front-Open Black Abaya with Scattered Handcrafted Blossom Cutdana | Premium Nida Black Beaded Handwork Abaya: done
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 5s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 5s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 4s
+    closer-2: retry
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Black Abaya with Stonework Embroidered Cuffs | Premium Nida Black Stone-Embroidered Abaya: in_progress
+    check answered in 11s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 14s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 12s
+    closer-4: passed
+  Front-Open Black Abaya with Geometric Stonework Fringe Cuffs | Premium Nida Black Stone-Studded Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 4s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 12s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 3s
+    closer-3: retry
+    check answered in 2s
+    closer-4: passed
+  Front-Open Abaya with Floral Meadow Embroidery | Premium Romantic Nida Embroidered Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    closer-4: retry (Gemini gave no image (OTHER))
+  Front-Open Abaya with Handcrafted Cutdana Embellishments | Premium Romantic Nida Beaded Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+  Front-Open Abaya with Handcrafted Cutdana Sleeves | Premium Romantic Nida Beaded Abaya: in_progress
+  projects/352302053849/locations/global/batchPredictionJobs/8545111488665223168: 300 answer(s) in 1 result file(s)
+    check answered in 2s
+    closer-2: manual
+    check answered in 3s
+    closer-4: manual
+  Front-Open Shimmer Panel Stonework Butterfly Black Abaya | Premium Nida Black Stone-Embellished Butterfly Abaya: manual
+    check answered in 3s
+    closer-3: passed
+  Front-Open Swirling Stonework Black Abaya | Premium Nida Black Stone-Studded Abaya: done
+    check answered in 3s
+    fitting-1: passed
+  Front-Open Zigzag Stonework Black Abaya | Premium Nida Black Stone-Studded Abaya: done
+    check answered in 3s
+    closer-2: passed
+  Front-Open Stripe Stonework Panel Black Abaya | Premium Nida Black Stone-Studded Abaya: done
+    check answered in 2s
+    colour-grey: passed
+    check answered in 2s
+    colour-blue: passed
+    check answered in 2s
+    colour-light-grey: passed
+    check answered in 2s
+    colour-olive-green: passed
+    check answered in 2s
+    colour-mauve: passed
+    check answered in 2s
+    colour-rust: passed
+    check answered in 2s
+    colour-light-green: passed
+    check answered in 2s
+    colour-pink: passed
+    check answered in 2s
+    colour-peach: passed
+  Front-Open Patterned Stonework Cuff Abaya | Premium Romantic Nida Abaya with Stone-Studded Cuffs: done
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    colour-brown: passed
+    check answered in 2s
+    colour-light-brown: passed
+    check answered in 2s
+    colour-grey: passed
+    check answered in 2s
+    colour-blue: passed
+    check answered in 2s
+    colour-dark-brown: passed
+    check answered in 2s
+    colour-dark-pink: passed
+    check answered in 2s
+    colour-maroon: passed
+    check answered in 2s
+    colour-navy: passed
+    check answered in 3s
+    colour-purple: passed
+  Front-Open Dotted Stonework Butterfly Abaya | Premium Romantic Nida Butterfly Abaya with Stone-Studded Panel & Cuffs: done
+    check answered in 3s
+    colour-emerald-green: passed
+    check answered in 3s
+    colour-skyblue: passed
+    check answered in 3s
+    colour-red: passed
+    check answered in 2s
+    colour-navy: passed
+    check answered in 2s
+    colour-beige: passed
+    check answered in 2s
+    colour-light-purple: passed
+    check answered in 3s
+    colour-mauve: passed
+  Front-Open Leaf Stonework Abaya with Tassels | Premium Romantic Nida Stone-Studded Abaya: done
+    check answered in 3s
+    closer-2: passed
+  Front-Open Rose-Gold Floral Stonework Black Abaya | Premium Romantic Nida Stone-Studded Abaya: done
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    colour-purple: passed
+    check answered in 2s
+    colour-light-green: passed
+    check answered in 2s
+    colour-grey: passed
+    check answered in 14s
+    colour-mustard-gold: passed
+    check answered in 3s
+    colour-maroon: passed
+    check answered in 2s
+    colour-brown: passed
+  Front-Open Handcrafted Cutdana Contrast Abaya | Premium Romantic Nida Handwork Cutdana Abaya: done
+    check answered in 3s
+    hero-3: passed
+    check answered in 2s
+    closer-3: passed
+  Front-Open Golden Rosette Handcrafted Cutdana Black Abaya | Premium Romantic Nida Black Handwork Cutdana Abaya: done
+    check answered in 2s
+    colour-dusty-lavender: passed
+    check answered in 2s
+    colour-pink: passed
+    check answered in 3s
+    colour-grey: passed
+    check answered in 3s
+    colour-skyblue: passed
+    check answered in 3s
+    colour-teal: passed
+  Front-Open Floral Vine Handcrafted Cutdana Abaya | Premium Romantic Nida Colored Handwork Cutdana Abaya: done
+    check answered in 2s
+    closer-2: passed
+    check answered in 3s
+    colour-teal: passed
+    check answered in 2s
+    colour-light-grey: passed
+    check answered in 2s
+    colour-purple: passed
+    check answered in 2s
+    colour-charcoal: passed
+  Front-Open Long Flared Abaya with Floral Vine Cutdana Handwork & Tassels | Premium Romantic Nida Handwork Cutdana Colored Abaya: done
+    check answered in 3s
+    fitting-1: passed
+  Front-Open Black Abaya with Scattered Sprig Cutdana Handwork | Premium Romantic Nida Handwork Cutdana Black Abaya: done
+    check answered in 3s
+    hero-4: passed
+    check answered in 2s
+    closer-3: passed
+  Front-Open Abaya with Golden Handcrafted Cutdana Cuffs | Premium Romantic Nida Handwork Cutdana Colored Abaya: in_progress
+    check answered in 3s
+    colour-dark-brown: passed
+    check answered in 3s
+    colour-mauve: passed
+    check answered in 2s
+    colour-purple: passed
+    check answered in 2s
+    colour-teal: passed
+    check answered in 2s
+    colour-blue: passed
+    check answered in 2s
+    colour-deep-plum: passed
+    check answered in 2s
+    colour-light-brown: passed
+  Front-Closed Plain Maxi Abaya with Belt | Premium Nida Plain Belted Maxi Abaya with Tasseled Cuff: done
+    check answered in 3s
+    fitting-1: passed
+    check answered in 4s
+    closer-4: passed
+    check answered in 2s
+    colour-black: passed
+    check answered in 2s
+    colour-pink: passed
+    check answered in 2s
+    colour-mauve: passed
+    check answered in 3s
+    colour-maroon: passed
+    check answered in 2s
+    colour-green: passed
+    check answered in 2s
+    colour-ice-blue: passed
+    check answered in 16s
+    colour-brown: passed
+    check answered in 2s
+    colour-purple: passed
+    check answered in 2s
+    colour-white: passed
+  Front-Open Abaya with Cutdana Handwork Cuffs | Premium Korean Nida Handcrafted Cutdana Abaya: done
+    check answered in 2s
+    colour-brown: passed
+    check answered in 2s
+    colour-purple: passed
+    check answered in 2s
+    colour-dark-brown: passed
+    check answered in 2s
+    colour-emerald-green: passed
+    check answered in 2s
+    colour-magenta: passed
+  Front-Open Pleated Abaya with Crystal Buttons & Tassel | Premium Romantic Nida Handcrafted Cutdana Abaya: done
+    check answered in 4s
+    colour-brown: passed
+    check answered in 2s
+    colour-purple: passed
+    check answered in 2s
+    colour-dark-brown: passed
+    check answered in 2s
+    colour-bronze: passed
+    check answered in 1s
+    colour-mauve-purple: passed
+    check answered in 3s
+    colour-olive-green: passed
+    check answered in 2s
+    colour-ruby-red: passed
+  Front-Open Pintuck Panel Abaya with Crystal Buttons & Tassel | Premium Romantic Nida Handcrafted Cutdana Abaya: done
+    check answered in 2s
+    fitting-1: passed
+    check answered in 2s
+    colour-bronze: passed
+    check answered in 6s
+    colour-navy: passed
+    check answered in 2s
+    colour-beige: passed
+    check answered in 3s
+    colour-emerald-green: passed
+    check answered in 3s
+    colour-olive-green: passed
+    check answered in 3s
+    colour-maroon: passed
+  Front-Open Long Flare Abaya with Cutdana Handwork | Premium Nida Handcrafted Beaded Abaya: done
+    check answered in 2s
+    hero-3: passed
+  Front-Open Black Abaya with Handcrafted Cutdana Cuffs | Premium Nida Handwork Cutdana Black Abaya: done
+    check answered in 4s
+    closer-1: passed
+  Front-Open Contrast Trim Minimalist Abaya with Scarf | Premium Moss Chiffon Contrast Abaya: done
+    check answered in 18s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+  Front-Closed Contrast Trim Abaya with Scarf | Premium Moss Chiffon Contrast Button Maxi Abaya: done
+    check answered in 4s
+    hero-4: passed
+    check answered in 4s
+    closer-2: passed
+  Front-Open Contrast Abaya with Scarf | Premium Moss Chiffon Dual-Tone Button Abaya: done
+    closer-2: retry (Gemini gave no image (OTHER))
+  Front-Open Green Trim White Abaya with Matching Scarf | Premium Moss Chiffon Contrast Trim Abaya: in_progress
+    check answered in 4s
+    closer-2: passed
+  Front-Open Plain White Abaya with Green Trim & Matching Scarf | Premium Moss Chiffon Contrast Trim Abaya: done
+    check answered in 2s
+    closer-2: passed
+  Front-Open Plain Dual Tone Abaya & Matching Scarf | Premium Moss Chiffon Colorblock Abaya: done
+    check answered in 2s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Black Stonework Abaya | Premium Nida Stone Embellished Black Abaya: done
+    check answered in 3s
+    hero-4: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 3s
+    closer-3: passed
+  Front-Open Black Handwork Cutdana Abaya | Premium Nida Handcrafted Beaded Black Abaya: done
+    check answered in 2s
+    colour-gray: passed
+    check answered in 2s
+    colour-ruby-red: passed
+    check answered in 2s
+    colour-navy: passed
+    check answered in 2s
+    colour-skyblue: passed
+    check answered in 2s
+    colour-emerald-green: passed
+  Front-Open Stonework Abaya with Side Pockets | Premium Romantic Nida Stone-Studded Colored Abaya: done
+    check answered in 3s
+    hero-4: passed
+  Front-Open Embroidered Cuff Minimal Abaya | Premium Romantic Nida Colored Embroidered Abaya: in_progress
+    check answered in 3s
+    hero-4: passed
+    closer-4: retry (Gemini gave no image (OTHER))
+  Front-Open Scattered Floral Embroidery Abaya with Fringe Cuffs | Premium Romantic Nida Colored Embroidered Abaya: in_progress
+    check answered in 2s
+    colour-navy: passed
+    check answered in 3s
+    colour-silver-gray: passed
+    check answered in 2s
+    colour-brown: passed
+    check answered in 3s
+    colour-mauve: passed
+    check answered in 2s
+    colour-purple: passed
+  Front-Open Tassel Stonework Abaya | Premium Romantic Nida Colored Stonework Abaya: done
+    check answered in 3s
+    closer-3: passed
+    check answered in 2s
+    colour-brown: passed
+    check answered in 24s
+    colour-mauve-purple: passed
+    check answered in 2s
+    colour-pink: passed
+    check answered in 2s
+    colour-grey: passed
+    check answered in 2s
+    colour-teal: passed
+  Front-Open Vine Leaf Embroidered Abaya | Premium Romantic Nida Colored Embroidery Abaya: done
+    check answered in 3s
+    colour-purple: passed
+    check answered in 2s
+    colour-teal: passed
+    check answered in 12s
+    colour-light-grey: passed
+    check answered in 2s
+    colour-pink: passed
+  Front-Open Handcrafted Scattered Botanical Cutdana Abaya | Premium Romantic Nida Colored Handwork Cutdana Abaya: done
+    check answered in 7s
+    closer-3: passed
+    check answered in 2s
+    closer-4: passed
+  Front-Closed Black Maxi Abaya with Crystal Buttons & Tassels | Premium Romantic Nida Colored Black Maxi Abaya: done
+    check answered in 4s
+    colour-skyblue: passed
+    check answered in 2s
+    colour-white: passed
+    check answered in 2s
+    colour-emerald-green: passed
+    check answered in 2s
+    colour-taupe: passed
+    check answered in 4s
+    colour-dark-brown: passed
+    check answered in 2s
+    colour-cream: passed
+    check answered in 2s
+    colour-navy: passed
+    check answered in 2s
+    colour-mauve: passed
+    check answered in 2s
+    colour-purple: passed
+    check answered in 2s
+    colour-brown: passed
+    check answered in 3s
+    colour-mauve-purple: passed
+    check answered in 4s
+    colour-blue: passed
+    check answered in 2s
+    colour-pink: passed
+    check answered in 3s
+    colour-maroon: passed
+    check answered in 3s
+    colour-olive-green: passed
+    check answered in 2s
+    colour-light-brown: passed
+    check answered in 4s
+    colour-ice-blue: passed
+  Front-Open Abaya with Floral Embroidered Sleeves | Premium Nida Colored Embroidery Abaya: done
+    check answered in 34s
+    multi-1: passed
+    check answered in 10s
+    closer-3: passed
+  Front-Open Black Abaya with Handwork Cutdana Cuffs | Premium Nida Black Handcrafted Cutdana Abaya: done
+    check answered in 61s
+    closer-2: retry
+  Front-Open Black Stonework Embroidery Abaya | Premium Nida Black Chevron Stone-Embroidered Abaya: in_progress
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-3: passed
+  Front-Open Black Abaya with Floral Handwork Tissue Cutdana Cuffs | Premium Nida Black Handcrafted Cutdana Abaya: done
+    check answered in 3s
+    hero-3: passed
+  Front-Open Black Abaya with Floral Stone-Embroidered Cuffs | Premium Nida Black Stonework Embroidery Abaya: done
+    check answered in 2s
+    hero-3: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    multi-2: passed
+  Front-Open Black Abaya with 3D Floral Handcrafted Tissue Cutdana Cuffs | Premium Nida Black Tissue Cutdana Handwork Abaya: in_progress
+    check answered in 3s
+    multi-2: passed
+    check answered in 10s
+    closer-4: passed
+  Front-Open Black Handcrafted Floral Cutdana Abaya | Premium Nida Black Abaya with Embellished Hem & Sleeves: done
+    check answered in 3s
+    closer-2: passed
+    check answered in 20s
+    closer-3: passed
+  Front-Open Black Abaya with Floral Handcrafted Cutdana Hem | Premium Nida Black Abaya with Embellished Hem: done
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    closer-3: passed
+  Front-Open Abaya with Cascading Cutdana Handwork | Premium Nida Black Cutdana Embellished Abaya: done
+    check answered in 2s
+    closer-2: retry
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: retry
+  Front-Open Abaya with Handcrafted Cutdana Sleeves | Premium Romantic Nida Beaded Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: retry
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Abaya with Floral Handwork Cutdana Motifs | Premium Nida Beaded Flower Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 5s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 2s
+    closer-4: passed
+  Front-Open Floral Scroll Handwork Cutdana Abaya | Premium Romantic Nida Beaded Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    fitting-1: retry (Gemini gave no image (OTHER))
+    check answered in 12s
+    multi-1: passed
+    check answered in 2s
+    multi-2: retry
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 3s
+    closer-4: passed
+  Front-Open Abaya with Rosette Stonework Embellishments | Premium Romantic Nida Stone-Studded Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    closer-4: passed
+  Front-Open Abaya with Scalloped Sequin Embroidered Fringe Cuffs & Scarf | Premium Moss Chiffon Embroidery Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    hero-4: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 3s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 3s
+    closer-4: passed
+  Front-Open Leafy Vine Stonework Embellished Abaya | Premium Romantic Nida Stone-Studded Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 1s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 2s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 2s
+    closer-4: passed
+  Front-Open Abaya with Leafy Vine Embroidery on Sleeves | Premium Nida Embroidered Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 1s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 2s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 3s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 2s
+    closer-3: passed
+    check answered in 5s
+    closer-4: retry
+  Front-Open Abaya with Floral Handwork Cutdana Sleeves | Premium Moss Chiffon Beaded Flower Abaya: in_progress
+    check answered in 3s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 4s
+    closer-2: passed
+    check answered in 7s
+    closer-3: passed
+    check answered in 2s
+    closer-4: passed
+  Front-Open Black Butterfly Abaya with Teardrop Embroidery | Premium Nida Embroidered Black Abaya: done
+    check answered in 8s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+    check answered in 4s
+    hero-4: passed
+    check answered in 2s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 2s
+    multi-2: passed
+    check answered in 4s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    check answered in 3s
+    closer-3: passed
+    check answered in 2s
+    closer-4: passed
+  Front-Open Abaya with Floral Scroll Handwork Cutdana | Premium Romantic Nida Beaded Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 3s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    check answered in 3s
+    multi-1: passed
+    check answered in 3s
+    multi-2: passed
+    multi-3b: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    closer-1: passed
+    check answered in 31s
+    closer-2: retry
+    check answered in 2s
+    closer-3: passed
+    check answered in 4s
+    closer-4: passed
+  Front-Open Black Abaya with Curling Vine Handwork Cutdana | Premium Nida Handcrafted Beaded Leaf Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 3s
+    hero-2: passed
+    check answered in 2s
+    hero-3: passed
+    check answered in 2s
+    hero-4: passed
+    check answered in 3s
+    fitting-1: passed
+    multi-1: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    multi-2: passed
+    check answered in 2s
+    multi-3b: passed
+    check answered in 2s
+    closer-1: passed
+    check answered in 3s
+    closer-2: passed
+    closer-3: retry (Gemini gave no image (OTHER))
+    check answered in 2s
+    closer-4: passed
+  Front-Open Black Abaya with Leafy Branch Handwork Cutdana | Premium Nida Beaded Abaya: in_progress
+    check answered in 2s
+    hero-1: passed
+    check answered in 2s
+    hero-2: passed
+    check answered in 3s
+    hero-3: passed
+  Front-Open Black Abaya with Leafy Branch Embroidery and Tassel Cuffs | Premium Nida Embroidered Abaya: in_progress
+New Batch rounds are off (VERTEX_BATCH_NEW_ROUNDS); 0 Batch job(s) still out, nothing new sent.
+Batch: 0 submitted, 840 passed, 58 to try again, 2 do manually, 0 back in the queue
+Report: 517 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-29 07:36 UTC",
+  "mode": "live, batch auto",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 840,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 868,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 314.379,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
