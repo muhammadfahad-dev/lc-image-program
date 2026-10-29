@@ -1,0 +1,41 @@
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $320.61 of $328
+  projects/352302053849/locations/global/batchPredictionJobs/7718340317228826624: running, 300 image(s)
+  Front-Open Beaded Stripe Handwork Cutdana Sleeves Abaya | Premium Romantic Nida Beaded Abaya: 6 image(s)
+    check answered in 2s
+    check answered in 4s
+    check answered in 4s
+  Front-Open Braided Cutdana Handwork Border Abaya | Premium Romantic Nida Beaded Abaya: 3 image(s)
+    check answered in 2s
+  Front-Open Black Abaya with Feather Leaf Handwork Cutdana | Premium Nida Black Beaded Abaya: 12 image(s)
+    check answered in 23s
+  Front-Open Fan Flower Tissue Cutdana Handwork Abaya | Premium Nida Tissue Beaded Colored Abaya: 5 image(s)
+    check answered in 2s
+  Front-Open Handcrafted Leafy Cutdana Abaya | Premium Romantic Nida Embellished Abaya: 12 image(s)
+    check answered in 2s
+    check answered in 2s
+  Front-Open Handcrafted Rosy Cutdana Abaya | Premium Romantic Nida Embellished Abaya: 8 image(s)
+    check answered in 2s
+  Front-Open Handcrafted Black Starry Cutdana Abaya | Premium Nida Embellished Black Abaya: 12 image(s)
+    check answered in 3s
+  Front-Open Handcrafted Black Swirly Cutdana Abaya | Premium Nida Embellished Black Abaya: 12 image(s)
+Submitted 70 image(s) for 8 product(s) as projects/352302053849/locations/global/batchPredictionJobs/6573159374481522688
+Batch: 70 submitted, 0 passed, 0 to try again, 0 do manually, 0 back in the queue
+Report: 534 products the program has worked on
+Report updated: output/report.csv
+Report updated: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
+
+Summary: {
+  "date": "2026-10-29 12:00 UTC",
+  "mode": "live, batch auto",
+  "products_worked_on": 0,
+  "statuses": {
+    "batch": 1
+  },
+  "images_passed": 0,
+  "gemini_image_calls": 0,
+  "gemini_check_calls": 10,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 321.933,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
