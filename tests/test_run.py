@@ -15,6 +15,10 @@ tp = tb.tp
 import run  # noqa: E402
 from lc_images import config  # noqa: E402
 
+# the workflow's own settings (a paused or final round) must not change what the tests expect
+config.VERTEX_BATCH_NEW_ROUNDS = True
+config.VERTEX_BATCH_FINAL_ROUND = ""
+
 
 def call(argv, shopify, gemini, tmp):
     run.OUT = Path(tmp)

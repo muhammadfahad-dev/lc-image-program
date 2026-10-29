@@ -15,6 +15,9 @@ from lc_images import batch, config
 from lc_images.vertex import Spend
 
 config.VERTEX_BUCKET = "bucket"
+# the workflow's own settings (a paused or final round) must not change what the tests expect
+config.VERTEX_BATCH_NEW_ROUNDS = True
+config.VERTEX_BATCH_FINAL_ROUND = ""
 
 
 class FakeStorage:
