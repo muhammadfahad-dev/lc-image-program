@@ -1,0 +1,361 @@
+===== collect =====
+(no log)
+
+===== worker-0 =====
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $325.73 of $328
+
+Elastic Niqab| Single Layer High Multi Chiffon Elastic Face Veil
+    check answered in 2s
+  hero-1: generating
+    image answered in 16s
+    check answered in 3s
+  hero-1: passed, 0m 24s in all
+  hero-2: generating
+    image answered in 14s
+    check answered in 3s
+  hero-2: passed, 0m 21s in all
+  hero-3: generating
+    image answered in 6s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 1
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 5s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 2
+    image answered in 4s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 3
+  hero-3: do manually, 0m 34s in all
+  -> manual (2 images passed)
+
+Double Layer Niqab | High Multi Chiffon Face Veil
+    check answered in 2s
+  hero-1: generating
+    image answered in 16s
+    check answered in 3s
+  hero-1: passed, 0m 25s in all
+  hero-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image answered in 24s
+    check answered in 4s
+    hero-2: check failed (The niqab in the generated image has a different eye opening style (with an extra band/cap piece above the eyes) compared to the simple headband style in the re), attempt 1
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 15s
+    check answered in 5s
+    hero-2: check failed (shows a different style of niqab (pull-on/hood style instead of the tie-back headband style shown in the real product)), attempt 2
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 21s
+    check answered in 5s
+    hero-2: check failed (The generated niqab has a different eye opening style with an extra slit/layer on the forehead, which does not match the style in the real product photo (Image ), attempt 3
+  hero-2: do manually, 7m 01s in all
+  hero-3: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 3s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 1
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image answered in 8s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 2
+    image answered in 7s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 3
+  hero-3: do manually, 2m 22s in all
+  -> manual (1 images passed)
+
+Saudi Cutdana Niqab | Beaded Edge Chiffon Face Veil
+    check answered in 2s
+  hero-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 16s
+    check answered in 2s
+  hero-1: passed, 1m 08s in all
+  hero-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 12s
+    check answered in 2s
+  hero-2: passed, 1m 03s in all
+  hero-3: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 6s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 1
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 5s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 2
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image answered in 7s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 3
+  hero-3: do manually, 3m 37s in all
+  -> manual (2 images passed)
+
+Summary: {
+  "date": "2026-11-01 09:04 UTC",
+  "mode": "live",
+  "products_worked_on": 3,
+  "statuses": {
+    "manual": 3
+  },
+  "images_passed": 5,
+  "gemini_image_calls": 17,
+  "gemini_check_calls": 11,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 326.745,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
+
+===== worker-1 =====
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $325.73 of $328
+
+Aalima Niqab | High Multi Chiffon Black Face Veil
+    check answered in 3s
+  hero-1: generating
+    image answered in 17s
+    check answered in 12s
+  hero-1: passed, 0m 33s in all
+  hero-2: generating
+    image answered in 16s
+    check answered in 5s
+    hero-2: check failed (The niqab structure is incorrect and differs from Image 0, showing an extra gap of skin visible on the forehead between two bands.), attempt 1
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 12s
+    hero-2: Gemini gave no image (FinishReason.OTHER), attempt 2
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image answered in 20s
+    hero-2: Gemini gave no image (FinishReason.OTHER), attempt 3
+  hero-2: do manually, 3m 54s in all
+  hero-3: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 7s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 1
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image answered in 6s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 2
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 120s (6/6)
+  Limit reached: Vertex AI kept refusing (Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': )); stopping for now. Run the same command again later to continue.
+  Everything made so far is kept; run the same command again later.
+  Google is busy: waiting 5 minutes, then the next product
+  -> paused (limit) (1 images passed)
+
+Jumbo Full Size Double Layer Niqab | Extra Wide Coverage Face Veil
+    check answered in 3s
+  hero-1: generating
+    image answered in 16s
+    check answered in 4s
+    hero-1: check failed (The niqab in the generated image has a different structure with a much wider eye opening compared to the narrow eye slit in the real product photo.), attempt 1
+    image answered in 19s
+    hero-1: Gemini gave no image (FinishReason.OTHER), attempt 2
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 15s
+    check answered in 3s
+  hero-1: passed, 1m 47s in all
+  hero-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 33s
+    check answered in 3s
+    hero-2: check failed (shows a different niqab style with a different eye opening and headband structure compared to Image 0), attempt 1
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 14s
+    check answered in 3s
+    hero-2: check failed (The eye opening in the generated image is a wide rectangular opening, whereas the real product in Image 0 has a narrow slit eye opening.), attempt 2
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 17s
+    hero-2: Gemini gave no image (FinishReason.OTHER), attempt 3
+  hero-2: do manually, 2m 58s in all
+  hero-3: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 5s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 1
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image answered in 6s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 2
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 4s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 3
+  hero-3: do manually, 2m 34s in all
+  -> manual (1 images passed)
+
+Saudi Style Niqab | Premium Multi Chiffon Face Veil
+    check answered in 2s
+  hero-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 15s
+    check answered in 2s
+  hero-1: passed, 1m 09s in all
+  hero-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 20s
+    check answered in 3s
+    hero-2: check failed (The gold charm/pendant on the side of the eye opening from Image 0 is missing in Image 1.), attempt 1
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 18s
+    hero-2: Gemini gave no image (FinishReason.OTHER), attempt 2
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 15s
+    check answered in 3s
+    hero-2: check failed (The gold charm decoration on the side of the eye opening is missing; The forehead area has an incorrect double-band design with a gap showing the forehead, whic), attempt 3
+  hero-2: do manually, 2m 47s in all
+  hero-3: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 7s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 1
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image answered in 6s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 2
+    image answered in 7s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 3
+  hero-3: do manually, 2m 54s in all
+  -> manual (1 images passed)
+
+Triple Layer Niqab | Premium Multi Chiffon Face Veil
+    check answered in 3s
+  hero-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 16s
+    check answered in 3s
+  hero-1: passed, 1m 09s in all
+  hero-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 19s
+    hero-2: Gemini gave no image (FinishReason.OTHER), attempt 1
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 20s
+    hero-2: Gemini gave no image (FinishReason.OTHER), attempt 2
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 18s
+    hero-2: Gemini gave no image (FinishReason.OTHER), attempt 3
+  hero-2: do manually, 3m 13s in all
+  hero-3: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 7s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 1
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 5s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 2
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 7s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 3
+  hero-3: do manually, 2m 37s in all
+  -> manual (1 images passed)
+
+Summary: {
+  "date": "2026-11-01 09:04 UTC",
+  "mode": "live",
+  "products_worked_on": 4,
+  "statuses": {
+    "paused (limit)": 1,
+    "manual": 3
+  },
+  "images_passed": 4,
+  "gemini_image_calls": 29,
+  "gemini_check_calls": 14,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 327.783,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
+
+===== worker-2 =====
+Vertex AI, project project-c065e1d2-16ae-4565-bb0: images gemini-nano-banana-2.1, checks gemini-3.5-flash; spend so far about $325.73 of $328
+
+Classic Saudi Niqab | Premium Multi Chiffon Face Veil
+    check answered in 2s
+  hero-1: generating
+    image answered in 17s
+    check answered in 2s
+  hero-1: passed, 0m 25s in all
+  hero-2: generating
+    image answered in 16s
+    check answered in 2s
+  hero-2: passed, 0m 22s in all
+  hero-3: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image answered in 6s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 1
+    image answered in 9s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 2
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 5s
+    hero-3: Gemini gave no image (FinishReason.IMAGE_SAFETY), attempt 3
+  hero-3: do manually, 1m 23s in all
+  -> manual (2 images passed)
+
+Niqab for Eating | Split-Front Chiffon Face Veil
+    check answered in 2s
+  hero-1: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image answered in 18s
+    check answered in 3s
+  hero-1: passed, 1m 12s in all
+  hero-2: generating
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 15s (1/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 30s (2/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (3/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 60s (4/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 90s (5/6)
+    image: Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': ); waiting 120s (6/6)
+  Limit reached: Vertex AI kept refusing (Google says too many requests (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource has been exhausted (e.g. check quota).', 'status': )); stopping for now. Run the same command again later to continue.
+  Everything made so far is kept; run the same command again later.
+  Google is busy: waiting 5 minutes, then the next product
+  -> paused (limit) (1 images passed)
+
+Summary: {
+  "date": "2026-11-01 09:04 UTC",
+  "mode": "live",
+  "products_worked_on": 2,
+  "statuses": {
+    "manual": 1,
+    "paused (limit)": 1
+  },
+  "images_passed": 3,
+  "gemini_image_calls": 6,
+  "gemini_check_calls": 5,
+  "image_source": "vertex",
+  "estimated_vertex_spend_usd": 326.637,
+  "seconds_per_website_image": null,
+  "limit_reached": false
+}
+
+===== report =====
+Report: 543 products the program has worked on
+Report written: output/report.csv
+Report written: https://docs.google.com/spreadsheets/d/1mhaLZfa5E-7WfqeRUnwvbHJR3bUtf03cHKYrTqGEZuU
