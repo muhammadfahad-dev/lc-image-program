@@ -32,7 +32,7 @@ on:
 
 # Settings that are not secret (the Shopify keys stay in GitHub secrets).
 env:
-  AUTO: "single"
+  AUTO: "off"
   # Which product groups a run works on: the abayas are all done, so only the niqabs now
   IMAGE_CATEGORIES: "niqab"
   GOOGLE_CLOUD_PROJECT: project-c065e1d2-16ae-4565-bb0

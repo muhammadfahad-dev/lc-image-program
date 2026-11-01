@@ -9,6 +9,7 @@ from PIL import Image
 
 from lc_images import config, pipeline
 from lc_images.gemini import QuotaExhausted, TemporaryFailure
+config.CATEGORIES = {"abaya", "niqab"}  # a run may be limited to one group (IMAGE_CATEGORIES); the tests cover both
 
 config.SECONDS_BETWEEN_CALLS = 0
 import tempfile as _tempfile

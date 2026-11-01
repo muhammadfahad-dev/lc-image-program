@@ -13,6 +13,7 @@ spec.loader.exec_module(tp)  # reuses FakeGemini, FakeShopify, product(), jpeg()
 
 from lc_images import batch, config
 from lc_images.vertex import Spend
+config.CATEGORIES = {"abaya", "niqab"}  # a run may be limited to one group (IMAGE_CATEGORIES); the tests cover both
 
 config.VERTEX_BUCKET = "bucket"
 # the workflow's own settings (a paused or final round) must not change what the tests expect

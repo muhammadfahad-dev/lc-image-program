@@ -5,7 +5,8 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from lc_images import report
+from lc_images import config, report
+config.CATEGORIES = {"abaya", "niqab"}  # a run may be limited to one group (IMAGE_CATEGORIES); the tests cover both
 
 PH = "gid://shopify/MediaImage/ph"
 CHOICE = {"front_open": False, "has_design_work": False}
