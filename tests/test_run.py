@@ -14,7 +14,7 @@ tp = tb.tp
 
 import run  # noqa: E402
 from lc_images import config  # noqa: E402
-config.CATEGORIES = {"abaya", "niqab"}  # a run may be limited to one group (IMAGE_CATEGORIES); the tests cover both
+config.CATEGORIES = {"abaya", "niqab", "hijab"}  # a run may be limited to one group (IMAGE_CATEGORIES); the tests cover all
 
 # the workflow's own settings (a paused or final round) must not change what the tests expect
 config.VERTEX_BATCH_NEW_ROUNDS = True

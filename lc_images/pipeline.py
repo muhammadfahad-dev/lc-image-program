@@ -20,7 +20,12 @@ PROMPTS = json.loads((HERE / "prompts.json").read_text(encoding="utf-8"))
 PROMPT_SETS = {
     "abaya": PROMPTS,
     "niqab": json.loads((HERE / "prompts_niqab.json").read_text(encoding="utf-8")),
+    "hijab": json.loads((HERE / "prompts_hijab.json").read_text(encoding="utf-8")),
 }
+# Product groups whose pages only have Media images (no Fitting, Multi display or Closer sections)
+MEDIA_ONLY = {"niqab", "hijab"}
+# Ombré and tie-dye hijabs: recolouring one would invent a new dye pattern, so no colour images are made
+DYED = re.compile(r"ombr|tie-?dye|tie\s*&\s*dye", re.I)
 
 MIXED = re.compile(r"(-|&|/|\band\b|\bwith\b|ombr|tie-?dye|multi)", re.I)
 PATTERNS = {"floral", "checkered", "geometric"}
@@ -55,10 +60,18 @@ COLOUR_PROMPT_NIQAB = (
     "as in the reference; only the fabric changes colour. The fabric must clearly read as {colour}, true to life, as in "
     "a real studio photograph. Do not add any text, logo or watermark to the image."
 )
-COLOUR_PROMPTS = {"abaya": COLOUR_PROMPT, "niqab": COLOUR_PROMPT_NIQAB}
+COLOUR_PROMPT_HIJAB = (
+    "Use the attached image as the only reference. Change only the colour of the hijab to {colour}. Keep everything "
+    "else exactly the same: the fabric, weave and transparency, drape, edge finish, how it is wrapped, the mannequin, "
+    "white shirt, background, lighting and framing. Keep any beads, stones, lace, embroidery or trim in exactly the same "
+    "place, shape and colour as in the reference; only the fabric changes colour. The fabric must clearly read as "
+    "{colour}, true to life, as in a real studio photograph. Do not add any text, logo or watermark to the image."
+)
+COLOUR_PROMPTS = {"abaya": COLOUR_PROMPT, "niqab": COLOUR_PROMPT_NIQAB, "hijab": COLOUR_PROMPT_HIJAB}
 COLOUR_BRIEFS = {
     "abaya": "the same abaya recoloured to {colour} (with a matching niqab if worn), everything else unchanged",
     "niqab": "the same niqab recoloured to {colour} (with the hijab under it matching), everything else unchanged",
+    "hijab": "the same hijab recoloured to {colour}, everything else unchanged",
 }
 
 SELECT_PROMPT = """You are helping an abaya store prepare product images.
@@ -107,7 +120,19 @@ Answer in JSON with exactly these keys:
 - "input_colour": the colour option (copied exactly from the list) that the photo at best_index shows, or null if it matches none or you are unsure.
 - "colour_photos": an object with every colour option as a key; the value is the index of a photo that shows this same niqab alone in that colour, so it can be the picture for that colour on its own. Use null if no photo does, and always null for a photo that shows several colours together or a close-up. Only give an index when you are confident.
 """
-SELECT_PROMPTS = {"abaya": SELECT_PROMPT, "niqab": SELECT_PROMPT_NIQAB}
+SELECT_PROMPT_HIJAB = """You are helping a modest-wear store prepare product images.
+The images above are the store's photos of ONE product: "{title}" (type: {type}; tags: {tags}).
+Colour options for this product: {colours}.
+
+Answer in JSON with exactly these keys:
+- "best_index": the index of the single best photo to use as the reference for new product images: a clear, sharp, well-lit photo showing this hijab so its colour, fabric, any print or dye pattern and any decoration can be seen. A photo of it worn, folded or laid flat all work. A brand logo or watermark on the photo is fine (it is removed in the new images). Use null if no photo is good enough (blurry, only a tiny detail, several different products, a size chart).
+- "reason": one short sentence explaining the choice or why none is usable.
+- "front_open": false.
+- "has_design_work": true if the hijab has beads, stones, lace, embroidery, sequins or tassels; false if it is plain fabric (a print, stripe, ombré or tie-dye on its own counts as false).
+- "input_colour": the colour option (copied exactly from the list) that the photo at best_index shows, or null if it matches none or you are unsure.
+- "colour_photos": an object with every colour option as a key; the value is the index of a photo that shows this same hijab alone in that colour, so it can be the picture for that colour on its own. Use null if no photo does, and always null for a photo that shows several colours together or a close-up. Only give an index when you are confident.
+"""
+SELECT_PROMPTS = {"abaya": SELECT_PROMPT, "niqab": SELECT_PROMPT_NIQAB, "hijab": SELECT_PROMPT_HIJAB}
 
 CHECK_PROMPT_NIQAB = """You are checking an AI-generated image for an online modest-wear store.
 Image 0 is the real product photo of a niqab (face veil). Image 1 is the generated image. The brief for image 1: {brief}
@@ -123,14 +148,35 @@ Fail image 1 ONLY for a major problem that a customer would notice and that misr
 Do NOT fail for small things: slightly different folds or drape, decoration that is slightly simplified, small differences in framing, pose, lighting or background, or the exact shade of the hijab.
 {extra}{others}
 Answer in JSON: {{"pass": true or false, "problems": ["short plain reason", ...]}}. List only major problems; an image without a major problem passes."""
-CHECK_PROMPTS = {"abaya": CHECK_PROMPT, "niqab": CHECK_PROMPT_NIQAB}
+CHECK_PROMPT_HIJAB = """You are checking an AI-generated image for an online modest-wear store.
+Image 0 is the real product photo of a hijab (headscarf). Image 1 is the generated image. The brief for image 1: {brief}
+{scope}
+Fail image 1 ONLY for a major problem that a customer would notice and that misrepresents the product:
+- it shows a different hijab: a clearly different fabric, weave or transparency, a different print, stripe, ombré or tie-dye pattern, or a different edge finish;
+- decoration that image 0 has (beads, stones, lace, embroidery, sequins, tassels) is missing or clearly different, or decoration is added where image 0 has none;
+- the fabric colour is clearly not {colour};
+- the mannequin has a face with eyes, nose or mouth, or looks like a child or teenager instead of an adult woman;
+- a niqab, cap, pins or jewellery are shown, or the mannequin is not wearing a plain white shirt (for the mannequin images);
+- any text, logo, label or watermark appears, including a logo carried over from image 0;
+- the mannequin is clearly deformed, or the image clearly ignores the brief (wrong view or wrong kind of shot).
+Do NOT fail for small things: slightly different folds, drape or wrapping style, decoration that is slightly simplified, or small differences in framing, pose, lighting or background.
+{extra}{others}
+Answer in JSON: {{"pass": true or false, "problems": ["short plain reason", ...]}}. List only major problems; an image without a major problem passes."""
+CHECK_PROMPTS = {"abaya": CHECK_PROMPT, "niqab": CHECK_PROMPT_NIQAB, "hijab": CHECK_PROMPT_HIJAB}
 
 NIQAB_CLOSE_UP_SCOPE = (
     "Image 1 is a close-up of the niqab laid on a surface, so judge the details only on the part that is visible; "
     "it must still clearly be this niqab's own fabric, layers and decoration."
 )
-# Notes added when a niqab has no decoration, so the close-up does not invent any
-PLAIN_NOTES = {"niqab": {"hero-3": "Note: this niqab has no beads, stones, embroidery or other decoration; show only its fabric and layers."}}
+HIJAB_CLOSE_UP_SCOPE = (
+    "Image 1 is a close-up of the hijab laid on a surface, so judge the details only on the part that is visible; "
+    "it must still clearly be this hijab's own fabric, pattern and decoration."
+)
+# Notes added when a product has no decoration, so the close-up does not invent any
+PLAIN_NOTES = {
+    "niqab": {"hero-3": "Note: this niqab has no beads, stones, embroidery or other decoration; show only its fabric and layers."},
+    "hijab": {"hero-3": "This hijab has no beads, stones, embroidery or other decoration; show only the fabric."},
+}
 
 CLOSE_UP_SCOPE = (
     "Image 1 is a close-up, so judge the design details only on the part that is visible. "
@@ -140,7 +186,7 @@ CLOSE_UP_SCOPE = (
 )
 
 CLOSE_UP_SLOTS = {"multi-3b", "closer-1", "closer-2", "closer-3", "closer-4"}
-CLOSE_UPS = {"abaya": (CLOSE_UP_SLOTS, CLOSE_UP_SCOPE), "niqab": ({"hero-3"}, NIQAB_CLOSE_UP_SCOPE)}
+CLOSE_UPS = {"abaya": (CLOSE_UP_SLOTS, CLOSE_UP_SCOPE), "niqab": ({"hero-3"}, NIQAB_CLOSE_UP_SCOPE), "hijab": ({"hero-3"}, HIJAB_CLOSE_UP_SCOPE)}
 
 
 def now():
@@ -175,21 +221,21 @@ def fetch(url, width=None, http=requests):
     return to_jpeg(r.content, max_side=width or 2048)
 
 
-def classify_colour(option_name, value, product_type):
+def classify_colour(option_name, value, product_type, title=""):
     if option_name.strip().lower() not in config.COLOUR_OPTION_NAMES:
         return "not_fabric_colour"
     if value.strip().lower() in PATTERNS:
         return "pattern"
     if MIXED.search(value):
         return "mixed"
-    if product_type in config.PRINTED_TYPES:
+    if product_type in config.PRINTED_TYPES or (product_type in config.HIJAB_TYPES and DYED.search(title or "")):
         return "printed"
     return "single"
 
 
 def listing_plan(front_open, has_design_work, category="abaya"):
-    """The slots to make, in display order, for each image field. Niqabs only have Media images."""
-    if category == "niqab":
+    """The slots to make, in display order, for each image field. Niqabs and hijabs only have Media images."""
+    if category in MEDIA_ONLY:
         return {"media": ["hero-1", "hero-2", "hero-3"]}
     media = ["hero-1", "hero-2", "hero-3", "hero-4"] if front_open else ["hero-1", "hero-2", "hero-4"]
     multi = ["multi-1", "multi-2", "multi-3b" if has_design_work else "multi-3a"]
@@ -428,10 +474,18 @@ class ProductRun:
                         audit["slots"][slot] = {"status": "existing"}
         return None
 
+    def prompt_for(self, slot):
+        """The prompt entry for a slot. A plain product can have its own close-up prompt (hijabs: a close-up of the
+        fabric instead of the decoration)."""
+        if f"{slot}-plain" in self.prompts and not self.audit.get("choice", {}).get("has_design_work", True):
+            return self.prompts[f"{slot}-plain"]
+        return self.prompts[slot]
+
     def slot_job(self, field, slot):
         choice = self.audit["choice"]
-        prompt = self.prompts[slot]["prompt"]
-        brief = f"{self.prompts[slot]['title']} ({field} image)"
+        entry = self.prompt_for(slot)
+        prompt = entry["prompt"].replace("{colour}", choice.get("input_colour") or "the colour shown in the photo")
+        brief = f"{entry['title']} ({field} image)"
         if not choice["front_open"] and slot in CLOSED_NOTES:
             prompt = prompt + "\n\n" + CLOSED_NOTES[slot]
             # the checker must judge against what Gemini was really asked for
@@ -441,7 +495,7 @@ class ProductRun:
             prompt = prompt + "\n\n" + plain
             brief += ". " + plain
         tries = self.audit["slots"].get(slot, {}).get("tries", 0)
-        return Job("slot", slot, prompt, self.prompts[slot]["ratio"], brief, "the same as image 0", self.reference, field=field, tries=tries)
+        return Job("slot", slot, prompt, entry["ratio"], brief, "the same as image 0", self.reference, field=field, tries=tries)
 
     def media_ready(self):
         return all(self.audit["slots"].get(s, {}).get("status") in RESOLVED for s in self.plan["media"])
@@ -539,7 +593,7 @@ class ProductRun:
             if jpeg is not None:
                 if job.name == "hero-1":
                     self.hero_jpeg = jpeg
-                file_id = self.upload(jpeg, f"{p['handle']}-{job.name}.jpg", f"{p['title']} - {self.prompts[job.name]['title']}")
+                file_id = self.upload(jpeg, f"{p['handle']}-{job.name}.jpg", f"{p['title']} - {self.prompt_for(job.name)['title']}")
                 audit["slots"][job.name] = {"status": "done", "file": file_id}
                 if self.out:
                     audit["slots"][job.name]["local"] = self.last_local
@@ -656,7 +710,7 @@ class ProductRun:
                     status = ""  # the main image's colour now shows the new main image (see below), not the old photo
                 if status in COLOUR_FINAL or status.startswith("skipped") or status == "queued":
                     continue
-                kind = classify_colour(option["name"], value, p["productType"])
+                kind = classify_colour(option["name"], value, p["productType"], p.get("title", ""))
                 variants = self.variants_of(value)
                 if kind != "single":
                     audit["colours"][value], changed = {"status": f"skipped_{kind}"}, True

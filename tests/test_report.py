@@ -6,7 +6,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from lc_images import config, report
-config.CATEGORIES = {"abaya", "niqab"}  # a run may be limited to one group (IMAGE_CATEGORIES); the tests cover both
+config.CATEGORIES = {"abaya", "niqab", "hijab"}  # a run may be limited to one group (IMAGE_CATEGORIES); the tests cover all
 
 PH = "gid://shopify/MediaImage/ph"
 CHOICE = {"front_open": False, "has_design_work": False}
@@ -79,7 +79,7 @@ def test_done_section_and_batch_in_progress():
 def test_needs_photo_and_not_an_abaya():
     row = report.row_for(product({"status": "needs_photo", "slots": {}, "notes": ["No usable photo: only a size chart"]}), set(), "shop")
     assert cell(row, "Media images (1.1-1.4)") == "Needs photo" and "size chart" in cell(row, "To do")
-    row = report.row_for(product(ptype="Hijab"), set(), "shop")
+    row = report.row_for(product(ptype="Prayer Dress"), set(), "shop")
     assert cell(row, "Variant images") == "Skipped" and cell(row, "To do") == "" and cell(row, "Speciality") == "Skipped"
     assert len(row) == len(report.HEADER)
 

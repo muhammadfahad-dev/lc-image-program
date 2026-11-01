@@ -37,18 +37,21 @@ PRINTED_TYPES = {"Printed Abaya"}  # no colour images: recolouring would invent 
 COLOUR_OPTION_NAMES = {"color", "colour"}
 # Other product groups, each with its own prompts (lc_images/prompts_<group>.json) and only Media images
 NIQAB_TYPES = {"Niqab"}
-# Which groups a run works on, e.g. "niqab" for niqabs only; "abaya,niqab" for both
-CATEGORIES = {c.strip().lower() for c in env("IMAGE_CATEGORIES", "abaya,niqab").split(",") if c.strip()}
+HIJAB_TYPES = {"Hijab"}
+# Which groups a run works on, e.g. "hijab" for hijabs only; "abaya,niqab,hijab" for all
+CATEGORIES = {c.strip().lower() for c in env("IMAGE_CATEGORIES", "abaya,niqab,hijab").split(",") if c.strip()}
 
 
 def group_of(product_type):
-    """The product group a product type belongs to ("abaya", "niqab"), or None for a type the program does not do.
+    """The product group a product type belongs to ("abaya", "niqab", "hijab"), or None for a type the program does not do.
     Ignores IMAGE_CATEGORIES: the report and a product's prompts use this, so a product made in an earlier run keeps
     its real status even when this run works on another group."""
     if product_type in PRODUCT_TYPES:
         return "abaya"
     if product_type in NIQAB_TYPES:
         return "niqab"
+    if product_type in HIJAB_TYPES:
+        return "hijab"
     return None
 
 

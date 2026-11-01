@@ -134,7 +134,7 @@ def variant_status(product, audit=None):
             total += 1
             variants = [v for v in product["variants"]["nodes"] if any(o["name"] == option["name"] and o["value"] == value for o in v["selectedOptions"])]
             if not variants or not all(v["media"]["nodes"] for v in variants):
-                kind = classify_colour(option["name"], value, product["productType"])
+                kind = classify_colour(option["name"], value, product["productType"], product.get("title", ""))
                 state = (audit.get("colours") or {}).get(value, {}).get("status", "")
                 if kind == "single" and (state in ("queued", "pending") or (working and not state)):
                     waiting.append(value)
@@ -157,8 +157,8 @@ def row_for(product, placeholders, store_slug):
     category = config.group_of(product["productType"])  # not category_of: the report covers every group
 
     media = media_status(audit, category) if category else "Skipped (not a product type the program does)"
-    if category == "niqab":
-        sections = ["Not used (niqab)" for _ in IMAGE_FIELDS]  # niqabs only have Media images
+    if category in ("niqab", "hijab"):
+        sections = [f"Not used ({category})" for _ in IMAGE_FIELDS]  # niqabs and hijabs only have Media images
     else:
         sections = [image_section_status(f, _value(product, f), audit, placeholders) if category else "Skipped" for f, _ in IMAGE_FIELDS]
     texts = [_text_status(_value(product, f"t_{key}"), expected) for key, _, expected in TEXT_FIELDS]

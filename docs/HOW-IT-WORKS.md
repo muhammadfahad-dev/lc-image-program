@@ -20,7 +20,24 @@ Beaded Charcoal Black Net Hijab sample):
 The check also fails an image that keeps a logo from the reference photo, puts the hijab over the niqab, gives the
 mannequin a face, or makes it look like a child. Colour images recolour the niqab and the hijab under it.
 
-`IMAGE_CATEGORIES` chooses the groups a run works on: `niqab` for niqabs only, `abaya,niqab` (the default) for both.
+### Hijabs
+
+Products of type **Hijab** work the same way with `lc_images/prompts_hijab.json` (the prompts agreed in chat):
+Media images only, in the Beaded Charcoal Black Net Hijab order.
+
+| Image | What it shows | Shape |
+|---|---|---|
+| 1.1 | Three-quarter view, waist up, on a life-size faceless adult mannequin in a plain white shirt; the hijab is the only accessory | 4:5 |
+| 1.2 | Front view on the same mannequin | 4:5 |
+| 1.3 | Decorated hijab (beads, stones, lace, embroidery, sequins, tassels): close-up of the decoration. Plain, printed, ombré or tie-dye hijab: close-up of the main fabric (`hero-3-plain`), with a note not to invent decoration | 4:5 |
+
+Every prompt removes any logo, watermark or text from the reference photo. The check fails an image with a logo, a
+mannequin with a face or a child's proportions, a niqab, cap, pins or jewellery, or a different fabric or pattern.
+Colour collections: the 12-colour chiffon collection gets one recoloured image per colour; ombré and tie-dye
+hijabs get no recoloured images (recolouring would invent a new dye pattern).
+
+`IMAGE_CATEGORIES` chooses the groups a run works on: `hijab` for hijabs only, `abaya,niqab,hijab` (the default) for
+all. The report always shows every group's real status, whatever this setting is.
 
 ---
 

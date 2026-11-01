@@ -9,7 +9,7 @@ from PIL import Image
 
 from lc_images import config, pipeline
 from lc_images.gemini import QuotaExhausted, TemporaryFailure
-config.CATEGORIES = {"abaya", "niqab"}  # a run may be limited to one group (IMAGE_CATEGORIES); the tests cover both
+config.CATEGORIES = {"abaya", "niqab", "hijab"}  # a run may be limited to one group (IMAGE_CATEGORIES); the tests cover all
 
 config.SECONDS_BETWEEN_CALLS = 0
 import tempfile as _tempfile
@@ -490,7 +490,7 @@ def test_printed_and_not_abaya_and_no_photo():
     run = pipeline.ProductRun(product(ptype="Printed Abaya", colours=("Navy",)), g, s, log=lambda *a: None)
     run.run()
     assert run.audit["colours"]["Navy"]["status"] == "skipped_printed"
-    run = pipeline.ProductRun(product(ptype="Hijab"), FakeGemini(SELECT_OPEN), FakeShopify(), log=lambda *a: None)
+    run = pipeline.ProductRun(product(ptype="Prayer Dress"), FakeGemini(SELECT_OPEN), FakeShopify(), log=lambda *a: None)
     assert run.run() == "skipped"
     run = pipeline.ProductRun(product(), FakeGemini(dict(SELECT_OPEN, best_index=None, reason="only a size chart")), FakeShopify(), log=lambda *a: None)
     assert run.run() == "needs_photo" and "size chart" in run.audit["notes"][0]
@@ -539,6 +539,44 @@ def test_decorated_niqab_close_up_has_no_plain_note():
     assert "has no beads" not in g.prompts[2]
 
 
+SELECT_HIJAB = {"best_index": 0, "reason": "the hijab folded", "front_open": False, "has_design_work": False, "input_colour": None, "colour_photos": {}}
+
+
+def test_plain_hijab_makes_three_media_images_with_the_fabric_close_up():
+    g, s = FakeGemini(SELECT_HIJAB), FakeShopify()
+    p = product(ptype="Hijab", colours=(), variant_media=())
+    run = pipeline.ProductRun(p, g, s, log=lambda *a: None)
+    assert run.run() == "done"
+    a = run.audit
+    assert run.plan == {"media": ["hero-1", "hero-2", "hero-3"]}
+    assert [k for k, v in a["slots"].items() if v["status"] == "done"] == ["hero-1", "hero-2", "hero-3"]
+    assert s.metafields == []  # hijabs have no Fitting, Multi display or Closer sections
+    # the Beaded Charcoal order: three-quarter view, front view, then the close-up
+    assert "Three-quarter view" in g.prompts[0] and "Front view" in g.prompts[1]
+    assert all("life-size adult female display mannequin" in prompt and "white long-sleeved shirt" in prompt for prompt in g.prompts[:2])
+    assert all("remove them completely" in prompt for prompt in g.prompts[:3])
+    # plain hijab: close-up A (main fabric) with the no-decoration note, not the decoration close-up
+    assert "Close-up of the main body of the hijab" in g.prompts[2] and "show only the fabric" in g.prompts[2]
+    assert "Close-up of the hijab's decoration" not in g.prompts[2]
+    assert "{colour}" not in g.prompts[0] and "use only this colour: the colour shown in the photo" in g.prompts[0]
+    assert any("Image 0 is the real product photo of a hijab" in prompt for prompt in g.check_prompts)
+
+
+def test_beaded_hijab_close_up_shows_the_decoration_and_colour_collection_recolours():
+    g = FakeGemini(dict(SELECT_HIJAB, has_design_work=True, input_colour="Black"))
+    run = pipeline.ProductRun(product(ptype="Hijab", colours=("Black", "Navy"), variant_media=()), g, FakeShopify(), log=lambda *a: None)
+    run.run()
+    assert "Close-up of the hijab's decoration" in g.prompts[2] and "show only the fabric" not in g.prompts[2]
+    assert "use only this colour: Black" in g.prompts[0]
+    assert run.audit["colours"]["Navy"]["status"] == "done" and "colour of the hijab to Navy" in g.prompts[3]
+
+
+def test_tie_dye_hijab_colours_are_not_recoloured():
+    c = pipeline.classify_colour
+    assert c("Color", "Lime Green", "Hijab", "Tie-Dye Ombré Chiffon Hijab Collection | 6 Shades") == "printed"
+    assert c("Color", "Navy", "Hijab", "Chiffon Hijab Collection | 12 Colors") == "single"
+
+
 def test_categories_setting_limits_the_groups():
     saved = config.CATEGORIES
     try:
@@ -546,6 +584,9 @@ def test_categories_setting_limits_the_groups():
         assert config.category_of("Niqab") == "niqab" and config.category_of("Stonework Abaya") is None
         config.CATEGORIES = {"abaya", "niqab"}
         assert config.category_of("Stonework Abaya") == "abaya" and config.category_of("Hijab") is None
+        config.CATEGORIES = {"hijab"}
+        assert config.category_of("Hijab") == "hijab" and config.category_of("Niqab") is None
+        assert config.group_of("Niqab") == "niqab"  # the report still knows every group
     finally:
         config.CATEGORIES = saved
 
