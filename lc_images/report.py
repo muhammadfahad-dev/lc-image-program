@@ -79,13 +79,13 @@ def _text_status(raw, expected):
     return "Done" if count == expected else f"Retry ({count} of {expected})"
 
 
-def image_section_status(field, raw, audit, placeholders):
+def image_section_status(field, raw, audit, placeholders, category="abaya"):
     """Done / Retry / In progress / Not started for one image section."""
     ids = _ids(raw)
     slots = {}
     if audit.get("choice"):
-        plan = listing_plan(audit["choice"]["front_open"], audit["choice"]["has_design_work"])
-        slots = {s: audit["slots"].get(s, {}) for s in plan[field]}
+        plan = listing_plan(audit["choice"]["front_open"], audit["choice"]["has_design_work"], category)
+        slots = {s: audit["slots"].get(s, {}) for s in plan.get(field, [])}
     waiting = [s for s, st in slots.items() if st.get("status") in ("queued", "pending")]
     holders = [i for i in ids if i in placeholders]
     if ids and not holders:
@@ -100,12 +100,12 @@ def image_section_status(field, raw, audit, placeholders):
     return "Not started"
 
 
-def media_status(audit):
+def media_status(audit, category="abaya"):
     if audit.get("status") == "needs_photo":
         return "Needs photo"
     if not audit.get("choice"):
         return "Not started"
-    plan = listing_plan(audit["choice"]["front_open"], audit["choice"]["has_design_work"])
+    plan = listing_plan(audit["choice"]["front_open"], audit["choice"]["has_design_work"], category)
     states = [audit["slots"].get(s, {}).get("status") for s in plan["media"]]
     if all(st == "existing" for st in states):
         return "Done (by hand)"
@@ -154,17 +154,20 @@ def row_for(product, placeholders, store_slug):
     numeric = product["id"].rsplit("/", 1)[-1]
     admin = f"https://admin.shopify.com/store/{store_slug}/products/{numeric}"
     store = product.get("onlineStoreUrl") or f"https://{config.STORE_URL}/products/{product['handle']}"
-    is_abaya = product["productType"] in config.PRODUCT_TYPES
+    category = config.category_of(product["productType"])
 
-    media = media_status(audit) if is_abaya else "Skipped (not an abaya)"
-    sections = [image_section_status(f, _value(product, f), audit, placeholders) if is_abaya else "Skipped" for f, _ in IMAGE_FIELDS]
+    media = media_status(audit, category) if category else "Skipped (not a product type the program does)"
+    if category == "niqab":
+        sections = ["Not used (niqab)" for _ in IMAGE_FIELDS]  # niqabs only have Media images
+    else:
+        sections = [image_section_status(f, _value(product, f), audit, placeholders) if category else "Skipped" for f, _ in IMAGE_FIELDS]
     texts = [_text_status(_value(product, f"t_{key}"), expected) for key, _, expected in TEXT_FIELDS]
     text_overall = "Done" if all(t == "Done" for t in texts) else "Retry"
     listing = json.loads(_value(product, "listing") or "{}")
     if listing.get("status") == "Needs info":
         text_overall = "Retry (needs info)"
 
-    if not is_abaya:
+    if not category:
         return (
             [product["title"], f'=HYPERLINK("{admin}","Admin")', f'=HYPERLINK("{store}","Store")', product.get("templateSuffix") or "Default product", media]
             + sections + ["Skipped"] + ["Skipped"] * len(TEXT_FIELDS)

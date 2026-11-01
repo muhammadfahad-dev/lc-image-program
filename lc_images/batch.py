@@ -152,7 +152,7 @@ class BatchRunner:
         for product in self.s.iter_products(handles or None):
             if len(lines) >= size or products >= limit_products:
                 break
-            if product["productType"] not in config.PRODUCT_TYPES:
+            if config.category_of(product["productType"]) is None:
                 continue
             audit = json.loads((product.get("audit") or {}).get("value") or "{}")
             final = ("done", "needs_photo", "skipped") if retry_manual else ("done", "manual", "needs_photo", "skipped")

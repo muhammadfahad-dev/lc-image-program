@@ -180,7 +180,7 @@ def run_products(args, g, s, handles):
         if args.minutes and time.monotonic() - started >= args.minutes * 60:
             print(f"\n{args.minutes} minutes used: no new product is started; the next round carries on")
             break
-        if product["productType"] not in config.PRODUCT_TYPES:
+        if config.category_of(product["productType"]) is None:
             continue
         if not in_shard(product, args.shard):
             continue  # another worker's product

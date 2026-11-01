@@ -35,6 +35,22 @@ PRODUCT_TYPES = {
 }
 PRINTED_TYPES = {"Printed Abaya"}  # no colour images: recolouring would invent a new print
 COLOUR_OPTION_NAMES = {"color", "colour"}
+# Other product groups, each with its own prompts (lc_images/prompts_<group>.json) and only Media images
+NIQAB_TYPES = {"Niqab"}
+# Which groups a run works on, e.g. "niqab" for niqabs only; "abaya,niqab" for both
+CATEGORIES = {c.strip().lower() for c in env("IMAGE_CATEGORIES", "abaya,niqab").split(",") if c.strip()}
+
+
+def category_of(product_type):
+    """The product group a product type belongs to ("abaya", "niqab"), or None for a type the program does not do.
+    A group left out of IMAGE_CATEGORIES counts as None, so its products are passed over in this run."""
+    if product_type in PRODUCT_TYPES:
+        group = "abaya"
+    elif product_type in NIQAB_TYPES:
+        group = "niqab"
+    else:
+        return None
+    return group if group in CATEGORIES else None
 
 # Limits
 MAX_PRODUCTS_PER_RUN = int(env("MAX_PRODUCTS", "25"))

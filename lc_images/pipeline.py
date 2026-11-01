@@ -16,6 +16,11 @@ from .gemini import GenerationFailed, QuotaExhausted, TemporaryFailure
 
 HERE = Path(__file__).parent
 PROMPTS = json.loads((HERE / "prompts.json").read_text(encoding="utf-8"))
+# Each product group has its own image prompts; the slot names (hero-1 ...) are shared
+PROMPT_SETS = {
+    "abaya": PROMPTS,
+    "niqab": json.loads((HERE / "prompts_niqab.json").read_text(encoding="utf-8")),
+}
 
 MIXED = re.compile(r"(-|&|/|\band\b|\bwith\b|ombr|tie-?dye|multi)", re.I)
 PATTERNS = {"floral", "checkered", "geometric"}
@@ -41,6 +46,20 @@ COLOUR_PROMPT = (
     "fabric changes colour. The fabric must clearly read as {colour}, true to life, as in a real studio photograph. "
     "Do not add any text, logo or watermark to the image."
 )
+
+COLOUR_PROMPT_NIQAB = (
+    "Use the attached image as the only reference. Change only the colour of the niqab to {colour}, and change the "
+    "plain hijab worn under it to {colour} too, so they still match. Keep everything else exactly the same: the number "
+    "and length of the layers, the eye opening, the fabric texture, drape, ties, mannequin, white shirt, background, "
+    "lighting and framing. Keep any beads, stones, lace, embroidery or trim in exactly the same place, shape and colour "
+    "as in the reference; only the fabric changes colour. The fabric must clearly read as {colour}, true to life, as in "
+    "a real studio photograph. Do not add any text, logo or watermark to the image."
+)
+COLOUR_PROMPTS = {"abaya": COLOUR_PROMPT, "niqab": COLOUR_PROMPT_NIQAB}
+COLOUR_BRIEFS = {
+    "abaya": "the same abaya recoloured to {colour} (with a matching niqab if worn), everything else unchanged",
+    "niqab": "the same niqab recoloured to {colour} (with the hijab under it matching), everything else unchanged",
+}
 
 SELECT_PROMPT = """You are helping an abaya store prepare product images.
 The images above are the store's photos of ONE product: "{title}" (type: {type}; tags: {tags}).
@@ -76,6 +95,43 @@ OTHERS_NOTE = (
     "Also fail image 1 if it shows the same view or the same detail as one of them (each image in a section must show something different)."
 )
 
+SELECT_PROMPT_NIQAB = """You are helping a modest-wear store prepare product images.
+The images above are the store's photos of ONE product: "{title}" (type: {type}; tags: {tags}).
+Colour options for this product: {colours}.
+
+Answer in JSON with exactly these keys:
+- "best_index": the index of the single best photo to use as the reference for new product images: a clear, sharp, well-lit photo showing this niqab whole, so its layers, length, eye opening and any decoration can be seen. A photo of it worn or laid flat both work. A brand logo or watermark on the photo is fine (it is removed in the new images). Use null if no photo is good enough (blurry, only a tiny detail, several different products, a size chart).
+- "reason": one short sentence explaining the choice or why none is usable.
+- "front_open": false.
+- "has_design_work": true if the niqab has beads, stones, lace, embroidery, print or other decoration; false if it is plain fabric.
+- "input_colour": the colour option (copied exactly from the list) that the photo at best_index shows, or null if it matches none or you are unsure.
+- "colour_photos": an object with every colour option as a key; the value is the index of a photo that shows this same niqab alone in that colour, so it can be the picture for that colour on its own. Use null if no photo does, and always null for a photo that shows several colours together or a close-up. Only give an index when you are confident.
+"""
+SELECT_PROMPTS = {"abaya": SELECT_PROMPT, "niqab": SELECT_PROMPT_NIQAB}
+
+CHECK_PROMPT_NIQAB = """You are checking an AI-generated image for an online modest-wear store.
+Image 0 is the real product photo of a niqab (face veil). Image 1 is the generated image. The brief for image 1: {brief}
+{scope}
+Fail image 1 ONLY for a major problem that a customer would notice and that misrepresents the product:
+- it shows a different niqab: a different number of layers, clearly different lengths, a different eye opening, or a main part missing or added;
+- the fabric, decoration or detail shown does not come from the niqab in image 0, or decoration that image 0 has is missing, or decoration is added where image 0 has none;
+- the fabric colour is clearly not {colour};
+- the hijab is worn over the niqab or over the face; the niqab must be on top, over the face, with the hijab underneath;
+- the mannequin has a face with eyes, nose or mouth, or looks like a child or teenager instead of an adult woman;
+- any text, logo, label or watermark appears, including a logo carried over from image 0;
+- the mannequin is clearly deformed, or the image clearly ignores the brief (wrong view or wrong kind of shot).
+Do NOT fail for small things: slightly different folds or drape, decoration that is slightly simplified, small differences in framing, pose, lighting or background, or the exact shade of the hijab.
+{extra}{others}
+Answer in JSON: {{"pass": true or false, "problems": ["short plain reason", ...]}}. List only major problems; an image without a major problem passes."""
+CHECK_PROMPTS = {"abaya": CHECK_PROMPT, "niqab": CHECK_PROMPT_NIQAB}
+
+NIQAB_CLOSE_UP_SCOPE = (
+    "Image 1 is a close-up of the niqab laid on a surface, so judge the details only on the part that is visible; "
+    "it must still clearly be this niqab's own fabric, layers and decoration."
+)
+# Notes added when a niqab has no decoration, so the close-up does not invent any
+PLAIN_NOTES = {"niqab": {"hero-3": "Note: this niqab has no beads, stones, embroidery or other decoration; show only its fabric and layers."}}
+
 CLOSE_UP_SCOPE = (
     "Image 1 is a close-up, so judge the design details only on the part that is visible. "
     "But it must still look like a real photo of this abaya: if the brief puts the garment on a person or mannequin, "
@@ -84,6 +140,7 @@ CLOSE_UP_SCOPE = (
 )
 
 CLOSE_UP_SLOTS = {"multi-3b", "closer-1", "closer-2", "closer-3", "closer-4"}
+CLOSE_UPS = {"abaya": (CLOSE_UP_SLOTS, CLOSE_UP_SCOPE), "niqab": ({"hero-3"}, NIQAB_CLOSE_UP_SCOPE)}
 
 
 def now():
@@ -130,8 +187,10 @@ def classify_colour(option_name, value, product_type):
     return "single"
 
 
-def listing_plan(front_open, has_design_work):
-    """The slots to make, in display order, for each image field."""
+def listing_plan(front_open, has_design_work, category="abaya"):
+    """The slots to make, in display order, for each image field. Niqabs only have Media images."""
+    if category == "niqab":
+        return {"media": ["hero-1", "hero-2", "hero-3"]}
     media = ["hero-1", "hero-2", "hero-3", "hero-4"] if front_open else ["hero-1", "hero-2", "hero-4"]
     multi = ["multi-1", "multi-2", "multi-3b" if has_design_work else "multi-3a"]
     return {"media": media, "fitting": ["fitting-1"], "multi": multi, "closer": ["closer-1", "closer-2", "closer-3", "closer-4"]}
@@ -169,6 +228,8 @@ class ProductRun:
         self.reference = None
         self.plan = None
         self.colour_opts = []
+        self.category = config.category_of(product.get("productType")) or "abaya"
+        self.prompts = PROMPT_SETS[self.category]
         raw = (product.get("audit") or {}).get("value")
         local = self.out / "report.json" if self.out else None
         if local and local.exists():
@@ -212,11 +273,12 @@ class ProductRun:
         ]
 
     def check(self, original, generated, brief, colour, slot=None, others=()):
-        scope = CLOSE_UP_SCOPE if slot in CLOSE_UP_SLOTS else ""
+        close_ups, close_up_scope = CLOSE_UPS[self.category]
+        scope = close_up_scope if slot in close_ups else ""
         extra = FITTING_FRAMING if slot == "fitting-1" else ""
         others = list(others)[:3]
         note = OTHERS_NOTE.format(last=1 + len(others)) if others else ""
-        answer = self.g.ask_json([original, generated, *others], CHECK_PROMPT.format(brief=brief, scope=scope, colour=colour, extra=extra, others=note))
+        answer = self.g.ask_json([original, generated, *others], CHECK_PROMPTS[self.category].format(brief=brief, scope=scope, colour=colour, extra=extra, others=note))
         if not isinstance(answer, dict):
             answer = {}
         passed = answer.get("pass") is True or str(answer.get("pass")).strip().lower() == "true"
@@ -272,7 +334,7 @@ class ProductRun:
         audit = self.audit
         if "choice" not in audit:
             return []
-        plan = listing_plan(audit["choice"]["front_open"], audit["choice"]["has_design_work"])
+        plan = listing_plan(audit["choice"]["front_open"], audit["choice"]["has_design_work"], self.category)
         wanted = set()
         for name in names:
             wanted.update(plan.get(name, [name]))
@@ -307,8 +369,8 @@ class ProductRun:
             return audit["status"]
         if hasattr(self.g, "start_product"):
             self.g.start_product(p["handle"])  # the website gives each product its own chat
-        if p["productType"] not in config.PRODUCT_TYPES:
-            audit["notes"] = [f"Not an abaya type ({p['productType'] or 'none'})"]
+        if config.category_of(p["productType"]) is None:
+            audit["notes"] = [f"Not a product type this program makes images for ({p['productType'] or 'none'})"]
             self.save("skipped")
             return "skipped"
 
@@ -323,7 +385,7 @@ class ProductRun:
         # Choose the reference photo (once; kept in the record)
         if "choice" not in audit:
             small = [fetch(m["image"]["url"], 768) for m in photos]
-            answer = self.g.ask_json(small, SELECT_PROMPT.format(title=p["title"], type=p["productType"], tags=", ".join(p["tags"]), colours=", ".join(colour_names) or "none"))
+            answer = self.g.ask_json(small, SELECT_PROMPTS[self.category].format(title=p["title"], type=p["productType"], tags=", ".join(p["tags"]), colours=", ".join(colour_names) or "none"))
             if not isinstance(answer, dict):
                 answer = {}
             index = answer.get("best_index")
@@ -350,7 +412,7 @@ class ProductRun:
         self.keep_local("reference.jpg", self.reference)
 
         # Sections already filled by hand (never by this program) are left alone; if all three are, only colours run
-        self.plan = listing_plan(choice["front_open"], choice["has_design_work"])
+        self.plan = listing_plan(choice["front_open"], choice["has_design_work"], self.category)
         ours = audit.get("placed", {})
         filled = {f: bool((p.get(f) or {}).get("value")) and f not in ours for f in ("fitting", "multi", "closer")}
         by_hand = all(filled.values())
@@ -368,14 +430,18 @@ class ProductRun:
 
     def slot_job(self, field, slot):
         choice = self.audit["choice"]
-        prompt = PROMPTS[slot]["prompt"]
-        brief = f"{PROMPTS[slot]['title']} ({field} image)"
+        prompt = self.prompts[slot]["prompt"]
+        brief = f"{self.prompts[slot]['title']} ({field} image)"
         if not choice["front_open"] and slot in CLOSED_NOTES:
             prompt = prompt + "\n\n" + CLOSED_NOTES[slot]
             # the checker must judge against what Gemini was really asked for
             brief += f". {CLOSED_NOTES[slot]} The brief's 'worn open' does not apply to this abaya."
+        plain = PLAIN_NOTES.get(self.category, {}).get(slot)
+        if plain and not choice["has_design_work"]:
+            prompt = prompt + "\n\n" + plain
+            brief += ". " + plain
         tries = self.audit["slots"].get(slot, {}).get("tries", 0)
-        return Job("slot", slot, prompt, PROMPTS[slot]["ratio"], brief, "the same as image 0", self.reference, field=field, tries=tries)
+        return Job("slot", slot, prompt, self.prompts[slot]["ratio"], brief, "the same as image 0", self.reference, field=field, tries=tries)
 
     def media_ready(self):
         return all(self.audit["slots"].get(s, {}).get("status") in RESOLVED for s in self.plan["media"])
@@ -473,7 +539,7 @@ class ProductRun:
             if jpeg is not None:
                 if job.name == "hero-1":
                     self.hero_jpeg = jpeg
-                file_id = self.upload(jpeg, f"{p['handle']}-{job.name}.jpg", f"{p['title']} - {PROMPTS[job.name]['title']}")
+                file_id = self.upload(jpeg, f"{p['handle']}-{job.name}.jpg", f"{p['title']} - {self.prompts[job.name]['title']}")
                 audit["slots"][job.name] = {"status": "done", "file": file_id}
                 if self.out:
                     audit["slots"][job.name]["local"] = self.last_local
@@ -610,8 +676,8 @@ class ProductRun:
                     audit["colours"][value], changed = {"status": "existing_photo", "file": media_id}, True
                     continue
                 jobs.append(Job(
-                    "colour", f"colour-{slug(value)}", COLOUR_PROMPT.format(colour=value), "4:5",
-                    f"the same abaya recoloured to {value} (with a matching niqab if worn), everything else unchanged", value, None, value=value, tries=state.get("tries", 0),
+                    "colour", f"colour-{slug(value)}", COLOUR_PROMPTS[self.category].format(colour=value), "4:5",
+                    COLOUR_BRIEFS[self.category].format(colour=value), value, None, value=value, tries=state.get("tries", 0),
                 ))
         if jobs:
             base = self.colour_base()
@@ -656,7 +722,7 @@ class ProductRun:
             image = self.file_image(state.get("file"))
             if image is None:
                 continue
-            ok, problems = self.check(self.colour_base(), image, f"the same abaya recoloured to {value} (with a matching niqab if worn), everything else unchanged", value)
+            ok, problems = self.check(self.colour_base(), image, COLOUR_BRIEFS[self.category].format(colour=value), value)
             if not ok:
                 self.log(f"  colour {value}: fails the current check ({'; '.join(problems)[:140]}); will be made again")
                 audit.setdefault("colour_replace", {})[value] = state["file"]
@@ -694,8 +760,8 @@ class ProductRun:
         else:
             value = ref["value"]
             base = self.reference if ref.get("base") == "ref" else self.colour_base()
-            job = Job("colour", ref["name"], COLOUR_PROMPT.format(colour=value), "4:5",
-                      f"the same abaya recoloured to {value} (with a matching niqab if worn), everything else unchanged", value, base, value=value)
+            job = Job("colour", ref["name"], COLOUR_PROMPTS[self.category].format(colour=value), "4:5",
+                      COLOUR_BRIEFS[self.category].format(colour=value), value, base, value=value)
         job.tries = state.get("tries", 0)
         return job
 
@@ -715,7 +781,7 @@ class ProductRun:
                     state = {"status": "manual", "problems": problem}
                     if group == "slots" and key not in self.plan["media"]:
                         try:
-                            state["placeholder"] = self.s.placeholder(PROMPTS[key]["ratio"], key)
+                            state["placeholder"] = self.s.placeholder(self.prompts[key]["ratio"], key)
                         except Exception:
                             pass  # placed without it; the report still lists the image as to do
                     self.audit[group][key] = state

@@ -505,6 +505,50 @@ def test_classify():
     assert c("Color", "Pink", "Printed Abaya") == "printed"
 
 
+SELECT_NIQAB = {"best_index": 0, "reason": "the niqab whole", "front_open": False, "has_design_work": False, "input_colour": "Black", "colour_photos": {}}
+
+
+def test_niqab_makes_three_media_images_in_the_set_order():
+    g, s = FakeGemini(SELECT_NIQAB), FakeShopify()
+    p = product(ptype="Niqab", colours=("Black", "Navy"), variant_media=())
+    run = pipeline.ProductRun(p, g, s, log=lambda *a: None)
+    assert run.run() == "done"
+    a = run.audit
+    assert run.plan == {"media": ["hero-1", "hero-2", "hero-3"]}
+    assert [k for k, v in a["slots"].items() if v["status"] == "done"] == ["hero-1", "hero-2", "hero-3"]
+    assert s.metafields == []  # niqabs have no Fitting, Multi display or Closer sections
+    assert s.moved == [[a["slots"][k]["file"] for k in ("hero-1", "hero-2", "hero-3")]]
+    # three-quarter view, front view, then the fabric close-up, all on the faceless adult mannequin
+    assert "Three-quarter view" in g.prompts[0] and "Front view" in g.prompts[1] and "Close-up of the niqab" in g.prompts[2]
+    assert all("logo" in prompt for prompt in g.prompts[:3])
+    assert "never put the hijab over the niqab" in g.prompts[0]
+    assert "has no beads" in g.prompts[2]  # plain niqab: the close-up must not invent decoration
+    # niqab photo choice and checks use the niqab wording
+    assert any("this niqab whole" in prompt for prompt in g.check_prompts)
+    assert any("The hijab is worn over the niqab" in prompt or "hijab is worn over the niqab" in prompt for prompt in g.check_prompts)
+    # the Navy colour is made from the new three-quarter image and recolours the niqab with its hijab
+    assert a["colours"]["Black"]["status"] == "main_image" and a["colours"]["Navy"]["status"] == "done"
+    assert "colour of the niqab to Navy" in g.prompts[3]
+
+
+def test_decorated_niqab_close_up_has_no_plain_note():
+    g = FakeGemini(dict(SELECT_NIQAB, has_design_work=True))
+    run = pipeline.ProductRun(product(ptype="Niqab", colours=("Black",), variant_media=()), g, FakeShopify(), log=lambda *a: None)
+    run.run()
+    assert "has no beads" not in g.prompts[2]
+
+
+def test_categories_setting_limits_the_groups():
+    saved = config.CATEGORIES
+    try:
+        config.CATEGORIES = {"niqab"}
+        assert config.category_of("Niqab") == "niqab" and config.category_of("Stonework Abaya") is None
+        config.CATEGORIES = {"abaya", "niqab"}
+        assert config.category_of("Stonework Abaya") == "abaya" and config.category_of("Hijab") is None
+    finally:
+        config.CATEGORIES = saved
+
+
 if __name__ == "__main__":
     failures = 0
     for name, fn in list(globals().items()):

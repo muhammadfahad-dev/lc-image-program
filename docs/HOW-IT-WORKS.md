@@ -5,6 +5,25 @@ what it changes in Shopify, and when it stops. Use it to decide what else should
 
 ---
 
+## Niqabs (and other product groups)
+
+Products of type **Niqab** go through the same steps with their own prompts (`lc_images/prompts_niqab.json`)
+and their own photo-choice and check wording. They get **Media images only**, in this order (the same look as the
+Beaded Charcoal Black Net Hijab sample):
+
+| Image | What it shows | Shape |
+|---|---|---|
+| 1.1 | Three-quarter view on a faceless adult mannequin in a white shirt, plain hijab underneath, niqab on top | 4:5 |
+| 1.2 | Front view on the same mannequin | 4:5 |
+| 1.3 | Close-up of the niqab laid on linen: its layers, edges and any decoration (a plain niqab gets a note not to invent decoration) | 4:5 |
+
+The check also fails an image that keeps a logo from the reference photo, puts the hijab over the niqab, gives the
+mannequin a face, or makes it look like a child. Colour images recolour the niqab and the hijab under it.
+
+`IMAGE_CATEGORIES` chooses the groups a run works on: `niqab` for niqabs only, `abaya,niqab` (the default) for both.
+
+---
+
 ## 1. The whole job, start to finish
 
 For each abaya:
