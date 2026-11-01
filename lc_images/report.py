@@ -13,6 +13,7 @@ Google Sheet access (one time; see README "Reports"):
 """
 import csv
 import json
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -217,7 +218,7 @@ def build_rows(shopify, log=print):
     rows, after = [], None
     while True:
         d = shopify.gql(
-            f"query($after: String) {{ products(first: 3, after: $after, sortKey: TITLE, query: \"status:active\") {{ pageInfo {{ hasNextPage endCursor }} nodes {{ {REPORT_FIELDS} }} }} }}",
+            f"query($after: String) {{ products(first: 3, after: $after, sortKey: CREATED_AT, query: \"status:active\") {{ pageInfo {{ hasNextPage endCursor }} nodes {{ {REPORT_FIELDS} }} }} }}",
             {"after": after},
         )
         page = d["products"]
@@ -262,6 +263,28 @@ def sheet_session():
     return AuthorizedSession(creds)
 
 
+PRODUCT_ID = re.compile(r"/products/(\d+)")
+
+
+def keep_sheet_order(rows, admin_cells):
+    """Put the rows in the order the Sheet already has them (matched by product ID in the Admin link); products not
+    in the Sheet yet keep their own order (oldest first) and go at the bottom, so new products are added at the end."""
+    position = {}
+    for index, cell in enumerate(admin_cells):
+        found = PRODUCT_ID.search(cell or "")
+        if found and found.group(1) not in position:
+            position[found.group(1)] = index
+    column = HEADER.index("Admin link")
+
+    def key(numbered):
+        number, row = numbered
+        found = PRODUCT_ID.search(str(row[column]))
+        product_id = found.group(1) if found else None
+        return (0, position[product_id], number) if product_id in position else (1, 0, number)
+
+    return [row for _, row in sorted(enumerate(rows), key=key)]
+
+
 def write_sheet(rows, sheet_id=None, tab=None, session=None):
     """Replace the tab's contents with the header and rows. The tab is created (header frozen) if it does not exist."""
     sheet_id = sheet_id or config.REPORT_SHEET_ID
@@ -277,11 +300,16 @@ def write_sheet(rows, sheet_id=None, tab=None, session=None):
 
     info = ok(session.get(base, params={"fields": "sheets.properties"}))
     names = {s["properties"]["title"]: s["properties"]["sheetId"] for s in info.get("sheets", [])}
-    if tab not in names:
+    created = tab not in names
+    if created:
         added = ok(session.post(f"{base}:batchUpdate", json={"requests": [{"addSheet": {"properties": {"title": tab, "gridProperties": {"frozenRowCount": 1}}}}]}))
         names[tab] = added["replies"][0]["addSheet"]["properties"]["sheetId"]
         _add_colours(session, base, names[tab], ok)
     rng = f"'{tab}'"
+    # Products already in the Sheet keep their rows; new products go at the bottom
+    if not created:
+        current = ok(session.get(f"{base}/values/{rng}!B2:B", params={"valueRenderOption": "FORMULA"}))
+        rows = keep_sheet_order(rows, [cell[0] if cell else "" for cell in current.get("values", [])])
     ok(session.post(f"{base}/values/{rng}!A:Z:clear", json={}))
     ok(session.put(f"{base}/values/{rng}!A1", params={"valueInputOption": "USER_ENTERED"}, json={"values": [HEADER] + rows}))
     return f"https://docs.google.com/spreadsheets/d/{sheet_id}"

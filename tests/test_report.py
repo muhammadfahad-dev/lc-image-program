@@ -112,12 +112,14 @@ def test_csv_and_sheet_calls():
             return self.data
 
     class Session:
-        def __init__(self):
-            self.calls = []
+        def __init__(self, tab="Sheet1", existing=()):
+            self.calls, self.tab, self.existing = [], tab, [list(x) for x in existing]
 
         def get(self, url, params=None):
             self.calls.append(("get", url))
-            return Resp({"sheets": [{"properties": {"title": "Sheet1", "sheetId": 0}}]})
+            if "/values/" in url:
+                return Resp({"values": self.existing})
+            return Resp({"sheets": [{"properties": {"title": self.tab, "sheetId": 0}}]})
 
         def post(self, url, json=None, params=None):
             self.calls.append(("post", url, json))
@@ -133,6 +135,18 @@ def test_csv_and_sheet_calls():
     kinds = [c[0] for c in session.calls]
     assert kinds == ["get", "post", "post", "post", "put"]  # read tabs, add tab, colours, clear, write
     assert session.calls[-1][2]["values"][0] == report.HEADER
+
+    # An existing tab keeps its row order; a product new to the Sheet is added at the bottom
+    def row(pid, title):
+        p = product()
+        p["id"], p["title"] = f"gid://shopify/Product/{pid}", title
+        return report.row_for(p, set(), "shop")
+    rows = [row(1, "Alpha new"), row(2, "Beta"), row(3, "Gamma")]
+    existing = [['=HYPERLINK("https://admin.shopify.com/store/shop/products/3","Admin")'], ['=HYPERLINK("https://admin.shopify.com/store/shop/products/2","Admin")']]
+    session = Session(tab="Image report", existing=existing)
+    report.write_sheet(rows, "SHEET", "Image report", session)
+    assert [c[0] for c in session.calls] == ["get", "get", "post", "put"]  # tabs, current order, clear, write
+    assert [r[0] for r in session.calls[-1][2]["values"][1:]] == ["Gamma", "Beta", "Alpha new"]
 
 
 def test_sheet_sign_in_acts_as_the_service_account_when_set():

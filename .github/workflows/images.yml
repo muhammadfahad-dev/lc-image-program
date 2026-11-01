@@ -33,9 +33,11 @@ on:
 
 # Settings that are not secret (the Shopify keys stay in GitHub secrets).
 env:
-  AUTO: "off"
+  AUTO: "single" # hijab close-up test: only the handles below, and only their images marked "do manually"
   # Products the hourly run works on (comma-separated handles); empty = every product of IMAGE_CATEGORIES
-  AUTO_HANDLES: ""
+  AUTO_HANDLES: "beaded-charcoal-black-net-hijab-statement-occasion-scarf,smoke-grey-chiffon-hijab-premium-everyday-scarf"
+  # "1" = the live run also tries again the images marked "do manually" (python run.py --retry-manual)
+  AUTO_RETRY_MANUAL: "1"
   # Which product groups a run works on: the abayas are all done; hijabs next, then the rest of the niqabs
   IMAGE_CATEGORIES: "hijab"
   GOOGLE_CLOUD_PROJECT: project-c065e1d2-16ae-4565-bb0
@@ -134,7 +136,8 @@ jobs:
           case "$MODE" in
             vertex-test)  python run.py --vertex --test-key 2>&1 | tee output/run.log ;;
             pilot)        python run.py --vertex --dry-run --limit "$LIMIT" --handles "$HANDLES" 2>&1 | tee output/run.log ;;
-            live)         { python run.py --vertex --batch collect; python run.py --vertex --limit "$LIMIT" --handles "$HANDLES"; } 2>&1 | tee output/run.log ;;
+            live)         RETRY=""; if [ "$AUTO_RETRY_MANUAL" = "1" ]; then RETRY="--retry-manual"; fi
+                          { python run.py --vertex --batch collect; python run.py --vertex --limit "$LIMIT" --handles "$HANDLES" $RETRY; } 2>&1 | tee output/run.log ;;
             batch-auto)   python run.py --vertex --batch auto --limit "$LIMIT" --handles "$HANDLES" 2>&1 | tee output/run.log ;;
             batch-status) python run.py --vertex --batch status 2>&1 | tee output/run.log ;;
             recheck)      python run.py --vertex --recheck --limit "$LIMIT" --handles "$HANDLES" 2>&1 | tee output/run.log ;;
