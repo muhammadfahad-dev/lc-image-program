@@ -154,7 +154,7 @@ def row_for(product, placeholders, store_slug):
     numeric = product["id"].rsplit("/", 1)[-1]
     admin = f"https://admin.shopify.com/store/{store_slug}/products/{numeric}"
     store = product.get("onlineStoreUrl") or f"https://{config.STORE_URL}/products/{product['handle']}"
-    category = config.category_of(product["productType"])
+    category = config.group_of(product["productType"])  # not category_of: the report covers every group
 
     media = media_status(audit, category) if category else "Skipped (not a product type the program does)"
     if category == "niqab":

@@ -228,7 +228,7 @@ class ProductRun:
         self.reference = None
         self.plan = None
         self.colour_opts = []
-        self.category = config.category_of(product.get("productType")) or "abaya"
+        self.category = config.group_of(product.get("productType")) or "abaya"
         self.prompts = PROMPT_SETS[self.category]
         raw = (product.get("audit") or {}).get("value")
         local = self.out / "report.json" if self.out else None

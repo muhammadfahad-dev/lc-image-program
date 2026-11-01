@@ -84,6 +84,19 @@ def test_needs_photo_and_not_an_abaya():
     assert len(row) == len(report.HEADER)
 
 
+def test_run_limited_to_niqabs_still_reports_abayas():
+    """A run with IMAGE_CATEGORIES=niqab must not show the finished abayas as Skipped"""
+    saved = config.CATEGORIES
+    config.CATEGORIES = {"niqab"}
+    try:
+        audit = {"status": "done", "choice": CHOICE, "slots": {s: {"status": "done"} for s in ("hero-1", "hero-2", "hero-4")}}
+        row = report.row_for(product(audit, closer=["a", "b", "c", "d"]), set(), "shop")
+        assert cell(row, "Media images (1.1-1.4)") == "Done" and cell(row, "A little closer images") == "Done"
+        assert cell(row, "Image status") == "Done" and "Skipped" not in row
+    finally:
+        config.CATEGORIES = saved
+
+
 def test_csv_and_sheet_calls():
     rows = [report.row_for(product(), set(), "shop")]
     with tempfile.TemporaryDirectory() as tmp:

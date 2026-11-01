@@ -41,15 +41,21 @@ NIQAB_TYPES = {"Niqab"}
 CATEGORIES = {c.strip().lower() for c in env("IMAGE_CATEGORIES", "abaya,niqab").split(",") if c.strip()}
 
 
-def category_of(product_type):
+def group_of(product_type):
     """The product group a product type belongs to ("abaya", "niqab"), or None for a type the program does not do.
-    A group left out of IMAGE_CATEGORIES counts as None, so its products are passed over in this run."""
+    Ignores IMAGE_CATEGORIES: the report and a product's prompts use this, so a product made in an earlier run keeps
+    its real status even when this run works on another group."""
     if product_type in PRODUCT_TYPES:
-        group = "abaya"
-    elif product_type in NIQAB_TYPES:
-        group = "niqab"
-    else:
-        return None
+        return "abaya"
+    if product_type in NIQAB_TYPES:
+        return "niqab"
+    return None
+
+
+def category_of(product_type):
+    """Like group_of, but a group left out of IMAGE_CATEGORIES counts as None, so its products are passed over in
+    this run. Only for choosing which products a run works on, never for the report."""
+    group = group_of(product_type)
     return group if group in CATEGORIES else None
 
 # Limits

@@ -4,6 +4,7 @@ on:
   # Every hour. What the hourly run does is set by AUTO below (in this file, so it can be changed by a commit):
   #   batch  -> a Batch round: read finished Batch jobs, check and place their images, send the next images
   #   single -> one-by-one by WORKERS parallel workers, each starting no new product after WORKER_MINUTES
+  #   report -> only rebuild the Google Sheet report from Shopify (makes no images, spends nothing)
   #   off    -> nothing (the hourly run stops straight away)
   schedule:
     - cron: "20 * * * *"
@@ -32,7 +33,7 @@ on:
 
 # Settings that are not secret (the Shopify keys stay in GitHub secrets).
 env:
-  AUTO: "off"
+  AUTO: "report" # rebuild the Sheet after the fix for abayas wrongly shown as Skipped; back to "off" once it is right
   # Which product groups a run works on: the abayas are all done, so only the niqabs now
   IMAGE_CATEGORIES: "niqab"
   GOOGLE_CLOUD_PROJECT: project-c065e1d2-16ae-4565-bb0
@@ -77,13 +78,13 @@ jobs:
     steps:
       - id: p
         run: |
-          if [ "${{ github.event_name }}" = "schedule" ] && [ "$AUTO" != "batch" ] && [ "$AUTO" != "single" ]; then
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$AUTO" != "batch" ] && [ "$AUTO" != "single" ] && [ "$AUTO" != "report" ]; then
             echo "AUTO is off in .github/workflows/images.yml; nothing to do."
             echo "go=false" >> "$GITHUB_OUTPUT"; exit 0
           fi
           MODE="${{ github.event.inputs.mode }}"
           if [ -z "$MODE" ]; then
-            if [ "$AUTO" = "batch" ]; then MODE=batch-auto; else MODE=live; fi
+            if [ "$AUTO" = "batch" ]; then MODE=batch-auto; elif [ "$AUTO" = "report" ]; then MODE=report; else MODE=live; fi
           fi
           LIMIT="${{ github.event.inputs.limit || vars.MAX_PRODUCTS || '25' }}"
           if [ "$MODE" = "batch-auto" ] && [ -z "${{ github.event.inputs.limit }}" ]; then LIMIT="$BATCH_PRODUCTS_PER_ROUND"; fi
