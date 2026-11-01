@@ -142,11 +142,24 @@ def test_csv_and_sheet_calls():
         p["id"], p["title"] = f"gid://shopify/Product/{pid}", title
         return report.row_for(p, set(), "shop")
     rows = [row(1, "Alpha new"), row(2, "Beta"), row(3, "Gamma")]
-    existing = [['=HYPERLINK("https://admin.shopify.com/store/shop/products/3","Admin")'], ['=HYPERLINK("https://admin.shopify.com/store/shop/products/2","Admin")']]
+    def sheet_row(pid, title, **cells):
+        out = [""] * len(report.HEADER)
+        out[0], out[1] = title, f'=HYPERLINK("https://admin.shopify.com/store/shop/products/{pid}","Admin")'
+        for name, value in cells.items():
+            out[report.HEADER.index(name.replace("_", " "))] = value
+        return out
+    # Beta's Variant images and To do were marked Done by hand in the Sheet
+    existing = [report.HEADER, sheet_row(3, "Gamma"), sheet_row(2, "Beta", Variant_images="Done", To_do="")]
+    assert rows[1][report.HEADER.index("Variant images")].startswith("Not completed")
     session = Session(tab="Image report", existing=existing)
     report.write_sheet(rows, "SHEET", "Image report", session)
-    assert [c[0] for c in session.calls] == ["get", "get", "post", "put"]  # tabs, current order, clear, write
-    assert [r[0] for r in session.calls[-1][2]["values"][1:]] == ["Gamma", "Beta", "Alpha new"]
+    assert [c[0] for c in session.calls] == ["get", "get", "post", "put"]  # tabs, current Sheet, clear, write
+    written = session.calls[-1][2]["values"][1:]
+    assert [r[0] for r in written] == ["Gamma", "Beta", "Alpha new"]
+    beta = written[1]
+    assert beta[report.HEADER.index("Variant images")] == "Done" and beta[report.HEADER.index("To do")] == ""
+    # statuses not marked Done still come from Shopify
+    assert written[0][report.HEADER.index("Variant images")].startswith("Not completed")
 
 
 def test_sheet_sign_in_acts_as_the_service_account_when_set():

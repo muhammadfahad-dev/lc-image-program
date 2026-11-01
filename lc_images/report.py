@@ -285,6 +285,43 @@ def keep_sheet_order(rows, admin_cells):
     return [row for _, row in sorted(enumerate(rows), key=key)]
 
 
+# Status columns a person may mark Done in the Sheet by hand (e.g. after fixing an image themselves)
+STATUS_COLUMNS = set(HEADER[HEADER.index("Media images (1.1-1.4)"):HEADER.index("To do")])
+
+
+def keep_marked_done(rows, old_header, old_rows):
+    """Keep every status already Done in the Sheet: the report rewrites the Sheet from Shopify, and without this a
+    Done typed by hand (for work the program cannot see) was overwritten with Retry or Not completed again.
+    When a status is kept, that row's To do is kept as it was too."""
+    old_by_id = {}
+    admin = old_header.index("Admin link") if "Admin link" in old_header else 1
+    for old in old_rows:
+        found = PRODUCT_ID.search(str(old[admin]) if len(old) > admin else "")
+        if found:
+            old_by_id.setdefault(found.group(1), old)
+    new_admin = HEADER.index("Admin link")
+    kept_rows = []
+    for row in rows:
+        found = PRODUCT_ID.search(str(row[new_admin]))
+        old = old_by_id.get(found.group(1)) if found else None
+        if old is None:
+            kept_rows.append(row)
+            continue
+        row, kept = list(row), False
+        for index, name in enumerate(HEADER):
+            if name not in STATUS_COLUMNS or name not in old_header:
+                continue
+            old_index = old_header.index(name)
+            old_value = str(old[old_index]) if len(old) > old_index else ""
+            if old_value.startswith("Done") and not str(row[index]).startswith("Done"):
+                row[index], kept = old_value, True
+        if kept and "To do" in old_header:
+            todo_index = old_header.index("To do")
+            row[HEADER.index("To do")] = old[todo_index] if len(old) > todo_index else ""
+        kept_rows.append(row)
+    return kept_rows
+
+
 def write_sheet(rows, sheet_id=None, tab=None, session=None):
     """Replace the tab's contents with the header and rows. The tab is created (header frozen) if it does not exist."""
     sheet_id = sheet_id or config.REPORT_SHEET_ID
@@ -306,10 +343,14 @@ def write_sheet(rows, sheet_id=None, tab=None, session=None):
         names[tab] = added["replies"][0]["addSheet"]["properties"]["sheetId"]
         _add_colours(session, base, names[tab], ok)
     rng = f"'{tab}'"
-    # Products already in the Sheet keep their rows; new products go at the bottom
+    # Products already in the Sheet keep their rows (new products go at the bottom), and a status someone marked
+    # Done in the Sheet is never turned back into Retry or Not completed
     if not created:
-        current = ok(session.get(f"{base}/values/{rng}!B2:B", params={"valueRenderOption": "FORMULA"}))
-        rows = keep_sheet_order(rows, [cell[0] if cell else "" for cell in current.get("values", [])])
+        current = ok(session.get(f"{base}/values/{rng}!A1:Z", params={"valueRenderOption": "FORMULA"})).get("values", [])
+        if current:
+            rows = keep_marked_done(rows, current[0], current[1:])
+            column = current[0].index("Admin link") if "Admin link" in current[0] else 1
+            rows = keep_sheet_order(rows, [old[column] if len(old) > column else "" for old in current[1:]])
     ok(session.post(f"{base}/values/{rng}!A:Z:clear", json={}))
     ok(session.put(f"{base}/values/{rng}!A1", params={"valueInputOption": "USER_ENTERED"}, json={"values": [HEADER] + rows}))
     return f"https://docs.google.com/spreadsheets/d/{sheet_id}"
