@@ -33,11 +33,11 @@ on:
 
 # Settings that are not secret (the Shopify keys stay in GitHub secrets).
 env:
-  AUTO: "single" # hijab close-up test: only the handles below, and only their images marked "do manually"
+  AUTO: "off"
   # Products the hourly run works on (comma-separated handles); empty = every product of IMAGE_CATEGORIES
-  AUTO_HANDLES: "beaded-charcoal-black-net-hijab-statement-occasion-scarf,smoke-grey-chiffon-hijab-premium-everyday-scarf"
+  AUTO_HANDLES: ""
   # "1" = the live run also tries again the images marked "do manually" (python run.py --retry-manual)
-  AUTO_RETRY_MANUAL: "1"
+  AUTO_RETRY_MANUAL: ""
   # Which product groups a run works on: the abayas are all done; hijabs next, then the rest of the niqabs
   IMAGE_CATEGORIES: "hijab"
   GOOGLE_CLOUD_PROJECT: project-c065e1d2-16ae-4565-bb0
