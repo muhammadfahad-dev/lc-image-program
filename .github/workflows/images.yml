@@ -33,7 +33,9 @@ on:
 
 # Settings that are not secret (the Shopify keys stay in GitHub secrets).
 env:
-  AUTO: "report" # rebuild the Sheet after the fix for abayas wrongly shown as Skipped; back to "off" once it is right
+  AUTO: "single" # hijab test: only the handles in AUTO_HANDLES; a live run also rebuilds the Sheet
+  # Products the hourly run works on (comma-separated handles); empty = every product of IMAGE_CATEGORIES
+  AUTO_HANDLES: "beaded-charcoal-black-net-hijab-statement-occasion-scarf,smoke-grey-chiffon-hijab-premium-everyday-scarf"
   # Which product groups a run works on: the abayas are all done; hijabs next, then the rest of the niqabs
   IMAGE_CATEGORIES: "hijab"
   GOOGLE_CLOUD_PROJECT: project-c065e1d2-16ae-4565-bb0
@@ -53,7 +55,8 @@ env:
   # Billing showed $249 on Oct 29 with every job read and the estimate at $314.38. If the last $14.14 of estimate
   # (since Oct 28's $300.24) was not billed yet and every further estimated dollar costs a real dollar:
   # 249 + 14.14 + (328 - 314.38) = $276.76. (The real bill has run at about 79% of the estimate.)
-  VERTEX_BUDGET_USD: "328"
+  # Nov 1: raised by $20 to 348 on the owner's instruction, for the hijabs (about $6-9) and the niqab leftovers.
+  VERTEX_BUDGET_USD: "348"
   WORKERS: "3" # keep in step with the shard list of the workers job below
   WORKER_MINUTES: "45"
 
@@ -89,7 +92,7 @@ jobs:
           LIMIT="${{ github.event.inputs.limit || vars.MAX_PRODUCTS || '25' }}"
           if [ "$MODE" = "batch-auto" ] && [ -z "${{ github.event.inputs.limit }}" ]; then LIMIT="$BATCH_PRODUCTS_PER_ROUND"; fi
           PARALLEL=false
-          if [ "$MODE" = "live" ] && [ -z "${{ github.event.inputs.handles }}" ]; then PARALLEL=true; fi
+          if [ "$MODE" = "live" ] && [ -z "${{ github.event.inputs.handles || env.AUTO_HANDLES }}" ]; then PARALLEL=true; fi
           { echo "go=true"; echo "mode=$MODE"; echo "limit=$LIMIT"; echo "parallel=$PARALLEL"; } >> "$GITHUB_OUTPUT"
           echo "mode $MODE, limit $LIMIT, parallel workers: $PARALLEL"
 
@@ -126,7 +129,7 @@ jobs:
           mkdir -p output
           MODE="${{ needs.plan.outputs.mode }}"
           LIMIT="${{ needs.plan.outputs.limit }}"
-          HANDLES="${{ github.event.inputs.handles }}"
+          HANDLES="${{ github.event.inputs.handles || env.AUTO_HANDLES }}"
           echo "$MODE" > output/mode.txt
           case "$MODE" in
             vertex-test)  python run.py --vertex --test-key 2>&1 | tee output/run.log ;;
