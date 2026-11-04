@@ -1,10 +1,13 @@
 """Upload every abaya's product images from Shopify to the client's Google Drive.
 
 For each product in the seven abaya collections, all images uploaded on the product are downloaded at full quality,
-in this order: the Media gallery, then the Fitting, Multi display and A little closer images (each once; the black
-placeholders are left out). They go into
+in this order: the Media gallery, the colour (variant) images, then the Fitting, Multi display and A little closer
+images, each once. They go into
     ABAYA PICTURE EDITED / <type folder> / <product name> / <product name> 1.jpg, 2.jpg ...
 A product in two collections gets a folder in both type folders.
+
+A product with any black image (a "do manually" placeholder, or any image that is all black) is skipped entirely,
+in every folder, and marked in the report; nothing of it is uploaded until the black image is replaced.
 
 Safe to run again: images already uploaded (recognised by their Shopify image ID) are skipped, so a second run only
 adds what is new. Nothing is ever deleted or changed, in Drive or in Shopify (Shopify is only read).
@@ -24,6 +27,8 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
+
+import io
 
 import requests
 
@@ -51,11 +56,12 @@ IMAGE_REF = "... on MediaImage { id image { url } }"
 COLLECTION_QUERY = f"""
 query($handle: String!, $after: String) {{
   collectionByIdentifier(identifier: {{handle: $handle}}) {{
-    products(first: 20, after: $after) {{
+    products(first: 4, after: $after) {{
       pageInfo {{ hasNextPage endCursor }}
       nodes {{
         id title handle status
         media(first: 100) {{ nodes {{ {IMAGE_REF} }} }}
+        variants(first: 60) {{ nodes {{ media(first: 1) {{ nodes {{ {IMAGE_REF} }} }} }} }}
         fitting: metafield(namespace: "custom", key: "fitting_image") {{ reference {{ {IMAGE_REF} }} }}
         multi: metafield(namespace: "custom", key: "multi_display_images") {{ references(first: 20) {{ nodes {{ {IMAGE_REF} }} }} }}
         closer: metafield(namespace: "custom", key: "closer_images") {{ references(first: 20) {{ nodes {{ {IMAGE_REF} }} }} }}
@@ -75,23 +81,55 @@ def safe_name(title):
     return name[:180] or "Untitled product"
 
 
-def product_images(product, placeholders):
-    """The product's images in page order (Media, Fitting, Multi display, A little closer), each once,
-    without the black placeholders. Returns [(shopify image id, url)]."""
-    found = [n for n in (product.get("media") or {}).get("nodes", []) if n]
-    fitting = ((product.get("fitting") or {}).get("reference"))
-    if fitting:
-        found.append(fitting)
-    for key in ("multi", "closer"):
-        found.extend(n for n in (((product.get(key) or {}).get("references") or {}).get("nodes", [])) if n)
+SECTIONS = (("Media", "media"), ("Colour", "variants"), ("Fitting", "fitting"), ("Multi display", "multi"), ("A little closer", "closer"))
+
+
+def product_images(product):
+    """The product's images in page order (Media gallery, colour images, Fitting, Multi display, A little closer),
+    each once. Returns [(shopify image id, url, section name)]."""
+    found = []
+    for section, key in SECTIONS:
+        value = product.get(key) or {}
+        if key == "media":
+            nodes = value.get("nodes", [])
+        elif key == "variants":
+            nodes = [m for v in value.get("nodes", []) for m in ((v.get("media") or {}).get("nodes", []))]
+        elif key == "fitting":
+            nodes = [value.get("reference")]
+        else:
+            nodes = ((value.get("references") or {}).get("nodes", []))
+        found.extend((n, section) for n in nodes if n)
     images, seen = [], set()
-    for node in found:
+    for node, section in found:
         media_id, url = node.get("id"), ((node.get("image") or {}).get("url"))
-        if not media_id or not url or media_id in placeholders or media_id in seen:
+        if not media_id or not url or media_id in seen:  # videos have no image; a colour image is already in Media
             continue
         seen.add(media_id)
-        images.append((media_id, url))
+        images.append((media_id, url, section))
     return images
+
+
+def is_black(data):
+    """True when an image is all (or almost all) black: the program's placeholders, or a black image put in by hand."""
+    from PIL import Image
+
+    try:
+        with Image.open(io.BytesIO(data)) as im:
+            histogram = im.convert("L").resize((48, 48)).histogram()
+    except Exception:
+        return False  # not readable as an image: not judged black (it is still uploaded as it is)
+    # Real photos, even close-ups of black fabric, have well over half their pixels above this level (checked on the
+    # store's black embroidered abayas: 64-91%); the placeholders have none
+    return sum(histogram[25:]) <= sum(histogram) * 0.01
+
+
+def black_images(images, placeholders, files):
+    """The positions of black images: known placeholders, files named lc-PLACEHOLDER, or all-black pixels."""
+    found = []
+    for position, (media_id, url, section) in enumerate(images, start=1):
+        if media_id in placeholders or "lc-placeholder" in url.lower() or is_black(files[media_id]):
+            found.append(f"{section} (image {position})")
+    return found
 
 
 def collection_products(shopify, handle):
@@ -129,6 +167,7 @@ def extension(url):
 def run(shopify, drive, limit=None, handles=None, dry_run=False, http=None, log=print):
     http = http or requests.Session()
     placeholders = set((shopify.get_shop_json("image_placeholders", {}) or {}).values())
+    store_slug = getattr(shopify, "domain", "").split(".")[0]
 
     # The seven type folders must already exist; the program never makes or renames them
     type_folders = {}
@@ -138,8 +177,8 @@ def run(shopify, drive, limit=None, handles=None, dry_run=False, http=None, log=
             raise RuntimeError(f'No folder named "{folder_name}" inside ABAYA PICTURE EDITED. Check the name in Drive (it must match exactly).')
         type_folders[handle] = folder_id
 
-    rows, done_products = [], set()
-    totals = {"uploaded": 0, "already there": 0}
+    rows, done_products, black = [], set(), {}
+    totals = {"uploaded": 0, "already there": 0, "skipped": 0}
     for handle, folder_name in FOLDERS.items():
         for product in collection_products(shopify, handle):
             if handles and product["handle"] not in handles:
@@ -148,38 +187,56 @@ def run(shopify, drive, limit=None, handles=None, dry_run=False, http=None, log=
                 continue
             done_products.add(product["id"])
             numeric = product["id"].rsplit("/", 1)[-1]
+            admin = f"https://admin.shopify.com/store/{store_slug}/products/{numeric}"
             name = safe_name(product["title"])
-            images = product_images(product, placeholders)
+            images = product_images(product)
             if not images:
-                rows.append([folder_name, product["title"], 0, 0, "no images"])
+                rows.append([folder_name, product["title"], admin, "Skipped", 0, 0, "No images"])
                 log(f"{folder_name} / {name}: no images, skipped")
                 continue
-            folder_id = drive.product_folder(type_folders[handle], name, numeric, create=not dry_run)
+
+            folder_id = drive.product_folder(type_folders[handle], name, numeric, create=False)
             have = drive.uploaded_media(folder_id) if folder_id else set()
-            uploaded = 0
-            for position, (media_id, url) in enumerate(images, start=1):
-                if media_id in have:
-                    continue
-                file_name = f"{name} {position}{extension(url)}"
-                if dry_run:
-                    uploaded += 1
-                    continue
-                data = download(url, http)
-                drive.upload(folder_id, file_name, data, MIME[extension(url)], media_id)
-                uploaded += 1
-            skipped = len(images) - uploaded
-            totals["uploaded"] += uploaded
-            totals["already there"] += skipped
-            rows.append([folder_name, product["title"], uploaded, skipped, "would upload" if dry_run else "done"])
-            log(f"{folder_name} / {name}: {uploaded} {'to upload' if dry_run else 'uploaded'}, {skipped} already there")
+            # Every image is downloaded and looked at before anything of the product is uploaded
+            if product["id"] in black:
+                files = None
+            else:
+                files = {media_id: download(url, http) for media_id, url, _ in images}
+                black[product["id"]] = black_images(images, placeholders, files)
+            if black[product["id"]]:
+                totals["skipped"] += 1
+                reason = "Black image in " + ", ".join(black[product["id"]])
+                rows.append([folder_name, product["title"], admin, "Skipped - black image", 0, len(have), reason])
+                log(f"{folder_name} / {name}: SKIPPED, {reason}")
+                continue
+
+            new = [(media_id, url, position) for position, (media_id, url, _) in enumerate(images, start=1) if media_id not in have]
+            if new and not dry_run:
+                folder_id = folder_id or drive.product_folder(type_folders[handle], name, numeric)
+                for media_id, url, position in new:
+                    data = files[media_id] if files else download(url, http)
+                    drive.upload(folder_id, f"{name} {position}{extension(url)}", data, MIME[extension(url)], media_id)
+            totals["uploaded"] += len(new)
+            totals["already there"] += len(images) - len(new)
+            status = "Would upload" if dry_run else "Uploaded"
+            if not new:
+                status = "Already in Drive"
+            rows.append([folder_name, product["title"], admin, status, len(new), len(images) - len(new), ""])
+            log(f"{folder_name} / {name}: {len(new)} {'to upload' if dry_run else 'uploaded'}, {len(images) - len(new)} already there")
 
     REPORT.parent.mkdir(parents=True, exist_ok=True)
     with open(REPORT, "w", newline="", encoding="utf-8-sig") as f:
         w = csv.writer(f)
-        w.writerow(["Folder", "Product", "Images uploaded" if not dry_run else "Images to upload", "Already there", "Result"])
-        w.writerows(rows)
+        w.writerow(["Folder", "Product", "Admin link", "Status", "Images to upload" if dry_run else "Images uploaded", "Already in Drive", "Reason"])
+        # skipped products first, so they are easy to find
+        w.writerows(sorted(rows, key=lambda row: not row[3].startswith("Skipped")))
+    skipped = sorted({row[1] for row in rows if row[3] == "Skipped - black image"})
     log(f"\n{len(done_products)} products, {totals['uploaded']} images {'to upload' if dry_run else 'uploaded'}, "
         f"{totals['already there']} already there. Report: {REPORT}")
+    if skipped:
+        log(f"{len(skipped)} products skipped because of a black image (fix them in Shopify, then run again):")
+        for title in skipped:
+            log(f"  - {title}")
     return rows
 
 
@@ -212,7 +269,7 @@ def authorize():
         "client_id": GOOGLE_CLIENT_ID, "redirect_uri": redirect, "response_type": "code", "scope": SCOPE,
         "access_type": "offline", "prompt": "consent", "state": state,
     })
-    print("A browser window opens: sign in with the Gmail that has Editor access to ABAYA PICTURE EDITED and allow.")
+    print("A browser window opens: sign in with the Gmail that owns ABAYA PICTURE EDITED (the client) and allow.")
     print(f"If it does not open, copy this link into the browser:\n{url}\n")
     webbrowser.open(url)
     while "code" not in result and "error" not in result:

@@ -42,7 +42,7 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - run: pip install requests python-dotenv
+      - run: pip install requests python-dotenv Pillow
       - name: Tests (no keys needed)
         run: python tests/test_drive_upload.py
       - name: Upload
