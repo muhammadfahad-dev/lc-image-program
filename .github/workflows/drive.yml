@@ -1,0 +1,62 @@
+name: Drive upload
+
+# Runs only when started by hand (Actions > Drive upload > Run workflow). It has no schedule, so it never runs on its own.
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "test = list what would be uploaded, upload nothing · upload = upload to Google Drive"
+        type: choice
+        options: [test, upload]
+        default: test
+      limit:
+        description: "Most products (empty = all)"
+        required: false
+        default: ""
+      handles:
+        description: "Only these product handles, comma-separated (empty = all)"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: drive-upload
+  cancel-in-progress: false
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    env:
+      SHOPIFY_STORE: ${{ vars.SHOPIFY_STORE }}
+      SHOPIFY_ADMIN_TOKEN: ${{ secrets.SHOPIFY_ADMIN_TOKEN }}
+      SHOPIFY_CLIENT_ID: ${{ secrets.SHOPIFY_CLIENT_ID }}
+      SHOPIFY_CLIENT_SECRET: ${{ secrets.SHOPIFY_CLIENT_SECRET }}
+      GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+      GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+      GOOGLE_OAUTH_REFRESH_TOKEN: ${{ secrets.GOOGLE_OAUTH_REFRESH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install requests python-dotenv
+      - name: Tests (no keys needed)
+        run: python tests/test_drive_upload.py
+      - name: Upload
+        run: |
+          ARGS=""
+          if [ "${{ github.event.inputs.mode }}" = "test" ]; then ARGS="--dry-run"; fi
+          if [ -n "${{ github.event.inputs.limit }}" ]; then ARGS="$ARGS --limit ${{ github.event.inputs.limit }}"; fi
+          if [ -n "${{ github.event.inputs.handles }}" ]; then ARGS="$ARGS --handles ${{ github.event.inputs.handles }}"; fi
+          python drive_upload.py $ARGS 2>&1 | tee drive-run.log
+      - name: Keep the report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: drive-report
+          path: |
+            output/drive_report.csv
+            drive-run.log
