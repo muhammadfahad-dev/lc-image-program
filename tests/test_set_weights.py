@@ -52,13 +52,16 @@ def test_weights_by_collection_only_with_apply():
     assert by_product["gid://shopify/Product/2"][0]["inventoryItem"]["measurement"]["weight"]["value"] == 990
 
 
-def test_same_weight_twice_is_fine_but_different_weights_is_a_conflict():
-    both_990 = product(1, "Stone Embroidery", [0.5])
-    clash = product(2, "Plain Stone", [0.5])
-    shop = FakeShopify({"stonework-abaya": [both_990, clash], "embroidery-abaya": [both_990], "plain-abaya": [clash]})
+def test_work_wins_over_plain_and_titles_count_as_work():
+    plain_stone = product(1, "Plain Stone", [0.5])  # in Plain and Stonework collections
+    titled = product(2, "Printed Abaya with Embroidered Cuffs", [0.5])  # only in Printed, but has embroidery
+    printed = product(3, "Floral Printed Abaya", [0.5])
+    shop = FakeShopify({"stonework-abaya": [plain_stone], "plain-abaya": [plain_stone], "printed-abaya": [titled, printed]})
     rows = run(shop, apply=True)
-    assert [u["productId"] for u in shop.updates] == ["gid://shopify/Product/1"]
-    assert rows[1][0] == "Plain Stone" and rows[1][6] == "Not changed" and "Conflict" in rows[1][7]
+    grams = {u["productId"][-1]: u["variants"][0]["inventoryItem"]["measurement"]["weight"]["value"] for u in shop.updates}
+    assert grams == {"1": 990, "2": 990, "3": 700}
+    why = {r[0]: r[7] for r in rows[1:]}
+    assert why["Plain Stone"] == "Work: in Stonework Abaya" and why["Printed Abaya with Embroidered Cuffs"] == "Work: title mentions embroider"
 
 
 def test_kids_products_are_left_alone_and_right_weights_are_skipped():

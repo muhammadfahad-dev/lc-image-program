@@ -1,39 +1,40 @@
-"""Set the shipping weight of every abaya in Shopify by its collection.
+"""Set the shipping weight of every abaya in Shopify by the work on it.
 
     python set_weights.py            test: lists what would change, changes nothing
     python set_weights.py --apply    writes the new weights
 
-| Collection                  | Weight |
-|-----------------------------|--------|
-| Plain Abaya                 | 700 g  |
-| Printed Abaya               | 700 g  |
-| Stonework Abaya             | 990 g  |
-| Embroidery Abaya            | 990 g  |
-| Handcrafted Cutdana Abaya   | 990 g  |
-| Stonework Embroidery Abaya  | 990 g  |
+An abaya with work on it (stonework, embroidery or handcrafted cutdana) weighs 990 g; a plain or printed abaya 700 g.
+An abaya has work when it is in a Stonework, Embroidery, Handcrafted Cutdana or Stonework Embroidery collection, or its
+title names the work (stonework, stone, embroider, cutdana, handwork, handcrafted). So a plain or printed abaya that
+also has stonework or embroidery gets 990 g.
 
 Every variant (colour / size) of a product gets the weight. Only the weight changes: nothing else on the product is
-touched. A product in two collections with different weights (e.g. Plain and Stonework) is not changed and is listed as
-a conflict; so is a product that is also in the Kids collection (kids abayas are lighter). Each run writes
-output/weights_report.csv with every variant's old and new weight, so any change can be put back by hand.
+touched. A product that is also in the Kids collection is not changed and is listed (kids abayas are lighter). Each run
+writes output/weights_report.csv with every variant's old and new weight, so any change can be put back by hand.
 """
 import argparse
 import csv
+import re
 import sys
 import time
 from pathlib import Path
 
 from lc_images.shopify import Shopify
 
-# Shopify collection handle -> (collection name, weight in grams)
-WEIGHTS = {
-    "plain-abaya": ("Plain Abaya", 700),
-    "printed-abaya": ("Printed Abaya", 700),
-    "stonework-abaya": ("Stonework Abaya", 990),
-    "embroidery-abaya": ("Embroidery Abaya", 990),
-    "handcrafted-cutdana-abaya": ("Handcrafted Cutdana Abaya", 990),
-    "stonework-embroidery-abaya": ("Stonework Embroidery Abaya", 990),
+WORK_GRAMS, PLAIN_GRAMS = 990, 700
+# Shopify collection handle -> collection name. Abayas with work (990 g) ...
+WORK_COLLECTIONS = {
+    "stonework-abaya": "Stonework Abaya",
+    "embroidery-abaya": "Embroidery Abaya",
+    "handcrafted-cutdana-abaya": "Handcrafted Cutdana Abaya",
+    "stonework-embroidery-abaya": "Stonework Embroidery Abaya",
 }
+# ... and plain or printed abayas (700 g unless they also have work)
+PLAIN_COLLECTIONS = {
+    "plain-abaya": "Plain Abaya",
+    "printed-abaya": "Printed Abaya",
+}
+WORK_IN_TITLE = re.compile(r"stone|embroider|cutdana|hand\s*-?\s*work|handcraft", re.I)
 KIDS = "kids"
 REPORT = Path("output/weights_report.csv")
 
@@ -95,28 +96,24 @@ def admin_link(shopify, product_id):
 
 
 def run(shopify, apply=False, log=print):
-    # Which weights each product would get, from every collection it is in
+    # Every abaya in the six collections, with the collections it is in
     products, wanted = {}, {}
-    for handle, (name, weight) in WEIGHTS.items():
+    for handle, name in {**WORK_COLLECTIONS, **PLAIN_COLLECTIONS}.items():
         count = 0
         for product in collection_products(shopify, handle):
             products[product["id"]] = product
-            wanted.setdefault(product["id"], {})[name] = weight
+            wanted.setdefault(product["id"], []).append(name)
             count += 1
         log(f"{name}: {count} products")
     kids = {p["id"] for p in collection_products(shopify, KIDS)} if KIDS else set()
 
-    rows, counts = [], {"changed": 0, "already": 0, "conflict": 0, "kids": 0}
-    for product_id, by_collection in wanted.items():
+    rows, counts = [], {"changed": 0, "already": 0, "kids": 0}
+    for product_id, names in wanted.items():
         product = products[product_id]
         link = admin_link(shopify, product_id)
-        collections = ", ".join(by_collection)
-        weights = set(by_collection.values())
+        collections = ", ".join(names)
         reason = ""
-        if len(weights) > 1:
-            reason = "Conflict: in collections with different weights (" + ", ".join(f"{n} {w} g" for n, w in by_collection.items()) + ")"
-            counts["conflict"] += 1
-        elif product_id in kids:
+        if product_id in kids:
             reason = "Also in Kids collection: kids abayas are lighter, set by hand"
             counts["kids"] += 1
         if reason:
@@ -125,12 +122,18 @@ def run(shopify, apply=False, log=print):
                 rows.append([product["title"], variant["title"], collections, product["status"], shown(weight), "", "Not changed", reason, link])
             continue
 
-        target = weights.pop()
+        work = [n for n in names if n in WORK_COLLECTIONS.values()]
+        if work:
+            target, why = WORK_GRAMS, f"Work: in {', '.join(work)}"
+        elif WORK_IN_TITLE.search(product["title"]):
+            target, why = WORK_GRAMS, f"Work: title mentions {WORK_IN_TITLE.search(product['title']).group(0).lower()}"
+        else:
+            target, why = PLAIN_GRAMS, "Plain or printed, no work"
         to_change = []
         for variant in product["variants"]["nodes"]:
             weight = ((variant.get("inventoryItem") or {}).get("measurement") or {}).get("weight")
             if grams(weight) == target:
-                rows.append([product["title"], variant["title"], collections, product["status"], shown(weight), f"{target} g", "Already right", "", link])
+                rows.append([product["title"], variant["title"], collections, product["status"], shown(weight), f"{target} g", "Already right", why, link])
             else:
                 to_change.append((variant, weight))
         if not to_change:
@@ -149,7 +152,7 @@ def run(shopify, apply=False, log=print):
         if not status.startswith("Failed"):
             counts["changed"] += 1
         for variant, weight in to_change:
-            rows.append([product["title"], variant["title"], collections, product["status"], shown(weight), f"{target} g", status, "", link])
+            rows.append([product["title"], variant["title"], collections, product["status"], shown(weight), f"{target} g", status, why, link])
         log(f"{status}: {product['title']} ({len(to_change)} variants) -> {target} g")
 
     order = {"Not changed": 0, "Failed": 1}
@@ -162,7 +165,7 @@ def run(shopify, apply=False, log=print):
 
     verb = "changed" if apply else "to change"
     log(f"\n{len(wanted)} products: {counts['changed']} {verb}, {counts['already']} already right, "
-        f"{counts['conflict']} conflicts, {counts['kids']} also in Kids (not changed). Report: {REPORT}")
+        f"{counts['kids']} also in Kids (not changed). Report: {REPORT}")
     skipped = [r for r in rows if r[6] == "Not changed"]
     if skipped:
         log("Not changed (set these by hand if needed):")
@@ -173,7 +176,7 @@ def run(shopify, apply=False, log=print):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Set abaya shipping weights by collection")
+    ap = argparse.ArgumentParser(description="Set abaya shipping weights by the work on them")
     ap.add_argument("--apply", action="store_true", help="write the weights (without it: test only, changes nothing)")
     args = ap.parse_args()
     started = time.time()
