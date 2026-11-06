@@ -9,8 +9,8 @@ title names the work (stonework, stone, embroider, cutdana, handwork, handcrafte
 also has stonework or embroidery gets 990 g.
 
 Every variant (colour / size) of a product gets the weight. Only the weight changes: nothing else on the product is
-touched. A product that is also in the Kids collection is not changed and is listed (kids abayas are lighter). Each run
-writes output/weights_report.csv with every variant's old and new weight, so any change can be put back by hand.
+touched. Kids abayas follow the same rule; a product in the Kids collection that is not an abaya (no "abaya" in its
+title, e.g. a prayer dress) is not changed and is listed. Each run writes output/weights_report.csv with every variant's old and new weight, so any change can be put back by hand.
 """
 import argparse
 import csv
@@ -35,7 +35,7 @@ PLAIN_COLLECTIONS = {
     "printed-abaya": "Printed Abaya",
 }
 WORK_IN_TITLE = re.compile(r"stone|embroider|cutdana|hand\s*-?\s*work|handcraft", re.I)
-KIDS = "kids"
+KIDS = ("kids", "Kids")  # kids abayas: same rule by work; other kids products are left alone
 REPORT = Path("output/weights_report.csv")
 
 COLLECTION_QUERY = """
@@ -105,17 +105,22 @@ def run(shopify, apply=False, log=print):
             wanted.setdefault(product["id"], []).append(name)
             count += 1
         log(f"{name}: {count} products")
-    kids = {p["id"] for p in collection_products(shopify, KIDS)} if KIDS else set()
+    count = 0
+    for product in collection_products(shopify, KIDS[0]):
+        products[product["id"]] = product
+        wanted.setdefault(product["id"], []).append(KIDS[1])
+        count += 1
+    log(f"{KIDS[1]}: {count} products")
 
-    rows, counts = [], {"changed": 0, "already": 0, "kids": 0}
+    rows, counts = [], {"changed": 0, "already": 0, "other": 0}
     for product_id, names in wanted.items():
         product = products[product_id]
         link = admin_link(shopify, product_id)
         collections = ", ".join(names)
         reason = ""
-        if product_id in kids:
-            reason = "Also in Kids collection: kids abayas are lighter, set by hand"
-            counts["kids"] += 1
+        if names == [KIDS[1]] and "abaya" not in product["title"].lower():
+            reason = "Not an abaya (Kids collection only)"
+            counts["other"] += 1
         if reason:
             for variant in product["variants"]["nodes"]:
                 weight = ((variant.get("inventoryItem") or {}).get("measurement") or {}).get("weight")
@@ -165,7 +170,7 @@ def run(shopify, apply=False, log=print):
 
     verb = "changed" if apply else "to change"
     log(f"\n{len(wanted)} products: {counts['changed']} {verb}, {counts['already']} already right, "
-        f"{counts['kids']} also in Kids (not changed). Report: {REPORT}")
+        f"{counts['other']} not abayas (not changed). Report: {REPORT}")
     skipped = [r for r in rows if r[6] == "Not changed"]
     if skipped:
         log("Not changed (set these by hand if needed):")

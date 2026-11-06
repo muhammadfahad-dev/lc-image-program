@@ -64,13 +64,18 @@ def test_work_wins_over_plain_and_titles_count_as_work():
     assert why["Plain Stone"] == "Work: in Stonework Abaya" and why["Printed Abaya with Embroidered Cuffs"] == "Work: title mentions embroider"
 
 
-def test_kids_products_are_left_alone_and_right_weights_are_skipped():
-    kid, done = product(1, "Kids Stone", [0.5]), product(2, "Done", [700], unit="GRAMS")
-    shop = FakeShopify({"stonework-abaya": [kid], "plain-abaya": [done], "kids": [kid]})
+def test_kids_abayas_by_work_other_kids_products_alone_and_right_weights_skipped():
+    kid_stone = product(1, "Kids Stone Abaya", [0.5])  # in Stonework and Kids
+    kid_printed = product(4, "Kids Printed Abaya with Belt", [0.5])  # Kids only, no work
+    kid_embroidered = product(5, "Kids Bow Embroidered Abaya", [0.5])  # Kids only, work in the title
+    prayer = product(6, "Kids One-Piece Printed Prayer Dress", [0.5])
+    done = product(2, "Done", [700], unit="GRAMS")
+    shop = FakeShopify({"stonework-abaya": [kid_stone], "plain-abaya": [done], "kids": [kid_stone, kid_printed, kid_embroidered, prayer]})
     rows = run(shop, apply=True)
-    assert shop.updates == []
-    assert rows[1][6] == "Not changed" and "Kids" in rows[1][7] and rows[2][6] == "Already right"
-    assert rows[1][4] == "0.5 kg"
+    grams = {u["productId"][-1]: u["variants"][0]["inventoryItem"]["measurement"]["weight"]["value"] for u in shop.updates}
+    assert grams == {"1": 990, "4": 700, "5": 990}
+    assert rows[1][0] == "Kids One-Piece Printed Prayer Dress" and rows[1][6] == "Not changed" and rows[1][4] == "0.5 kg"
+    assert [r[6] for r in rows if r[0] == "Done"] == ["Already right"]
 
 
 if __name__ == "__main__":
