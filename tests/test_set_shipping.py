@@ -21,9 +21,15 @@ class FakeShopify:
         if "deliveryProfileUpdate" in query:
             self.updates.append(variables)
             return {"deliveryProfileUpdate": {"profile": {"id": "p"}, "userErrors": []}}
-        return {"deliveryProfiles": {"nodes": [
-            {"id": "gid://shopify/DeliveryProfile/1", "name": "General profile", "default": True,
-             "profileLocationGroups": [{"locationGroup": {"id": "gid://shopify/DeliveryLocationGroup/9"}, "locationGroupZones": {"nodes": self.zones}}]}]}}
+        if "deliveryProfiles" in query:
+            return {"deliveryProfiles": {"nodes": [
+                {"id": "gid://shopify/DeliveryProfile/1", "name": "General profile", "default": True,
+                 "profileLocationGroups": [{"locationGroup": {"id": "gid://shopify/DeliveryLocationGroup/9"}}]}]}}
+        start = int(variables.get("after") or 0)  # pages of one zone, to test paging
+        page = self.zones[start:start + 1]
+        more = start + 1 < len(self.zones)
+        return {"deliveryProfile": {"profileLocationGroups": [{"locationGroupZones": {
+            "pageInfo": {"hasNextPage": more, "endCursor": str(start + 1)}, "nodes": page}}]}}
 
 
 def run(shop, **kw):

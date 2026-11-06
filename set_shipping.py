@@ -34,22 +34,27 @@ ZONE_PREFIX = "Pakistan Post"
 # Countries Shopify may refuse as shipping destinations: each gets a zone of its own, so a refusal never blocks others
 OWN_ZONE = {"KP", "CU", "IR", "SY"}
 
+# Read in small pages: Shopify refuses a single query that asks for too much at once
 PROFILES = """
 query {
   deliveryProfiles(first: 20) {
-    nodes {
-      id name default
-      profileLocationGroups {
-        locationGroup { id }
-        locationGroupZones(first: 250) {
-          nodes {
-            zone { id name countries { code { countryCode restOfWorld } } }
-            methodDefinitions(first: 100) {
-              nodes {
-                id name active
-                rateProvider { ... on DeliveryRateDefinition { price { amount currencyCode } } }
-                methodConditions { field operator conditionCriteria { ... on Weight { unit value } ... on MoneyV2 { amount currencyCode } } }
-              }
+    nodes { id name default profileLocationGroups { locationGroup { id } } }
+  }
+}"""
+
+ZONES = """
+query($profile: ID!, $group: ID!, $after: String) {
+  deliveryProfile(id: $profile) {
+    profileLocationGroups(locationGroupId: $group) {
+      locationGroupZones(first: 10, after: $after) {
+        pageInfo { hasNextPage endCursor }
+        nodes {
+          zone { id name countries { code { countryCode restOfWorld } } }
+          methodDefinitions(first: 25) {
+            nodes {
+              id name active
+              rateProvider { ... on DeliveryRateDefinition { price { amount currencyCode } } }
+              methodConditions { field operator conditionCriteria { ... on Weight { unit value } ... on MoneyV2 { amount currencyCode } } }
             }
           }
         }
@@ -57,6 +62,18 @@ query {
     }
   }
 }"""
+
+
+def location_group_zones(shopify, profile_id, group_id):
+    after = None
+    while True:
+        groups = shopify.gql(ZONES, {"profile": profile_id, "group": group_id, "after": after})["deliveryProfile"]["profileLocationGroups"]
+        page = groups[0]["locationGroupZones"] if groups else {"nodes": [], "pageInfo": {"hasNextPage": False}}
+        yield from page["nodes"]
+        if not page["pageInfo"]["hasNextPage"]:
+            return
+        after = page["pageInfo"]["endCursor"]
+
 
 UPDATE = """
 mutation($id: ID!, $profile: DeliveryProfileInput!) {
@@ -148,7 +165,7 @@ def run(shopify, apply=False, log=print):
 
     report, to_delete, blocked = [], [], []
     for group in groups:
-        for node in group["locationGroupZones"]["nodes"]:
+        for node in location_group_zones(shopify, general["id"], group["locationGroup"]["id"]):
             zone = node["zone"]
             zone_codes = [c["code"]["countryCode"] or "REST_OF_WORLD" for c in zone["countries"]]
             rates = describe_rates(node["methodDefinitions"]["nodes"])
