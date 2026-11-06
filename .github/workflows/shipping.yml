@@ -9,6 +9,10 @@ on:
         type: choice
         options: [test, apply]
         default: test
+      replace:
+        description: "Existing zones to replace even though they hold other countries (comma-separated names, e.g. International)"
+        required: false
+        default: ""
 
 permissions:
   contents: read
@@ -38,7 +42,7 @@ jobs:
         run: |
           ARGS=""
           if [ "${{ github.event.inputs.mode }}" = "apply" ]; then ARGS="--apply"; fi
-          python set_shipping.py $ARGS 2>&1 | tee shipping-run.log
+          python set_shipping.py $ARGS --replace "${{ github.event.inputs.replace }}" 2>&1 | tee shipping-run.log
       - name: Keep the report
         if: always()
         uses: actions/upload-artifact@v4

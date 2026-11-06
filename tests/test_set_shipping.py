@@ -7,6 +7,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import set_shipping  # noqa: E402
 
+set_shipping.time.sleep = lambda s: None  # no pauses in tests
+
 
 def zone(zid, name, codes, rates=()):
     return {"zone": {"id": zid, "name": name, "countries": [{"code": {"countryCode": c, "restOfWorld": False}} for c in codes]},
@@ -21,6 +23,8 @@ class FakeShopify:
         if "deliveryProfileUpdate" in query:
             self.updates.append(variables)
             return {"deliveryProfileUpdate": {"profile": {"id": "p"}, "userErrors": []}}
+        if "shop {" in query:
+            return {"shop": {"currencyCode": getattr(self, "currency", "USD")}}
         if "deliveryProfiles" in query:
             return {"deliveryProfiles": {"nodes": [
                 {"id": "gid://shopify/DeliveryProfile/1", "name": "General profile", "default": True,
@@ -74,6 +78,16 @@ def test_mixed_zone_stops_everything():
     shop = FakeShopify([zone("z1", "Asia", ["PK", "AE"])])
     rows = run(shop, apply=True)
     assert shop.updates == [] and any(r[7].startswith("BLOCKED") for r in rows)
+
+
+def test_named_mixed_zone_can_be_replaced_and_other_currency_stops():
+    shop = FakeShopify([zone("z1", "International", ["IL", "AE"])])
+    rows = run(shop, apply=True, replace=["International"])
+    assert shop.updates[0]["profile"] == {"zonesToDelete": ["z1"]} and "IL" in rows[1][7]
+    shop = FakeShopify([zone("z1", "Domestic", ["PK"])])
+    shop.currency = "PKR"
+    run(shop, apply=True)
+    assert shop.updates == []
 
 
 if __name__ == "__main__":

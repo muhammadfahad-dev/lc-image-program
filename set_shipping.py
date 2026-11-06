@@ -149,11 +149,15 @@ def describe_rates(method_nodes):
     return "; ".join(parts)
 
 
-def run(shopify, apply=False, log=print):
+def run(shopify, apply=False, replace=(), log=print):
+    """replace: names of existing zones to delete even though they also hold countries outside the tariff (those
+    countries then have no shipping rate)."""
     tariff, skipped = load_tariff()
     codes = {code for code, *_ in tariff}
     zones = plan_zones(tariff)
 
+    currency = shopify.gql("query { shop { currencyCode } }")["shop"]["currencyCode"]
+    log(f"Store currency: {currency}")
     profiles = shopify.gql(PROFILES)["deliveryProfiles"]["nodes"]
     general = next((p for p in profiles if p["default"]), None)
     if general is None:
@@ -175,13 +179,22 @@ def run(shopify, apply=False, log=print):
             elif len(inside) == len(zone_codes):
                 status = "Replaced"
                 to_delete.append(zone["id"])
+            elif zone["name"] in replace:
+                others = [c for c in zone_codes if c not in codes]
+                status = "Replaced (asked for); these countries will have no shipping: " + " ".join(others)
+                to_delete.append(zone["id"])
             else:
-                status = "BLOCKED: mixes tariff countries with others"
+                others = [c for c in zone_codes if c not in codes]
+                status = "BLOCKED: also holds countries outside the tariff: " + " ".join(others)
                 blocked.append(zone["name"])
             report.append(["Existing zone", zone["name"], " ".join(zone_codes), "", "", "", rates, status])
             log(f"Existing zone '{zone['name']}' ({len(zone_codes)} countries): {status}")
 
-    if blocked:
+    if currency != "USD":
+        blocked.append(f"store currency is {currency}, not USD")
+        log(f"\nStopped: the rates are worked out in USD (PKR / {PKR_PER_USD}) but Shopify stores shipping rates in the "
+            f"store currency, {currency}. Nothing will be written until this is settled.")
+    if any(b for b in blocked if not b.startswith("store currency")):
         log("\nStopped: these existing zones mix tariff countries with other countries, so the program will not touch "
             "them. Move the other countries to their own zone (or delete the zone) in Shopify, then run again: "
             + ", ".join(blocked))
@@ -233,9 +246,10 @@ def run(shopify, apply=False, log=print):
 def main():
     ap = argparse.ArgumentParser(description="Set international shipping rates from the Pakistan Post tariff")
     ap.add_argument("--apply", action="store_true", help="write the zones and rates (without it: test only)")
+    ap.add_argument("--replace", default="", help="existing zone names to delete although they hold other countries, comma-separated")
     args = ap.parse_args()
     started = time.time()
-    run(Shopify(), apply=args.apply)
+    run(Shopify(), apply=args.apply, replace=[z.strip() for z in args.replace.split(",") if z.strip()])
     print(f"Finished in {int(time.time() - started)} s.")
 
 
