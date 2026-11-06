@@ -1,0 +1,49 @@
+name: Set weights
+
+# Runs only when started by hand (Actions > Set weights > Run workflow). It has no schedule.
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "test = list what would change, change nothing · apply = write the new weights to Shopify"
+        type: choice
+        options: [test, apply]
+        default: test
+
+permissions:
+  contents: read
+
+concurrency:
+  group: set-weights
+  cancel-in-progress: false
+
+jobs:
+  weights:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      SHOPIFY_STORE: ${{ vars.SHOPIFY_STORE }}
+      SHOPIFY_ADMIN_TOKEN: ${{ secrets.SHOPIFY_ADMIN_TOKEN }}
+      SHOPIFY_CLIENT_ID: ${{ secrets.SHOPIFY_CLIENT_ID }}
+      SHOPIFY_CLIENT_SECRET: ${{ secrets.SHOPIFY_CLIENT_SECRET }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install requests python-dotenv
+      - name: Tests (no keys needed)
+        run: python tests/test_set_weights.py
+      - name: Set weights
+        run: |
+          ARGS=""
+          if [ "${{ github.event.inputs.mode }}" = "apply" ]; then ARGS="--apply"; fi
+          python set_weights.py $ARGS 2>&1 | tee weights-run.log
+      - name: Keep the report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: weights-report
+          path: |
+            output/weights_report.csv
+            weights-run.log
