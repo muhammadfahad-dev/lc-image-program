@@ -171,6 +171,31 @@ def test_a_collection_of_more_than_250_products_is_added_in_parts():
     assert len(made["products"]) == 250 and [len(a) for a in added] == [250, 9]
 
 
+def test_templates_are_copied_and_verify_finds_what_differs():
+    source, target = stores()
+    source.products[0]["templateSuffix"] = "npdp"
+    target.products[0]["templateSuffix"] = None
+    run(source, target, "content", apply=True)
+    update = [w for w in target.writes if w[0] == "productUpdate"][0][1]["p"]
+    assert update == {"id": "gid://shopify/Product/T1", "templateSuffix": "npdp"}
+
+    # verify: a fresh LCM Pak copy with a wrong template, one field missing and a collection one product short
+    source, target = stores()
+    source.products[0]["templateSuffix"] = "npdp"
+    target.products[0]["templateSuffix"] = None
+    target.files_.append(image("gid://shopify/MediaImage/T9", "fit-1.jpg"))
+    target.products[0]["metafields"]["nodes"] = [{"namespace": "custom", "key": "fitting_image", "type": "file_reference", "value": "gid://shopify/MediaImage/T9"}]
+    source.collections_[0]["productsCount"] = {"count": 2}
+    target.collections_ = [dict(source.collections_[0], id="gid://shopify/Collection/T1", productsCount={"count": 1}, product_handles=["black-abaya"])]
+    source.collections_[0]["product_handles"] = ["black-abaya", "lost-abaya"]
+    rows = run(source, target, "verify", apply=False)
+    problems = {r[1]: r[3] for r in rows if r[2] == "Problem"}
+    assert "template default instead of npdp" in problems["black-abaya"] and "custom.closer_images missing" in problems["black-abaya"]
+    assert "fitting_image" not in problems["black-abaya"]  # that one matches
+    assert "missing in LCM Pak: lost-abaya" in problems["plain-abaya"]
+    assert target.writes == []
+
+
 def test_refuses_to_copy_into_the_international_store():
     copy_store.TARGET_STORE, copy_store.TARGET_CLIENT_ID, copy_store.TARGET_CLIENT_SECRET = copy_store.config.SHOP_DOMAIN, "x", "y"
     sys.argv = ["copy_store.py", "--step", "setup"]

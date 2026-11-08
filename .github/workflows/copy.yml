@@ -5,9 +5,9 @@ on:
   workflow_dispatch:
     inputs:
       step:
-        description: "compare = list products missing in LCM Pak · setup = before the product CSV import (files, field definitions) · content = after it (product image fields, collections, pages, menus, redirects)"
+        description: "verify = check LCM Pak against the main store (templates, fields, collections) · compare = list products missing in LCM Pak · setup = before the product CSV import (files, field definitions) · content = after it (product image fields, collections, pages, menus, redirects)"
         type: choice
-        options: [compare, setup, content]
+        options: [verify, compare, setup, content]
         default: setup
       mode:
         description: "test = list what would be copied, copy nothing · apply = copy into LCM Pak"

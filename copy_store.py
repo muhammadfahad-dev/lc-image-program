@@ -489,6 +489,68 @@ class Copier:
                 check(self.target.gql("mutation($r: UrlRedirectInput!) { urlRedirectCreate(urlRedirect: $r) { urlRedirect { id } userErrors { field message } } }", {"r": r})["urlRedirectCreate"], r["path"])
             self.note("Redirect", r["path"], "Created" if self.apply else "Would create", r["target"])
 
+    def product_templates(self):
+        """The product file does not carry each product's template (e.g. npdp): set the same one in LCM Pak."""
+        query = "query($first: Int!, $after: String) { products(first: $first, after: $after) { pageInfo { hasNextPage endCursor } nodes { id handle templateSuffix } } }"
+        target = {p["handle"]: p for p in paged(self.target, query, "products", size=250)}
+        for p in paged(self.source, query, "products", size=250):
+            mine = target.get(p["handle"])
+            if not mine or (mine.get("templateSuffix") or "") == (p.get("templateSuffix") or ""):
+                continue
+            if self.apply:
+                check(self.target.gql("mutation($p: ProductUpdateInput!) { productUpdate(product: $p) { product { id } userErrors { field message } } }",
+                                      {"p": {"id": mine["id"], "templateSuffix": p.get("templateSuffix") or ""}})["productUpdate"], p["handle"])
+            self.note("Product template", p["handle"], "Set" if self.apply else "Would set", p.get("templateSuffix") or "default")
+
+    def verify(self):
+        """Compare LCM Pak with the International store: each product's template and fields, each collection's products."""
+        query = """query($first: Int!, $after: String) { products(first: $first, after: $after) { pageInfo { hasNextPage endCursor }
+          nodes { handle templateSuffix metafields(first: 40) { nodes { namespace key type value } } } } }"""
+        target = {p["handle"]: p for p in paged(self.target, query, "products", size=10)}
+        checked = problems = 0
+        for p in paged(self.source, query, "products", size=10):
+            checked += 1
+            mine = target.get(p["handle"])
+            if not mine:
+                self.note("Check product", p["handle"], "Problem", "not in LCM Pak")
+                problems += 1
+                continue
+            issues = []
+            if (mine.get("templateSuffix") or "") != (p.get("templateSuffix") or ""):
+                issues.append(f"template {mine.get("templateSuffix") or "default"} instead of {p.get("templateSuffix") or "default"}")
+            have = {(m["namespace"], m["key"]): m["value"] for m in mine["metafields"]["nodes"]}
+            for m in p["metafields"]["nodes"]:
+                if SKIP_NAMESPACE.match(m["namespace"]):
+                    continue
+                want = self.remap_value(m["type"], m["value"])
+                got = have.get((m["namespace"], m["key"]))
+                if got is None:
+                    issues.append(f"{m['namespace']}.{m['key']} missing")
+                elif want is not None and got != want:
+                    issues.append(f"{m['namespace']}.{m['key']} differs")
+            if issues:
+                problems += 1
+                self.note("Check product", p["handle"], "Problem", "; ".join(issues))
+        self.log(f"Products: {checked} checked, {problems} with a problem")
+
+        count_query = """query($first: Int!, $after: String) { collections(first: $first, after: $after) { pageInfo { hasNextPage endCursor }
+          nodes { id handle productsCount { count } } } }"""
+        target_collections = {c["handle"]: c for c in paged(self.target, count_query, "collections", size=50)}
+        members = "query($id: ID!, $first: Int!, $after: String) { collection(id: $id) { products(first: $first, after: $after) { pageInfo { hasNextPage endCursor } nodes { handle } } } }"
+        for c in paged(self.source, count_query, "collections", size=50):
+            mine = target_collections.get(c["handle"])
+            if not mine:
+                self.note("Check collection", c["handle"], "Problem", "not in LCM Pak")
+                continue
+            if mine["productsCount"]["count"] == c["productsCount"]["count"]:
+                self.note("Check collection", c["handle"], "OK", f"{c['productsCount']['count']} products")
+                continue
+            source_handles = {n["handle"] for n in paged(self.source, members, "collection.products", {"id": c["id"]}, size=250)}
+            target_handles = {n["handle"] for n in paged(self.target, members, "collection.products", {"id": mine["id"]}, size=250)}
+            self.note("Check collection", c["handle"], "Problem",
+                      f"{c['productsCount']['count']} vs {mine['productsCount']['count']}; missing in LCM Pak: {', '.join(sorted(source_handles - target_handles)) or '-'}"
+                      f"; extra in LCM Pak: {', '.join(sorted(target_handles - source_handles)) or '-'}")
+
     def compare_products(self):
         """Products of the International store that are not in LCM Pak (matched by handle), with why they may be missing."""
         query = """query($first: Int!, $after: String) { products(first: $first, after: $after) { pageInfo { hasNextPage endCursor }
@@ -510,7 +572,8 @@ class Copier:
             # Files first (metaobjects may point at them), metaobject types before the field definitions that use them
             "setup": [("Files", self.copy_files), ("Metaobjects", self.metaobjects), ("Metafield definitions", self.metafield_definitions)],
             "compare": [("Compare products", self.compare_products)],
-            "content": [("Product metafields", self.product_metafields), ("Collections", self.collections), ("Pages", self.pages),
+            "verify": [("Verify", self.verify)],
+            "content": [("Product templates", self.product_templates), ("Product metafields", self.product_metafields), ("Collections", self.collections), ("Pages", self.pages),
                         ("Blogs", self.blogs), ("Menus", self.menus), ("Redirects", self.redirects)],
         }[step]
         for title, part in parts:
@@ -536,7 +599,7 @@ class Copier:
 
 def main():
     ap = argparse.ArgumentParser(description="Copy the International store's content into LCM Pak")
-    ap.add_argument("--step", choices=["setup", "content", "compare"], required=True)
+    ap.add_argument("--step", choices=["setup", "content", "compare", "verify"], required=True)
     ap.add_argument("--apply", action="store_true", help="copy (without it: test only, copies nothing)")
     args = ap.parse_args()
     if not (TARGET_STORE and TARGET_CLIENT_ID and TARGET_CLIENT_SECRET):
