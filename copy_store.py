@@ -517,7 +517,7 @@ class Copier:
                 continue
             issues = []
             if (mine.get("templateSuffix") or "") != (p.get("templateSuffix") or ""):
-                issues.append(f"template {mine.get("templateSuffix") or "default"} instead of {p.get("templateSuffix") or "default"}")
+                issues.append(f"template {mine.get('templateSuffix') or 'default'} instead of {p.get('templateSuffix') or 'default'}")
             have = {(m["namespace"], m["key"]): m["value"] for m in mine["metafields"]["nodes"]}
             for m in p["metafields"]["nodes"]:
                 if SKIP_NAMESPACE.match(m["namespace"]):
