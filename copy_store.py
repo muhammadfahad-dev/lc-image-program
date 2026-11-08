@@ -431,11 +431,27 @@ class Copier:
                 check(self.target.gql("mutation($r: UrlRedirectInput!) { urlRedirectCreate(urlRedirect: $r) { urlRedirect { id } userErrors { field message } } }", {"r": r})["urlRedirectCreate"], r["path"])
             self.note("Redirect", r["path"], "Created" if self.apply else "Would create", r["target"])
 
+    def compare_products(self):
+        """Products of the International store that are not in LCM Pak (matched by handle), with why they may be missing."""
+        query = """query($first: Int!, $after: String) { products(first: $first, after: $after) { pageInfo { hasNextPage endCursor }
+          nodes { handle title status variantsCount { count } media(first: 1) { nodes { id } } } } }"""
+        have = set(self.handles(self.target, "product").values())
+        total = missing = 0
+        for p in paged(self.source, query, "products", size=100):
+            total += 1
+            if p["handle"] in have:
+                continue
+            missing += 1
+            self.note("Missing product", p["handle"], p["status"].title(),
+                      f"{p['title']} | {p['variantsCount']['count']} variants | {'has images' if p['media']['nodes'] else 'no images'}")
+        self.log(f"Products: {total} in the International store, {len(have)} in LCM Pak, {missing} not in LCM Pak")
+
     # ---------- running ----------
     def run(self, step):
         parts = {
             # Files first (metaobjects may point at them), metaobject types before the field definitions that use them
             "setup": [("Files", self.copy_files), ("Metaobjects", self.metaobjects), ("Metafield definitions", self.metafield_definitions)],
+            "compare": [("Compare products", self.compare_products)],
             "content": [("Product metafields", self.product_metafields), ("Collections", self.collections), ("Pages", self.pages),
                         ("Blogs", self.blogs), ("Menus", self.menus), ("Redirects", self.redirects)],
         }[step]
@@ -462,7 +478,7 @@ class Copier:
 
 def main():
     ap = argparse.ArgumentParser(description="Copy the International store's content into LCM Pak")
-    ap.add_argument("--step", choices=["setup", "content"], required=True)
+    ap.add_argument("--step", choices=["setup", "content", "compare"], required=True)
     ap.add_argument("--apply", action="store_true", help="copy (without it: test only, copies nothing)")
     args = ap.parse_args()
     if not (TARGET_STORE and TARGET_CLIENT_ID and TARGET_CLIENT_SECRET):
