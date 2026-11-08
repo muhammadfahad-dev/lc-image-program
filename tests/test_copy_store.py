@@ -160,6 +160,17 @@ def test_a_bad_file_does_not_stop_its_group():
     assert any("filename" not in f for w in target.writes if w[0] == "fileCreate" for f in w[1]["f"])
 
 
+def test_a_collection_of_more_than_250_products_is_added_in_parts():
+    source, target = stores()
+    handles = [f"abaya-{i}" for i in range(509)]
+    target.products += [{"id": f"gid://shopify/Product/A{i}", "handle": h, "metafields": {"nodes": []}} for i, h in enumerate(handles)]
+    source.collections_[0]["product_handles"] = handles
+    run(source, target, "content", apply=True)
+    made = [w for w in target.writes if w[0] == "collectionCreate"][0][1]["c"]
+    added = [w[1]["p"] for w in target.writes if w[0] == "collectionAddProducts"]
+    assert len(made["products"]) == 250 and [len(a) for a in added] == [250, 9]
+
+
 def test_refuses_to_copy_into_the_international_store():
     copy_store.TARGET_STORE, copy_store.TARGET_CLIENT_ID, copy_store.TARGET_CLIENT_SECRET = copy_store.config.SHOP_DOMAIN, "x", "y"
     sys.argv = ["copy_store.py", "--step", "setup"]

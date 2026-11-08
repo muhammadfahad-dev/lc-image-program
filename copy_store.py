@@ -340,40 +340,53 @@ class Copier:
         publication = self.online_store() if self.apply else None
         target_products = {v: k for k, v in self.handles(self.target, "product").items()}
         for c in paged(self.source, query, "collections", size=10):
-            if c["handle"] in have or c["handle"] == "frontpage":
-                self.note("Collection", c["handle"], "Already there")
-                continue
-            data = {"handle": c["handle"], "title": c["title"], "descriptionHtml": c["descriptionHtml"], "sortOrder": c["sortOrder"],
-                    "templateSuffix": c["templateSuffix"], "seo": c["seo"]}
-            if c["image"]:
-                data["image"] = {"src": c["image"]["url"], "altText": c["image"]["altText"]}
-            if c["ruleSet"]:
-                rules = []
-                for r in c["ruleSet"]["rules"]:
-                    rule = {"column": r["column"], "relation": r["relation"], "condition": r["condition"]}
-                    definition = ((r.get("conditionObject") or {}).get("metafieldDefinition") or {}).get("id")
-                    if definition:  # a rule on a metafield: the same field's definition in LCM Pak
-                        rule["conditionObjectId"] = self.same_definition(definition)
-                    rules.append(rule)
-                data["ruleSet"] = {"appliedDisjunctively": c["ruleSet"]["appliedDisjunctively"], "rules": rules}
-            else:
-                handles = [p["handle"] for p in paged(self.source, "query($id: ID!, $first: Int!, $after: String) { collection(id: $id) { products(first: $first, after: $after) { pageInfo { hasNextPage endCursor } nodes { handle } } } }", "collection.products", {"id": c["id"]}, size=250)]
-                data["products"] = [target_products[h] for h in handles if h in target_products]
-            fields = []
-            for m in c["metafields"]["nodes"]:
-                value = None if SKIP_NAMESPACE.match(m["namespace"]) else self.remap_value(m["type"], m["value"])
-                if value is not None:
-                    fields.append({"namespace": m["namespace"], "key": m["key"], "type": m["type"], "value": value})
-            if fields:
-                data["metafields"] = fields
-            if self.apply:
-                made = check(self.target.gql("mutation($c: CollectionInput!) { collectionCreate(input: $c) { collection { id } userErrors { field message } } }", {"c": data})["collectionCreate"], c["handle"])
-                if publication:
-                    self.target.gql("mutation($id: ID!, $p: ID!) { publishablePublish(id: $id, input: [{publicationId: $p}]) { userErrors { field message } } }",
-                                    {"id": made["collection"]["id"], "p": publication})
-            kind = "smart" if c["ruleSet"] else f"{len(data.get('products', []))} products"
-            self.note("Collection", c["handle"], "Created" if self.apply else "Would create", kind)
+            try:
+                self._collection(c, have, publication, target_products)
+            except RuntimeError as error:
+                self.note("Collection", c["handle"], "Failed", str(error)[:300])
         self._maps.pop((id(self.target), "collection"), None)
+
+    def _collection(self, c, have, publication, target_products):
+        if c["handle"] in have or c["handle"] == "frontpage":
+            self.note("Collection", c["handle"], "Already there")
+            return
+        data = {"handle": c["handle"], "title": c["title"], "descriptionHtml": c["descriptionHtml"], "sortOrder": c["sortOrder"],
+                "templateSuffix": c["templateSuffix"], "seo": c["seo"]}
+        if c["image"]:
+            data["image"] = {"src": c["image"]["url"], "altText": c["image"]["altText"]}
+        if c["ruleSet"]:
+            rules = []
+            for r in c["ruleSet"]["rules"]:
+                rule = {"column": r["column"], "relation": r["relation"], "condition": r["condition"]}
+                definition = ((r.get("conditionObject") or {}).get("metafieldDefinition") or {}).get("id")
+                if definition:  # a rule on a metafield: the same field's definition in LCM Pak
+                    rule["conditionObjectId"] = self.same_definition(definition)
+                rules.append(rule)
+            data["ruleSet"] = {"appliedDisjunctively": c["ruleSet"]["appliedDisjunctively"], "rules": rules}
+        else:
+            handles = [p["handle"] for p in paged(self.source, "query($id: ID!, $first: Int!, $after: String) { collection(id: $id) { products(first: $first, after: $after) { pageInfo { hasNextPage endCursor } nodes { handle } } } }", "collection.products", {"id": c["id"]}, size=250)]
+            data["products"] = [target_products[h] for h in handles if h in target_products]
+        fields = []
+        for m in c["metafields"]["nodes"]:
+            value = None if SKIP_NAMESPACE.match(m["namespace"]) else self.remap_value(m["type"], m["value"])
+            if value is not None:
+                fields.append({"namespace": m["namespace"], "key": m["key"], "type": m["type"], "value": value})
+        if fields:
+            data["metafields"] = fields
+        count = len(data.get("products", []))
+        if self.apply:
+            products = data.pop("products", [])
+            if products or not c["ruleSet"]:
+                data["products"] = products[:250]  # Shopify takes at most 250 at once; the rest are added below
+            made = check(self.target.gql("mutation($c: CollectionInput!) { collectionCreate(input: $c) { collection { id } userErrors { field message } } }", {"c": data})["collectionCreate"], c["handle"])
+            for i in range(250, len(products), 250):
+                check(self.target.gql("mutation($id: ID!, $p: [ID!]!) { collectionAddProducts(id: $id, productIds: $p) { collection { id } userErrors { field message } } }",
+                                      {"id": made["collection"]["id"], "p": products[i:i + 250]})["collectionAddProducts"], c["handle"])
+            if publication:
+                self.target.gql("mutation($id: ID!, $p: ID!) { publishablePublish(id: $id, input: [{publicationId: $p}]) { userErrors { field message } } }",
+                                {"id": made["collection"]["id"], "p": publication})
+        kind = "smart" if c["ruleSet"] else f"{count} products"
+        self.note("Collection", c["handle"], "Created" if self.apply else "Would create", kind)
 
     def same_definition(self, source_id):
         query = "query($id: ID!) { node(id: $id) { ... on MetafieldDefinition { namespace key ownerType } } }"
