@@ -34,8 +34,11 @@ class FakeShop:
             name = q.split("{", 1)[1].split("(", 1)[0].strip()
             self.writes.append((name, v))
             if name == "fileCreate":
+                bad = [f for f in v["f"] if f.get("filename", "").endswith(".png") and "jpg" in f["originalSource"]]
+                if bad:  # Shopify refuses the whole group when one name's extension differs from the original
+                    return {name: {"files": [], "userErrors": [{"field": ["files"], "message": "Provided filename extension must match original source."}]}}
                 for f in v["f"]:
-                    self.files_.append({"id": f"gid://shopify/MediaImage/T{len(self.files_)}", "alt": f["alt"], "image": {"url": f"https://cdn/{f['filename']}?v=2"}})
+                    self.files_.append({"id": f"gid://shopify/MediaImage/T{len(self.files_)}", "alt": f["alt"], "image": {"url": f"https://cdn/{f.get('filename') or 'shopify-named.jpg'}?v=2"}})
                 return {name: {"files": [], "userErrors": []}}
             if name == "collectionCreate":
                 return {name: {"collection": {"id": "gid://shopify/Collection/T1"}, "userErrors": []}}
@@ -145,6 +148,16 @@ def test_content_points_metafields_collections_and_menus_at_lcm_pak():
     # collection created in this run, page created in this run: the fake store does not list them, so they become links
     assert [i["type"] for i in menu["i"]] == ["HTTP", "HTTP"] and menu["i"][0]["url"] == "/collections/plain-abaya"
     assert [w for w in target.writes if w[0] == "urlRedirectCreate"][0][1]["r"] == {"path": "/old", "target": "/new"}
+
+
+def test_a_bad_file_does_not_stop_its_group():
+    source, target = stores()
+    source.files_.append({"id": "gid://shopify/MediaImage/9", "alt": "", "image": {"url": "https://cdn.shopify.com/s/files/1/odd.png?v=1"}})
+    source.files_[-1]["image"]["url"] = "https://cdn.shopify.com/s/files/1/odd.png?v=1&src=jpg"
+    rows = run(source, target, "setup", apply=True)
+    results = {r[1]: r[2] for r in rows if r[0] == "File"}
+    assert results == {"fit-1.jpg": "Copied", "closer-1.jpg": "Copied", "odd.png": "Copied"}
+    assert any("filename" not in f for w in target.writes if w[0] == "fileCreate" for f in w[1]["f"])
 
 
 def test_refuses_to_copy_into_the_international_store():

@@ -124,12 +124,15 @@ class Copier:
         query = """query($first: Int!, $after: String) { files(first: $first, after: $after) { pageInfo { hasNextPage endCursor } nodes {
           id alt
           ... on MediaImage { image { url } }
-          ... on Video { filename originalSource { url } }
+          ... on Video { filename originalSource { url } sources { url mimeType height } }
           ... on GenericFile { url } } } }"""
         found, self._sources = {}, getattr(self, "_sources", {})
         for node in paged(shop, query, "files", size=100):
             if node.get("filename"):
-                name, url, kind = node["filename"], (node.get("originalSource") or {}).get("url"), "VIDEO"
+                # Shopify downloads a video from a plain MP4 address: the largest MP4 rendition
+                mp4 = sorted((v for v in node.get("sources") or [] if "mp4" in (v.get("mimeType") or "")), key=lambda v: v.get("height") or 0)
+                url = mp4[-1]["url"] if mp4 else (node.get("originalSource") or {}).get("url")
+                name, kind = node["filename"], "VIDEO"
             elif node.get("image"):
                 url = node["image"]["url"]
                 name, kind = file_name(url), "IMAGE"
@@ -231,12 +234,26 @@ class Copier:
             for _, name in batch:
                 self.note("File", name, "Would copy")
             return
-        data = self.target.gql("mutation($f: [FileCreateInput!]!) { fileCreate(files: $f) { files { id } userErrors { field message } } }",
-                               {"f": [item for item, _ in batch]})["fileCreate"]
-        errors = "; ".join(e["message"] for e in data["userErrors"])
-        for _, name in batch:
-            self.note("File", name, "Copied" if not errors else "Failed", errors)
-        time.sleep(1)
+        create = "mutation($f: [FileCreateInput!]!) { fileCreate(files: $f) { files { id } userErrors { field message } } }"
+        data = self.target.gql(create, {"f": [item for item, _ in batch]})["fileCreate"]
+        if not data["userErrors"]:
+            for _, name in batch:
+                self.note("File", name, "Copied")
+            time.sleep(1)
+            return
+        # One bad file fails the whole group: copy them one by one
+        for item, name in batch:
+            errors = self.target.gql(create, {"f": [item]})["fileCreate"]["userErrors"]
+            if errors and any("extension" in e["message"].lower() for e in errors):
+                # Its name ends differently from the stored original: copy it under the name Shopify gives it
+                plain = {k: v for k, v in item.items() if k != "filename"}
+                errors = self.target.gql(create, {"f": [plain]})["fileCreate"]["userErrors"]
+                if not errors:
+                    self.note("File", name, "Copied", "under Shopify's own name (its extension differs from the original)")
+                    continue
+            message = "; ".join(e["message"] for e in errors)
+            self.note("File", name, "Failed" if errors else "Copied", message)
+            time.sleep(0.3)
 
     # ---------- step 2: after the product CSV ----------
     def remap_value(self, kind, value):
