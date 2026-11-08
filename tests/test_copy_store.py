@@ -43,6 +43,10 @@ class FakeShop:
             if name == "collectionCreate":
                 return {name: {"collection": {"id": "gid://shopify/Collection/T1"}, "userErrors": []}}
             return {name: {"userErrors": []}}
+        if "collectionByIdentifier" in q:
+            return {"collectionByIdentifier": {"ruleSet": {"appliedDisjunctively": False, "rules": [{"column": "TAG", "relation": "EQUALS", "condition": "Plain"}]}}}
+        if "productByIdentifier" in q:
+            return {"productByIdentifier": {"productType": "Abaya", "vendor": "LC", "tags": ["Plain"] if self.name == "source" else [], "title": "x", "status": "ACTIVE"}}
         if "files(" in q:
             return {"files": page(self.files_)}
         if "metaobjectDefinitions(" in q:
@@ -185,14 +189,18 @@ def test_templates_are_copied_and_verify_finds_what_differs():
     target.products[0]["templateSuffix"] = None
     target.files_.append(image("gid://shopify/MediaImage/T9", "fit-1.jpg"))
     target.products[0]["metafields"]["nodes"] = [{"namespace": "custom", "key": "fitting_image", "type": "file_reference", "value": "gid://shopify/MediaImage/T9"}]
+    # a list written without spaces is the same list
+    target.files_.append(image("gid://shopify/MediaImage/T8", "closer-1.jpg"))
+    target.products[0]["metafields"]["nodes"].append({"namespace": "custom", "key": "closer_images", "type": "list.file_reference", "value": '["gid://shopify/MediaImage/T8"]'})
     source.collections_[0]["productsCount"] = {"count": 2}
     target.collections_ = [dict(source.collections_[0], id="gid://shopify/Collection/T1", productsCount={"count": 1}, product_handles=["black-abaya"])]
     source.collections_[0]["product_handles"] = ["black-abaya", "lost-abaya"]
     rows = run(source, target, "verify", apply=False)
     problems = {r[1]: r[3] for r in rows if r[2] == "Problem"}
-    assert "template default instead of npdp" in problems["black-abaya"] and "custom.closer_images missing" in problems["black-abaya"]
-    assert "fitting_image" not in problems["black-abaya"]  # that one matches
+    assert problems["black-abaya"] == "template default instead of npdp"  # both fields match, whatever the spacing
     assert "missing in LCM Pak: lost-abaya" in problems["plain-abaya"]
+    why = [r[3] for r in rows if r[0] == "Why not in collection"][0]
+    assert "TAG EQUALS Plain" in why and "LCM Pak: type='Abaya' vendor='LC' tags=[]" in why
     assert target.writes == []
 
 

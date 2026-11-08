@@ -489,6 +489,23 @@ class Copier:
                 check(self.target.gql("mutation($r: UrlRedirectInput!) { urlRedirectCreate(urlRedirect: $r) { urlRedirect { id } userErrors { field message } } }", {"r": r})["urlRedirectCreate"], r["path"])
             self.note("Redirect", r["path"], "Created" if self.apply else "Would create", r["target"])
 
+    def metafield_pins(self):
+        """Pin the same field definitions as in the main store, in the same order, so they show on each product in admin."""
+        query = """query($owner: MetafieldOwnerType!, $first: Int!, $after: String) { metafieldDefinitions(ownerType: $owner, first: $first, after: $after) {
+          pageInfo { hasNextPage endCursor } nodes { namespace key pinnedPosition } } }"""
+        for owner in METAFIELD_OWNERS:
+            pinned = {(d["namespace"], d["key"]) for d in paged(self.target, query, "metafieldDefinitions", {"owner": owner}) if d.get("pinnedPosition") is not None}
+            wanted = sorted((d for d in paged(self.source, query, "metafieldDefinitions", {"owner": owner})
+                             if d.get("pinnedPosition") is not None and not SKIP_NAMESPACE.match(d["namespace"])), key=lambda d: d["pinnedPosition"])
+            for d in wanted:
+                name = f"{owner.lower()}.{d['namespace']}.{d['key']}"
+                if (d["namespace"], d["key"]) in pinned:
+                    continue
+                if self.apply:
+                    check(self.target.gql("mutation($i: MetafieldDefinitionIdentifierInput!) { metafieldDefinitionPin(identifier: $i) { pinnedDefinition { id } userErrors { field message } } }",
+                                          {"i": {"ownerType": owner, "namespace": d["namespace"], "key": d["key"]}})["metafieldDefinitionPin"], name)
+                self.note("Field pinned", name, "Pinned" if self.apply else "Would pin")
+
     def product_templates(self):
         """The product file does not carry each product's template (e.g. npdp): set the same one in LCM Pak."""
         query = "query($first: Int!, $after: String) { products(first: $first, after: $after) { pageInfo { hasNextPage endCursor } nodes { id handle templateSuffix } } }"
@@ -501,6 +518,27 @@ class Copier:
                 check(self.target.gql("mutation($p: ProductUpdateInput!) { productUpdate(product: $p) { product { id } userErrors { field message } } }",
                                       {"p": {"id": mine["id"], "templateSuffix": p.get("templateSuffix") or ""}})["productUpdate"], p["handle"])
             self.note("Product template", p["handle"], "Set" if self.apply else "Would set", p.get("templateSuffix") or "default")
+
+    @staticmethod
+    def _parsed(value):
+        """A field value for comparing: lists and JSON compared by content, not by spacing."""
+        try:
+            return json.loads(value)
+        except (TypeError, ValueError):
+            return value
+
+    def _why_not_in(self, handle, collection_handle):
+        """The collection's rules and the product's type, vendor and tags in both stores."""
+        rules_query = "query($h: String!) { collectionByIdentifier(identifier: {handle: $h}) { ruleSet { appliedDisjunctively rules { column relation condition } } } }"
+        product_query = "query($h: String!) { productByIdentifier(identifier: {handle: $h}) { productType vendor tags title status } }"
+        rules = (self.source.gql(rules_query, {"h": collection_handle})["collectionByIdentifier"] or {}).get("ruleSet") or {}
+        text = " / ".join(f"{r['column']} {r['relation']} {r['condition']}" for r in rules.get("rules", []))
+        mode = "any" if rules.get("appliedDisjunctively") else "all"
+        parts = [f"rules ({mode}): {text or 'none'}"]
+        for label, shop in (("main", self.source), ("LCM Pak", self.target)):
+            p = shop.gql(product_query, {"h": handle})["productByIdentifier"] or {}
+            parts.append(f"{label}: type={p.get('productType')!r} vendor={p.get('vendor')!r} tags={p.get('tags')} status={p.get('status')}")
+        return " | ".join(parts)
 
     def verify(self):
         """Compare LCM Pak with the International store: each product's template and fields, each collection's products."""
@@ -526,7 +564,7 @@ class Copier:
                 got = have.get((m["namespace"], m["key"]))
                 if got is None:
                     issues.append(f"{m['namespace']}.{m['key']} missing")
-                elif want is not None and got != want:
+                elif want is not None and self._parsed(got) != self._parsed(want):
                     issues.append(f"{m['namespace']}.{m['key']} differs")
             if issues:
                 problems += 1
@@ -547,6 +585,11 @@ class Copier:
                 continue
             source_handles = {n["handle"] for n in paged(self.source, members, "collection.products", {"id": c["id"]}, size=250)}
             target_handles = {n["handle"] for n in paged(self.target, members, "collection.products", {"id": mine["id"]}, size=250)}
+            for handle in sorted(source_handles - target_handles)[:5]:
+                try:
+                    self.note("Why not in collection", f"{c['handle']}: {handle}", "Detail", self._why_not_in(handle, c["handle"]))
+                except RuntimeError as error:
+                    self.note("Why not in collection", f"{c['handle']}: {handle}", "Detail", str(error)[:200])
             self.note("Check collection", c["handle"], "Problem",
                       f"{c['productsCount']['count']} vs {mine['productsCount']['count']}; missing in LCM Pak: {', '.join(sorted(source_handles - target_handles)) or '-'}"
                       f"; extra in LCM Pak: {', '.join(sorted(target_handles - source_handles)) or '-'}")
@@ -573,7 +616,7 @@ class Copier:
             "setup": [("Files", self.copy_files), ("Metaobjects", self.metaobjects), ("Metafield definitions", self.metafield_definitions)],
             "compare": [("Compare products", self.compare_products)],
             "verify": [("Verify", self.verify)],
-            "content": [("Product templates", self.product_templates), ("Product metafields", self.product_metafields), ("Collections", self.collections), ("Pages", self.pages),
+            "content": [("Field pins", self.metafield_pins), ("Product templates", self.product_templates), ("Product metafields", self.product_metafields), ("Collections", self.collections), ("Pages", self.pages),
                         ("Blogs", self.blogs), ("Menus", self.menus), ("Redirects", self.redirects)],
         }[step]
         for title, part in parts:
