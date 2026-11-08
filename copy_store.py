@@ -333,7 +333,8 @@ class Copier:
     def collections(self):
         query = """query($first: Int!, $after: String) { collections(first: $first, after: $after) { pageInfo { hasNextPage endCursor }
           nodes { id handle title descriptionHtml sortOrder templateSuffix seo { title description } image { url altText }
-            ruleSet { appliedDisjunctively rules { column relation condition conditionObjectId } }
+            ruleSet { appliedDisjunctively rules { column relation condition
+              conditionObject { ... on CollectionRuleMetafieldCondition { metafieldDefinition { id } } } } }
             metafields(first: 30) { nodes { namespace key type value } } } } }"""
         have = set(self.handles(self.target, "collection").values())
         publication = self.online_store() if self.apply else None
@@ -350,8 +351,9 @@ class Copier:
                 rules = []
                 for r in c["ruleSet"]["rules"]:
                     rule = {"column": r["column"], "relation": r["relation"], "condition": r["condition"]}
-                    if r.get("conditionObjectId"):
-                        rule["conditionObjectId"] = self.same_definition(r["conditionObjectId"])
+                    definition = ((r.get("conditionObject") or {}).get("metafieldDefinition") or {}).get("id")
+                    if definition:  # a rule on a metafield: the same field's definition in LCM Pak
+                        rule["conditionObjectId"] = self.same_definition(definition)
                     rules.append(rule)
                 data["ruleSet"] = {"appliedDisjunctively": c["ruleSet"]["appliedDisjunctively"], "rules": rules}
             else:
