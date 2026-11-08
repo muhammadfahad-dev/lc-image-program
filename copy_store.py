@@ -229,10 +229,36 @@ class Copier:
             self._create_files(batch)
         self._maps.pop((id(self.target), "file"), None)
 
+    def _upload_video(self, item, name):
+        """Shopify only takes a video as an uploaded file, not from a web address: download it, then upload it."""
+        source = requests.get(item["originalSource"], timeout=600)
+        source.raise_for_status()
+        data = source.content
+        target = check(self.target.gql(
+            "mutation($i: [StagedUploadInput!]!) { stagedUploadsCreate(input: $i) { stagedTargets { url resourceUrl parameters { name value } } userErrors { field message } } }",
+            {"i": [{"resource": "VIDEO", "filename": name, "mimeType": "video/mp4", "httpMethod": "POST", "fileSize": str(len(data))}]},
+        )["stagedUploadsCreate"], "stagedUploadsCreate")["stagedTargets"][0]
+        form = {p["name"]: p["value"] for p in target["parameters"]}
+        sent = requests.post(target["url"], data=form, files={"file": (name, data, "video/mp4")}, timeout=900)
+        if sent.status_code not in (200, 201, 204):
+            return [{"message": f"video upload refused ({sent.status_code}): {sent.text[:200]}"}]
+        return self.target.gql("mutation($f: [FileCreateInput!]!) { fileCreate(files: $f) { files { id } userErrors { field message } } }",
+                               {"f": [{**item, "originalSource": target["resourceUrl"]}]})["fileCreate"]["userErrors"]
+
     def _create_files(self, batch):
         if not self.apply:
             for _, name in batch:
                 self.note("File", name, "Would copy")
+            return
+        videos = [(item, name) for item, name in batch if item["contentType"] == "VIDEO"]
+        batch = [(item, name) for item, name in batch if item["contentType"] != "VIDEO"]
+        for item, name in videos:
+            try:
+                errors = self._upload_video(item, name)
+            except (requests.RequestException, RuntimeError) as error:
+                errors = [{"message": str(error)[:300]}]
+            self.note("File", name, "Failed" if errors else "Copied", "; ".join(e["message"] for e in errors))
+        if not batch:
             return
         create = "mutation($f: [FileCreateInput!]!) { fileCreate(files: $f) { files { id } userErrors { field message } } }"
         data = self.target.gql(create, {"f": [item for item, _ in batch]})["fileCreate"]
