@@ -1,0 +1,57 @@
+name: Copy to LCM Pak
+
+# Runs only when started by hand (Actions > Copy to LCM Pak > Run workflow). It has no schedule.
+on:
+  workflow_dispatch:
+    inputs:
+      step:
+        description: "setup = before the product CSV import (files, field definitions) · content = after it (product image fields, collections, pages, menus, redirects)"
+        type: choice
+        options: [setup, content]
+        default: setup
+      mode:
+        description: "test = list what would be copied, copy nothing · apply = copy into LCM Pak"
+        type: choice
+        options: [test, apply]
+        default: test
+
+permissions:
+  contents: read
+
+concurrency:
+  group: copy-store
+  cancel-in-progress: false
+
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    env:
+      SHOPIFY_STORE: ${{ vars.SHOPIFY_STORE }}
+      SHOPIFY_ADMIN_TOKEN: ${{ secrets.SHOPIFY_ADMIN_TOKEN }}
+      SHOPIFY_CLIENT_ID: ${{ secrets.SHOPIFY_CLIENT_ID }}
+      SHOPIFY_CLIENT_SECRET: ${{ secrets.SHOPIFY_CLIENT_SECRET }}
+      TARGET_SHOPIFY_STORE: ${{ secrets.TARGET_SHOPIFY_STORE }}
+      TARGET_SHOPIFY_CLIENT_ID: ${{ secrets.TARGET_SHOPIFY_CLIENT_ID }}
+      TARGET_SHOPIFY_CLIENT_SECRET: ${{ secrets.TARGET_SHOPIFY_CLIENT_SECRET }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install requests python-dotenv
+      - name: Tests (no keys needed)
+        run: python tests/test_copy_store.py
+      - name: Copy
+        run: |
+          ARGS="--step ${{ github.event.inputs.step }}"
+          if [ "${{ github.event.inputs.mode }}" = "apply" ]; then ARGS="$ARGS --apply"; fi
+          python copy_store.py $ARGS 2>&1 | tee copy-run.log
+      - name: Keep the report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: copy-report
+          path: |
+            output/copy_report.csv
+            copy-run.log
